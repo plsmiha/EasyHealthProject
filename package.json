@@ -1,0 +1,19 @@
+{
+  "name": "easyhealth",
+  "version": "1.0.0",
+  "description": "A platform to manage hospital services",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jvj00/EasyHealth.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jvj00/EasyHealth/issues"
+  },
+  "homepage": "https://github.com/jvj00/EasyHealth#readme"
+}
