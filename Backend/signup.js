@@ -20,20 +20,20 @@ router.post('', async function(req, res) {
 
     if(typeof req.body.email == 'undefined' || typeof req.body.password == 'undefined' || typeof req.body.nome == 'undefined' || typeof req.body.cognome == 'undefined' || typeof req.body.residenza == 'undefined' || typeof req.body.CF == 'undefined' || typeof req.body.codPA == 'undefined')
     {
-        res.json({success: 'false', reason: 'Wrong format', error: '1'});
+        res.status(400).json({success: 'false', reason: 'Wrong format', error: '1'});
         return;
     }
 
     let user_check = await Patient.find().where('CF',req.body.CF);
     if(Object.keys(user_check).length>=1)
     {
-        res.json({success: 'false', reason: 'CF already exists', error: '2'});
+        res.status(406).json({success: 'false', reason: 'CF already exists', error: '2'});
         return;
     }
     user_check = await User.find().where('email',req.body.email);
     if(Object.keys(user_check).length>=1)
     {
-        res.json({success: 'false', reason: 'Email already exists', error: '3'});
+        res.status(406).json({success: 'false', reason: 'Email already exists', error: '3'});
         return;
     }
 
@@ -68,7 +68,7 @@ router.post('', async function(req, res) {
         html: "<a href='"+link+"'>Click here yo confirm your identity!</a> or copy and paste link below:<br/>"+link,
     }).then().catch(console.error);
 
-    res.json({success: 'true'});
+    res.status(200).json({success: 'true'});
     console.log("User saved");
     
 

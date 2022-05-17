@@ -62,8 +62,17 @@ function checkPassword()
 };
 function loadPA(){
     fetch('../api/v1/PA', {
-        method: 'POST',
+        method: 'GET',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify( { nome: nome, cognome: cognome, residenza: residenza, CF: CF, email: email, password: password, codPA: codPA } ),
+        body: JSON.stringify(),
+    })
+    .then((resp) => resp.json())
+    .then(function(data) {
+        data.forEach(el => {
+            var opt = document.createElement('option');
+            opt.innerHTML = el.name;
+            opt.value = el._id;
+            document.getElementById("CodPA").appendChild(opt);
+        })
     })
 };
