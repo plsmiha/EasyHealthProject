@@ -32,7 +32,7 @@
 
             position: absolute;
             width: auto;
-            height: 558px;
+            height: 1115px;
             left: 100px;
             right: 100px;
             top: 230px;
@@ -41,27 +41,50 @@
             border: 2px solid #D4001C;
             border-radius: 39px;
         }
-        #l_Residenza{
+        #l_Nome{
             position: absolute;
             height: 49px;
             left: 74px;
             top: 41px;
         }
-        #l_Email{
+        #l_Cognome{
             position: absolute;
             height: 49px;
             left: 74px;
             top: 169px;
         }
-   
-        #l_CodPA{
+        #l_Residenza{
             position: absolute;
             height: 49px;
             left: 74px;
             top: 297px;
         }
-  
-        #Residenza{
+        #l_CodFisc{
+            position: absolute;
+            height: 49px;
+            left: 74px;
+            top: 425px;
+        }
+        #l_Email{
+            position: absolute;
+            height: 49px;
+            left: 74px;
+            top: 553px;
+        }
+        #l_Password{
+            position: absolute;
+            height: 49px;
+            left: 74px;
+            top: 681px;
+        }
+        #l_CodPA{
+            position: absolute;
+            height: 49px;
+            left: 74px;
+            top: 806px;
+        }
+
+        #Nome{
             position: absolute;
             height: 49px;
             left: 74px;                
@@ -69,7 +92,7 @@
             width: auto;
             right: 74px;
         }
-        #Email{
+        #Cognome{
             position: absolute;
             height: 49px;
             left: 74px;
@@ -77,11 +100,19 @@
             width: auto;
             right: 74px;
         }
-        #CodPA{
+        #Residenza{
             position: absolute;
             height: 49px;
             left: 74px;
             top: 347px;
+            width: auto;
+            right: 74px;
+        }
+        #CF{
+            position: absolute;
+            height: 49px;
+            left: 74px;
+            top: 475px;
             width: auto;
             right: 74px;
         }
@@ -91,14 +122,42 @@
             top: 512px;
             font-size: 18px;      
         }
-    
+        #Email{
+            position: absolute;
+            height: 49px;
+            left: 74px;
+            top: 603px;
+            width: auto;
+            right: 74px;
+        }
         #Error_email{
             position: absolute;
             left: 74px;
             top: 645px;
             font-size: 18px;      
         }
-
+        #Password{
+            position: absolute;
+            height: 49px;
+            left: 74px;
+            top: 731px;
+            width: auto;
+            right: 74px;
+        }
+        #Error_password{
+            position: absolute;
+            left: 74px;
+            top: 773px;
+            font-size: 18px;      
+        }
+        #CodPA{
+            position: absolute;
+            height: 49px;
+            left: 74px;
+            top: 856px;
+            width: auto;
+            right: 74px;
+        }
 
         body{
             background-image: url('img/background.png');
@@ -141,25 +200,7 @@
             width: 248px;
             height: 67px;
             left: 74px;
-            top: 455px;
-
-            background: #D4001C;
-            border-radius: 15px;
-        }
-
-        input[type=reset]{
-            font-family: 'Questrial', sans-serif;
-            font-style: normal;
-            font-weight: 400;
-            font-size: 28px;
-            line-height: 49px;
-            color: #FFFFFF;
-
-            position: absolute;
-            width: 248px;
-            height: 67px;
-            left: 400px;
-            top: 455px;
+            top: 980px;
 
             background: #D4001C;
             border-radius: 15px;
@@ -173,20 +214,27 @@
     <div id="title">Modifica Profilo</div>
     <img src="img/Logo.png" id="logo"/>
     <div  id="box">
+        <span id="l_Nome">Nome</span>
+        <span id="l_Cognome">Cognome</span>
         <span id="l_Residenza">Residenza</span>
+        <span id="l_CodFisc">Codice Fiscale</span>
         <span id="l_Email">Email</span>
+        <span id="l_Password">Password</span>
         <span id="l_CodPA">Codice Piano Assicutativo</span>
         <span id="Error_email" hidden>*Email già registrata!</span>
         <span id="Error_CF" hidden>*Codice Fiscale già registrato!</span>
         <span id="Error_password"></span>
         <form onsubmit="signup(); return false;">
+            <input type="text" id="Nome" value="" required/>
+            <input type="text" id="Cognome" value="" required/>
             <input type="text" id="Residenza" value="" required/>
+            <input type="text" id="CF" value="" required/>
             <input type="email" id="Email" value="" required/>
+            <input type="password" id="Password" value="" onfocusout="checkPassword();" required/>
             <select name="CodPA" id="CodPA">
                 <option value="">Nessuno</option>
             </select>
-            <input type="submit" value="salva modifiche"/>
-            <input type="reset" value="esci"/>
+            <input type="submit" value="Registrati"/>
         </form>
     </div>
     <div style="position: absolute;top:1500px">&nbsp</div>
