@@ -11,7 +11,7 @@ function signup(){
     fetch('../api/v1/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify( { email: email, password: password } ),
+        body: JSON.stringify( { nome: nome, cognome: cognome, residenza: residenza, CF: CF, email: email, password: password, codPA: codPA } ),
     })
     .then((resp) => resp.json())
     .then(function(data) {
