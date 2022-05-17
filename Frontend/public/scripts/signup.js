@@ -56,6 +56,7 @@ function checkPassword()
     }
     else
     {
+        err.innerHTML="";
         pass.style.background = "#a2ff96";
         return true;
     }
