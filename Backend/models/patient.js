@@ -10,5 +10,4 @@ module.exports = mongoose.model('Patient', new Schema({
     address: String,
     CF: String,
     codePA: String,
-    verified: Boolean
 }));

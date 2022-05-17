@@ -145,6 +145,12 @@
                 width: auto;
                 right: 74px;
             }
+            #Error_password{
+                position: absolute;
+                left: 74px;
+                top: 773px;
+                font-size: 18px;      
+            }
             #CodPA{
                 position: absolute;
                 height: 49px;
@@ -216,13 +222,14 @@
             <span id="l_CodPA">Codice Piano Assicutativo</span>
             <span id="Error_email" hidden>*Email già registrata!</span>
             <span id="Error_CF" hidden>*Codice Fiscale già registrato!</span>
+            <span id="Error_password"></span>
             <form onsubmit="signup(); return false;">
                 <input type="text" id="Nome" value="" required/>
                 <input type="text" id="Cognome" value="" required/>
                 <input type="text" id="Residenza" value="" required/>
                 <input type="text" id="CF" value="" required/>
                 <input type="email" id="Email" value="" required/>
-                <input type="password" id="Password" value="" required/>
+                <input type="password" id="Password" value="" onfocusout="checkPassword();" required/>
                 <select name="CodPA" id="CodPA">
                     <option value="">Nessuno</option>
                 </select>

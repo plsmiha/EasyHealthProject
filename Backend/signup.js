@@ -1,9 +1,20 @@
 const express = require('express');
 const crypto = require('crypto');
+const nodemailer = require('nodemailer');
 const router = express.Router();
 
 const User = require('./models/user');
 const Patient = require('./models/patient');
+
+const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 587,
+    auth: {
+      user: 'easy.health.app.info@gmail.com',
+      pass: 'idsids22',
+    },
+});
+transporter.verify().then().catch(console.error);
 
 router.post('', async function(req, res) {
 
@@ -25,14 +36,15 @@ router.post('', async function(req, res) {
         res.json({success: 'false', reason: 'Email already exists', error: '3'});
         return;
     }
-    
+
     var hash = crypto.createHash('sha512');
     data = hash.update(req.body.password, 'utf-8');
     gen_hash= data.digest('hex');
     let user = new User({
         email: req.body.email,
         password: gen_hash,
-        type: 'P'
+        type: 'P',
+        verified: false
     });
     user = await user.save();
 
@@ -43,10 +55,19 @@ router.post('', async function(req, res) {
         surname: req.body.cognome,
         address: req.body.residenza,
         CF: req.body.CF,
-        codePA: req.body.codePA,
-        verified: false
+        codePA: req.body.codPA
     })
     patient = await patient.save();
+
+    let link = "http://localhost/api/v1/verify_email?id="+user._id.valueOf();
+    transporter.sendMail({
+        from: '"EasyHealth+" <easy.health.app.info@gmail.com>',
+        to: req.body.email,
+        subject: "Confirm your email on EasyHealth+ ✔",
+        text: "",
+        html: "<a href='"+link+"'>Click here yo confirm your identity!</a> or copy and paste link below:<br/>"+link,
+    }).then().catch(console.error);
+
     res.json({success: 'true'});
     console.log("User saved");
     
