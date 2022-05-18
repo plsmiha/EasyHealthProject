@@ -188,22 +188,25 @@
     </style>
 
 
+
 </head>
-<body onload="loadPA();">
+<body onload="loadData();">
+  <script src="scripts/modificaMedico.js"></script>
     <div id="title">Modifica Profilo DOC</div>
     <img src="img/Logo.png" id="logo"/>
     <div  id="box">
         <span id="l_Residenza">Residenza</span>
         <span id="l_Email">Email</span>
-        <span id="l_Password">Password</span>
+        <span id="l_Password">Password  (vuota per non modificare)</span>
         <span id="l_titoloMedico">Titolo</span>
         <span id="Error_email" hidden>*Email già registrata!</span>
         <span id="Error_CF" hidden>*Codice Fiscale già registrato!</span>
         <span id="Error_password"></span>
-        <form onsubmit="signup(); return false;">
+        <form onsubmit="modificaDatiMedico(); return true;">
             <input type="text" id="Residenza" value="" required/>
             <input type="email" id="Email" value="" required/>
-            <input type="password" id="Password" value="" onfocusout="checkPassword();" required/>
+            <!--- <input type="password" id="Password" value="" onfocusout="checkPassword();" required/> -->
+             <input type="password" id="Password" value="" onfocusout="checkPassword();" required/>
             <input type="text" id="TitoloMedico" value="" required/>
 
             <input type="submit" value="salva modifiche"/>
@@ -211,6 +214,5 @@
         </form>
     </div>
     <div style="position: absolute;top:1000px">&nbsp</div>
-    <script src="scripts/signup.js"></script>
 </body>
 </html>
