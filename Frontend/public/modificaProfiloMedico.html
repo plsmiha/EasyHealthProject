@@ -202,15 +202,15 @@
         <span id="Error_email" hidden>*Email già registrata!</span>
         <span id="Error_CF" hidden>*Codice Fiscale già registrato!</span>
         <span id="Error_password"></span>
-        <form onsubmit="modificaDatiMedico(); return true;">
+        <form onsubmit="modificaDatiMedico();">
             <input type="text" id="Residenza" value="" required/>
             <input type="email" id="Email" value="" required/>
-            <!--- <input type="password" id="Password" value="" onfocusout="checkPassword();" required/> -->
-             <input type="password" id="Password" value="" onfocusout="checkPassword();" required/>
+
+             <input type="password" id="Password" value="" onfocusout="checkPassword();"/>
             <input type="text" id="TitoloMedico" value="" required/>
 
             <input type="submit" value="salva modifiche"/>
-            <input type="button" value="esci"/>
+            <input type="button" value="esci" onclick="abort();"/>
         </form>
     </div>
     <div style="position: absolute;top:1000px">&nbsp</div>

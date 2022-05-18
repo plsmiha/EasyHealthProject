@@ -1,7 +1,36 @@
 function modificaDatiMedico(){
 
-    console.log('Qui devo modificare i dati')
-    return;
+    if(!checkPassword()) return;
+
+    var email=document.getElementById("Email").value;
+    var address=document.getElementById("Residenza").value;
+    var password=document.getElementById("Password").value;
+    var titolo=document.getElementById("TitoloMedico").value;
+    console.log('passo per le modifiche')
+    fetch('../api/v1/modmed', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify( { email: email, address: address, password: password, title:titolo } ),
+    })
+    .then((resp) => resp.json())
+    .then(function(data) {
+        if(data.success=="true")
+        {
+            console.log('buon fine')
+        }
+        else
+        {
+            if(data.error=="2")
+            {
+              console.log('pswd vuota')
+            }
+            else if(data.error=="3")
+            {
+              console.log('errore a caso')
+            }
+        }
+    })
+    .catch( error => console.error(error) );
 };
 
 function loadData()//se la password non viene inserita resta uguale, se viene inserita invece va a modificare la precedente
@@ -27,7 +56,9 @@ function loadData()//se la password non viene inserita resta uguale, se viene in
     })
 };
 
-
+function abort(){
+      window.location.href = "index.html";
+}
 
 function checkPassword()
 {
@@ -35,6 +66,8 @@ function checkPassword()
     var err = document.getElementById("Error_password");
     var pass = document.getElementById("Password");
     if(password.length == 0){
+      err.innerHTML="";
+      pass.style.background = "#C4C4C4";
       return true;
     }
     if(password.length<8)
