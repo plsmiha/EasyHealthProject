@@ -1,6 +1,6 @@
 <head>
     <title>Pagina di registrazione</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com"> <! ––perche ce ne sono due ––>
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
     <style>
@@ -32,7 +32,7 @@
 
             position: absolute;
             width: auto;
-            height: 558px;
+            height: 697px;
             left: 100px;
             right: 100px;
             top: 230px;
@@ -54,11 +54,18 @@
             top: 169px;
         }
    
-        #l_CodPA{
+        #l_Password{
             position: absolute;
             height: 49px;
             left: 74px;
             top: 297px;
+        }
+
+        #l_CodPA{
+            position: absolute;
+            height: 49px;
+            left: 74px;
+            top: 425px;
         }
   
         #Residenza{
@@ -77,7 +84,14 @@
             width: auto;
             right: 74px;
         }
-        #CodPA{
+
+        #Error_email{
+            position: absolute;
+            left: 74px;
+            top: 256px;
+            font-size: 18px;      
+        }
+        #Password{
             position: absolute;
             height: 49px;
             left: 74px;
@@ -85,19 +99,25 @@
             width: auto;
             right: 74px;
         }
-        #Error_CF{
+
+        #Error_password{
             position: absolute;
             left: 74px;
-            top: 512px;
+            top: 389px;
             font-size: 18px;      
+        }
+
+        #CodPA{
+            position: absolute;
+            height: 49px;
+            left: 74px;
+            top: 475px;
+            width: auto;
+            right: 74px;
         }
     
-        #Error_email{
-            position: absolute;
-            left: 74px;
-            top: 645px;
-            font-size: 18px;      
-        }
+
+
 
 
         body{
@@ -141,13 +161,13 @@
             width: 248px;
             height: 67px;
             left: 74px;
-            top: 455px;
+            top: 588px;
 
             background: #D4001C;
             border-radius: 15px;
         }
 
-        input[type=reset]{
+        input[type=button]{
             font-family: 'Questrial', sans-serif;
             font-style: normal;
             font-weight: 400;
@@ -159,7 +179,7 @@
             width: 248px;
             height: 67px;
             left: 400px;
-            top: 455px;
+            top: 588px;
 
             background: #D4001C;
             border-radius: 15px;
@@ -175,6 +195,7 @@
     <div  id="box">
         <span id="l_Residenza">Residenza</span>
         <span id="l_Email">Email</span>
+        <span id="l_Password">Password</span>
         <span id="l_CodPA">Codice Piano Assicutativo</span>
         <span id="Error_email" hidden>*Email già registrata!</span>
         <span id="Error_CF" hidden>*Codice Fiscale già registrato!</span>
@@ -182,14 +203,15 @@
         <form onsubmit="signup(); return false;">
             <input type="text" id="Residenza" value="" required/>
             <input type="email" id="Email" value="" required/>
+            <input type="password" id="Password" value="" onfocusout="checkPassword();" required/>
             <select name="CodPA" id="CodPA">
                 <option value="">Nessuno</option>
             </select>
             <input type="submit" value="salva modifiche"/>
-            <input type="reset" value="esci"/>
+            <input type="button" value="esci"/>
         </form>
     </div>
-    <div style="position: absolute;top:1500px">&nbsp</div>
+    <div style="position: absolute;top:1000px">&nbsp</div>
     <script src="scripts/signup.js"></script>
 </body>
 </html>
