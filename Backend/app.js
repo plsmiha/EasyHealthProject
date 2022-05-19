@@ -5,6 +5,7 @@ const cors = require('cors');
 const signup = require('./signup.js');
 const verify_email = require('./verify_email.js');
 const PA = require('./assurancePlans.js');
+const editPaziente = require ('./editPaziente.js');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -16,10 +17,10 @@ app.use('/api/v1/signup', signup);
 app.use('/api/v1/verify_email', verify_email);
 app.use('/api/v1/PA', PA);
 
-//token checker
+//app.use (token checker) //qualsiasi cosa scritta qua sotto richiede un check del token = autenticazione
 
-//all private resources
 
+app.use('/api/v1/editPaziente', editPaziente); 
 
 
 app.use((req, res) => {
