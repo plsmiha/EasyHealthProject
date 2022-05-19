@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const docs = require('../models/doc');//importo il tipo doc, definito il suo schema in models/doc
-const user = require('../models/user');//uguale con user
+const docs = require('../../models/doc');//importo il tipo doc, definito il suo schema in models/doc
+const user = require('../../models/user');//uguale con user
 const crypto = require('crypto');
 router.get('', async function(req, res)//quando ricevo una richiesta get su /api/v1/modmed entro qui
 {

@@ -5,7 +5,7 @@ const os = require('os')
 const cluster = require("cluster")
 const mongoose = require('mongoose');
 
-const app = require("./api/app.js")
+const app = require("./backend/api/app.js")
 
 if (cluster.isMaster) {
 
@@ -20,17 +20,18 @@ if (cluster.isMaster) {
         cluster.fork()
     })
 
-    var cpu_count = os.cpus().length;
-    for (var i = 0; i < cpu_count; i++) cluster.fork()
+    //let cpu_count = os.cpus().length;
+    let cpu_count = 2;
+    for (let i = 0; i < cpu_count; i++) cluster.fork()
 
 } else {
 
     app.locals.db = mongoose.connect('mongodb+srv://NodeApp:Y1XPLdwnXWNRSKIN@cluster0.emtou.mongodb.net/?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true})
     .then ( () => {
         
-        console.log(`WORKER ${worker.process.pid} connected to DB`)
+        console.log(`WORKER ${process.pid} connected to DB`)
 
-        router.use("/api", app)
+        router.use(app)
 
         let server = http.createServer(router)
         server.listen(80)
@@ -40,8 +41,6 @@ if (cluster.isMaster) {
             process.exit()
         })
         
-    });
-
-   
+    });  
 
 }

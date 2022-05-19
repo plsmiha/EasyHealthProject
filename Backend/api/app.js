@@ -2,12 +2,12 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 
-const signup = require('../signup.js');
-const verify_email = require('../verify_email.js');
+const signup = require('./routes/signup.js');
+const verify_email = require('./routes/verify_email.js');
 const PA = require('./routes/assurancePlans.js');
-const editPaziente = require ('../editPaziente.js');
+const editPaziente = require ('./routes/editPaziente.js');
 
-const modifMedico = require('./modificaMedico.js');
+const modifMedico = require('./routes/modificaMedico.js');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors())
