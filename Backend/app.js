@@ -16,6 +16,10 @@ app.use('/api/v1/signup', signup);
 app.use('/api/v1/verify_email', verify_email);
 app.use('/api/v1/PA', PA);
 
+//token checker
+
+//all private resources
+
 
 
 app.use((req, res) => {

@@ -1,0 +1,271 @@
+<html>
+    <head>
+        <title>Home page</title>
+        <link rel="icon" type="image/x-icon" href="/img/icona.png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+        <style>
+            #logo{
+                position: absolute;
+                width: 200px;
+                height: auto;
+                right: 100px;
+                top: 30px;
+            }
+            #title{
+                position: absolute;
+                width: auto;
+                height: 49px;
+                left: 100px;
+                top: 73px;
+
+                font-family: 'Questrial', sans-serif;
+                font-variant: small-caps;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 48px;
+                line-height: 49px;
+
+                color: #D4001C;
+            }
+            #box{
+                box-sizing: border-box;
+
+                position: absolute;
+                width: auto;
+                height: 700px;
+                left: 100px;
+                right: 100px;
+                top: 200px;
+
+                background: #FFFFFF;
+                border: 2px solid #D4001C;
+                border-radius: 39px;
+            }
+            body{
+                background-image: url('img/background.png');
+            }
+            #l_strumenti{
+                position: absolute;
+                width: 348px;
+                height: 37px;
+                left: 6%;
+                top: 60px;
+
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: bold;
+                font-size: 32px;
+                line-height: 37px;
+
+                color: #000000;
+            }
+            #btn_pazienti{
+                position: absolute;
+                width: 20%;
+                height: 39px;
+                left: 6%;
+                top: 110px;
+
+                background: #D4001C;
+                border-radius: 10px;
+                border: 0px;
+
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 20px;
+                line-height: 25px;
+                align-items: center;
+                text-align: center;
+
+                color: #FFFFFF;
+            }
+            #btn_medici{
+                position: absolute;
+                width: 20%;
+                height: 39px;
+                left: 6%;
+                top: 165px;
+
+                background: #D4001C;
+                border-radius: 10px;
+                border: 0px;
+
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 20px;
+                line-height: 25px;
+                align-items: center;
+                text-align: center;
+
+                color: #FFFFFF;
+            }
+            #btn_pa{
+                position: absolute;
+                width: 20%;
+                height: 39px;
+                left: 6%;
+                top: 220px;
+
+                background: #D4001C;
+                border-radius: 10px;
+                border: 0px;
+
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 20px;
+                line-height: 25px;
+                align-items: center;
+                text-align: center;
+
+                color: #FFFFFF;
+            }
+            #l_ospedale{
+                position: absolute;
+                width: 239px;
+                height: 37px;
+                left: 6%;
+                top: 350px;
+
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: bold;
+                font-size: 32px;
+                line-height: 37px;
+
+                color: #000000;
+            }
+            #l_app{
+                position: absolute;
+                width: 300px;
+                height: 37px;
+                left: 50%;
+                top: 60px;
+
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: bold;
+                font-size: 32px;
+                line-height: 37px;
+
+                color: #000000;
+            }
+            #hospital_dashboard{
+                position: absolute;
+                width: 40%;
+                height: 250px;
+                left: 6%;
+                top: 400px;
+
+                background: #FFEAED;
+                border-radius: 10px;
+                overflow: auto;
+            }
+            #app_dashboard{
+                position: absolute;
+                width: 40%;
+                height: 250px;
+                left: 50%;
+                top: 110px;
+
+                background: #FFEAED;
+                border-radius: 10px;
+                overflow: auto;
+            }
+            #profile{
+                position: absolute;
+                width: 100px;
+                height: 100px;
+                right: 30px;
+                bottom: 30px;
+                border-radius: 50px;
+                background: #DDDDDD;
+            }
+            #img_profile{
+                width: 100px;
+                height: 100px;
+            }
+            /* Scrollbar styles */
+            ::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+            }
+
+            ::-webkit-scrollbar-thumb {
+            background: #d4001c;  
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+            background: #960011;  
+            }
+            /* Dropdown content */
+            .dropbtn {
+                border: none;
+            }
+
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
+
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #DDDDDD;
+                min-width: 160px;
+                bottom: 100px;
+                right:0px;
+                /*box-shadow: 0px -8px 16px 0px rgba(0,0,0,0.2);*/
+                z-index: 1;
+                border-radius: 10px;
+            }
+            span{
+                text-align: center;
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 17px;
+                display: block;
+            }
+            .dropdown-content .drop {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+            .dropdown-content .drop:hover {background-color: #f1f1f1;}
+            .dropdown:hover .dropdown-content {display: block;}
+            .dropdown:hover {background-color: #3e8e41;}
+        </style>
+    </head>
+    <body>
+        <div id="title">Benvenuto, Admin [Nome] [Cognome]</div>
+        <a href="/"><img src="img/Logo.png" id="logo"/></a>
+        <div  id="box">
+            <div id="l_strumenti">Strumenti amministrativi</div>
+            <div id="l_app">Informazioni app</div>
+            <div id="l_ospedale">L'ospedale</div>
+            <input type="button" id="btn_pazienti" value="Visualizza Pazienti" onclick="window.location.href='patients_AO.html';"/>
+            <input type="button" id="btn_medici" value="Visualizza Medici" onclick="window.location.href='doctors_AO.html';"/>
+            <input type="button" id="btn_pa" value="Visualizza Piani Assicurativi" onclick="window.location.href='pas_AO.html';"/>
+            <div id="hospital_dashboard">
+                <!--To do in other sprint-->
+            </div>
+            <div id="app_dashboard">
+                <!--To do in other sprint-->
+            </div>
+            <div id="profile" class="dropdown">
+                <img src="img/profile.png" id="img_profile" class="dropbtn"/>
+                <div id="settings" class="dropdown-content">
+                    <span id="nome" style="padding-top: 10px;">[Nome]</span>
+                    <span id="cognome" style="padding-bottom: 10px;">[Cognome]</span>
+                    <span id="logout" onclick="logout();" class="drop">Logout</span>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
