@@ -9,11 +9,11 @@ const Patient = require('./models/patient');
 //FUNZIONI
 
 function getId(){
-    return 'asdfghj';
+    return '6283a725e782405e1e1e21b1';
 }
 
 function getUser(){
-    return 'aszdxfgh';
+    return '6283a725e782405e1e1e21b1';
 }
 
 
@@ -32,7 +32,7 @@ router.get('', async function(req, res){ //do la risposta al fronted che mi ha c
 router.post('', async function(req, res){
 
     //controllo che ogni campo sia completato in maniera opportuna
-    if(typeof req.body.email == 'undefined' || typeof req.body.password == 'undefined' ||  typeof req.body.residenza == 'undefined' ||  typeof req.body.codPA == 'undefined')
+    if(typeof req.body.email == 'undefined' ||  typeof req.body.residenza == 'undefined' ||  typeof req.body.codPA == 'undefined')
     {
         res.status(400).json({success: 'false', reason: 'Wrong format', error: '1'});
         return;
