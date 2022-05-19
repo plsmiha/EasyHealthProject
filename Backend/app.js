@@ -7,6 +7,7 @@ const verify_email = require('./verify_email.js');
 const PA = require('./assurancePlans.js');
 const editPaziente = require ('./editPaziente.js');
 
+const modifMedico = require('./modificaMedico.js');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors())
@@ -21,6 +22,7 @@ app.use('/api/v1/PA', PA);
 
 
 app.use('/api/v1/editPaziente', editPaziente); 
+app.use('/api/v1/modmed', modifMedico);
 
 
 app.use((req, res) => {
