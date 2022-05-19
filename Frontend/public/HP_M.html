@@ -46,9 +46,9 @@
             body{
                 background-image: url('img/background.png');
             }
-            #l_cercamedico{
+            #l_agenda{
                 position: absolute;
-                width: 220px;
+                width: 348px;
                 height: 37px;
                 left: 6%;
                 top: 60px;
@@ -61,47 +61,11 @@
 
                 color: #000000;
             }
-            #txt_medico_nome{
-                position: absolute;
-                width: 40%;
-                height: 39px;
-                left: 6%;
-                top: 110px;
-
-                font-family: 'Questrial';
-                font-style: normal;
-                font-weight: 400;
-                font-size: 26px;
-                line-height: 37px;
-
-                color: #000000;
-                background: #DDDDDD;
-                border-radius: 10px;
-                border: 0px;
-            }
-            #txt_medico_competenza{
-                position: absolute;
-                width: 40%;
-                height: 39px;
-                left: 6%;
-                top: 165px;
-
-                font-family: 'Questrial';
-                font-style: normal;
-                font-weight: 400;
-                font-size: 26px;
-                line-height: 37px;
-
-                color: #000000;
-                background: #DDDDDD;
-                border-radius: 10px;
-                border: 0px;
-            }
-            #btn_medico_nome{
+            #btn_calendario{
                 position: absolute;
                 width: 20%;
                 height: 39px;
-                left: calc(46% + 20px);
+                left: 6%;
                 top: 110px;
 
                 background: #D4001C;
@@ -118,84 +82,12 @@
 
                 color: #FFFFFF;
             }
-            #btn_medico_competenza{
-                position: absolute;
-                width: 20%;
-                height: 39px;
-                left: calc(46% + 20px);
-                top: 165px;
-
-                background: #D4001C;
-                border-radius: 10px;
-                border: 0px;
-
-                font-family: 'Questrial';
-                font-style: normal;
-                font-weight: 400;
-                font-size: 20px;
-                line-height: 25px;
-                align-items: center;
-                text-align: center;
-
-                color: #FFFFFF;
-            }
-            #l_calendario{
-                position: absolute;
-                width: 239px;
-                height: 37px;
-                left: 6%;
-                top: 260px;
-
-                font-family: 'Questrial';
-                font-style: normal;
-                font-weight: bold;
-                font-size: 32px;
-                line-height: 37px;
-
-                color: #000000;
-            }
-            #l_storia{
-                position: absolute;
-                width: 300px;
-                height: 37px;
-                left: calc(6% + 239px + 10%);
-                top: 260px;
-
-                font-family: 'Questrial';
-                font-style: normal;
-                font-weight: bold;
-                font-size: 32px;
-                line-height: 37px;
-
-                color: #000000;
-            }
-            #btn_appuntamenti{
+            #btn_pazienti{
                 position: absolute;
                 width: 20%;
                 height: 39px;
                 left: 6%;
-                top: 310px;
-
-                background: #D4001C;
-                border-radius: 10px;
-                border: 0px;
-
-                font-family: 'Questrial';
-                font-style: normal;
-                font-weight: 400;
-                font-size: 20px;
-                line-height: 25px;
-                align-items: center;
-                text-align: center;
-
-                color: #FFFFFF;
-            }
-            #btn_referti{
-                position: absolute;
-                width: 20%;
-                height: 39px;
-                left: calc(6% + 239px + 10%);
-                top: 310px;
+                top: 220px;
 
                 background: #D4001C;
                 border-radius: 10px;
@@ -216,7 +108,22 @@
                 width: 239px;
                 height: 37px;
                 left: 6%;
-                top: 380px;
+                top: 300px;
+
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: bold;
+                font-size: 32px;
+                line-height: 37px;
+
+                color: #000000;
+            }
+            #l_pazienti{
+                position: absolute;
+                width: 300px;
+                height: 37px;
+                left: 6%;
+                top: 170px;
 
                 font-family: 'Questrial';
                 font-style: normal;
@@ -228,10 +135,10 @@
             }
             #dashboard{
                 position: absolute;
-                width: 45%;
-                height: 230px;
+                width: 40%;
+                height: 300px;
                 left: 6%;
-                top: 430px;
+                top: 350px;
 
                 background: #FFEAED;
                 border-radius: 10px;
@@ -304,43 +211,14 @@
         </style>
     </head>
     <body>
-        <div id="title">Benvenuto, [Nome] [Cognome]</div>
+        <div id="title">Benvenuto, Admin [Nome] [Cognome]</div>
         <a href="/"><img src="img/Logo.png" id="logo"/></a>
         <div  id="box">
-            <div id="l_cercamedico">Cerca medico</div>
-            <div id="l_calendario">Il tuo calendario</div>
-            <div id="l_storia">La tua storia medica</div>
+            <div id="l_agenda">La tua agenda</div>
+            <div id="l_pazienti">I tuoi pazienti</div>
             <div id="l_dashboard">Dashboard</div>
-            <input type="text" id="txt_medico_nome" value=""/>
-            <select id="txt_medico_competenza">
-                <option value="0">Medicina generale</option>
-                <option value="1">Pediatria</option>
-                <option value="2">Cardiologia</option>
-                <option value="3">Pulmonologia</option>
-                <option value="4">Ginecologia</option>
-                <option value="5">Otorinolaringoiatria</option>
-                <option value="6">Urologia</option>
-                <option value="7">Endocrinologia</option>
-                <option value="8">Dermatologia</option>
-                <option value="9">Traumatologia</option>
-                <option value="10">Oncologia</option>
-                <option value="11">Geriatria</option>
-                <option value="12">Odontoiatria</option>
-                <option value="13">Gastroenterologia</option>
-                <option value="14">Nefrologia</option>
-                <option value="15">Infettologia</option>
-                <option value="16">Tossicologia</option>
-                <option value="17">Ematologia</option>
-                <option value="18">Oftalmologia</option>
-                <option value="19">Radiologia</option>
-                <option value="20">Proctologia</option>
-                <option value="21">Reumatologia</option>
-                <option value="22">Immunologia</option>
-            </select>
-            <input type="button" id="btn_medico_nome" value="Cerca per nome" onclick="check_and_redirect_nome();"/>
-            <input type="button" id="btn_medico_competenza" value="Cerca per competenza" onclick="check_and_redirect_competenza();"/>
-            <input type="button" id="btn_appuntamenti" value="Visualizza appuntamenti" onclick="window.location.href='calendar_P.html';"/>
-            <input type="button" id="btn_referti" value="Visualizza referti" onclick="window.location.href='reports_P.html';"/>
+            <input type="button" id="btn_calendario" value="Visualizza Agenda" onclick="window.location.href='calendar_M.html';"/>
+            <input type="button" id="btn_pazienti" value="Visualizza Pazienti" onclick="window.location.href='patients_M.html';"/>
             <div id="dashboard">
                 <!--To do in other sprint-->
             </div>
@@ -349,7 +227,7 @@
                 <div id="settings" class="dropdown-content">
                     <span id="nome" style="padding-top: 10px;">[Nome]</span>
                     <span id="cognome" style="padding-bottom: 10px;">[Cognome]</span>
-                    <span id="modifica_profilo" onclick="window.location.href='edit_profile_P.html';" class="drop">Modifica profilo</span>
+                    <span id="modifica_profilo" onclick="window.location.href='edit_profile_M.html';" class="drop">Modifica profilo</span>
                     <span id="logout" onclick="logout();" class="drop">Logout</span>
                 </div>
             </div>
