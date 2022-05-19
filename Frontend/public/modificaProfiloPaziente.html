@@ -115,10 +115,6 @@
             width: auto;
             right: 74px;
         }
-    
-
-
-
 
         body{
             background-image: url('img/background.png');
@@ -185,6 +181,20 @@
             border-radius: 15px;
         }
 
+        /* Scrollbar styles */
+        ::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #d4001c;  
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #960011;  
+        }
+
     </style>
 
 
@@ -200,7 +210,7 @@
         <span id="Error_email" hidden>*Email già registrata!</span>
         <span id="Error_CF" hidden>*Codice Fiscale già registrato!</span>
         <span id="Error_password"></span>
-        <form onsubmit="signup(); return false;">
+        <form onsubmit="edit(); return false;">
             <input type="text" id="Residenza" value="" required/>
             <input type="email" id="Email" value="" required/>
             <input type="password" id="Password" value="" onfocusout="checkPassword();" required/>
