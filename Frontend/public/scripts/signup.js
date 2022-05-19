@@ -17,6 +17,12 @@ function signup(){
     })
     .then((resp) => resp.json())
     .then(function(data) {
+
+        document.getElementById("CF").style.background = "#C4C4C4";
+        document.getElementById("Error_CF").hidden = true;
+        document.getElementById("Email").style.background = "#C4C4C4";
+        document.getElementById("Error_email").hidden = true;
+
         if(data.success=="true")
         {
             window.location.href = "index.html";
