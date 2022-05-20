@@ -6,7 +6,7 @@ const signup = require('./routes/signup.js');
 const verify_email = require('./routes/verify_email.js');
 const PA = require('./routes/assurancePlans.js');
 const editPaziente = require ('./routes/editPaziente.js');
-const reset = require ('./routers/resetPassword.js')
+const reset = require ('./routes/resetPassword.js')
 
 const modifMedico = require('./routes/modificaMedico.js');
 app.use(express.json());
