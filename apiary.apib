@@ -1,26 +1,26 @@
 FORMAT: 1A
-HOST: https://localhost
+HOST: https://easyhealth22.herokuapp.com/
 
 # EasyHealth+
 
-API for using platform EasyHealth+, project of Software Engineering 2022
+API per usare la piattaforma EasyHealth+, progetto di Ingengeria del Software UniTN 2022
 
-## Signup [/api/v1/signup]
+## Registrazione [/api/v1/signup]
 
-### Signup a new patient [POST]
+### Registrazione di un nuovo paziente [POST]
 
-Creates a new user which can enter the platform as patient. Then he can perform all the task of a patient.
+Crea un nuovo utente che può accedere alla piattaforma. Poi potrà eseguire tutte le operazioni che gli sono concesse in qualità di paziente.
 
 + Request (application/json)
 
     + Attributes
-        - email (string, required) - Email of the patient
-        - password (string, required) - Password chosen by the patient
-        - nome (string, required) - Name of the patient
-        - cognome (string, required) - Surname of the patient
-        - residenza (string, required) - Address of the patient
-        - CF (string, required) - Fiscal Code of the patient
-        - CodPA (string, required) - Assurance Plan Code of the patient
+        - email (string, required) - Email del paziente
+        - password (string, required) - Password scelta dal paziente
+        - nome (string, required) - Nome del paziente
+        - cognome (string, required) - Cognome del paziente
+        - residenza (string, required) - Indirizzo del paziente
+        - CF (string, required) - Codice Fiscale del paziente
+        - CodPA (string, required) - Codice del Piano Assicurativo del paziente
 
 + Response 200
 
@@ -34,7 +34,7 @@ Creates a new user which can enter the platform as patient. Then he can perform 
 
 + Response 400
     
-    Return if it's a wrong Format. Missing one or more parameters.
+    Ritornato se la richiesta è in un formato errato: mancano uno o più parametri.
     
     + Body
             
@@ -46,7 +46,7 @@ Creates a new user which can enter the platform as patient. Then he can perform 
 
 + Response 406
     
-    Returned if user already exists. Error 2 for the CF, error 3 for the email
+    Ritornato se l'utente esiste già: errore 2 per CF già esistente, errore 3 per email esistente.
     
     + Body
             
@@ -56,15 +56,15 @@ Creates a new user which can enter the platform as patient. Then he can perform 
                 "error": ""
             }
 
-## Verify email [/api/v1/verify_email{?id}]
+## Verifica email [/api/v1/verify_email{?id}]
 
-### Verify email of a created user [GET]
+### Verifica l'email di un utente appena creato [GET]
 
-Verify email of a created user by knowing his id.
+Verifica l'email di un utente appena creato conoscendo il suo id.
 
 + Parameters
 
-    + id - User id
+    + id - Id utente
         
 + Response 200
     
