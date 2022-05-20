@@ -57,6 +57,7 @@ router.post('', async function(req, res)//qui quando ricevo una post
                   }
               }
         )
+        return;
         console.log('Update tabella docs RIUSCITO');
         _id=getUser();//carico l'id della tabella user per modificare mail e password anche li
 

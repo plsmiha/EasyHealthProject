@@ -20,14 +20,7 @@ function modificaDatiMedico(){
         }
         else
         {
-            if(data.error=="2")
-            {
-              console.log('pswd vuota')
-            }
-            else if(data.error=="3")
-            {
-              console.log('errore a caso')
-            }
+          window.alert("Something went wrong:\n"+data.error+"\nTry again.");
         }
     })
     .catch( error => console.error(error) );
