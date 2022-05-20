@@ -3,7 +3,7 @@ const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const router = express.Router();
 
-const User = require('./models/user');
+const User = require('../../models/user');
 
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
