@@ -16,6 +16,7 @@ function modificaDatiPaziente(){
         if(data.success=="true")
         {
             console.log('buon fine')
+            window.location.href = "HP_P.html";
         }
         else
         {
