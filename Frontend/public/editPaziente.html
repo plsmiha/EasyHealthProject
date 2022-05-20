@@ -199,7 +199,8 @@
 
 
 </head>
-<body onload="loadPA();">
+<body onload="loadData();">
+    <script src="scripts/modificaPaziente.js"></script>
     <div id="title">Modifica Profilo</div>
     <img src="img/Logo.png" id="logo"/>
     <div  id="box">
@@ -207,21 +208,18 @@
         <span id="l_Email">Email</span>
         <span id="l_Password">Password</span>
         <span id="l_CodPA">Codice Piano Assicutativo</span>
-        <span id="Error_email" hidden>*Email già registrata!</span>
-        <span id="Error_CF" hidden>*Codice Fiscale già registrato!</span>
         <span id="Error_password"></span>
-        <form onsubmit="edit(); return false;">
+        <form onsubmit="modificaDatiPaziente();">
             <input type="text" id="Residenza" value="" required/>
             <input type="email" id="Email" value="" required/>
-            <input type="password" id="Password" value="" onfocusout="checkPassword();" required/>
+            <input type="password" id="Password" value="" onfocusout="checkPassword();"/>
             <select name="CodPA" id="CodPA">
                 <option value="">Nessuno</option>
             </select>
             <input type="submit" value="salva modifiche"/>
-            <input type="button" value="esci"/>
+            <input type="button" value="esci" onclick="abort();"/>
         </form>
     </div>
     <div style="position: absolute;top:1000px">&nbsp</div>
-    <script src="scripts/signup.js"></script>
 </body>
 </html>

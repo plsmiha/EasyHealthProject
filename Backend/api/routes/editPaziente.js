@@ -9,20 +9,21 @@ const Patient = require('../../models/patient');
 //FUNZIONI
 
 function getId(){
-    return '6283a725e782405e1e1e21b1';
+    return '6283b2e8cd01c7be9d02d14a';
 }
 
 function getUser(){
-    return '6283a725e782405e1e1e21b1';
+    return '6283b2e8cd01c7be9d02d148';
+    
 }
 
 
 
 //recupero le informazioni dell'utente con un GET per metterle nel form di modifica
 router.get('', async function(req, res){ //do la risposta al fronted che mi ha chiesto e faccio la richiesta al db
-    
+    console.log('recupero dati');
     var _id = getId();
-    let data = await Patient.findById(id);
+    let data = await Patient.findById(_id);
 
     res.status(200).json(data);
 })
@@ -30,18 +31,22 @@ router.get('', async function(req, res){ //do la risposta al fronted che mi ha c
 //aggiorno tutte le info del paziente con un post
 
 router.post('', async function(req, res){
-
+    console.log('dentro post backend');
     //controllo che ogni campo sia completato in maniera opportuna
-    if(typeof req.body.email == 'undefined' ||  typeof req.body.residenza == 'undefined' ||  typeof req.body.codPA == 'undefined')
-    {
+    if(typeof req.body.email == 'undefined' ||  typeof req.body.residenza == 'undefined' || typeof req.body.codePA == 'undefined' )
+    {   console.log('anuovi dati:');
+        console.log(req.body.email);
+        console.log(req.body.residenza);
+        console.log(req.body.codePA)
         res.status(400).json({success: 'false', reason: 'Wrong format', error: '1'});
+        console.log('wrong format');
         return;
     }
 
     var email=req.body.email;
-    var address=req.body.address;
+    var address=req.body.residenza;
     var password=req.body.password;
-    var codPA=req.body.codPA;
+    var codePA=req.body.codePA;
     var _id=getId();
 
   
@@ -49,7 +54,7 @@ router.post('', async function(req, res){
     //primo parametro e quello secondo il quale sto cercando=id, poi passo nuovi campi, poi callback
     //The query executes if callback is passed.
     Patient.findByIdAndUpdate(  {_id}, 
-                                {"email": email, "address": address, "codPA" : codPA}, 
+                                {"email": email, "address": address, "codePA" : codePA}, 
                                 function(err, result){
                                         if(err){ //errore nell'update
                                             res.status(406).json({success: 'false', reason: 'Errore update paziente', error: '2'})
@@ -57,9 +62,10 @@ router.post('', async function(req, res){
                                         }
                                 }
                              )
+    console.log('update paziente');
 
     _id = getUser(); //cambio id, ora passo a updatare 
-
+    
     if(password.length > 0){
         //il campo password e stato lasciato vuoto quindi non si vuole modificare
         
@@ -76,6 +82,7 @@ router.post('', async function(req, res){
                                             return; //esce dalla funzione del post
                                         }
                                 })
+        console.log('update user psw');
 
     }else{ //password=0 -> non voglio modificata
         User.findByIdAndUpdate( {_id}, 
@@ -86,6 +93,7 @@ router.post('', async function(req, res){
                                             return; //esce dalla funzione del post
                                         }
                                 })
+        console.log('update no psw user');
     }
 
     res.status(200).json({success: 'true',comment:'paziente modificato'});
