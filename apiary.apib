@@ -1,0 +1,156 @@
+FORMAT: 1A
+HOST: https://easyhealth22.herokuapp.com/
+
+# EasyHealth+
+
+API per usare la piattaforma EasyHealth+, progetto di Ingengeria del Software UniTN 2022
+
+## Registrazione [/api/v1/signup]
+
+### Registrazione di un nuovo paziente [POST]
+
+Crea un nuovo utente che può accedere alla piattaforma. Poi potrà eseguire tutte le operazioni che gli sono concesse in qualità di paziente.
+
++ Request (application/json)
+
+    + Attributes
+        - email (string, required) - Email del paziente
+        - password (string, required) - Password scelta dal paziente
+        - nome (string, required) - Nome del paziente
+        - cognome (string, required) - Cognome del paziente
+        - residenza (string, required) - Indirizzo del paziente
+        - CF (string, required) - Codice Fiscale del paziente
+        - CodPA (string, required) - Codice del Piano Assicurativo del paziente
+
++ Response 200
+
+    User created
+    
+    + Body
+
+            {
+                "success": "true"
+            }
+
++ Response 400
+    
+    Ritornato se la richiesta è in un formato errato: mancano uno o più parametri.
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "Wrong format",
+                "error": "1"
+            }
+
++ Response 406
+    
+    Ritornato se l'utente esiste già: errore 2 per CF già esistente, errore 3 per email esistente.
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "",
+                "error": ""
+            }
+
+## Verifica email [/api/v1/verify_email{?id}]
+
+### Verifica l'email di un utente appena creato [GET]
+
+Verifica l'email di un utente appena creato conoscendo il suo id.
+
++ Parameters
+
+    + id - Id utente
+        
++ Response 200
+    
+    + Headers            
+        
+                Location: /
+                
+                
+                
+## UpdateDoc [/api/v1/modmed]
+
+### Ottiene le DoctorInfo [GET]
+
+Richiede al database l'indirizzo, l'email e l'area di competenza del dottore attualmente loggato
++ Token
+
+    + doc_id - Doctor id
+
++ Response 200
+
+    Query a buon fine
+    
+    + Body
+
+            {
+                "address" : @address,
+                "email": @email,
+                "title": @areaDiCompetenza
+            }
+
++ Response 400
+    
+    Mancata connessione al db
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "db problem",
+                "error": "1"
+            }
+            
+
+### Aggiorna le DoctorInfo [POST]
+
+Aggiorna il database con le nuove info relative al medico.
+
++ Request (application/json)
+
+    + Attributes
+        - email (string, required) - Email del medico
+        - password (string, optional) - Nuova password del medico
+        - address (string, required) - Indirizzo del medico
+        - title (string, required) - Area di competenza del medico
+
+
++ Response 200
+
+    Dati aggiornati
+    
+    + Body
+
+            {
+                "success": "true"
+            }
+
++ Response 400
+    
+    Risposta per dati non correttamente formattati o mancanti.
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "Wrong format",
+                "error": "1"
+            }
+
++ Response 406
+    
+    Risposta per errori legati al database.
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "db",
+                "error": "2"
+            }
