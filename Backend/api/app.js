@@ -21,7 +21,7 @@ app.use('/api/v1/PA', PA);
 //app.use (token checker) //qualsiasi cosa scritta qua sotto richiede un check del token = autenticazione
 
 
-app.use('/api/v1/editPaziente', editPaziente); 
+app.use('/api/v1/editPaziente', editPaziente);
 app.use('/api/v1/modmed', modifMedico);
 
 
