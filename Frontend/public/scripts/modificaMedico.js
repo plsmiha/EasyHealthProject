@@ -35,6 +35,7 @@ function modificaDatiMedico(){
 
 function loadData()//se la password non viene inserita resta uguale, se viene inserita invece va a modificare la precedente
 {
+  event.preventDefault();
     console.log('caricooo')
     fetch('../api/v1/modmed', {
         method: 'GET',

@@ -5,20 +5,24 @@ const user = require('../../models/user'); //uguale con user
 const crypto = require('crypto');
 router.get('', async function(req, res) //quando ricevo una richiesta get su /api/v1/modmed entro qui
 {
-        var _id = getId();
-        let data = await docs.findById(_id); //recupera tutte le info dalla tabella docs cercando l'id e le ritorna
-        res.status(200).json(data);
+  var _user = getUser(req);
+
+  docs.findOne({id_user:_user}).then(utente =>{
+
+    var _id = String(utente._id).split('"')[0];
+
+      docs.findById({_id}).then(data =>{
+          res.status(200).json(data);
+      }); //recupera tutte le info dalla tabella docs cercando l'id e le ritorna
+
+      });
 })
 
 
-function getId() //qui dentro ricevaero dal jwt l'id medico, attesa token ascari
-{
-    return '6283a725e782405e1e1e21b1';
-}
 
-function getUser() //qui dentro ricevaero dal jwt l'id user, attesa token ascari
+function getUser(req) //qui dentro ricevaero dal jwt l'id user, attesa token ascari
 {
-    return '6283a725e782702e1e1e21fe';
+    return req.jwtData.id;
 }
 
 function creaPassword(pass) //funzione che genera l'hash della psw per non mandare robe in chiaro al db, deve essere questa la func o non sono coerenti
@@ -42,10 +46,10 @@ function metodoMagico(_email,address,password,title,_id,_user,res,req)//essendo 
                               res.status(500).json({ success: 'false',reason: 'Database connection',error: 3  }); //droppo errore
                               return;
                           } else {
-                              _id = getUser(); //carico l'id della tabella user per modificare mail e password anche li
+                              //carico l'id della tabella user per modificare mail e password anche li
                               if (password.length > 0) //in caso la password non debba essere modificata e` lasciata a vuoto quindi length==0 e aggiorna solo l'email nella tabella user (else) altrimenti aggiorna anche password
                               {
-                                  user.findByIdAndUpdate({_id}, {"email": _email,  "password": creaPassword(password)}, function(err, result) {
+                                  user.findByIdAndUpdate({_id:_user}, {"email": _email,  "password": creaPassword(password)}, function(err, result) {
                                       if (err) {
                                           res.status(500).json({success: 'false',  reason: 'Database connection',error: 3});
                                           return;
@@ -80,31 +84,36 @@ router.post('', async function(req, res) //qui quando ricevo una post
         var address = req.body.address;
         var password = req.body.password;
         var title = req.body.title;
-        var _id = getId(); //carico l'id della tabella doc per aggiornare le varie info
-        var _user = getUser();
+        var _user = getUser(req);
 
-        user.findOne({ email: _email }).then(data => {
-            if (data != null) {
-                var tmp = String(data._id);
+        docs.findOne({id_user:_user}).then(utente =>{
 
-                if (String(tmp.includes(_user)) == "false") {
+          var _id = String(utente._id).split('"')[0];
+          user.findOne({ email: _email }).then(data => {
+              if (data != null) {
+                  var tmp = String(data._id);
 
-                    res.status(500).json({success: 'false',  reason: "email gia usata",error: 1}); //droppo errore
-                    return;
-                }
-                else{
+                  if (String(tmp.includes(_user)) == "false") {
+
+                      res.status(500).json({success: 'false',  reason: "email gia usata",error: 1}); //droppo errore
+                      return;
+                  }
+                  else{
+                    metodoMagico(_email,address,password,title,_id,_user,res,req);
+                  }
+              } else {
+
                   metodoMagico(_email,address,password,title,_id,_user,res,req);
-                }
-            } else {
-
-                metodoMagico(_email,address,password,title,_id,_user,res,req);
-            }
+              }
 
 
-        }).catch(err => {
-          res.status(500).json({success: 'false',reason: 'bonk',error: 3});
-            console.log(err);
-        });
+          }).catch(err => {
+            res.status(500).json({success: 'false',reason: 'bonk',error: 3});
+              console.log(err);
+          });
+
+      });
+
 
     });
 
