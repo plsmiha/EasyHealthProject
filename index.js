@@ -5,6 +5,8 @@ const os = require('os')
 const cluster = require("cluster")
 const mongoose = require('mongoose');
 
+require("dotenv").config();
+
 const app = require("./backend/api/app.js")
 
 if (cluster.isMaster) {
