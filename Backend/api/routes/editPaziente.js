@@ -89,7 +89,7 @@ router.post('', async function(req, res){
                                 {"email": email}, 
                                 function(err, result){
                                         if(err){ //errore nell'update
-                                            res.status(404).json({success: 'false', reason: 'db', error: '2'})
+                                            res.status(406).json({success: 'false', reason: 'db', error: '2'})
                                             return; //esce dalla funzione del post
                                         }
                                 })
