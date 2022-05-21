@@ -5,7 +5,8 @@ const cookieParser = require("cookie-parser");
 
 const login = require('./routes/login.js');
 const signup = require('./routes/signup.js');
-const check = require('./routes/tokenCheck.js')
+const check = require('./routes/tokenCheck.js');
+const logout = require('./routes/logout.js');
 const verify_email = require('./routes/verify_email.js');
 const PA = require('./routes/assurancePlans.js');
 const editPaziente = require ('./routes/editPaziente.js');
@@ -25,9 +26,8 @@ app.use('/api/v1/PA', PA);
 
 app.use((req, res, next) => {
     result = check(req.cookies.access_token);
-    if (result) {
-        req.jwtData.id = result.id
-        req.jwtData.role = result.role
+    if (result != undefined) {
+        req.jwtData = { id: result.id, role: result.role }
         next()
     } else {
         res.status(403).json({ error: 'Unauthorized' });
@@ -37,6 +37,8 @@ app.use((req, res, next) => {
 app.use('/api/v1/editPaziente', editPaziente);
 app.use('/api/v1/modmed', modifMedico);
 
+
+app.use('/api/v1/logout', logout);
 
 app.use((req, res) => {
     res.status(404);
