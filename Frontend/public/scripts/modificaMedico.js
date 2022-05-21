@@ -14,19 +14,18 @@ function modificaDatiMedico(){
     })
     .then((resp) => resp.json())
     .then(function(data) {
-      console.log(data);
+      var elementresid =  document.getElementById("Error_email");
           if(data.success != "true"){
               if(data.error == 1){
-                console.log('email gia presente');
+                elementresid.innerHTML = "*Email già presente!";
               }
               else{
-                console.log("problemi col db");
+                window.alert('Errore:\n'+data.reason+'\nRiprovare.')
+                elementresid.innerHTML = "";
               }
 
-              window.alert(data.reason);
           }
           else{
-            console.log('buon fine');
             window.location.href = "HP_M.html";
           }
 
