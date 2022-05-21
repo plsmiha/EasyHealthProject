@@ -5,7 +5,7 @@ const cookieParser = require("cookie-parser");
 
 const login = require('./routes/login.js');
 const signup = require('./routes/signup.js');
-const check = requrie('./routes/tokenCheck.js')
+const check = require('./routes/tokenCheck.js')
 const verify_email = require('./routes/verify_email.js');
 const PA = require('./routes/assurancePlans.js');
 const editPaziente = require ('./routes/editPaziente.js');
