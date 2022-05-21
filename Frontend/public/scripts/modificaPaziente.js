@@ -4,7 +4,7 @@ function modificaDatiPaziente(){
     var residenza=document.getElementById("Residenza").value;
     var password=document.getElementById("Password").value;
     var codePA=document.getElementById("CodPA").value;
-    
+    console.log('in post');
     fetch('../api/v1/editPaziente', {
         
         method: 'POST',
@@ -13,25 +13,38 @@ function modificaDatiPaziente(){
     })
     .then((resp) => resp.json())
     .then(function(data) {
+        var elementresid =  document.getElementById("Error_email");
         if(data.success=="true")
         {
-            console.log('buon fine')
+            console.log('buon fine');
             window.location.href = "HP_P.html";
         }
         else
         {
             if(data.error=="2")
             {
-              console.log('errore update paziente-db')
+              console.log('errore update paziente-db');
+              window.alert('Errore:\n'+data.reason+'\nRiprovare.')
+              elementresid.innerHTML = "";
             }
             else if(data.error=='1'){
-                console.log('campo vuoto -wrong format')
+                console.log('campo vuoto -wrong format');
+                window.alert('Errore:\n'+data.reason+'\nRiprovare.')
+                elementresid.innerHTML = "";
+            }else if(data.error=='3'){
+                console.log('mail usata da altri');
+                elementresid.innerHTML = "*Email già in uso da altro utente!";
+                document.getElementById("email_reset").style.background = "#ff7a89";
+            }else{
+                console.log(data);
             }
         }
     })
     .catch( error => console.error(error) );
  
 };
+
+
 
 function loadData()
 {    
@@ -40,7 +53,7 @@ function loadData()
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(),
     })
-    .then((resp) => resp.json())
+    .then((resp) => resp.json()) //perche router.post e async ->returns a promise -> posso fare.then
     .then(function(data) {
         data.forEach(el => {
             var opt = document.createElement('option');
