@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-//FUNZIONI 
+//FUNZIONI
 
 function generateString(length) {
     const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789?[#?!@$%^&';
@@ -43,8 +43,6 @@ router.post('', async function(req, res) {
     }else{
         //genero una nuova password
         var passTemp = generateString(8);
-
-
         //la hasho per salvarla nel db
         var hash = crypto.createHash('sha512');
         data = hash.update(passTemp, 'utf-8');
@@ -52,8 +50,8 @@ router.post('', async function(req, res) {
 
         //modifico il campo inserendo il nuovo hash della pass
         User.findOneAndUpdate(
-            {email: req.body.email},                                                                                                    
-            {"password":gen_hash}, 
+            {email: req.body.email},
+            {"password":gen_hash},
             function(err, result){ // For nearly all mongoose queries callback(err, results)
                 if(err){
                     res.status(406).json({success: 'false', reason: 'Errore update PSW temp ', error: '1'});
@@ -65,15 +63,15 @@ router.post('', async function(req, res) {
         //mando nuova passw in chiaro al paziente per mail
         console.log('mail presente nel db');
         transporter.sendMail({
-        from: '"EasyHealth+" <easy.health.app.info@gmail.com>',
-        to: req.body.email,                                                                                          
-        subject: "Cambio password EasyHealth+",
-        text: "È stata per te creata una nuova password!\nPotrai usarla per accedere al tuo account e cambiarla nelle opzioni di modifica profilo\n." + passTemp,
+          from: '"EasyHealth+" <easy.health.app.info@gmail.com>',
+          to: req.body.email,
+          subject: "Cambio password EasyHealth+",
+          text: "È stata per te creata una nuova password!\nPotrai usarla per accedere al tuo account e cambiarla nelle opzioni di modifica profilo:\n" + passTemp,
         }).then().catch(console.error);
 
     }
     console.log("password temporanea modificata");
-    res.status(200).json({success: 'true', comment:'password temporanea modificata'});  
+    res.status(200).json({success: 'true', comment:'password temporanea modificata'});
 
 });
 

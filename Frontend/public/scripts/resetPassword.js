@@ -11,7 +11,7 @@ function startReset(){
       if(data.success=="true")
       {
           console.log('buon fine')
-          window.location.href = "index.html";
+          window.location.href = "login.html";
       }
       else
       {
@@ -21,9 +21,9 @@ function startReset(){
             document.getElementById("email_reset").style.background = "#ff7a89";
             document.getElementById("Error_email").innerHTML = "l'email inserita non corrisponde a nessun account";
           }
-          else if(data.error=="3")
+          else if(data.error=="1")
           {
-            console.log('error 3 in caso miha implementi qualche error magico')
+            window.alert('Errore:\n'+data.reason+'\nRiprovare.')
             document.getElementById("email_reset").style.background = "#ff7a89";
           }
       }

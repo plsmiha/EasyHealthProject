@@ -5,7 +5,7 @@ const cors = require('cors');
 const signup = require('./routes/signup.js');
 const verify_email = require('./routes/verify_email.js');
 const PA = require('./routes/assurancePlans.js');
-const editPaziente = require ('./routes/editPaziente.js');
+
 const reset = require ('./routes/resetPassword.js')
 
 const modifMedico = require('./routes/modificaMedico.js');
@@ -23,7 +23,7 @@ app.use('/api/v1/resetPassword', reset)
 //app.use (token checker) //qualsiasi cosa scritta qua sotto richiede un check del token = autenticazione
 
 
-app.use('/api/v1/editPaziente', editPaziente); 
+
 app.use('/api/v1/modmed', modifMedico);
 
 
