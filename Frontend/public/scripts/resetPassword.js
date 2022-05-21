@@ -18,13 +18,23 @@ function startReset(){
           if(data.error=="2")
           {
             console.log('error 2')
+            console.log('email non corrisponde a nessun account');
             document.getElementById("email_reset").style.background = "#ff7a89";
             document.getElementById("Error_email").innerHTML = "l'email inserita non corrisponde a nessun account";
           }
           else if(data.error=="1")
           {
+<<<<<<< HEAD
             window.alert('Errore:\n'+data.reason+'\nRiprovare.')
             document.getElementById("email_reset").style.background = "#ff7a89";
+=======
+            console.log('error 3')
+            console.log('errore update db');
+          }else if(data.error=="1")
+          {
+            console.log('error 1')
+            console.log('wrong format');
+>>>>>>> fddb162a29b9f3885b237f8b2409bdc691702d76
           }
       }
   })

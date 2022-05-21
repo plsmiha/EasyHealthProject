@@ -16,10 +16,11 @@ const transporter = nodemailer.createTransport({
 
 //FUNZIONI
 
-function generateString(length) {
+function generateString(length){
     const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789?[#?!@$%^&';
     let result = ' ';
     const charactersLength = characters.length;
+
     for ( let i = 0; i < length; i++ ) {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
@@ -32,12 +33,19 @@ function generateString(length) {
 //tramite browser faccio delle get
 router.post('', async function(req, res) {
     console.log('POST arrived')
+    
+
+    if(typeof req.body.email == 'undefined'){   
+        res.status(400).json({success: 'false', reason: 'Wrong format', error: '1'});
+        console.log('wrong format');
+        return;
+    }
 
     //controllo se la email è stata registrata
-   var user_check = await User.find().where('email',req.body.email);
+    var user_check = await User.find().where('email',req.body.email);
     console.log(Object.keys(user_check).length);
     if(Object.keys(user_check).length==0){
-        res.status(406).json({success: 'false', reason: 'email non registrata', error: '2'});
+        res.status(404).json({success: 'false', reason: 'email non registrata', error: '2'});
         console.log('email non registrata');
         return;
     }else{
@@ -54,7 +62,7 @@ router.post('', async function(req, res) {
             {"password":gen_hash},
             function(err, result){ // For nearly all mongoose queries callback(err, results)
                 if(err){
-                    res.status(406).json({success: 'false', reason: 'Errore update PSW temp ', error: '1'});
+                    res.status(406).json({success: 'false', reason: 'db', error: '3'});
                     console.log('errore update ma esiste');
                     return;
                 }
@@ -62,6 +70,7 @@ router.post('', async function(req, res) {
 
         //mando nuova passw in chiaro al paziente per mail
         console.log('mail presente nel db');
+
         transporter.sendMail({
           from: '"EasyHealth+" <easy.health.app.info@gmail.com>',
           to: req.body.email,
