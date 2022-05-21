@@ -3,7 +3,7 @@ function check(token) {
         return undefined;
     } else {
         try {
-            const data = jwt.verify(token, "YOUR_SECRET_KEY");
+            const data = jwt.verify(token, process.env.JWT_KEY);
             return { id: data.id, role: data.role }
         } catch {
             return undefined;
