@@ -1,5 +1,6 @@
 function doLogin(){
 
+    event.preventDefault();
     var email=document.getElementById("email").value;
     var password=document.getElementById("pass").value;
 
@@ -11,27 +12,23 @@ function doLogin(){
     .then((resp) => resp.json())
     .then(function(data) {
 
-        document.getElementById("Email").style.background = "#C4C4C4";
-        document.getElementById("Error_email").hidden = true;
-        document.getElementById("Email").style.background = "#C4C4C4";
-        document.getElementById("Error_email").hidden = true;
-
-        if(data.success=="true")
+        if(!data.error)
         {
-            //window.location.href = "index.html";
+            if (data.redirectTo == 'M') {
+                window.location.href = "HP_M.html";
+            } else if (data.redirectTo == 'P') {
+                window.location.href = "HP_P.html";
+            } else if (data.redirectTo == 'AO') {
+                window.location.href = "HP_AO.html";
+            } else {
+                // wtf
+            }
         }
         else
         {
-            if(data.error=="2")
-            {
-
-                
-            }
-            else if(data.error=="3")
-            {
-                document.getElementById("Email").style.background = "#ff7a89";
-                document.getElementById("Error_email").hidden = false;
-            }
+            document.getElementById("Email").style.background = "#ff7a89";
+            document.getElementById("Error_email").hidden = false;
+            
         }
     })
     .catch( error => console.error(error) );
