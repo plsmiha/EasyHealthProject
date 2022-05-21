@@ -9,7 +9,8 @@ const check = require('./routes/tokenCheck.js');
 const logout = require('./routes/logout.js');
 const verify_email = require('./routes/verify_email.js');
 const PA = require('./routes/assurancePlans.js');
-const editPaziente = require ('./routes/editPaziente.js');
+
+const reset = require ('./routes/resetPassword.js')
 
 const modifMedico = require('./routes/modificaMedico.js');
 app.use(express.json());
@@ -23,6 +24,7 @@ app.use('/api/v1/login', login);
 app.use('/api/v1/signup', signup);
 app.use('/api/v1/verify_email', verify_email);
 app.use('/api/v1/PA', PA);
+app.use('/api/v1/resetPassword', reset)
 
 app.use((req, res, next) => {
     result = check(req.cookies.access_token);
@@ -35,6 +37,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/v1/editPaziente', editPaziente);
+
 app.use('/api/v1/modmed', modifMedico);
 
 
