@@ -26,9 +26,8 @@ function doLogin(){
         }
         else
         {
-            document.getElementById("Email").style.background = "#ff7a89";
-            document.getElementById("Error_email").hidden = false;
-            
+            document.getElementById("email").style.background = "#ff7a89";
+            document.getElementById("pass").style.background = "#ff7a89";
         }
     })
     .catch( error => console.error(error) );
