@@ -22,14 +22,10 @@ function modificaDatiPaziente(){
         {
             if(data.error=="2")
             {
-              console.log('errore update paziente')
-            }
-            else if(data.error=="3")
-            {
-              console.log('errore update user')
+              console.log('errore update paziente-db')
             }
             else if(data.error=='1'){
-                console.log('campo vuoto')
+                console.log('campo vuoto -wrong format')
             }
         }
     })

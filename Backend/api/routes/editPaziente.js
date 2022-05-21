@@ -57,7 +57,7 @@ router.post('', async function(req, res){
                                 {"email": email, "address": address, "codePA" : codePA}, 
                                 function(err, result){
                                         if(err){ //errore nell'update
-                                            res.status(406).json({success: 'false', reason: 'Errore update paziente', error: '2'})
+                                            res.status(406).json({success: 'false', reason: 'db', error: '2'})
                                             return; //esce dalla funzione del post
                                         }
                                 }
@@ -78,7 +78,7 @@ router.post('', async function(req, res){
                                 {"email": email,  "password": gen_hash}, 
                                 function(err, result){
                                         if(err){ //errore nell'update
-                                            res.status(406).json({success: 'false', reason: 'Errore update paziente e password', error: '3'})
+                                            res.status(406).json({success: 'false', reason: 'db', error: '2'})
                                             return; //esce dalla funzione del post
                                         }
                                 })
@@ -89,7 +89,7 @@ router.post('', async function(req, res){
                                 {"email": email}, 
                                 function(err, result){
                                         if(err){ //errore nell'update
-                                            res.status(406).json({success: 'false', reason: 'Errore update paziente e password', error: '3'})
+                                            res.status(404).json({success: 'false', reason: 'db', error: '2'})
                                             return; //esce dalla funzione del post
                                         }
                                 })
