@@ -36,10 +36,7 @@ app.use((req, res, next) => {
     }
 });
 
-app.use('/api/v1/editPaziente', editPaziente);
-
 app.use('/api/v1/modmed', modifMedico);
-
 
 app.use('/api/v1/logout', logout);
 
