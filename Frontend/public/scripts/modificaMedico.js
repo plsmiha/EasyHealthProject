@@ -1,7 +1,7 @@
 function modificaDatiMedico(){
 
     if(!checkPassword()) return;
-
+    event.preventDefault();
     var email=document.getElementById("Email").value;
     var address=document.getElementById("Residenza").value;
     var password=document.getElementById("Password").value;
@@ -14,23 +14,23 @@ function modificaDatiMedico(){
     })
     .then((resp) => resp.json())
     .then(function(data) {
-        if(data.success=="true")
-        {
-            console.log('buon fine')
-        }
-        else
-        {
-            if(data.error=="2")
-            {
-              console.log('pswd vuota')
-            }
-            else if(data.error=="3")
-            {
-              console.log('errore a caso')
-            }
-        }
+      var elementresid =  document.getElementById("Error_email");
+          if(data.success != "true"){
+              if(data.error == 1){
+                elementresid.innerHTML = "*Email già presente!";
+              }
+              else{
+                window.alert('Errore:\n'+data.reason+'\nRiprovare.')
+                elementresid.innerHTML = "";
+              }
+
+          }
+          else{
+            window.location.href = "HP_M.html";
+          }
+
     })
-    .catch( error => console.error(error) );
+    .catch( error => console.log(error) );
 };
 
 function loadData()//se la password non viene inserita resta uguale, se viene inserita invece va a modificare la precedente
@@ -57,7 +57,7 @@ function loadData()//se la password non viene inserita resta uguale, se viene in
 };
 
 function abort(){
-      window.location.href = "index.html";
+      window.location.href = "HP_M.html";
 }
 
 function checkPassword()
