@@ -5,7 +5,7 @@ function modificaDatiMedico(){
     var email=document.getElementById("Email").value;
     var address=document.getElementById("Residenza").value;
     var password=document.getElementById("Password").value;
-    var titolo=document.getElementById("TitoloMedico").value;
+    var titolo=document.getElementById("aree").value;
     console.log('passo per le modifiche')
     fetch('../api/v1/modmed', {
         method: 'POST',
@@ -36,6 +36,25 @@ function modificaDatiMedico(){
 function loadData()//se la password non viene inserita resta uguale, se viene inserita invece va a modificare la precedente
 {
   event.preventDefault();
+
+  fetch('../api/v1/aree', {
+         method: 'GET',
+         headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify(),
+     })
+     .then((resp) => resp.json())
+     .then(function(data) {
+         data.forEach(el => {
+             var opt = document.createElement('option');
+             opt.innerHTML = el.name;
+             opt.value = el._id;
+             document.getElementById("aree").appendChild(opt);
+         })
+     })
+
+
+
+
     console.log('caricooo')
     fetch('../api/v1/modmed', {
         method: 'GET',
@@ -48,7 +67,7 @@ function loadData()//se la password non viene inserita resta uguale, se viene in
         var elementresid =  document.getElementById("Residenza");
         elementresid.value = data['address'];
 
-        var elementretitolo =  document.getElementById("TitoloMedico");
+        var elementretitolo =  document.getElementById("aree");
         elementretitolo.value = data['title'];
 
         var elementemail =  document.getElementById("Email");

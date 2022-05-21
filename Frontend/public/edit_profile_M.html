@@ -184,6 +184,15 @@
             background: #D4001C;
             border-radius: 15px;
         }
+        #aree{
+            position: absolute;
+            height: 49px;
+            left: 74px;
+            top: 475px;
+            width: auto;
+            right: 74px;
+        }
+
 
     </style>
 
@@ -206,7 +215,10 @@
             <input type="email" id="Email" value="" required/>
 
              <input type="password" id="Password" value="" onfocusout="checkPassword();"/>
-            <input type="text" id="TitoloMedico" value="" required/>
+             <select name="aree" id="aree">
+                   <option value="">Nessuno</option>
+               </select>
+
 
             <input type="submit" value="salva modifiche"/>
             <input type="button" value="esci" onclick="abort();"/>

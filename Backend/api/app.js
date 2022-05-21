@@ -4,6 +4,7 @@ const cors = require('cors');
 const cookieParser = require("cookie-parser");
 
 const login = require('./routes/login.js');
+const aree = require('./routes/aree.js');
 const signup = require('./routes/signup.js');
 const check = require('./routes/tokenCheck.js');
 const logout = require('./routes/logout.js');
@@ -21,6 +22,7 @@ app.use(cookieParser());
 app.use('/', express.static('./Frontend/public'));
 
 app.use('/api/v1/login', login);
+app.use('/api/v1/aree', aree);
 app.use('/api/v1/signup', signup);
 app.use('/api/v1/verify_email', verify_email);
 app.use('/api/v1/PA', PA);
