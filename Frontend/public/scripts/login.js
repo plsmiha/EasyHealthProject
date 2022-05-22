@@ -12,6 +12,11 @@ function doLogin(){
     .then((resp) => resp.json())
     .then(function(data) {
 
+        document.getElementById("email").style.background = "#FFFFFF";
+        document.getElementById("pass").style.background = "#FFFFFF";
+        document.getElementById("Error_account").hidden = true;
+        document.getElementById("Error_verified").hidden = true;
+
         if(!data.error)
         {
             if (data.redirectTo == 'M') {
@@ -24,10 +29,16 @@ function doLogin(){
                 // wtf
             }
         }
+        else if(data.error=="Not verified")
+        {
+            document.getElementById("email").style.background = "#ff7a89";
+            document.getElementById("Error_verified").hidden = false;
+        }
         else
         {
             document.getElementById("email").style.background = "#ff7a89";
             document.getElementById("pass").style.background = "#ff7a89";
+            document.getElementById("Error_account").hidden = false;
         }
     })
     .catch( error => console.error(error) );
