@@ -73,6 +73,48 @@ Verifica l'email di un utente appena creato conoscendo il suo id.
                 Location: /
                 
                 
+## Login [/api/v1/login]
+
+### Ottieni token JWT [POST]
+
+Fornendo le credenziali utente (email e passwork), si ottiene il token JWT necessario ad usufruire dei servizi autenticati della piattaforma.
+
++ Request (application/json)
+
+    + Attributes
+        - email (string, required) - Email del medico
+        - password (string, optional) - Nuova password del medico
+
+
++ Response 200
+
+    Dati aggiornati
+    
+    + Body
+
+            {
+                "redirectTo": "P"
+            }
+
++ Response 403
+    
+    Credenziali invalide.
+    
+    + Body
+
+            {
+                "error": "Unauthorized"
+            }
+
++ Response 400
+    
+    Bad request, email o password mancanti
+    
+    + Body
+
+            {
+                "error": "Bad request"
+            }
                 
 ## UpdateDoc [/api/v1/modmed]
 
@@ -182,7 +224,7 @@ Aggiorna il database con le nuove info relative al paziente.
         - email (string, required) - Email del medico
         - password (string, optional) - Nuova password del medico
         - residenza (string, required) - Indirizzo del medico
-        - codePA (string, required) - Area di competenza del medico
+        - codePA (string, required) - codica piano assicurativo
 
 
 + Response 200
