@@ -79,9 +79,8 @@ Verifica l'email di un utente appena creato conoscendo il suo id.
 ### Ottiene le DoctorInfo [GET]
 
 Richiede al database l'indirizzo, l'email e l'area di competenza del dottore attualmente loggato
-+ Token
-
-    + doc_id - Doctor id
++ Cookies
+    + jwtData.id
 
 + Response 200
 
@@ -95,17 +94,7 @@ Richiede al database l'indirizzo, l'email e l'area di competenza del dottore att
                 "title": @areaDiCompetenza
             }
 
-+ Response 400
-    
-    Mancata connessione al db
-    
-    + Body
-            
-            {
-                "success": "false",
-                "reason": "db problem",
-                "error": "1"
-            }
+
             
 
 ### Aggiorna le DoctorInfo [POST]
@@ -129,28 +118,29 @@ Aggiorna il database con le nuove info relative al medico.
 
             {
                 "success": "true"
+                "comment": ""
             }
 
-+ Response 400
++ Response 506
     
-    Risposta per dati non correttamente formattati o mancanti.
+    Email gia` utilizzata da altro utente.
     
     + Body
             
             {
                 "success": "false",
-                "reason": "Wrong format",
+                "reason": "Email gia usata",
                 "error": "1"
             }
-
-+ Response 406
+            
++ Response 500
     
-    Risposta per errori legati al database.
+    Errore correlato alla connessione con il database. 
     
     + Body
             
             {
                 "success": "false",
-                "reason": "db",
-                "error": "2"
+                "reason": "DB connection",
+                "error": "3"
             }
