@@ -16,6 +16,7 @@ router.post('', async function(req, res) {
 
         let user = await User.findOne({ email: req.body.email});
 
+
         var hash = crypto.createHash('sha512');
         data = hash.update(req.body.password, 'utf-8');
         gen_hash= data.digest('hex');
@@ -31,8 +32,8 @@ router.post('', async function(req, res) {
             res.status(403).json({ error: 'Unauthorized' });
         }
     }
-    
-    
+
+
 
 });
 
