@@ -144,3 +144,68 @@ Aggiorna il database con le nuove info relative al medico.
                 "reason": "DB connection",
                 "error": "3"
             }
+            
+            
+            
+
+
+## Reset Password [/api/v1/resetPassword]   
+
+### Reset Password [POST]
+
+Genera una password casuale, la invia all'utente tramite mail e parallelamente la salva come nuova password 
+collegata all'email dell'utente permettendogli di accedere di nuovo.
+
++ Request (application/json)
+
+    + Attributes
+        - email (string, required) - Email dell'utente
+
+
++ Response 200
+
+    Password inserita e inviata
+    
+    + Body
+
+            {
+                "success": "true"
+                "comment": "password temporanea modificata"
+            }
+
++ Response 400
+    
+    Errore nella formattazione campo email.
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "Wrong format",
+                "error": "1"
+            }
+            
++ Response 404
+    
+    Email non presente nel database.
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "email non registrata",
+                "error": "2"
+            }
+            
+            
++ Response 406
+    
+    Errore correlato alla connesione con il database.
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "db",
+                "error": "3"
+            }
