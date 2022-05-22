@@ -210,7 +210,7 @@
         <span id="l_Password">Password</span>
         <span id="l_CodPA">Codice Piano Assicutativo</span>
         <span id="Error_password"></span>
-        <form onsubmit="modificaDatiPaziente();">
+        <form onsubmit="modificaDatiPaziente(); return false;">
             <input type="text" id="Residenza" value="" required/>
             <input type="email" id="Email" value="" required/>
             <input type="password" id="Password" value="" onfocusout="checkPassword();"/>

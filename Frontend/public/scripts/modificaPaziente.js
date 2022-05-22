@@ -1,59 +1,53 @@
+
 function modificaDatiPaziente(){
     if(!checkPassword()) return; //se la funzione check password
+
     var email=document.getElementById("Email").value;
     var residenza=document.getElementById("Residenza").value;
     var password=document.getElementById("Password").value;
     var codePA=document.getElementById("CodPA").value;
-    console.log('in post');
+
     fetch('../api/v1/editPaziente', {
-        
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify( { email: email, residenza: residenza, password: password,  codePA: codePA } ),
     })
     .then((resp) => resp.json())
     .then(function(data) {
-        var elementresid =  document.getElementById("Error_email");
         if(data.success=="true")
         {
-            console.log('buon fine');
+            console.log('buon fine')
             window.location.href = "HP_P.html";
         }
         else
         {
             if(data.error=="2")
             {
-              console.log('errore update paziente-db');
-              window.alert('Errore:\n'+data.reason+'\nRiprovare.')
-              elementresid.innerHTML = "";
+              console.log('errore update paziente-db')
             }
             else if(data.error=='1'){
-                console.log('campo vuoto -wrong format');
-                window.alert('Errore:\n'+data.reason+'\nRiprovare.')
-                elementresid.innerHTML = "";
-            }else if(data.error=='3'){
-                console.log('mail usata da altri');
-                elementresid.innerHTML = "*Email già in uso da altro utente!";
-                document.getElementById("email_reset").style.background = "#ff7a89";
-            }else{
-                console.log(data);
+                console.log('campo vuoto -wrong format')
+            }else if(data.error=="3"){
+                
+              console.log('email gia registrata');
+              document.getElementById("Email").style.background = "#ff7a89";
+              document.getElementById("Error_email").innerHTML = "l'email inserita è già associata ad un altro account";
+
             }
         }
     })
-    .catch( error => console.error(error) );
- 
+    .catch( error => console.error(error) );  
 };
+  
 
-
-
-function loadData()
+  function loadData()
 {    
     fetch('../api/v1/PA', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(),
     })
-    .then((resp) => resp.json()) //perche router.post e async ->returns a promise -> posso fare.then
+    .then((resp) => resp.json())
     .then(function(data) {
         data.forEach(el => {
             var opt = document.createElement('option');
@@ -84,7 +78,7 @@ function loadData()
 };
 
 function abort(){ //se schiaccio exit non succederà niente, non verrà mandato nessun post, niente backend solo reindirizzamento
-    window.location.href = "index.html";
+    window.location.href = "HP_P.html";
       //window.location.href is not a method, it's a property that will tell you the current URL
       //location of the browser. Changing the value of the property will redirect the page.
 }
@@ -118,5 +112,3 @@ function checkPassword()
         return true;
     }
 };
-
-
