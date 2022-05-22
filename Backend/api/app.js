@@ -13,7 +13,9 @@ const PA = require('./routes/assurancePlans.js');
 
 const reset = require ('./routes/resetPassword.js')
 
+const editPaziente = require('./routes/editPaziente.js');
 const modifMedico = require('./routes/modificaMedico.js');
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors())
@@ -38,6 +40,7 @@ app.use((req, res, next) => {
     }
 });
 
+app.use('/api/v1/editPaziente', editPaziente);
 app.use('/api/v1/modmed', modifMedico);
 
 app.use('/api/v1/logout', logout);

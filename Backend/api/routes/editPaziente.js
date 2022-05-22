@@ -30,6 +30,7 @@ router.get('', async function(req, res){ //do la risposta al fronted che mi ha c
 
 router.post('', async function(req, res){
     console.log('dentro post backend');
+    
     //controllo che ogni campo sia completato in maniera opportuna
     if(typeof req.body.email == 'undefined' ||  typeof req.body.residenza== 'undefined' || typeof req.body.codePA == 'undefined' )
     {   console.log('anuovi dati:');
@@ -67,18 +68,18 @@ router.post('', async function(req, res){
     
     if(password.length > 0){
         //il campo password e stato lasciato vuoto quindi non si vuole modificare
-        
+
         //creo digest della password
         var hash = crypto.createHash('sha512');
         data = hash.update(password, 'utf-8');
         gen_hash= data.digest('hex');
 
-        User.findByIdAndUpdate( {_user}, 
+        await User.findByIdAndUpdate( {_id: _user}, 
                                 {"email": email,  "password": gen_hash})
         console.log('update user psw');
 
     }else{ //password=0 -> non voglio modificata
-        User.findByIdAndUpdate( {_user},{"email": email});
+        await User.findByIdAndUpdate( {_id: _user},{"email": email});
         console.log('update no psw user');
     }
 
