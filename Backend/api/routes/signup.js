@@ -63,9 +63,9 @@ router.post('', async function(req, res) {
     transporter.sendMail({
         from: '"EasyHealth+" <easy.health.app.info@gmail.com>',
         to: req.body.email,
-        subject: "Confirm your email on EasyHealth+ ✔",
+        subject: "Conferma il tuo account su EasyHealth+ ✔",
         text: "",
-        html: "<a href='"+link+"'>Click here yo confirm your identity!</a> or copy and paste link below:<br/>"+link,
+        html: "<a href='"+link+"'>Clicca qui per confermare la tua identità!</a> O copia incolla il link qui sotto:<br/>"+link,
     }).then().catch(console.error);
 
     res.status(200).json({success: 'true'});
