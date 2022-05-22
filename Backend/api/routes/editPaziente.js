@@ -8,8 +8,8 @@ const Patient = require('../../models/patient');
 
 
 function getUser(req){ //qui dentro ricevaero dal jwt l'id user
-    //return req.jwtData.id;
-    return '6283b2e8cd01c7be9d02d148';
+    return req.jwtData.id;
+    //return '6283b2e8cd01c7be9d02d148';
 }
 
 

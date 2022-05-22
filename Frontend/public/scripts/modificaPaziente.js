@@ -37,7 +37,7 @@ function modificaDatiPaziente(){
 
   function loadData()
 {    
- 
+    event.preventDefault();
     fetch('../api/v1/PA', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
