@@ -1,6 +1,6 @@
 <head>
-    <title>Modifica Medico</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <title>Pagina di registrazione</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
     <style>
@@ -53,7 +53,7 @@
             left: 74px;
             top: 169px;
         }
-
+   
         #l_Password{
             position: absolute;
             height: 49px;
@@ -61,17 +61,17 @@
             top: 297px;
         }
 
-        #l_titoloMedico{
+        #l_CodPA{
             position: absolute;
             height: 49px;
             left: 74px;
             top: 425px;
         }
-
+  
         #Residenza{
             position: absolute;
             height: 49px;
-            left: 74px;
+            left: 74px;                
             top: 91px;
             width: auto;
             right: 74px;
@@ -89,7 +89,7 @@
             position: absolute;
             left: 74px;
             top: 256px;
-            font-size: 18px;
+            font-size: 18px;      
         }
         #Password{
             position: absolute;
@@ -104,10 +104,10 @@
             position: absolute;
             left: 74px;
             top: 389px;
-            font-size: 18px;
+            font-size: 18px;      
         }
 
-        #TitoloMedico{
+        #CodPA{
             position: absolute;
             height: 49px;
             left: 74px;
@@ -115,10 +115,6 @@
             width: auto;
             right: 74px;
         }
-
-
-
-
 
         body{
             background-image: url('img/background.png');
@@ -184,42 +180,42 @@
             background: #D4001C;
             border-radius: 15px;
         }
-        #aree{
-            position: absolute;
-            height: 49px;
-            left: 74px;
-            top: 475px;
-            width: auto;
-            right: 74px;
+
+        /* Scrollbar styles */
+        ::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
         }
 
+        ::-webkit-scrollbar-thumb {
+            background: #d4001c;  
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #960011;  
+        }
 
     </style>
 
 
-
 </head>
 <body onload="loadData();">
-  <script src="scripts/modificaMedico.js"></script>
-    <div id="title">Modifica Profilo DOC</div>
+    <script src="scripts/modificaPaziente.js"></script>
+    <div id="title">Modifica Profilo</div>
     <img src="img/Logo.png" id="logo"/>
     <div  id="box">
         <span id="l_Residenza">Residenza</span>
         <span id="l_Email">Email</span>
-        <span id="l_Password">Password  (vuota per non modificare)</span>
-        <span id="l_titoloMedico">Area di competenza</span>
-        <span id="Error_email"></span>
+        <span id="l_Password">Password</span>
+        <span id="l_CodPA">Codice Piano Assicutativo</span>
         <span id="Error_password"></span>
-        <form onsubmit="modificaDatiMedico();">
+        <form onsubmit="modificaDatiPaziente();">
             <input type="text" id="Residenza" value="" required/>
             <input type="email" id="Email" value="" required/>
-
-             <input type="password" id="Password" value="" onfocusout="checkPassword();"/>
-             <select name="aree" id="aree">
-                   <option value="">Nessuno</option>
-               </select>
-
-
+            <input type="password" id="Password" value="" onfocusout="checkPassword();"/>
+            <select name="CodPA" id="CodPA">
+                <option value="">Nessuno</option>
+            </select>
             <input type="submit" value="salva modifiche"/>
             <input type="button" value="esci" onclick="abort();"/>
         </form>
