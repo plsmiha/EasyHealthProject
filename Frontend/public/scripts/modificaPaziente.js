@@ -1,4 +1,3 @@
-
 function modificaDatiPaziente(){
     if(!checkPassword()) return; //se la funzione check password
 
@@ -21,11 +20,7 @@ function modificaDatiPaziente(){
         }
         else
         {
-            if(data.error=="2")
-            {
-              console.log('errore update paziente-db')
-            }
-            else if(data.error=='1'){
+            if(data.error=='1'){
                 console.log('campo vuoto -wrong format')
             }else if(data.error=="3"){
                 
@@ -42,6 +37,7 @@ function modificaDatiPaziente(){
 
   function loadData()
 {    
+ 
     fetch('../api/v1/PA', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },

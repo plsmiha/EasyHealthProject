@@ -6,26 +6,24 @@ const router = express.Router();
 const User = require('../../models/user');
 const Patient = require('../../models/patient');
 
-//FUNZIONI
 
-function getId(){
-    return '6283b2e8cd01c7be9d02d14a';
-}
-
-function getUser(){
+function getUser(req){ //qui dentro ricevaero dal jwt l'id user
+    //return req.jwtData.id;
     return '6283b2e8cd01c7be9d02d148';
-    
 }
-
 
 
 //recupero le informazioni dell'utente con un GET per metterle nel form di modifica
 router.get('', async function(req, res){ //do la risposta al fronted che mi ha chiesto e faccio la richiesta al db
-    console.log('recupero dati');
-    var _id = getId();
-    let data = await Patient.findById(_id);
-
-    res.status(200).json(data);
+    
+    var _user = getUser(req);
+    Patient.findOne({id_user:_user}).then(utente =>{
+        var _id = String(utente._id).split('"')[0];
+        console.log('get dati di '+_id);
+        Patient.findById({_id}).then(data =>{
+            res.status(200).json(data);
+        }); 
+    });
 })
 
 //aggiorno tutte le info del paziente con un post
@@ -33,7 +31,7 @@ router.get('', async function(req, res){ //do la risposta al fronted che mi ha c
 router.post('', async function(req, res){
     console.log('dentro post backend');
     //controllo che ogni campo sia completato in maniera opportuna
-    if(typeof req.body.email == 'undefined' ||  typeof req.body.residenza == 'undefined' || typeof req.body.codePA == 'undefined' )
+    if(typeof req.body.email == 'undefined' ||  typeof req.body.residenza== 'undefined' || typeof req.body.codePA == 'undefined' )
     {   console.log('anuovi dati:');
         console.log(req.body.email);
         console.log(req.body.residenza);
@@ -44,12 +42,12 @@ router.post('', async function(req, res){
     }
 
     var email=req.body.email;
-    var address=req.body.residenza;
+    var residenza=req.body.residenza;
     var password=req.body.password;
     var codePA=req.body.codePA;
-    var _id=getId();
-    var _user=getUser();
-
+    var _user=getUser(req);
+    var ids= await Patient.findOne({id_user:_user})
+    var _id = String(ids._id).split('"')[0];
 
     var user_check = await User.find({"email" : { $regex : new RegExp(email, "i") }}).where('_id').ne(_user);
     console.log(Object.keys(user_check).length);
@@ -63,18 +61,9 @@ router.post('', async function(req, res){
 
     //primo parametro e quello secondo il quale sto cercando=id, poi passo nuovi campi, poi callback
     //The query executes if callback is passed.
-    Patient.findByIdAndUpdate(  {_id}, 
-                                {"email": email, "address": address, "codePA" : codePA}, 
-                                function(err, result){
-                                        if(err){ //errore nell'update
-                                            res.status(406).json({success: 'false', reason: 'db', error: '2'})
-                                            return; //esce dalla funzione del post
-                                        }
-                                }
-                             )
+    await Patient.findByIdAndUpdate(  {_id},{"email": email, "address": residenza, "codePA" : codePA});
     console.log('update paziente');
 
-    _id = getUser(); //cambio id, ora passo a updatare 
     
     if(password.length > 0){
         //il campo password e stato lasciato vuoto quindi non si vuole modificare
@@ -84,25 +73,12 @@ router.post('', async function(req, res){
         data = hash.update(password, 'utf-8');
         gen_hash= data.digest('hex');
 
-        User.findByIdAndUpdate( {_id}, 
-                                {"email": email,  "password": gen_hash}, 
-                                function(err, result){
-                                        if(err){ //errore nell'update
-                                            res.status(406).json({success: 'false', reason: 'db', error: '2'})
-                                            return; //esce dalla funzione del post
-                                        }
-                                })
+        User.findByIdAndUpdate( {_user}, 
+                                {"email": email,  "password": gen_hash})
         console.log('update user psw');
 
     }else{ //password=0 -> non voglio modificata
-        User.findByIdAndUpdate( {_id}, 
-                                {"email": email}, 
-                                function(err, result){
-                                        if(err){ //errore nell'update
-                                            res.status(406).json({success: 'false', reason: 'db', error: '2'})
-                                            return; //esce dalla funzione del post
-                                        }
-                                })
+        User.findByIdAndUpdate( {_user},{"email": email});
         console.log('update no psw user');
     }
 
