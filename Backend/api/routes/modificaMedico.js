@@ -95,7 +95,7 @@ router.post('', async function(req, res) //qui quando ricevo una post
 
                   if (String(tmp.includes(_user)) == "false") {
 
-                      res.status(500).json({success: 'false',  reason: "email gia usata",error: 1}); //droppo errore
+                      res.status(506).json({success: 'false',  reason: "email gia usata",error: 1}); //droppo errore
                       return;
                   }
                   else{
