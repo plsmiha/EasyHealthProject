@@ -28,7 +28,7 @@ if (cluster.isMaster) {
 
 } else {
 
-    app.locals.db = mongoose.connect('mongodb+srv://NodeApp:Y1XPLdwnXWNRSKIN@cluster0.emtou.mongodb.net/?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true})
+    app.locals.db = mongoose.connect(process.env.DB_URL, {useNewUrlParser: true, useUnifiedTopology: true})
     .then ( () => {
         
         console.log(`WORKER ${process.pid} connected to DB`)
