@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
     port: 587,
     auth: {
       user: 'easy.health.app.info@gmail.com',
-      pass: 'idsids22',
+      pass: process.env.PASSWORD_MAIL
     },
 });
 transporter.verify().then().catch(console.error);
@@ -59,13 +59,13 @@ router.post('', async function(req, res) {
     })
     patient = await patient.save();
 
-    let link = "http://localhost/api/v1/verify_email?id="+user._id.valueOf();
+    let link = process.env.DOMAIN + "/api/v1/verify_email?id=" + user._id.valueOf();
     transporter.sendMail({
         from: '"EasyHealth+" <easy.health.app.info@gmail.com>',
         to: req.body.email,
-        subject: "Confirm your email on EasyHealth+ ✔",
+        subject: "Conferma il tuo account su EasyHealth+ ✔",
         text: "",
-        html: "<a href='"+link+"'>Click here yo confirm your identity!</a> or copy and paste link below:<br/>"+link,
+        html: "<a href='"+link+"'>Clicca qui per confermare la tua identità!</a> O copia incolla il link qui sotto:<br/>"+link,
     }).then().catch(console.error);
 
     res.status(200).json({success: 'true'});

@@ -13,7 +13,7 @@
         }
         #title{
             position: absolute;
-            width: 400px;
+            width: 500px;
             height: 49px;
             left: 96px;
             top: 113px;
@@ -192,6 +192,19 @@
             width: auto;
             right: 74px;
         }
+        /* Scrollbar styles */
+        ::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+            }
+
+            ::-webkit-scrollbar-thumb {
+            background: #d4001c;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+            background: #960011;
+            }
 
 
     </style>
@@ -201,7 +214,7 @@
 </head>
 <body onload="loadData();">
   <script src="scripts/modificaMedico.js"></script>
-    <div id="title">Modifica Profilo DOC</div>
+    <div id="title">Modifica Profilo Doc</div>
     <img src="img/Logo.png" id="logo"/>
     <div  id="box">
         <span id="l_Residenza">Residenza</span>

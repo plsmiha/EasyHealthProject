@@ -79,7 +79,7 @@
                 border-radius: 10px;
                 border: 0px;
             }
-            #txt_medico_competenza{
+            #aree{
                 position: absolute;
                 width: 40%;
                 height: 39px;
@@ -303,7 +303,7 @@
             .dropdown:hover {background-color: #3e8e41;}
         </style>
     </head>
-    <body>
+    <body onload="loadAree();">
         <div id="title">Benvenuto, [Nome] [Cognome]</div>
         <a href="/"><img src="img/Logo.png" id="logo"/></a>
         <div  id="box">
@@ -312,31 +312,7 @@
             <div id="l_storia">La tua storia medica</div>
             <div id="l_dashboard">Dashboard</div>
             <input type="text" id="txt_medico_nome" value=""/>
-            <select id="txt_medico_competenza">
-                <option value="0">Medicina generale</option>
-                <option value="1">Pediatria</option>
-                <option value="2">Cardiologia</option>
-                <option value="3">Pulmonologia</option>
-                <option value="4">Ginecologia</option>
-                <option value="5">Otorinolaringoiatria</option>
-                <option value="6">Urologia</option>
-                <option value="7">Endocrinologia</option>
-                <option value="8">Dermatologia</option>
-                <option value="9">Traumatologia</option>
-                <option value="10">Oncologia</option>
-                <option value="11">Geriatria</option>
-                <option value="12">Odontoiatria</option>
-                <option value="13">Gastroenterologia</option>
-                <option value="14">Nefrologia</option>
-                <option value="15">Infettologia</option>
-                <option value="16">Tossicologia</option>
-                <option value="17">Ematologia</option>
-                <option value="18">Oftalmologia</option>
-                <option value="19">Radiologia</option>
-                <option value="20">Proctologia</option>
-                <option value="21">Reumatologia</option>
-                <option value="22">Immunologia</option>
-            </select>
+            <select id="aree"></select>
             <input type="button" id="btn_medico_nome" value="Cerca per nome" onclick="check_and_redirect_nome();"/>
             <input type="button" id="btn_medico_competenza" value="Cerca per competenza" onclick="check_and_redirect_competenza();"/>
             <input type="button" id="btn_appuntamenti" value="Visualizza appuntamenti" onclick="window.location.href='calendar_P.html';"/>
@@ -355,5 +331,6 @@
             </div>
         </div>
         <script src="scripts/logout.js"></script>
+        <script src="scripts/hp_p_load.js"></script>
     </body>
 </html>

@@ -173,6 +173,30 @@
 
                 color: #D4001C;
             }
+            #Error_verified{
+                position: absolute;
+                left: calc(50% - 351px/2 - 0.5px);
+                top: 125px;
+                font-size: 18px;
+                font-family: 'Questrial', sans-serif;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 49px;
+
+                color: #D4001C;
+            }
+            #Error_account{
+                position: absolute;
+                left: calc(50% - 351px/2 - 0.5px);
+                top: 252px;
+                font-size: 18px;
+                font-family: 'Questrial', sans-serif;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 49px;
+
+                color: #D4001C;
+            }
             /* Scrollbar styles */
             ::-webkit-scrollbar {
             width: 12px;
@@ -209,6 +233,8 @@
           <div id="l_email">Email</div>
             <div id="creds"></div>
             <div id="l_password">Password</div>
+            <span id="Error_verified" hidden>*Email non verificata</span>
+            <span id="Error_account" hidden>*Email o password errata</span>
             <a href="resetPassword.html" id="forgot_pass">Ho dimenticato la password...</a>
             <form onsubmit="doLogin(); return false;">
                 <input type="email" id="email" value="" required/>

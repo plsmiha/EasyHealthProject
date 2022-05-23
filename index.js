@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 
 require("dotenv").config();
 
-const app = require("./backend/api/app.js")
+const app = require("./Backend/api/app.js")
 
 if (cluster.isMaster) {
 
@@ -22,13 +22,12 @@ if (cluster.isMaster) {
         cluster.fork()
     })
 
-    //let cpu_count = os.cpus().length;
     let cpu_count = 2;
     for (let i = 0; i < cpu_count; i++) cluster.fork()
 
 } else {
 
-    app.locals.db = mongoose.connect('mongodb+srv://NodeApp:Y1XPLdwnXWNRSKIN@cluster0.emtou.mongodb.net/?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true})
+    app.locals.db = mongoose.connect(process.env.DB_URL, {useNewUrlParser: true, useUnifiedTopology: true})
     .then ( () => {
         
         console.log(`WORKER ${process.pid} connected to DB`)
@@ -36,7 +35,7 @@ if (cluster.isMaster) {
         router.use(app)
 
         let server = http.createServer(router)
-        server.listen(80)
+        server.listen(process.env.PORT || 80)
     
         process.on('uncaughtException', (code, signal) => {
             console.log(`WORKER error...\n\tcode:(${code})\n\tsignal:(${signal})`)

@@ -16,19 +16,31 @@ router.post('', async function(req, res) {
 
         let user = await User.findOne({ email: req.body.email});
 
+        if(user!=null)
+        {
+            var hash = crypto.createHash('sha512');
+            data = hash.update(req.body.password, 'utf-8');
+            gen_hash= data.digest('hex');
 
-        var hash = crypto.createHash('sha512');
-        data = hash.update(req.body.password, 'utf-8');
-        gen_hash= data.digest('hex');
+            if (user.verified && gen_hash == user.password) {
+                console.log("utente loggato " + process.env.JWT_KEY)
 
-        if (gen_hash == user.password) {
-            console.log("utente loggato " + process.env.JWT_KEY)
+                const token = jwt.sign({ id: user._id, role: user.type },  process.env.JWT_KEY);
+                res.cookie("access_token", token, { httpOnly: true, secure: true}).status(200).json( { redirectTo: user.type });
 
-            const token = jwt.sign({ id: user._id, role: user.type },  process.env.JWT_KEY);
-            res.cookie("access_token", token, { httpOnly: true, secure: true}).status(200).json( { redirectTo: user.type });
-
-        } else {
-            console.log("tentativo di log errato")
+            } 
+            else if(gen_hash != user.password){
+                console.log("tentativo di log errato");
+                res.status(403).json({ error: 'Unauthorized' });
+            }
+            else{
+                console.log("utente non verificato");
+                res.status(403).json({ error: 'Not verified' });
+            }        
+        }
+        else
+        {
+            console.log("tentativo di log errato");
             res.status(403).json({ error: 'Unauthorized' });
         }
     }
