@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport({
     port: 587,
     auth: {
       user: 'easy.health.app.info@gmail.com',
-      pass: process.env.PASSWORD_MAIL,
+      pass: process.env.PASSWORD_MAIL
     },
 });
 
