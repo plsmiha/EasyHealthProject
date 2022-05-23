@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 
 require("dotenv").config();
 
-const app = require("./backend/api/app.js")
+const app = require("./Backend/api/app.js")
 
 if (cluster.isMaster) {
 
@@ -22,7 +22,6 @@ if (cluster.isMaster) {
         cluster.fork()
     })
 
-    //let cpu_count = os.cpus().length;
     let cpu_count = 2;
     for (let i = 0; i < cpu_count; i++) cluster.fork()
 
