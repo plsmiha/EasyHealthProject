@@ -98,7 +98,7 @@
                 width: 168px;
                 height: 41px;
                 left: calc(50% - 168px/2);
-                top: calc(14% - 41px/2 + 110.5px);
+                top: calc(16% - 41px/2 + 110.5px);
 
                 font-family: 'Questrial';
                 font-style: normal;
@@ -186,6 +186,18 @@
             ::-webkit-scrollbar-thumb:hover {
             background: #960011;
             }
+
+            #creds{
+              width: 351px;
+              height: 40px;
+
+
+              color: #D4001C;
+                position: absolute;
+                left:50px;
+                top: 26%;
+                font-size: 20px;
+            }
         </style>
     </head>
     <body>
@@ -194,7 +206,8 @@
             <div id="l_login">LOGIN</div>
         </div>
         <div  id="main_box">
-            <div id="l_email">Email</div>
+          <div id="l_email">Email</div>
+            <div id="creds"></div>
             <div id="l_password">Password</div>
             <a href="resetPassword.html" id="forgot_pass">Ho dimenticato la password...</a>
             <form onsubmit="doLogin(); return false;">

@@ -30,5 +30,9 @@ function doLogin(){
             document.getElementById("pass").style.background = "#ff7a89";
         }
     })
-    .catch( error => console.error(error) );
+    .catch( error => {document.getElementById("email").style.background = "#ff7a89";
+    document.getElementById("pass").style.background = "#ff7a89";
+    document.getElementById("creds").innerHTML ="*Credenziali non valide!"
+   }
+   );
 };
