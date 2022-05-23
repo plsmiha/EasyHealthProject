@@ -35,7 +35,7 @@ if (cluster.isMaster) {
         router.use(app)
 
         let server = http.createServer(router)
-        server.listen(80)
+        server.listen(process.env.PORT || 80)
     
         process.on('uncaughtException', (code, signal) => {
             console.log(`WORKER error...\n\tcode:(${code})\n\tsignal:(${signal})`)
