@@ -16,18 +16,11 @@ router.post('', async function(req, res) {
 
         let user = await User.findOne({ email: req.body.email});
 
-<<<<<<< HEAD
         if(user!=null)
         {
             var hash = crypto.createHash('sha512');
             data = hash.update(req.body.password, 'utf-8');
             gen_hash= data.digest('hex');
-=======
-
-        var hash = crypto.createHash('sha512');
-        data = hash.update(req.body.password, 'utf-8');
-        gen_hash= data.digest('hex');
->>>>>>> 21e6b91c09839f0a526b2d2f6f9a6ea9c8ad1200
 
             if (user.verified && gen_hash == user.password) {
                 console.log("utente loggato " + process.env.JWT_KEY)

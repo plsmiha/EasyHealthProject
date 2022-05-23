@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
     port: 587,
     auth: {
       user: 'easy.health.app.info@gmail.com',
-      pass: 'idsids22',
+      pass: process.env.PASSWORD_MAIL,
     },
 });
 transporter.verify().then().catch(console.error);
