@@ -26,7 +26,7 @@ app.use('/', express.static('./Frontend/public'));
 app.use('/api/v1/login', login);
 app.use('/api/v1/aree', aree);
 app.use('/api/v1/signup', signup);
-app.use('/api/v1/verify_email', verify_email);
+app.use('/api/v1/verifyEmail', verify_email);
 app.use('/api/v1/PA', PA);
 app.use('/api/v1/resetPassword', reset)
 
@@ -41,7 +41,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/v1/editPaziente', editPaziente);
-app.use('/api/v1/modmed', modifMedico);
+app.use('/api/v1/editMedico', modifMedico);
 
 app.use('/api/v1/logout', logout);
 

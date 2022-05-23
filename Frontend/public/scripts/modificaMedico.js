@@ -7,7 +7,7 @@ function modificaDatiMedico(){
     var password=document.getElementById("Password").value;
     var titolo=document.getElementById("aree").value;
     console.log('passo per le modifiche')
-    fetch('../api/v1/modmed', {
+    fetch('../api/v1/editMedico', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify( { email: email, address: address, password: password, title:titolo } ),

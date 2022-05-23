@@ -59,7 +59,7 @@ router.post('', async function(req, res) {
     })
     patient = await patient.save();
 
-    let link = process.env.DOMAIN + "/api/v1/verify_email?id=" + user._id.valueOf();
+    let link = process.env.DOMAIN + "/api/v1/verifyEmail?id=" + user._id.valueOf();
     transporter.sendMail({
         from: '"EasyHealth+" <easy.health.app.info@gmail.com>',
         to: req.body.email,
