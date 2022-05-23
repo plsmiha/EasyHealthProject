@@ -56,7 +56,7 @@ function loadData()//se la password non viene inserita resta uguale, se viene in
 
 
     console.log('caricooo')
-    fetch('../api/v1/modmed', {
+    fetch('../api/v1/editMedico', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(),
