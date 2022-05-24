@@ -10,7 +10,7 @@ const check = require('./routes/tokenCheck.js');
 const logout = require('./routes/logout.js');
 const verify_email = require('./routes/verify_email.js');
 const PA = require('./routes/assurancePlans.js');
-
+const AO = require('./routes/modificaAO.js');
 const reset = require ('./routes/resetPassword.js')
 
 const editPaziente = require('./routes/editPaziente.js');
@@ -42,7 +42,7 @@ app.use((req, res, next) => {
 
 app.use('/api/v1/editPaziente', editPaziente);
 app.use('/api/v1/editMedico', modifMedico);
-
+app.use('/api/v1/editAO', AO);
 app.use('/api/v1/logout', logout);
 
 app.use((req, res) => {
