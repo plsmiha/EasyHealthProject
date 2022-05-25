@@ -72,7 +72,17 @@ Verifica l'email di un utente appena creato conoscendo il suo id.
         
                 Location: /
                 
++ Response 400
+    Id mancante
+    
+    + Body            
+        
+                {
+                    "error": "Bad Request"
+                }
                 
+ 
+             
 ## Login [/api/v1/login]
 
 ### Effettua il login [POST]
