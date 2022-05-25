@@ -125,7 +125,7 @@ function openSlot(day, month, year)
     document.getElementById("add_slot_box").style.display="block";
 }
 
-function addSlot()
+async function addSlot()
 {
     document.getElementById("from_time").style.background="#DDDDDD";
     document.getElementById("to_time").style.background="#DDDDDD";
@@ -141,7 +141,7 @@ function addSlot()
     }
     else
     {
-        fetch('../api/v1/agendaMedico', {
+        await fetch('../api/v1/agendaMedico', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({day: day, from: from, to: to}),
@@ -155,13 +155,64 @@ function addSlot()
     }
 }
 
-function viewSlot(day, month, year)
+var vs_day,vs_month,vs_year;
+async function viewSlot(day, month, year)
 {
-    //carico da api gli slot di quel giorno
+    vs_day=day; vs_month=month; vs_year=year;
+    var table = document.getElementById("slots");
+
+    table.innerHTML='<tbody id="header_raw"><tr><th style="width: 30%">Da</th><th style="width: 30%">A</th><th style="width: 30%">Occupato</th><th style="width: 10%">Rimuovi</th></tr></tbody>';
+
+    const data = await fetch('../api/v1/agendaMedico?year='+year+'&month='+(month+1)+'&day='+day, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include'
+    }).then(response => response.json());
+
+    data.forEach(async function(el) {
+        const data = await fetch('../api/v1/agendaMedico/' + el._id, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include'
+        }).then(response => response.json());
+        
+        var tr = document.createElement("tr");
+
+        var td1 = document.createElement("td");
+        td1.innerText = data.from;
+        tr.appendChild(td1);
+
+        var td2 = document.createElement("td");
+        td2.innerText = data.to;
+        tr.appendChild(td2);
+
+        var td3 = document.createElement("td");
+        td3.innerText = (data.occupied_id_pat==""?"NO":"SI");
+        tr.appendChild(td3);
+        
+        var rem = document.createElement("td");
+        if(data.occupied_id_pat=="")
+        {
+            rem.innerHTML="<u>X</u>";
+            rem.style="text-align:center; cursor: pointer;";
+            rem.setAttribute("onclick","removeSlot('"+el._id+"')");
+        }
+        tr.appendChild(rem);
+        table.appendChild(tr);
+    });
+
+
     document.getElementById("remove_slot_box").style.display="block";
 }
 
-function removeSlot(id)
+async function removeSlot(id)
 {
-    //chiamata a api per rimozione slot
+    const data = await fetch('../api/v1/agendaMedico/'+id, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include'
+    }).then(response => response.json());
+    console.log(data);
+    loadCalendar();
+    viewSlot(vs_day,vs_month,vs_year);
 }
