@@ -365,3 +365,282 @@ collegata all'email dell'utente permettendogli di accedere di nuovo.
                 "reason": "db",
                 "error": "3"
             }
+            
+            
+## Agenda Medico [/api/v1/agendaMedico]   
+
+### Ottieni Slot Mese [GET /api/v1/agendaMedico{?year}{?month}]
+
+Restituisce gli slot di un medico di un determinato mese.
+
++ Cookies
+    + access_token
+    
++ Parameters
+
+    + year - anno slot
+    + month - mese slot
+
+
++ Response 200
+
+    Successo: restituisce gli id e i giorni degli slot
+    
+    + Body
+
+            [
+                {
+                    "_id": @id, 
+                    "day": @day
+                },
+                ...
+            ]
+
+
++ Response 403
+
+    L'utente non ha il ruolo del medico, quindi non può usare questa API
+    
+    + Body
+            
+            {
+                "error": "Unauthorized"
+            }
+
++ Response 400
+
+    Parametri month o year non settati
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "Wrong format",
+                "error": "1"
+            }
+
+### Ottieni Slot Giorno [GET /api/v1/agendaMedico{?year}{?month}{?day}]
+
+Restituisce gli slot di un medico di un determinato mese.
+
++ Cookies
+    + access_token
+    
++ Parameters
+
+    + year - anno slot
+    + month - mese slot
+    + day - giorno slot
+
+
++ Response 200
+
+    Successo: restituisce gli id degli slot
+    
+    + Body
+
+            [
+                {
+                    "_id": @id
+                },
+                ...
+            ]
+
+
++ Response 403
+
+    L'utente non ha il ruolo del medico, quindi non può usare questa API
+    
+    + Body
+            
+            {
+                "success": "false", 
+                "reason": "Unauthorized",
+                "error": "2"
+            }
+
++ Response 400
+
+    Parametri month o year non settati
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "Wrong format",
+                "error": "1"
+            }
+
+### Ottieni Info Slot [GET /api/v1/agendaMedico/{id}]
+
+Restituisce le info di un determinato slot.
+
++ Cookies
+    + access_token
+    
++ Parameters
+
+    + id - id dello slot
+
+
++ Response 200
+
+    Successo: restituisce le info dello slot
+    
+    + Body
+
+            {
+                _id: @id
+                id_doc: @id_doc,
+                day: @day,
+                from: @from_time,
+                to: @to_time,
+                occupied_id_pat: @id_patient_prenotato
+            }
+
++ Response 403
+
+    L'utente non ha il ruolo del medico, quindi non può usare questa API
+    
+    + Body
+            
+            {
+                "success": "false", 
+                "reason": "Unauthorized",
+                "error": "2"
+            }
+
+
++ Response 404
+
+    Slot non esistente
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "Not found",
+                "error": "1"
+            }
+            
+            
+### Aggiungi Slot [POST]
+
+Aggiunge uno slot alla data e orario indicato
+
++ Cookies
+    + access_token
+    
++ Request
+
+    + Attributes
+        - day (string, required) - Data dello slot formattata in yyyy-m-d
+        - from (string, required) - Orario di inizio formattato in h:m
+        - to (string, required) - Orario di fine formattato in h:m
+
+
++ Response 200
+
+    Slot creato con successo
+    
+    + Body
+
+            {
+                "success": "true"
+            }
+
++ Response 403
+
+    L'utente non ha il ruolo del medico, quindi non può usare questa API
+    
+    + Body
+            
+            {
+                "success": "false", 
+                "reason": "Unauthorized",
+                "error": "2"
+            }
+
+
++ Response 400
+
+    Uno o più attributi non definiti
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "Wrong format",
+                "error": "1"
+            }
+            
++ Response 400
+
+    Data o ore non corrette (non rispettano sequenzialità o sono passate)
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "Incorrect date or time",
+                "error": "3"
+            }
+
+### Rimuovi Slot [DELETE /api/v1/agendaMedico/{id}]
+
+Rimuove uno slot
+
++ Cookies
+    + access_token
+    
++ Parameters
+
+    + id - id dello slot
+
+
++ Response 200
+
+    Successo: slot rimosso
+    
+    + Body
+
+            {
+                "success": "true"
+            }
+
++ Response 403
+
+    L'utente non ha il ruolo del medico, quindi non può usare questa API
+    
+    + Body
+            
+            {
+                "success": "false", 
+                "reason": "Unauthorized",
+                "error": "2"
+            }
+
+
++ Response 404
+
+    Slot non esistente
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "Not found",
+                "error": "1"
+            }
+
++ Response 400
+
+    Slot occupato: impossibile rimuoverlo
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "Slot occupied",
+                "error": "3"
+            }
