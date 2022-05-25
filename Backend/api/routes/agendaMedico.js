@@ -20,7 +20,7 @@ router.post('', async function(req, res){
 
     if(getRole(req)!='M')
     {
-        res.status(403).json({error: 'Unauthorized'});
+        res.status(403).json({success: 'false', reason: 'Unauthorized', error: '2'});
         return;
     }
     if(typeof day == 'undefined' || typeof from == 'undefined' || typeof to == 'undefined')
@@ -32,7 +32,7 @@ router.post('', async function(req, res){
     let today = d.getFullYear()  + "-" + (d.getMonth()+1) + "-" + d.getDate();
     if(from>=to || day<=today)
     {
-        res.status(400).json({success: 'false', reason: 'Incorrect date or time', error: '2'});
+        res.status(400).json({success: 'false', reason: 'Incorrect date or time', error: '3'});
         return;
     }
 
@@ -57,7 +57,7 @@ router.get('', async function(req, res){
 
     if(getRole(req)!='M')
     {
-        res.status(403).json({error: 'Unauthorized'});
+        res.status(403).json({success: 'false', reason: 'Unauthorized', error: '2'});
         return;
     }
     if(typeof month == 'undefined' || typeof year == 'undefined')
@@ -80,6 +80,11 @@ router.get('', async function(req, res){
 
 router.get('/:id', async function(req, res){
 
+    if(getRole(req)!='M')
+    {
+        res.status(403).json({success: 'false', reason: 'Unauthorized', error: '2'});
+        return;
+    }
     let slot = await Slot.findById(req.params.id);
     if(!slot)
     {
@@ -91,6 +96,11 @@ router.get('/:id', async function(req, res){
 
 router.delete('/:id', async function(req, res){
 
+    if(getRole(req)!='M')
+    {
+        res.status(403).json({success: 'false', reason: 'Unauthorized', error: '2'});
+        return;
+    }
     let slot = await Slot.findById(req.params.id);
     if(!slot)
     {
@@ -99,7 +109,7 @@ router.delete('/:id', async function(req, res){
     }
     if(slot.occupied_id_pat!="")
     {
-        res.status(403).json({success: 'false', reason: 'Slot occupied', error: '2'});
+        res.status(400).json({success: 'false', reason: 'Slot occupied', error: '3'});
         return;
     }
     
