@@ -46,13 +46,14 @@ router.post('', async function(req, res){
     slot = await slot.save();
     res.status(200).json({success: 'true'});
 
-})
+});
 
 router.get('', async function(req, res){
 
     let user = getUser(req);
     var month = req.query.month;
     var year = req.query.year;
+    var day = req.query.day;
 
     if(getRole(req)!='M')
     {
@@ -64,19 +65,47 @@ router.get('', async function(req, res){
         res.status(400).json({success: 'false', reason: 'Wrong format', error: '1'});
         return;
     }
-    let slots = await Slot.find({id_doc: user, day: new RegExp(year+"-"+month+"-")}, "_id day");
-    console.log(slots);
-    res.status(200).json(slots);
-})
 
+    if(typeof day == 'undefined')
+    {
+        let slots = await Slot.find({id_doc: user, day: new RegExp(year+"-"+month+"-")}, "_id day");
+        res.status(200).json(slots);
+    }
+    else
+    {
+        let slots = await Slot.find({id_doc: user, day: year+"-"+month+"-"+day}, "_id");
+        res.status(200).json(slots);
+    }
+});
 
+router.get('/:id', async function(req, res){
 
+    let slot = await Slot.findById(req.params.id);
+    if(!slot)
+    {
+        res.status(404).json({success: 'false', reason: 'Not found', error: '1'});
+        return;
+    }
+    res.status(200).json(slot);
+});
 
+router.delete('/:id', async function(req, res){
 
-
-
-
-
+    let slot = await Slot.findById(req.params.id);
+    if(!slot)
+    {
+        res.status(404).json({success: 'false', reason: 'Not found', error: '1'});
+        return;
+    }
+    if(slot.occupied_id_pat!="")
+    {
+        res.status(403).json({success: 'false', reason: 'Slot occupied', error: '2'});
+        return;
+    }
+    
+    await Slot.deleteOne(slot);
+    res.status(200).json({success: "true"});
+});
 
 
 module.exports = router;
