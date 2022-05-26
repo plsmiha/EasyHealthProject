@@ -8,7 +8,7 @@ function modificaDatiMedico(){
     var titolo=document.getElementById("aree").value;
     console.log('passo per le modifiche')
     fetch('../api/v1/Medico', {
-        method: 'POST',
+        method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify( { email: email, address: address, password: password, title:titolo } ),
     })

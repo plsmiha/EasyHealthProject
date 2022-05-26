@@ -7,7 +7,7 @@ function modificaDatiPaziente(){
     var codePA=document.getElementById("CodPA").value;
 
     fetch('../api/v1/Paziente', {
-        method: 'POST',
+        method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify( { email: email, residenza: residenza, password: password,  codePA: codePA } ),
     })

@@ -77,7 +77,7 @@ function metodoMagico(_email,address,password,title,_id,_user,res,req)//essendo 
                     )
 }
 
-router.post('', async function(req, res) //qui quando ricevo una post
+router.put('', async function(req, res) //qui quando ricevo una post
     {
         //i dati della richiesta sono dentro a req.body, e` un dictionary a cui si accede ai campi con .nomeCampo
         var _email = req.body.email;
