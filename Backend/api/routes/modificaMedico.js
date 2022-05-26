@@ -12,6 +12,7 @@ router.get('', async function(req, res) //quando ricevo una richiesta get su /ap
     var _id = String(utente._id).split('"')[0];
 
       docs.findById({_id}).then(data =>{
+      
           res.status(200).json(data);
       }); //recupera tutte le info dalla tabella docs cercando l'id e le ritorna
 
@@ -33,13 +34,13 @@ function creaPassword(pass) //funzione che genera l'hash della psw per non manda
     return gen_hash;
 }
 
-function metodoMagico(_email,address,password,title,_id,_user,res,req)//essendo asincrone le richieste al db sono nidificate, ho fatto un metodoMagico perche` essendoci una serie
+function metodoMagico(_email,bio,password,title,numero,_id,_user,res,req)//essendo asincrone le richieste al db sono nidificate, ho fatto un metodoMagico perche` essendoci una serie
 //di if avevo bisogno di ricapitare comunque in questo metodo e copia incollarlo non si fa, quindi sta qui dentro la gestione di invio roba al db per l'update di user e doc
 {
 
                   docs.findByIdAndUpdate( //cerca e aggiorna {parametroDiRicerca} (devo ancora capire come usarne di diversi ma tanto coi token useremo questo)
                       // {"nomeParametroNelDb":variabile,"nomeParametroNelDb2":variabile2....}
-                      {_id}, {"email": _email,"address": address,"title": title  }, function(err, result) {
+                      {_id}, {"email": _email,"bio": bio,"title": title,"numero":numero  }, function(err, result) {
 
                           if (err) //errore nell'update
                           {
@@ -61,12 +62,13 @@ function metodoMagico(_email,address,password,title,_id,_user,res,req)//essendo 
                                   })
                               } else //password == 0
                               {
-                                  user.findByIdAndUpdate({  _id}, {"email": _email}, function(err, result) {
+                                  user.findByIdAndUpdate({  _id:_user}, {"email": _email}, function(err, result) {
                                       if (err) {
                                           res.status(500).json({success: 'false',  reason: 'Database connection',error: 3});
                                           return;
 
                                       } else {
+
                                           res.status(200).json({ success: 'true',comment: 'eheh'});
                                           return;
                                       }
@@ -81,15 +83,19 @@ router.put('', async function(req, res) //qui quando ricevo una post
     {
         //i dati della richiesta sono dentro a req.body, e` un dictionary a cui si accede ai campi con .nomeCampo
         var _email = req.body.email;
-        var address = req.body.address;
+        var bio = req.body.bio;
         var password = req.body.password;
         var title = req.body.title;
+        var numero = req.body.numero;
         var _user = getUser(req);
+
 
         docs.findOne({id_user:_user}).then(utente =>{
 
+
           var _id = String(utente._id).split('"')[0];
           user.findOne({ email: _email }).then(data => {
+
               if (data != null) {
                   var tmp = String(data._id);
 
@@ -99,11 +105,11 @@ router.put('', async function(req, res) //qui quando ricevo una post
                       return;
                   }
                   else{
-                    metodoMagico(_email,address,password,title,_id,_user,res,req);
+                    metodoMagico(_email,bio,password,title,numero,_id,_user,res,req);
                   }
               } else {
 
-                  metodoMagico(_email,address,password,title,_id,_user,res,req);
+                  metodoMagico(_email,bio,password,title,numero,_id,_user,res,req);
               }
 
 
