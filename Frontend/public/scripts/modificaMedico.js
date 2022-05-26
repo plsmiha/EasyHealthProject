@@ -7,7 +7,7 @@ function modificaDatiMedico(){
     var password=document.getElementById("Password").value;
     var titolo=document.getElementById("aree").value;
     console.log('passo per le modifiche')
-    fetch('../api/v1/editMedico', {
+    fetch('../api/v1/Medico', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify( { email: email, address: address, password: password, title:titolo } ),
@@ -56,7 +56,7 @@ function loadData()//se la password non viene inserita resta uguale, se viene in
 
 
     console.log('caricooo')
-    fetch('../api/v1/editMedico', {
+    fetch('../api/v1/Medico', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(),
