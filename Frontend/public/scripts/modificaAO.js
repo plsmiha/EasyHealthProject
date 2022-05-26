@@ -1,16 +1,15 @@
-function modificaDatiMedico(){
+function modificaAO(){
 
     if(!checkPassword()) return;
     event.preventDefault();
     var email=document.getElementById("Email").value;
-    var address=document.getElementById("Residenza").value;
+
     var password=document.getElementById("Password").value;
-    var titolo=document.getElementById("aree").value;
     console.log('passo per le modifiche')
-    fetch('../api/v1/editAO', {
-        method: 'POST',
+    fetch('../api/v1/AO', {
+        method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify( { email: email, address: address, password: password, title:titolo } ),
+        body: JSON.stringify( { email: email, password: password } ),
     })
     .then((resp) => resp.json())
     .then(function(data) {
@@ -37,38 +36,14 @@ function loadData()//se la password non viene inserita resta uguale, se viene in
 {
   event.preventDefault();
 
-  fetch('../api/v1/aree', {
-         method: 'GET',
-         headers: { 'Content-Type': 'application/json' },
-         body: JSON.stringify(),
-     })
-     .then((resp) => resp.json())
-     .then(function(data) {
-         data.forEach(el => {
-             var opt = document.createElement('option');
-             opt.innerHTML = el.name;
-             opt.value = el._id;
-             document.getElementById("aree").appendChild(opt);
-         })
-     })
-
-
-
-
     console.log('caricooo')
-    fetch('../api/v1/editAO', {
+    fetch('../api/v1/AO', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(),
     })
     .then((resp) => resp.json())
     .then(function(data) {
-
-        var elementresid =  document.getElementById("Residenza");
-        elementresid.value = data['address'];
-
-        var elementretitolo =  document.getElementById("aree");
-        elementretitolo.value = data['title'];
 
         var elementemail =  document.getElementById("Email");
         elementemail.value = data['email'];

@@ -42,7 +42,7 @@ app.use((req, res, next) => {
 
 app.use('/api/v1/editPaziente', editPaziente);
 app.use('/api/v1/editMedico', modifMedico);
-app.use('/api/v1/editAO', AO);
+app.use('/api/v1/AO', AO);
 app.use('/api/v1/logout', logout);
 
 app.use((req, res) => {

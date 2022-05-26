@@ -32,7 +32,7 @@
 
             position: absolute;
             width: auto;
-            height: 697px;
+            height: 450px;
             left: 100px;
             right: 100px;
             top: 230px;
@@ -51,14 +51,14 @@
             position: absolute;
             height: 49px;
             left: 74px;
-            top: 169px;
+            top: 50px;
         }
 
         #l_Password{
             position: absolute;
             height: 49px;
             left: 74px;
-            top: 297px;
+            top: 178px;
         }
 
         #l_titoloMedico{
@@ -80,7 +80,7 @@
             position: absolute;
             height: 49px;
             left: 74px;
-            top: 219px;
+            top: 100px;
             width: auto;
             right: 74px;
         }
@@ -95,7 +95,7 @@
             position: absolute;
             height: 49px;
             left: 74px;
-            top: 347px;
+            top: 228px;
             width: auto;
             right: 74px;
         }
@@ -103,7 +103,7 @@
         #Error_password{
             position: absolute;
             left: 74px;
-            top: 389px;
+            top: 270px;
             font-size: 18px;
         }
 
@@ -161,7 +161,7 @@
             width: 248px;
             height: 67px;
             left: 74px;
-            top: 588px;
+            top: 340px;
 
             background: #D4001C;
             border-radius: 15px;
@@ -179,7 +179,7 @@
             width: 248px;
             height: 67px;
             left: 400px;
-            top: 588px;
+            top: 340px;
 
             background: #D4001C;
             border-radius: 15px;
@@ -214,24 +214,19 @@
 </head>
 <body onload="loadData();">
   <script src="scripts/modificaAO.js"></script>
-    <div id="title">Modifica Profilo Doc</div>
+    <div id="title">Modifica Profilo AO</div>
     <img src="img/Logo.png" id="logo"/>
     <div  id="box">
-        <span id="l_Residenza">Residenza</span>
+
         <span id="l_Email">Email</span>
         <span id="l_Password">Password  (vuota per non modificare)</span>
-        <span id="l_titoloMedico">Area di competenza</span>
+
         <span id="Error_email"></span>
         <span id="Error_password"></span>
-        <form onsubmit="modificaDatiMedico();">
-            <input type="text" id="Residenza" value="" required/>
+        <form onsubmit="modificaAO(); return false;">
+
             <input type="email" id="Email" value="" required/>
-
              <input type="password" id="Password" value="" onfocusout="checkPassword();"/>
-             <select name="aree" id="aree">
-                   <option value="">Nessuno</option>
-               </select>
-
 
             <input type="submit" value="salva modifiche"/>
             <input type="button" value="esci" onclick="abort();"/>

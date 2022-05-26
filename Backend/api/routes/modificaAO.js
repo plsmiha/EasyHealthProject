@@ -1,19 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const AO = require('../../models/AO'); //importo il tipo doc, definito il suo schema in models/doc
+
 const user = require('../../models/user'); //uguale con user
 const crypto = require('crypto');
 router.get('', async function(req, res) //quando ricevo una richiesta get su /api/v1/modmed entro qui
 {
   var _user = getUser(req);
 
-  AO.findOne({id_user:_user}).then(utente =>{
+  user.findOne({_id:_user}).then(utente =>{
 
     var _id = String(utente._id).split('"')[0];
 
-      AO.findById({_id}).then(data =>{
+      user.findById({_id}).then(data =>{
           res.status(200).json(data);
-      }); //recupera tutte le info dalla tabella AO cercando l'id e le ritorna
+      }); //recupera tutte le info dalla tabella user cercando l'id e le ritorna
 
       });
 })
@@ -33,13 +33,13 @@ function creaPassword(pass) //funzione che genera l'hash della psw per non manda
     return gen_hash;
 }
 
-function metodoMagico(_email,address,password,title,_id,_user,res,req)//essendo asincrone le richieste al db sono nidificate, ho fatto un metodoMagico perche` essendoci una serie
+function metodoMagico(_email,password,_user,res,req)//essendo asincrone le richieste al db sono nidificate, ho fatto un metodoMagico perche` essendoci una serie
 //di if avevo bisogno di ricapitare comunque in questo metodo e copia incollarlo non si fa, quindi sta qui dentro la gestione di invio roba al db per l'update di user e doc
 {
 
-                  AO.findByIdAndUpdate( //cerca e aggiorna {parametroDiRicerca} (devo ancora capire come usarne di diversi ma tanto coi token useremo questo)
+                  user.findByIdAndUpdate( //cerca e aggiorna {parametroDiRicerca} (devo ancora capire come usarne di diversi ma tanto coi token useremo questo)
                       // {"nomeParametroNelDb":variabile,"nomeParametroNelDb2":variabile2....}
-                      {_id}, {"email": _email,"address": address,"title": title  }, function(err, result) {
+                      {_id:_user}, {"email": _email  }, function(err, result) {
 
                           if (err) //errore nell'update
                           {
@@ -61,7 +61,7 @@ function metodoMagico(_email,address,password,title,_id,_user,res,req)//essendo 
                                   })
                               } else //password == 0
                               {
-                                  user.findByIdAndUpdate({  _id}, {"email": _email}, function(err, result) {
+                                  user.findByIdAndUpdate({  _id:_user}, {"email": _email}, function(err, result) {
                                       if (err) {
                                           res.status(500).json({success: 'false',  reason: 'Database connection',error: 3});
                                           return;
@@ -77,19 +77,17 @@ function metodoMagico(_email,address,password,title,_id,_user,res,req)//essendo 
                     )
 }
 
-router.post('', async function(req, res) //qui quando ricevo una post
+router.put('', async function(req, res) //qui quando ricevo una post
     {
         //i dati della richiesta sono dentro a req.body, e` un dictionary a cui si accede ai campi con .nomeCampo
         var _email = req.body.email;
-        var address = req.body.address;
+
         var password = req.body.password;
-        var title = req.body.title;
+
         var _user = getUser(req);
+        console.log(_user);
 
-        AO.findOne({id_user:_user}).then(utente =>{
-
-          var _id = String(utente._id).split('"')[0];
-          user.findOne({ email: _email }).then(data => {
+        user.findOne({ _id:_user }).then(data => {
               if (data != null) {
                   var tmp = String(data._id);
 
@@ -99,20 +97,20 @@ router.post('', async function(req, res) //qui quando ricevo una post
                       return;
                   }
                   else{
-                    metodoMagico(_email,address,password,title,_id,_user,res,req);
+                    metodoMagico(_email,password,_user,res,req);
                   }
               } else {
 
-                  metodoMagico(_email,address,password,title,_id,_user,res,req);
+                  metodoMagico(_email,password,_user,res,req);
               }
 
 
           }).catch(err => {
-            res.status(500).json({success: 'false',reason: 'bonk',error: 3});
+            res.status(500).json({success: 'false',reason: err,error: 3});
               console.log(err);
           });
 
-      });
+
 
 
     });
