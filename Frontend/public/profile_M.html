@@ -1,0 +1,234 @@
+<html>
+    <head>
+        <title>doctor profile</title>
+        <link rel="icon" type="image/x-icon" href="/img/icona.png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+        <style>
+            #logo{
+                position: absolute;
+                width: 200px;
+                height: auto;
+                right: 100px;
+                top: 30px;
+            }
+            #title{
+                position: absolute;
+                width: auto;
+                height: 49px;
+                left: 105px;
+                top: 90px;
+
+                font-family: 'Questrial', sans-serif;
+                font-variant: small-caps;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 63px;
+                line-height: 49px;
+
+                color: #D4001C;
+            }
+            #box{
+                box-sizing: border-box;
+
+                position: absolute;
+                width: auto;
+                height: 700px;
+                left: 100px;
+                right: 100px;
+                top: 185px;
+
+                background: #FFFFFF;
+                border: 2px solid #D4001C;
+                border-radius: 39px;
+            }
+            body{
+                background-image: url('img/background.png');
+            }
+           
+            #dashboard{
+                position: absolute;
+                width: 41.5%;
+                height: 250px;
+                left: 4.2%;
+                top: 355px;
+
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 20px;
+                line-height: 26px;
+                display: block;
+                padding: 30px;
+                margin-top: 3px;
+                margin-bottom: 3px;
+
+                text-align: justify;
+
+                background: #FFEAED;
+                border-radius: 10px;
+                overflow-y: scroll;
+            }
+
+            #img_profile{
+                position: absolute;
+                width: 288px;
+                height: auto;
+                left: 1.5%;
+                top: 30px;
+            }
+
+            #info_box{
+                box-sizing: border-box;
+
+                position: absolute;
+                width: auto;
+                height: 253px;
+                left: calc(1% + 288px);
+                right:calc(50%);
+                top: 55px;
+
+                background: #FFEAED;
+                border: 4px solid #D4001C;
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                border-radius: 46px;
+            }
+            
+            /* Scrollbar styles */
+            ::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+            }
+
+            ::-webkit-scrollbar-thumb {
+            background: #d4001c;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+            background: #960011;
+            }
+   
+            span{
+                text-align: center;
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 17px;
+                display: block;
+            }
+            #Nome {
+            position: absolute;
+            width: auto;
+            height: 34px;
+            left: calc(7%);
+            right:calc(7%);
+            top: 23px; 
+            border: 0px;
+            display: flex;
+            justify-content:center;
+            align-items: center;;
+
+            font-family: 'Questrial';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 19px;
+
+            background: #ffffff;
+            border: 2px solid #D4001C;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 1px;
+            }
+
+            #Competenza {
+            position: absolute;
+            width: auto;
+            height: 34px;
+            left: calc(7%);
+            right:calc(7%);
+            top: 77px; 
+            border: 0px;
+            display: flex;
+            justify-content:center;
+            align-items: center;
+
+            font-family: 'Questrial';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 19px;
+
+            background: #ffffff;
+            border: 2px solid #D4001C;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 1px;
+            }
+
+            #Tel {
+            position: absolute;
+            width: auto;
+            height: 34px;
+            left: calc(7%);
+            right:calc(7%);
+            top: 131px;
+            border: 0px;
+            display: flex;
+            justify-content:center;
+            align-items: center;
+            font-family: 'Questrial';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 19px;
+            
+
+            background: #ffffff;
+            border: 2px solid #D4001C;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 1px;
+            }
+            
+            #Email {
+            text-align: center;
+            position: absolute;
+            width: auto;
+            height: 34px;
+            left: calc(7%);
+            right:calc(7%);
+            top: 185px; 
+            border: 0px;
+            display: flex;
+            justify-content:center;
+            align-items: center;
+            font-family: 'Questrial';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 19px;
+
+            background: #ffffff;
+            border: 2px solid #D4001C;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 1px;
+            }
+          
+        </style>
+    </head>
+    <body onload="loadData();">
+        <script src="scripts/profileM.js"></script>
+        <div id="title"></div>
+        <a href="/"><img src="img/Logo.png" id="logo"/></a>
+        <div  id="box">
+            <img src="img/medicoCarino.png" id="img_profile"/>
+            <div  id="info_box">
+                <div id="Nome"></div>
+                <div id="Competenza"></div>
+                <div id="Tel"></div>
+                <div id="Email">This text is enclosed in a box.</div>
+            </div>
+            <div id="dashboard">
+                
+                    
+                </p>
+            </div>
+        </div>
+        <div style="position: absolute;top:850px">&nbsp</div>
+    </body>
+</html>
