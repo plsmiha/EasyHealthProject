@@ -122,7 +122,8 @@ function openSlot(day, month, year)
     daySelected=day;
     monthSelected=month;
     yearSelected=year;
-    document.getElementById("add_slot_box").style.display="block";
+    document.getElementById("add_slot_box").style.visibility="visible";
+    document.getElementById("add_slot_box").style.opacity=1;
 }
 
 async function addSlot()
@@ -202,7 +203,8 @@ async function viewSlot(day, month, year)
     });
 
 
-    document.getElementById("remove_slot_box").style.display="block";
+    document.getElementById("remove_slot_box").style.visibility="visible";
+    document.getElementById("remove_slot_box").style.opacity=1;
 }
 
 async function removeSlot(id)
