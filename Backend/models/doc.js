@@ -7,7 +7,7 @@ module.exports = mongoose.model('docs', new Schema({
 	email: String,
     name: String,
     surname: String,
-    address: String,
-		CF: String,
+    bio: String,
+		numero: String,
     title: String,
 }));
