@@ -34,9 +34,6 @@ app.use('/api/v1/resetPassword', reset)
 
 //__________________________________________________________
 
-app.use('/api/v1/editPaziente', editPaziente);
-app.use('/api/v1/agendaMedico', agendaMedico);
-app.use('/api/v1/profileM', profileM);
 
 app.use((req, res, next) => {
     result = check(req.cookies.access_token);
@@ -50,7 +47,10 @@ app.use((req, res, next) => {
 
 
 app.use('/api/v1/editMedico', modifMedico);
+app.use('/api/v1/profileM', profileM);
 
+app.use('/api/v1/editPaziente', editPaziente);
+app.use('/api/v1/agendaMedico', agendaMedico);
 
 app.use('/api/v1/logout', logout);
 
