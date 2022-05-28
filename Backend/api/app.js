@@ -15,6 +15,7 @@ const reset = require ('./routes/resetPassword.js')
 
 const editPaziente = require('./routes/editPaziente.js');
 const modifMedico = require('./routes/modificaMedico.js');
+const admin = require('./routes/admin.js');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -42,6 +43,7 @@ app.use((req, res, next) => {
 
 app.use('/api/v1/Paziente', editPaziente);
 app.use('/api/v1/Medico', modifMedico);
+app.use('/api/v1/Admin', admin);
 
 app.use('/api/v1/logout', logout);
 
