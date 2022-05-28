@@ -107,3 +107,15 @@ router.put('', async function(req, res){
 });
 
 module.exports = router;
+
+//con il metodo che usato il ho una sola get e posso passargli tutti i parametri che voglio
+     //es) fetch('../api/v1/agendaMedico?year='+year+'&month='+(month+1)+'&day='+day, {
+/*altrimenti nello script fetcho fetch('../api/v1/profileM/'+id, {
+e qua posso avere PIU GET DIVERSE  ma devo diversificarle con il primo parametro
+    router.get('/:id', async function(req, res){
+                  ^
+                  |
+      let idMedico = req.params.id;
+                     //piuttosto che req.body.id
+
+*/ 
