@@ -9,12 +9,15 @@ const signup = require('./routes/signup.js');
 const check = require('./routes/tokenCheck.js');
 const logout = require('./routes/logout.js');
 const verify_email = require('./routes/verify_email.js');
+const calendarioP = require('./routes/calendarioP.js');
 const PA = require('./routes/assurancePlans.js');
 
 const reset = require ('./routes/resetPassword.js')
 
 const editPaziente = require('./routes/editPaziente.js');
 const modifMedico = require('./routes/modificaMedico.js');
+const profileM = require('./routes/profiloM.js');
+const agendaMedico = require('./routes/agendaMedico.js');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -29,6 +32,9 @@ app.use('/api/v1/signup', signup);
 app.use('/api/v1/verifyEmail', verify_email);
 app.use('/api/v1/PA', PA);
 app.use('/api/v1/resetPassword', reset)
+
+//_______________________________________________________________________-
+app.use('/api/v1/calendarP', calendarioP);
 
 app.use((req, res, next) => {
     result = check(req.cookies.access_token);

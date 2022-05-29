@@ -1,0 +1,291 @@
+<html>
+    <head>
+        <title>calendario</title>
+        <link rel="icon" type="image/x-icon" href="/img/icona.png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+        <style>
+
+            #logo{
+                position: absolute;
+                width: 200px;
+                height: auto;
+                right: 100px;
+                top: 30px;
+            }
+
+            #title{
+                position: absolute;
+                width: auto;
+                height: 49px;
+                left: 105px;
+                top: 90px;
+
+                font-family: 'Questrial', sans-serif;
+                font-variant: small-caps;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 63px;
+                line-height: 49px;
+
+                color: #D4001C;
+            }
+
+            #box{
+                box-sizing: border-box;
+
+                position: absolute;
+                height: 700px;
+                left: 100px;
+                right: 100px;
+                top: 200px;
+
+
+                background: #FFFFFF;
+                border: 2px solid #D4001C;
+                border-radius: 39px;
+            }
+
+            body{
+                background-image: url('img/background.png');
+            }
+           
+             
+            /* Scrollbar styles */
+            ::-webkit-scrollbar {
+            width: 12px;
+            height: 4px;
+            }
+
+            ::-webkit-scrollbar-thumb {
+            background: #d4001c;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+            background: #960011;
+            }
+
+            #dashboard{
+                position: absolute;
+                width: 31%;
+                height: 18%;
+                left: 4.2%;
+                bottom: 40px;
+                gap: 18px;
+                padding: 30px;
+
+                display:flex;
+                justify-content: center;
+                align-items: center;
+                background: #FFEAED;
+                border-radius: 10px;
+            }
+   
+            span{
+                
+                display:flex;
+                flex-basis: 55%;
+                text-align: left;
+                font-family: 'Questrial';
+                font-style: bold;
+                font-weight: 600;
+         
+            }
+
+            #img{
+                width: 45%;
+                height: auto;
+            }
+
+            #oggi{
+                position: absolute;
+                width: auto;
+                height: 49px;
+                left: 4.2%;
+                top: 33px;
+
+                font-family: 'Questrial', sans-serif;
+                font-variant: small-caps;
+                font-style: bold;
+                font-weight: 500;
+                font-size: 50px;
+                line-height: 49px;
+
+                color: #000000;
+            }
+
+            #prossimi{
+                position: absolute;
+                width: auto;
+                height: 49px;
+                left: 50%;
+                top: 33px;
+
+                font-family: 'Questrial', sans-serif;
+                font-variant: small-caps;
+                font-style: bold;
+                font-weight: 500;
+                font-size: 50px;
+                line-height: 49px;
+
+                color: #000000;
+            }
+     
+
+            #containerDx{
+                position: absolute;
+                width: auto;
+                height: auto;
+                left: calc(48%);
+                right:calc(4.2%);
+                bottom:60px; 
+                top: 108px;
+                padding:30px;
+                
+                box-sizing: border-box; /*paddingall'interno della box*/
+                display:flex;
+                justify-content: flex-start;
+                flex-wrap:wrap;
+                flex-direction: row;
+                align-items: flex-start;
+                gap:40px;
+
+                overflow-y: scroll;
+            }
+
+            #containerSx{
+                position: absolute;
+                width: 33%;
+                height: 37.8%;
+                left: calc(4.2%);
+                top: 135px;
+
+                display:flex;
+                justify-content:flex-start;
+                align-items: center;
+                flex-wrap:wrap;
+                flex-direction: row;
+                gap:20px;
+          
+                background: transparent;
+                overflow-y: scroll;
+            }
+
+            .item{
+                box-sizing: border-box; /*paddingall'interno della box*/
+                height:50px; 
+                width: 100%;
+                
+                display: flex;
+                justify-content:space-between;
+                align-items: center;
+                flex-direction: row;
+                gap:20px;
+
+                background: transparent;
+            }
+
+            .appuntamentoDx{
+                box-sizing: border-box; /*paddingall'interno della box*/
+                height:67px; 
+                width: 75%;
+               
+                text-align: center;
+
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: 800;
+                font-size: 20px;
+                
+                background: #FFEAED;
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                border-radius: 50px;
+            }
+
+            .appuntamentoSx{
+                box-sizing: border-box; /*paddingall'interno della box*/
+                height:68px; 
+                width: 94%;
+                
+                text-align: center;
+   
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: 800;
+                font-size: 20px;
+
+                color: #ffffff;
+                background: #D4001C;
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                border-radius: 50px;
+            }
+
+        
+            .bottone{
+                box-sizing: border-box; /*paddingall'interno della box*/
+                height:34px; 
+                width: 17%;
+               
+                display: flex;
+                justify-content:center;
+                align-items: center;
+                flex-direction: row;
+                gap:20px;
+
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: 800;
+                font-size: 20px;
+
+                color: #FFFFFF;
+                background: #D4001C;
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                border-radius: 50px;
+            }
+            
+
+            input[type=button]{
+                box-sizing: border-box; /*paddingall'interno della box*/
+                height:34px; 
+                width: 17%;
+               
+                display: flex;
+                justify-content:center;
+                align-items: center;
+                flex-direction: row;
+                gap:20px;
+
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: 800;
+                font-size: 20px;
+
+                color: #FFFFFF;
+                background: #D4001C;
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                border-radius: 50px;
+            }
+          
+        </style>
+    </head>
+    <body onload="loadData();">
+        <script src="scripts/calendarP.js"></script>
+        <div id="title">I Tuoi Appuntamenti</div>
+        <a href="/"><img src="img/Logo.png" id="logo"/></a>
+        <div  id="box">
+            <div id="oggi">Gli Appuntamenti Di Oggi: </div>
+            <div id="prossimi">Prossimi Appuntamenti: </div>
+            <div id="dashboard">
+                <img src="img/calendario.png" id="img"/>
+                <span>Non è possibile disdire un appuntamento il giorno stesso.<br>In caso di assenza ad un 
+                    appuntamento ancora prenotato verrà applicata una multa pari a 30€</span>
+            </div>
+            <div id="containerDx"> </div>   
+            <div id="containerSx"> 
+               
+            </div>   
+        </div>
+        <div style="position: absolute;top:900px">&nbsp</div>
+    </body>
+</html>
