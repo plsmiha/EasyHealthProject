@@ -2,7 +2,7 @@ const d = new Date();
 const anno = d.getFullYear();
 const mese= d.getMonth()+1;
 const giorno =d.getDate();
-const oggi =new Date( anno+"-"+mese+"-"+giorno);
+const oggi =anno+"-"+mese+"-"+giorno;
 
 
 function loadData(){    
@@ -23,20 +23,11 @@ function loadData(){
             const dx =  document.getElementById("containerDx");
             const sx = document.getElementById("containerSx");
             
-
-
-            for (var i = 0; i < (data.appOggi).length; i++) {
-                    const visitaOggi = document.createElement('div');
-                    visitaOggi.classList.add('appuntamentoSx');
-                    visitaOggi.innerHTML ="<pre>"+noAnno(data.appOggi[i])+"  alle  "+data.appOggi[i].from+"-"+data.appOggi[i].to+"<br>"+ "Dr  "+nominativo(data.jsonArrOggi[i])+"</pre>";
-                    sx.appendChild(visitaOggi);
-
-            }
            
             for (var i = 0; i < (data.appuntamento).length; i++) {
 
-                 //metto le maiuscole al nome 
                  const giorgio = new Date(data.appuntamento[i].day);
+
 
                  if((giorgio-d)>0){ //faccio vedere solo da domani
                     
@@ -57,6 +48,14 @@ function loadData(){
                     el.appendChild(visita);
                     el.appendChild(bottone);
                     dx.appendChild(el);
+
+                } else if(oggi==data.appuntamento[i].day){
+
+                    console.log(oggi+"  "+data.appuntamento[i].day);
+                    const visita= document.createElement('div');
+                    visita.classList.add('appuntamentoSx');
+                    visita.innerHTML ="<pre>"+noAnno(data.appuntamento[i])+"  alle  "+data.appuntamento[i].from+"-"+data.appuntamento[i].to+"<br>"+ "Dr  "+nominativo(data.jsonArr[i])+"</pre>";
+                    sx.appendChild(visita);
                 }
             }
         }else{

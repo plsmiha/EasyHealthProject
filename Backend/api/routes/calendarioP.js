@@ -27,17 +27,14 @@ function custom_sort(a, b) {
 router.get('', async function(req, res){ //do la risposta al fronted che mi ha chiesto e faccio la richiesta al db
     console.log('dentro a get');
     var jsonArr = [];
-    var jsonArrOggi = [];
     var paziente = getPatient(req);
     console.log(oggi);
 
     //prendo tutti gli appuntamenti di questo paziente
     var appuntamento = await Slot.find({occupied_id_pat: paziente}, "_id day from to id_doc ");
-    var appOggi = await Slot.find({occupied_id_pat: paziente, day: oggi }, "_id day from to id_doc ");
 
     //ordino gli appuntamenti in base alla data
     appuntamento.sort(custom_sort);
-    appOggi.sort(custom_sort);
  
     if(appuntamento.length>0|| appoggi.length>0){
         //mi tiro fuori il nome del medico con cui ha appuntamento avendo l'id
@@ -47,18 +44,10 @@ router.get('', async function(req, res){ //do la risposta al fronted che mi ha c
             var medico = await Doctor.find({id_user: medId}, "name surname");
             jsonArr.push(medico);
         }
-
-        for(let i=0; i<appOggi.length; i++){
-            var medId= String(appuntamento[i].id_doc).split('"')[0];
-            var medico = await Doctor.find({id_user: medId}, "name surname");
-            jsonArrOggi.push(medico);
-        }
-  
         
-        var data = {appuntamento, jsonArr, appOggi, jsonArrOggi};
+        var data = {appuntamento, jsonArr};
         console.log(data);
         res.status(200).json(data);
-
 
     }else{
         res.status(406).json({success: 'false', reason: 'no appuntamenti', error: '1'});
