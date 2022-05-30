@@ -25,7 +25,7 @@ app.use('/', express.static('./Frontend/public'));
 
 app.use('/api/v1/login', login);
 app.use('/api/v1/aree', aree);
-app.use('/api/v1/signup', signup);
+app.use('/api/v2/signup', signup);
 app.use('/api/v1/verifyEmail', verify_email);
 app.use('/api/v1/PA', PA);
 app.use('/api/v1/resetPassword', reset)

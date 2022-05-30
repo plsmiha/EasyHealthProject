@@ -10,7 +10,7 @@ function signup(){
     var password=document.getElementById("Password").value;
     var codePA=document.getElementById("CodPA").value;
 
-    fetch('../api/v1/signup', {
+    fetch('../api/v2/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify( { name, surname, address, CF, email, password, codePA } ),
