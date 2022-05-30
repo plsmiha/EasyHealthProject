@@ -4,5 +4,5 @@ var Schema = mongoose.Schema;
 // set up a mongoose model
 module.exports = mongoose.model('PA', new Schema({
 	name: String,
-	sconto : Int32
+	sconto : Number
 }));
