@@ -2,18 +2,18 @@ function signup(){
 
     if(!checkPassword()) return;
 
-    var nome=document.getElementById("Nome").value;
-    var cognome=document.getElementById("Cognome").value;
-    var residenza=document.getElementById("Residenza").value;
+    var name=document.getElementById("Nome").value;
+    var surname=document.getElementById("Cognome").value;
+    var address=document.getElementById("Residenza").value;
     var CF=document.getElementById("CF").value;
     var email=document.getElementById("Email").value;
     var password=document.getElementById("Password").value;
-    var codPA=document.getElementById("CodPA").value;
+    var codePA=document.getElementById("CodPA").value;
 
     fetch('../api/v1/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify( { nome: nome, cognome: cognome, residenza: residenza, CF: CF, email: email, password: password, codPA: codPA } ),
+        body: JSON.stringify( { name, surname, address, CF, email, password, codePA } ),
     })
     .then((resp) => resp.json())
     .then(function(data) {
