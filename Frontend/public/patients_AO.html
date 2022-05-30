@@ -8,6 +8,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <style>
             #logo{
                 position: absolute;
@@ -16,6 +17,18 @@
                 right: 100px;
                 top: 30px;
             }
+            .btn{
+              background-color: #D4001c;
+border: none;
+color: white;
+padding: 12px 16px;
+font-size: 16px;
+cursor: pointer;
+
+            }
+            .btn:hover {
+  background-color: #7a1724;
+}
             #title{
                 position: absolute;
                 width: auto;
@@ -106,6 +119,27 @@
                 height: 39px;
                 left: calc(46% + 20px);
                 top: 110px;
+
+                background: #D4001C;
+                border-radius: 10px;
+                border: 0px;
+
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 20px;
+                line-height: 25px;
+                align-items: center;
+                text-align: center;
+
+                color: #FFFFFF;
+            }
+            #btn_restore_all{
+                position: absolute;
+                width: 20%;
+                height: 39px;
+                left: calc(70% + 20px);
+                top: 140px;
 
                 background: #D4001C;
                 border-radius: 10px;
@@ -253,6 +287,19 @@
                 width: 100px;
                 height: 100px;
             }
+            #listone{
+              height: 380px;
+
+  overflow:auto;
+            }
+
+            #listone tr:nth-child(even){font-size: 25px;}
+            #listone tr:nth-child(odd){background-color: #ffdbdc; font-size: 25px;}
+
+
+
+
+
             /* Scrollbar styles */
             ::-webkit-scrollbar {
             width: 12px;
@@ -320,10 +367,11 @@
 
 
             <div id="l_dashboard">Dashboard</div>
-            <input type="text" id="txt_medico_nome" value=""/>
+            <input type="text" id="txt_medico_nome" value="zeno"/>
             <select id="piani"></select>
-            <input type="button" id="btn_medico_nome" value="Cerca per nome" onclick="check_and_redirect_nome();"/>
-            <input type="button" id="btn_medico_competenza" value="Cerca per PA" onclick="check_and_redirect_competenza();"/>
+            <input type="button" id="btn_medico_nome" value="Cerca per nome" onclick="cercapernome();"/>
+              <input type="button" id="btn_restore_all" value="Restore All" onclick="restore_all();"/>
+            <input type="button" id="btn_medico_competenza" value="Cerca per PA" onclick="cercaperpa();"/>
 
             <div id="dashboard">
               <div id='listone'>
