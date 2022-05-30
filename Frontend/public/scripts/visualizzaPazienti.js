@@ -1,4 +1,6 @@
 var vettore_pazienti = new Array();
+var vettore_id = new Array();
+
 function loadData()//se la password non viene inserita resta uguale, se viene inserita invece va a modificare la precedente
 {
   event.preventDefault();
@@ -47,6 +49,7 @@ fetch('../api/v1/PA', {
           .then(function(data) {
               data.forEach(e => {
                     vettore_pazienti.push([e.name.toString(),e.surname.toString(),e.email.toString(),e.address.toString(),array_PA[e.codePA.toString()],'']);
+                    vettore_id.push(e._id.toString())
               })
               createTable(vettore_pazienti);
           })
@@ -116,7 +119,6 @@ function createTable(vettore_pazienti) {
     }
 
     //Add the data rows.
-
     for (var i = 1; i < vettore_pazienti.length; i++) {
 
         row = table.insertRow(-1);
@@ -127,7 +129,7 @@ function createTable(vettore_pazienti) {
           cell.style='text-align: center;';
           if(j+1 == columnCount){
                 var btn_visualizza = document.createElement('a');
-                btn_visualizza.innerHTML = '<button class="btn"><i class="fa fa-bars"></i></button>';
+                btn_visualizza.innerHTML = '<button class="btn" onclick="window.location.href=\'view_profile_P.html?id=' + vettore_id[i-1] + '\';" ><i class="fa fa-bars"></i></button>';
                 var btn_elimina = document.createElement('a');
                 btn_elimina.innerHTML = '<button class="btn"><i class="fa fa-trash"></i></button>';
                 var btn_modifica = document.createElement('a');
@@ -151,3 +153,54 @@ function createTable(vettore_pazienti) {
     dvTable.innerHTML = "";
     dvTable.appendChild(table);
 }
+
+function getParam(param) {
+  var url_string = window.location.href;
+  var url = new URL(url_string);
+  return url.searchParams.get(param);
+}
+
+
+function loadViewPatientData() {
+  event.preventDefault();
+
+  let array_PA = {}
+  fetch('../api/v1/PA', {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(),
+  })
+  .then((resp) => resp.json())
+  .then(function(data) {
+    data.forEach(e => {
+      array_PA[e._id] = e.name;
+        var opt = document.createElement('option');
+        opt.innerHTML = e.name;
+        opt.value = e._id;
+        document.getElementById("CodPA").appendChild(opt);
+    })
+
+    fetch('../api/v1/patient', {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(),
+      })
+      .then((resp) => resp.json())
+      .then(function(data) {
+
+          data.forEach(e => {
+            if (e._id == getParam("id")) {
+              console.log(e.codePA)
+              console.log(array_PA[e.codePA.toString()])
+              document.getElementById("Email").value = e.email;
+              document.getElementById("Nome").value = e.name;
+              document.getElementById("Cognome").value = e.surname;
+              document.getElementById("Residenza").value = e.address;
+              document.getElementById("CodPA").value = e.codePA;
+            }
+          })
+      })
+  })
+
+}
+
