@@ -4,7 +4,7 @@ function loadData()//se la password non viene inserita resta uguale, se viene in
   event.preventDefault();
 
 
-  fetch('../api/v1/PA', {
+  fetch('../api/v1/aree', {
          method: 'GET',
          headers: { 'Content-Type': 'application/json' },
          body: JSON.stringify(),
@@ -21,12 +21,12 @@ function loadData()//se la password non viene inserita resta uguale, se viene in
 
 
 
-     vettore_pazienti.push(["NOME", "COGNOME", "EMAIL","INDIRIZZO","PA", "OPZIONI"]);
+     vettore_pazienti.push(["NOME", "COGNOME", "EMAIL","NUMERO","AREA COMPETENZA", "OPZIONI"]);
 
 var array_PA = {};
 
 
-fetch('../api/v1/PA', {
+fetch('../api/v1/aree', {
        method: 'GET',
        headers: { 'Content-Type': 'application/json' },
        body: JSON.stringify(),
@@ -37,8 +37,8 @@ fetch('../api/v1/PA', {
 
          array_PA[e._id] = e.name;
        })
-  
-       fetch('../api/v1/patient', {
+
+       fetch('../api/v1/medic', {
               method: 'GET',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(),
@@ -46,7 +46,8 @@ fetch('../api/v1/PA', {
           .then((resp) => resp.json())
           .then(function(data) {
               data.forEach(e => {
-                    vettore_pazienti.push([e.name.toString(),e.surname.toString(),e.email.toString(),e.address.toString(),array_PA[e.codePA.toString()],'']);
+                console.log(e);
+                    vettore_pazienti.push([e.name.toString(),e.surname.toString(),e.email.toString(),e.numero.toString(),array_PA[e.title.toString()],'']);
               })
               createTable(vettore_pazienti);
           })
@@ -58,14 +59,14 @@ fetch('../api/v1/PA', {
 function cercaperpa(){
     var elemento=document.getElementById("piani");
     var codePA=elemento.options[elemento.selectedIndex].text;
-    var smistati = vettore_pazienti.filter(item =>item[4].indexOf(codePA) !== -1 || item[4].indexOf('PA') !== -1);
+    var smistati = vettore_pazienti.filter(item =>item[4].indexOf(codePA) !== -1 || item[4].indexOf('AREA COMPETENZA') !== -1);
 
     if(smistati.length != 1){
       createTable(smistati);
     }
     else{
       var tmp = new Array();
-      tmp.push(["NOME", "COGNOME", "EMAIL","INDIRIZZO","PA", "OPZIONI"]);
+      tmp.push(["NOME", "COGNOME", "EMAIL","NUMERO","AREA COMPETENZA", "OPZIONI"]);
       createTable(tmp);
     }
 
@@ -78,7 +79,7 @@ function restore_all(){
 }
 
 function cercapernome(){
-  var nome=document.getElementById("txt_paziente_nome").value;
+  var nome=document.getElementById("txt_medico_nome").value;
 
 
   var smistati = vettore_pazienti.filter(item =>item[0].indexOf(nome) !== -1 || item[0].indexOf('NOME') !== -1);
@@ -88,7 +89,7 @@ function cercapernome(){
   }
   else{
     var tmp = new Array();
-    tmp.push(["NOME", "COGNOME", "EMAIL","INDIRIZZO","PA", "OPZIONI"]);
+    tmp.push(["NOME", "COGNOME", "EMAIL","NUMERO","AREA COMPETENZA", "OPZIONI"]);
     createTable(tmp);
   }
 
