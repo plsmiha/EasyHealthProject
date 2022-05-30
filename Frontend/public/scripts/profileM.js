@@ -50,6 +50,8 @@ function loadData(){
         tel.innerHTML = data.med['numero']; 
         email.innerHTML = data.med['email']
         bio.innerHTML = data.med['bio']
+        const box = document.getElementById('container');
+        box.innerHTML="";
         
 
         //creo gli elementi necessari per ogni giorno in cui c'è almeno uno slot
@@ -103,7 +105,6 @@ function loadData(){
                 }
 
                 //metto queso nuovo elemento "giorno+select+opzioni" nel box che contiene tutto
-                const box = document.getElementById('container');
                 box.appendChild(el);
             }
         }
@@ -124,9 +125,10 @@ function prenota(){
     .then(function(data) {
         if(data.success=="true")
         {
+            loadData();    
             //se la prenotazione va a buon fine ricarico la pagina in modo che sparisca lo slot appena selezionato
             console.log('slot prenotato')
-            window.location.href = "profile_M.html?id="+id_medico; //cosi ritorno su quel medico li
+            //window.location.href = "profile_M.html?id="+id_medico; //cosi ritorno su quel medico li
             //non so perche non fuziona se rimetto l'opzione a index 0 e richiamo loadData() con il redirect si invece
         }
         else
