@@ -36,9 +36,9 @@ router.get('', async function(req, res){ //do la risposta al fronted che mi ha c
   console.log("ma bro "+doc);
 
   let med= await Doctor.findOne({id_user: doc});
-  var titleId= String(med.title).split('"')[0];
-  let spec = await Area.findById(titleId);
 
+  let spec = await Area.findById(med.title);
+  console.log("______________1");
 
   month1=(month+1)%13;
   month2=(month+2)%13;
@@ -61,15 +61,18 @@ router.get('', async function(req, res){ //do la risposta al fronted che mi ha c
    // console.log(month2+"  3  "+month3+"   "+year3)
   }
 
-
+  console.log("______________2");
    //let slots = await Slot.find({id_doc: _user, day: new RegExp(year+"-"+month+"-")}, "_id day"); //mi prendo solo l'id e i giorni=projection
                                                       //regExp è per il pattern matching -> mi basta che la prima parte della data sia uguale
-   let slotsDate = await Slot.distinct("day", {$or: [{day: new RegExp(year+"-"+month+"-")},{day: new RegExp(year1+"-"+month1+"-")},{day: new RegExp(year2+"-"+month2+"-")},
-   {day: new RegExp(year3+"-"+month3+"-")}], id_doc: doc, occupied_id_pat: ""});
+   /*let slotsDate = await Slot.distinct("day", {$or: [{day: new RegExp(year+"-"+month+"-")},{day: new RegExp(year1+"-"+month1+"-")},{day: new RegExp(year2+"-"+month2+"-")},
+   {day: new RegExp(year3+"-"+month3+"-")}], id_doc: doc, occupied_id_pat: ""});*/
+   
+   let slotsDate=await Slot.aggregate([{ "$match": { "id_doc": doc } }, { "$group": { _id: day} } ])
    //let slotsOra = await Slot.find({$or: [{day: new RegExp(year+"-"+month+"-")},{day: new RegExp(year1+"-"+month1+"-")},{day: new RegExp(year2+"-"+month2+"-")},{day: new RegExp(year3+"-"+month3+"-")}],$and: [{id_doc: _user}]}, "_id day from to ");
    //let slotsOra = await Slot.aggregate([{$group :{_id : "$day",  items: {$push: '$$ROOT'}}}]);
    //let slotsOra = await Slot.aggregate([{$group :{_id : "$day",  items: {$push: "from"}}}]);
-  
+   console.log("______________3");
+   console.log()
    //{$match: {$or: [{day: new RegExp(year+"-"+month+"-")},{day: new RegExp(year1+"-"+month1+"-")},{day: new RegExp(year2+"-"+month2+"-")},{day: new RegExp(year3+"-"+month3+"-")}],$and: [{id_doc: _user}]}]);
    (slotsDate).sort(function(a, b){
       const date1 = new Date(a)

@@ -17,7 +17,7 @@ function loadData(){
     console.log(id_medico);
     
     console.log(id_medico);
-    fetch('../api/v1/profileM?id='+id_medico, {//passo al middleware il mio parametro attraverso la uri
+    fetch('../api/v1/visita?id='+id_medico, {//passo al middleware il mio parametro attraverso la uri
         method: 'GET', //con il get mi arriva come risposta non solo lo statos ma anche i dati che chiedo
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -116,7 +116,7 @@ function prenota(){
 
     console.log("prenotero lo slot "+visita);
 
-    fetch('../api/v1/profileM', {
+    fetch('../api/v1/visita', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify( {_idSlot: visita } ),
