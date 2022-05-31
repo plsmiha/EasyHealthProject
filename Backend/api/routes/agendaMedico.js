@@ -41,7 +41,7 @@ router.post('', async function(req, res){
         day: day,
         from: from,
         to: to,
-        occupied_id_pat: ""
+        occupied_id_pat: null
     });
     slot = await slot.save();
     res.status(200).json({success: 'true'});

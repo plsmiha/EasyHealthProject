@@ -188,7 +188,7 @@ async function viewSlot(day, month, year)
         tr.appendChild(td2);
 
         var td3 = document.createElement("td");
-        td3.innerText = (data.occupied_id_pat==""?"NO":"SI");
+        td3.innerText = (data.occupied_id_pat==null?"NO":"SI");
         tr.appendChild(td3);
         
         var rem = document.createElement("td");
