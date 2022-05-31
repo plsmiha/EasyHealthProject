@@ -1,6 +1,7 @@
 const express = require('express');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
+const mongoose = require('mongoose');
 const router = express.Router();
 
 const User = require('../../models/user');
@@ -55,7 +56,7 @@ router.post('', async function(req, res) {
         surname: req.body.surname,
         address: req.body.address,
         CF: req.body.CF,
-        codePA: req.body.codePA
+        codePA: req.body.codePA==''?null:req.body.codePA
     })
     patient = await patient.save();
 
