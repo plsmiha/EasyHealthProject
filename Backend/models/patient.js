@@ -9,5 +9,5 @@ module.exports = mongoose.model('Patient', new Schema({
     surname: String,
     address: String,
     CF: String,
-    codePA: String,
+    codePA: [{ type: Schema.Types.ObjectId, ref: 'PA' }],
 }));
