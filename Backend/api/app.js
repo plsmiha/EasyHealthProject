@@ -31,7 +31,8 @@ app.use('/api/v1/aree', aree);
 app.use('/api/v1/signup', signup);
 app.use('/api/v1/verifyEmail', verify_email);
 app.use('/api/v1/PA', PA);
-app.use('/api/v1/resetPassword', reset)
+app.use('/api/v1/resetPassword', reset);
+
 
 //_______________________________________________________________________-
 
@@ -47,8 +48,8 @@ app.use((req, res, next) => {
 
 app.use('/api/v1/editPaziente', editPaziente);
 app.use('/api/v1/editMedico', modifMedico);
-app.use('/api/v1/calendarP', calendarioP);
 
+app.use('/api/v1/agendaPaziente', calendarioP);
 app.use('/api/v1/logout', logout);
 
 app.use((req, res) => {
