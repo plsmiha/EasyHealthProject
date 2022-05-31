@@ -13,7 +13,7 @@ function loadData(){
     fetch('../api/v1/agendaPaziente', {
         method: 'GET', 
         headers: { 'Content-Type': 'application/json' },
-       // credentials: 'include',
+        credentials: 'include',
     })
     .then((resp) => resp.json())
     .then(function(data) {
@@ -76,7 +76,7 @@ function cancella(slot){
     fetch('../api/v1/agendaPaziente/'+slot, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
-        //credentials: 'include'
+        credentials: 'include'
     })
     .then((resp) => resp.json())
     .then(function(data) {

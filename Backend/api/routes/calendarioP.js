@@ -39,7 +39,6 @@ router.get('', async function(req, res){ //do la risposta al fronted che mi ha c
         return;
     }
 
-    var jsonArr = [];
     var paziente = getPatient(req);
 
     console.log('dentro a get');
@@ -61,9 +60,10 @@ router.delete('/:slot', async function(req, res){
         res.status(403).json({success: 'false', reason: 'Unauthorized', error: '1'});
         return;
     }
+    console.log('dentro a delete');
 
     const s=req.params.slot;
-    let sl= await Slot.findOneAndUpdate( {_id:s,  day: { $ne: oggi }, occupied_id_pat:  getPatient() },{"occupied_id_pat":""});
+    let sl= await Slot.findOneAndUpdate( {_id:s,  day: { $ne: oggi }, occupied_id_pat:  getPatient(req) },{"occupied_id_pat":null});
     //.where("day").ne(oggi).where("occupied_id_pat", getPatient());
     
     if(!sl){
