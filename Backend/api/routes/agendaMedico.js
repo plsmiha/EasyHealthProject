@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Slot = require('../../models/slot');
+const Doc = require('../../models/doc');
 
 function getUser(req) //qui dentro ricevaero dal jwt l'id user, attesa token ascari
 {
@@ -36,8 +37,9 @@ router.post('', async function(req, res){
         return;
     }
 
+    let doc = await Doc.findOne({id_user: user}, "_id");
     let slot = new Slot({
-        id_doc: user,
+        id_doc: doc._id,
         day: day,
         from: from,
         to: to,
@@ -68,12 +70,14 @@ router.get('', async function(req, res){
 
     if(typeof day == 'undefined')
     {
-        let slots = await Slot.find({id_doc: user, day: new RegExp(year+"-"+month+"-")}, "_id day");
+        let doc = await Doc.findOne({id_user: user}, "_id");
+        let slots = await Slot.find({id_doc: doc._id, day: new RegExp(year+"-"+month+"-")}, "_id day");
         res.status(200).json(slots);
     }
     else
     {
-        let slots = await Slot.find({id_doc: user, day: year+"-"+month+"-"+day}, "_id");
+        let doc = await Doc.findOne({id_user: user}, "_id");
+        let slots = await Slot.find({id_doc: doc._id, day: year+"-"+month+"-"+day}, "_id");
         res.status(200).json(slots);
     }
 });
