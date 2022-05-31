@@ -229,6 +229,7 @@
                 border-radius: 10px;
                 margin-left: 3%;
                 flex-basis: 94%;
+                cursor: pointer;
             }
 
             #open_referto{
@@ -267,7 +268,24 @@
                 transition: visibility 0.3s, opacity 0.3s;
                 opacity: 0;
             }
-            #exit_referto_box{
+            #view_referto_box{
+                box-sizing: border-box;
+
+                position: absolute;
+                width: 1000px;
+                height: 520px;
+                left: calc(50% - 500px);
+                top: calc(50% - 260px);
+
+                background: #FFFFFF;
+                border: 2px solid #000000;
+                border-radius: 39px;
+                box-shadow: 0px 0px 25px 3px rgba(0,0,0,0.5);
+                visibility: hidden;
+                transition: visibility 0.3s, opacity 0.3s;
+                opacity: 0;
+            }
+            #exit_referto{
                 position: absolute;
                 width: 200px;
                 height: 39px;
@@ -415,18 +433,21 @@
             </div>
             <div id="container"> 
                 
-            </div>   
+            </div>  
             <input type="button" id="open_referto" value="Aggiungi Referto" onclick="document.getElementById('add_referto_box').style.opacity=1; document.getElementById('add_referto_box').style.visibility='visible'; document.getElementById('title').value=''; document.getElementById('comment').value=''; document.getElementById('pdf').value=''; file='';"/>
-            <div id="add_referto_box">
-                <span id="l_title">Titolo:</span>
-                <span id="l_comment">Commento:</span>
-                <span id="l_pdf">File PDF:</span>
-                <input type="text" id="title_ref" value=""/>
-                <textarea id="comment" rows="4" cols="50"></textarea>
-                <input type="file" id="pdf" accept="application/pdf" onchange="loadFile();"/>
-                <input type="button" id="add_referto" value="Aggiungi slot" onclick="addReferto();"/>
-                <input type="button" id="exit_referto_box" value="Annulla" onclick="document.getElementById('add_referto_box').style.opacity=0; document.getElementById('add_referto_box').style.visibility='hidden';"/>
-            </div>
+        </div>
+        <div id="add_referto_box">
+            <span id="l_title">Titolo:</span>
+            <span id="l_comment">Commento:</span>
+            <span id="l_pdf">File PDF:</span>
+            <input type="text" id="title_ref" value=""/>
+            <textarea id="comment" rows="4" cols="50"></textarea>
+            <input type="file" id="pdf" accept="application/pdf" onchange="loadFile();"/>
+            <input type="button" id="add_referto" value="Aggiungi slot" onclick="addReferto();"/>
+            <input type="button" id="exit_referto" value="Annulla" onclick="document.getElementById('add_referto_box').style.opacity=0; document.getElementById('add_referto_box').style.visibility='hidden';"/>
+        </div>
+        <div id="view_referto_box">
+            <input type="button" id="exit_referto" value="Annulla" onclick="document.getElementById('view_referto_box').style.opacity=0; document.getElementById('view_referto_box').style.visibility='hidden';"/>
         </div>
         <div style="position: absolute;top:850px">&nbsp</div>
     </body>

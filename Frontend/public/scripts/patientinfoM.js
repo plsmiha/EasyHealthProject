@@ -19,15 +19,40 @@ function loadData(){
         document.getElementById("Indirizzo").innerText = data['address'];
         document.getElementById("Email").innerText = data['email'];       
     })
+
+    fetch('../api/v1/Referto?patient='+user_id, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(),
+    })
+    .then((resp) => resp.json())
+    .then(function(data) {
+        document.getElementById("container").innerHTML=null;
+        data.forEach(function (el) {
+            var item=document.createElement("div");
+            item.classList.add("item");
+            item.innerText = "("+el.date+") "+el.title;
+            //item.setAttribute("value",el._id);
+            item.onclick = function() { viewReferto(el._id); };
+            document.getElementById("container").appendChild(item);
+        });
+    })
 }
 
-function addReferto()
+function viewReferto(value)
+{
+    console.log(value);
+    document.getElementById("view_referto_box").style.visibility="visible";
+    document.getElementById("view_referto_box").style.opacity=1;
+}
+
+async function addReferto()
 {
     let title=document.getElementById("title_ref").value;
     let comment=document.getElementById("comment").value;
     if(title!="")
     {
-        fetch('../api/v1/Referto', {
+        await fetch('../api/v1/Referto', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({id_patient: user_id, title: title, pdf: file, comment: comment}),
@@ -39,6 +64,7 @@ function addReferto()
     }
     document.getElementById('add_referto_box').style.opacity=0; 
     document.getElementById('add_referto_box').style.visibility='hidden';
+    loadData();
 }
 var file="";
 function loadFile()
