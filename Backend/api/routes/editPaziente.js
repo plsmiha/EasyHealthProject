@@ -15,22 +15,22 @@ function getUser(req){ //qui dentro ricevaero dal jwt l'id user
 
 //recupero le informazioni dell'utente con un GET per metterle nel form di modifica
 router.get('', async function(req, res){ //do la risposta al fronted che mi ha chiesto e faccio la richiesta al db
-    
+
     var _user = getUser(req);
     Patient.findOne({id_user:_user}).then(utente =>{
         var _id = String(utente._id).split('"')[0];
         console.log('get dati di '+_id);
         Patient.findById({_id}).then(data =>{
             res.status(200).json(data);
-        }); 
+        });
     });
 })
 
 //aggiorno tutte le info del paziente con un post
 
-router.post('', async function(req, res){
+router.put('', async function(req, res){
     console.log('dentro post backend');
-    
+
     //controllo che ogni campo sia completato in maniera opportuna
     if(typeof req.body.email == 'undefined' ||  typeof req.body.residenza== 'undefined' || typeof req.body.codePA == 'undefined' )
     {   console.log('anuovi dati:');
@@ -57,15 +57,15 @@ router.post('', async function(req, res){
         console.log('email gia registrata');
         return;
     }
-  
-  
+
+
 
     //primo parametro e quello secondo il quale sto cercando=id, poi passo nuovi campi, poi callback
     //The query executes if callback is passed.
     await Patient.findByIdAndUpdate(  {_id},{"email": email, "address": residenza, "codePA" : codePA});
     console.log('update paziente');
 
-    
+
     if(password.length > 0){
         //il campo password e stato lasciato vuoto quindi non si vuole modificare
 
@@ -74,7 +74,7 @@ router.post('', async function(req, res){
         data = hash.update(password, 'utf-8');
         gen_hash= data.digest('hex');
 
-        await User.findByIdAndUpdate( {_id: _user}, 
+        await User.findByIdAndUpdate( {_id: _user},
                                 {"email": email,  "password": gen_hash})
         console.log('update user psw');
 
@@ -89,7 +89,3 @@ router.post('', async function(req, res){
 });
 
 module.exports = router;
-
-
-
-

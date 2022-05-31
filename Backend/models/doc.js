@@ -7,7 +7,13 @@ module.exports = mongoose.model('docs', new Schema({
 	email: String,
     name: String,
     surname: String,
+<<<<<<< HEAD
     address: String,
 		CF: String,
     title: [{ type: Schema.Types.ObjectId, ref: 'aree' }],
+=======
+    bio: String,
+		numero: String,
+    title: String,
+>>>>>>> db7eebc1f885365032f17c51b55cab5fbf814f86
 }));

@@ -3,14 +3,16 @@ function modificaDatiMedico(){
     if(!checkPassword()) return;
     event.preventDefault();
     var email=document.getElementById("Email").value;
-    var address=document.getElementById("Residenza").value;
+    var bio=document.getElementById("Bio").value;
+    var numero=document.getElementById("Numero").value;
     var password=document.getElementById("Password").value;
     var titolo=document.getElementById("aree").value;
-    console.log('passo per le modifiche')
-    fetch('../api/v1/editMedico', {
-        method: 'POST',
+    console.log('passo per le modifiche');
+    
+    fetch('../api/v1/Medico', {
+        method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify( { email: email, address: address, password: password, title:titolo } ),
+        body: JSON.stringify( { email: email, bio: bio, password: password, title:titolo,numero:numero } ),
     })
     .then((resp) => resp.json())
     .then(function(data) {
@@ -56,7 +58,7 @@ function loadData()//se la password non viene inserita resta uguale, se viene in
 
 
     console.log('caricooo')
-    fetch('../api/v1/editMedico', {
+    fetch('../api/v1/Medico', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(),
@@ -64,8 +66,10 @@ function loadData()//se la password non viene inserita resta uguale, se viene in
     .then((resp) => resp.json())
     .then(function(data) {
 
-        var elementresid =  document.getElementById("Residenza");
-        elementresid.value = data['address'];
+        var elementresid =  document.getElementById("Bio");
+        elementresid.value = data['bio'];
+        var elementresid =  document.getElementById("Numero");
+        elementresid.value = data['numero'];
 
         var elementretitolo =  document.getElementById("aree");
         elementretitolo.value = data['title'];
