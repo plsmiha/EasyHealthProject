@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Referto = require('../../models/referto');
+const Doc = require('../../models/doc');
+const Patient = require('../../models/patient');
 
 function getUser(req)
 {
@@ -9,7 +11,7 @@ function getUser(req)
 
 router.get('', async function(req, res)
 {
-    var _doc = getUser(req);
+    var _doc = Doc.findOne({id_user: getUser(req)}, "_id")._id;
     var _pat = req.query.patient;
 
     Referto.find({doc_id: _doc, patient_id: _pat}).then(ref =>{
@@ -34,7 +36,7 @@ router.post('', async function(req, res)
     {
         res.status(400).json({success: 'false', reason: 'Wrong format', error: '1'});
     }
-    var _doc = getUser(req);
+    var _doc = Doc.findOne({id_user: getUser(req)}, "_id")._id;
     var date = (new Date()).getFullYear()+"-"+((new Date()).getMonth()+1)+"-"+(new Date()).getDate();
     var comment = typeof req.body.comment == 'undefined' ? '' : req.body.comment;
     var pdf = typeof req.body.pdf == 'undefined' ? '' : req.body.pdf;

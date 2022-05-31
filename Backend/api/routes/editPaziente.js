@@ -29,7 +29,7 @@ router.get('', async function(req, res){ //do la risposta al fronted che mi ha c
 router.get('/:id', async function(req, res){ //do la risposta al fronted che mi ha chiesto e faccio la richiesta al db
     
     var _user = req.params.id;
-    Patient.findOne({id_user:_user}).then(paziente =>{
+    Patient.findById(_user).then(paziente =>{
         res.status(200).json(paziente);
     });
 })

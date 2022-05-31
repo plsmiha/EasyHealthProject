@@ -351,7 +351,7 @@
                 line-height: 37px;
                 color: #000000;
             }
-            #l_pdf{
+            #l_pdf, #l_pdf_view{
                 position: absolute;
                 left: 7%;
                 top: 300px;
@@ -362,7 +362,7 @@
                 line-height: 37px;
                 color: #000000;
             }
-            #title_ref{
+            #title_ref, #title_ref_view{
                 position: absolute;
                 height: 39px;
                 left: calc(7% + 180px);
@@ -380,7 +380,7 @@
                 border-radius: 10px;
                 border: 0px;
             }
-            #comment{
+            #comment, #comment_view{
                 position: absolute;
                 height: 120px;
                 left: calc(7% + 180px);
@@ -447,7 +447,13 @@
             <input type="button" id="exit_referto" value="Annulla" onclick="document.getElementById('add_referto_box').style.opacity=0; document.getElementById('add_referto_box').style.visibility='hidden';"/>
         </div>
         <div id="view_referto_box">
-            <input type="button" id="exit_referto" value="Annulla" onclick="document.getElementById('view_referto_box').style.opacity=0; document.getElementById('view_referto_box').style.visibility='hidden';"/>
+            <span id="l_title">Titolo:</span>
+            <span id="l_comment">Commento:</span>
+            <span id="l_pdf_view" style="visibility: hidden;">File PDF:</span>
+            <img id="pdf_view" src="img/pdf.png" style="height: 50px; width: auto; position:absolute; left: calc(7% + 180px); top: 300px; visibility: hidden; cursor: pointer;" onclick="downloadPDF();"/>
+            <span id="title_ref_view"></span>
+            <textarea id="comment_view" readonly></textarea>
+            <input type="button" id="exit_referto" style="right: 7%;" value="Esci" onclick="document.getElementById('view_referto_box').style.opacity=0; document.getElementById('view_referto_box').style.visibility='hidden'; pdf_file=null; document.getElementById('pdf_view').style.visibility='hidden'; document.getElementById('l_pdf_view').style.visibility='hidden';"/>
         </div>
         <div style="position: absolute;top:850px">&nbsp</div>
     </body>

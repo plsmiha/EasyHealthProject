@@ -32,18 +32,36 @@ function loadData(){
             var item=document.createElement("div");
             item.classList.add("item");
             item.innerText = "("+el.date+") "+el.title;
-            //item.setAttribute("value",el._id);
             item.onclick = function() { viewReferto(el._id); };
             document.getElementById("container").appendChild(item);
         });
     })
 }
 
+var pdf_file;
+var pdf_file_name;
 function viewReferto(value)
 {
-    console.log(value);
     document.getElementById("view_referto_box").style.visibility="visible";
     document.getElementById("view_referto_box").style.opacity=1;
+    fetch('../api/v1/Referto/'+value, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(),
+    })
+    .then((resp) => resp.json())
+    .then(function(data) {
+
+        document.getElementById("title_ref_view").innerText = data.title;
+        document.getElementById("comment_view").innerText = data.comment;
+        pdf_file=data.pdf_file;
+        pdf_file_name=data.title;
+        if(pdf_file[0].length!=0) 
+        {
+            document.getElementById("pdf_view").style.visibility="visible";
+            document.getElementById("l_pdf_view").style.visibility="visible";
+        }
+    })
 }
 
 async function addReferto()
@@ -66,6 +84,19 @@ async function addReferto()
     document.getElementById('add_referto_box').style.visibility='hidden';
     loadData();
 }
+
+function downloadPDF()
+{
+    console.log(pdf_file);
+    const url = pdf_file[0];
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', pdf_file_name+'.pdf');
+    document.body.appendChild(link);
+    link.click();
+}
+
+
 var file="";
 function loadFile()
 {
