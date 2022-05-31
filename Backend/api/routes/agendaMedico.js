@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 const Slot = require('../../models/slot');
 
-function getUser(req) //qui dentro ricevaero dal jwt l'id user, attesa token ascari
+function getUser(req)
 {
     return req.jwtData.id;
 }
-function getRole(req) //qui dentro ricevaero dal jwt l'id user, attesa token ascari
+function getRole(req)
 {
     return req.jwtData.role;
 }
@@ -41,7 +41,7 @@ router.post('', async function(req, res){
         day: day,
         from: from,
         to: to,
-        occupied_id_pat: ""
+        occupied_id_pat: null
     });
     slot = await slot.save();
     res.status(200).json({success: 'true'});
@@ -65,7 +65,6 @@ router.get('', async function(req, res){
         res.status(400).json({success: 'false', reason: 'Wrong format', error: '1'});
         return;
     }
-
     if(typeof day == 'undefined')
     {
         let slots = await Slot.find({id_doc: user, day: new RegExp(year+"-"+month+"-")}, "_id day");

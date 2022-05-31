@@ -1,6 +1,7 @@
 const express = require('express');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
+const mongoose = require('mongoose');
 const router = express.Router();
 
 const User = require('../../models/user');
@@ -18,7 +19,7 @@ transporter.verify().then().catch(console.error);
 
 router.post('', async function(req, res) {
 
-    if(typeof req.body.email == 'undefined' || typeof req.body.password == 'undefined' || typeof req.body.nome == 'undefined' || typeof req.body.cognome == 'undefined' || typeof req.body.residenza == 'undefined' || typeof req.body.CF == 'undefined' || typeof req.body.codPA == 'undefined')
+    if(typeof req.body.email == 'undefined' || typeof req.body.password == 'undefined' || typeof req.body.name == 'undefined' || typeof req.body.surname == 'undefined' || typeof req.body.address == 'undefined' || typeof req.body.CF == 'undefined' || typeof req.body.codePA == 'undefined')
     {
         res.status(400).json({success: 'false', reason: 'Wrong format', error: '1'});
         return;
@@ -51,11 +52,11 @@ router.post('', async function(req, res) {
     let patient = new Patient({
         id_user: user._id.valueOf(),
         email: req.body.email,
-        name: req.body.nome,
-        surname: req.body.cognome,
-        address: req.body.residenza,
+        name: req.body.name,
+        surname: req.body.surname,
+        address: req.body.address,
         CF: req.body.CF,
-        codePA: req.body.codPA
+        codePA: req.body.codePA==''?null:req.body.codePA
     })
     patient = await patient.save();
 
