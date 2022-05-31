@@ -7,12 +7,18 @@ const boxes = [["boxday00","boxday01","boxday02","boxday03","boxday04"],
                ["boxday30","boxday31","boxday32","boxday33","boxday34"],
                ["boxday40","boxday41","boxday42","boxday43","boxday44"]];
 
-function loadCalendar()
+async function loadCalendar()
 {
     let s="", caselle=0;
     d = new Date(year, month);
 
     document.getElementById("month").innerHTML=monthNames[month]+" "+year;
+
+    const data = await fetch('../api/v1/agendaMedico?year='+d.getFullYear()+'&month='+(d.getMonth()+1), {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include'
+    }).then(response => response.json());
 
     for(let r=0;r<5;r++) //reset grafico giorni
         for(let c=0;c<5;c++)
@@ -41,8 +47,10 @@ function loadCalendar()
             }
             else
             {
+                
                 s+=("0" + index_day).slice(-2)+" ";
-                document.getElementById(boxes[(caselle/5)|0][caselle%5]).innerHTML = '<div id="number">'+d.getDate()+'</div><div id="minus" onclick="openremoveSlot('+d.getDate()+','+d.getMonth()+','+d.getFullYear()+');"></div><div id="plus" onclick="openSlot('+d.getDate()+','+d.getMonth()+','+d.getFullYear()+');"></div>';
+                let number = data.filter(function(value) { return value.day === d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate() }).length;
+                document.getElementById(boxes[(caselle/5)|0][caselle%5]).innerHTML = ((number==0)?'':('<div id="slots_number">'+number+' slot</div>'))+'<div id="number">'+d.getDate()+'</div><div id="lens" onclick="viewSlot('+d.getDate()+','+d.getMonth()+','+d.getFullYear()+');"></div><div id="plus" onclick="openSlot('+d.getDate()+','+d.getMonth()+','+d.getFullYear()+');"></div>';
             }
             caselle++;
         }
@@ -119,12 +127,35 @@ function openSlot(day, month, year)
 
 function addSlot()
 {
-    //controllo che le ore siano sequenziali
-    //chiamata a api per aggiungere slot
-    //ricarico tutto
+    document.getElementById("from_time").style.background="#DDDDDD";
+    document.getElementById("to_time").style.background="#DDDDDD";
+
+    day=yearSelected+"-"+(monthSelected+1)+"-"+daySelected;
+    from=document.getElementById("from_time").value;
+    to=document.getElementById("to_time").value;
+
+    if(from >= to)
+    {
+        document.getElementById("from_time").style.background="#ff7a89";
+        document.getElementById("to_time").style.background="#ff7a89";
+    }
+    else
+    {
+        fetch('../api/v1/agendaMedico', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({day: day, from: from, to: to}),
+        })
+        .then((resp) => resp.json())
+        .then(function(data) {
+            console.log(data);
+        })
+        document.getElementById('add_slot_box').style.display='none';
+        loadCalendar();
+    }
 }
 
-function openremoveSlot(day, month, year)
+function viewSlot(day, month, year)
 {
     //carico da api gli slot di quel giorno
     document.getElementById("remove_slot_box").style.display="block";
