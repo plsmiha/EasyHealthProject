@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const Slot = require('../../models/slot');
-const Doc = require('../../models/doc');
 
-function getUser(req) //qui dentro ricevaero dal jwt l'id user, attesa token ascari
+function getUser(req)
 {
     return req.jwtData.id;
 }
-function getRole(req) //qui dentro ricevaero dal jwt l'id user, attesa token ascari
+function getRole(req)
 {
     return req.jwtData.role;
 }
