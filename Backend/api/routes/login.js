@@ -24,7 +24,6 @@ router.post('', async function(req, res) {
 
             if (user.verified && gen_hash == user.password) {
                 console.log("utente loggato " + process.env.JWT_KEY)
-                console.log(user._id.valueOf())
                 const token = jwt.sign({ id: user._id.valueOf(), role: user.type },  process.env.JWT_KEY);
                 res.cookie("access_token", token, { httpOnly: true, secure: true}).status(200).json( { redirectTo: user.type });
 
