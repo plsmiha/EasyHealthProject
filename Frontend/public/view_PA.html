@@ -1,0 +1,234 @@
+<head>
+    <title>Modifica Medico</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+    <style>
+        #logo{
+            position: absolute;
+            width: 300px;
+            height: 165.52px;
+            right: 28px;
+            top: 30px;
+        }
+        #title{
+            position: absolute;
+            width: 500px;
+            height: 49px;
+            left: 96px;
+            top: 113px;
+
+            font-family: 'Questrial', sans-serif;
+            font-variant: small-caps;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 48px;
+            line-height: 49px;
+
+            color: #D4001C;
+        }
+        #box{
+            box-sizing: border-box;
+
+            position: absolute;
+            width: auto;
+            height: 450px;
+            left: 100px;
+            right: 100px;
+            top: 230px;
+
+            background: #FFFFFF;
+            border: 2px solid #D4001C;
+            border-radius: 39px;
+        }
+        #l_Residenza{
+            position: absolute;
+            height: 49px;
+            left: 74px;
+            top: 41px;
+        }
+        #l_Email{
+            position: absolute;
+            height: 49px;
+            left: 74px;
+            top: 169px;
+        }
+
+        #l_Password{
+            position: absolute;
+            height: 49px;
+            left: 74px;
+            top: 297px;
+        }
+
+        #l_titoloMedico{
+            position: absolute;
+            height: 49px;
+            left: 74px;
+            top: 425px;
+        }
+
+        #Nome{
+            position: absolute;
+            height: 49px;
+            left: 74px;
+            top: 91px;
+            width: auto;
+            right: 74px;
+        }
+        #Sconto{
+            position: absolute;
+            height: 49px;
+            left: 74px;
+            top: 219px;
+            width: auto;
+            right: 74px;
+        }
+
+        #Error_email{
+            position: absolute;
+            left: 74px;
+            top: 256px;
+            font-size: 18px;
+        }
+        #Password{
+            position: absolute;
+            height: 49px;
+            left: 74px;
+            top: 347px;
+            width: auto;
+            right: 74px;
+        }
+
+        #Error_password{
+            position: absolute;
+            left: 74px;
+            top: 389px;
+            font-size: 18px;
+        }
+
+        #TitoloMedico{
+            position: absolute;
+            height: 49px;
+            left: 74px;
+            top: 475px;
+            width: auto;
+            right: 74px;
+        }
+
+
+
+
+
+        body{
+            background-image: url('img/background.png');
+        }
+        span{
+            font-family: 'Questrial', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 34px;
+            line-height: 49px;
+
+            color: #D4001C;
+        }
+        input, select{
+            font-family: 'Questrial', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 28px;
+            line-height: 49px;
+
+            position: absolute;
+            width: 1408px;
+            height: 57px;
+            left: 172px;
+            top: 326px;
+            border: 0px;
+
+            background: #C4C4C4;
+            border-radius: 15px;
+        }
+        input[type=submit]{
+            font-family: 'Questrial', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 28px;
+            line-height: 49px;
+            color: #FFFFFF;
+
+            position: absolute;
+            width: 248px;
+            height: 67px;
+
+            left: 400px;
+            top: 320px;
+
+            background: #D4001C;
+            border-radius: 15px;
+        }
+
+        input[type=button]{
+            font-family: 'Questrial', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 28px;
+            line-height: 49px;
+            color: #FFFFFF;
+
+            position: absolute;
+            width: 248px;
+            height: 67px;
+            left: 76px;
+            top: 320;
+
+            background: #D4001C;
+            border-radius: 15px;
+        }
+        #aree{
+            position: absolute;
+            height: 49px;
+            left: 74px;
+            top: 475px;
+            width: auto;
+            right: 74px;
+        }
+        /* Scrollbar styles */
+        ::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+            }
+
+            ::-webkit-scrollbar-thumb {
+            background: #d4001c;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+            background: #960011;
+            }
+
+
+    </style>
+
+
+
+</head>
+<body onload="loadData();">
+  <script src="scripts/modificaPA.js"></script>
+    <div id="title">Modifica PA</div>
+    <img src="img/Logo.png" id="logo"/>
+    <div  id="box">
+        <span id="l_Residenza">Nome</span>
+        <span id="l_Email">Sconto</span>
+
+        <form onsubmit="modificaPA();">
+            <input type="text" id="Nome" value="" required/>
+            <input type="text" id="Sconto" value="" required/>
+
+            <input type="submit" value="salva modifiche" id="btn_salva"/>
+            <input type="button" value="esci" id="btn_esci" onclick="abort();"/>
+        </form>
+    </div>
+    <div style="position: absolute;top:1000px">&nbsp</div>
+</body>
+</html>
