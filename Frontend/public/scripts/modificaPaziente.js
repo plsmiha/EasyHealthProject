@@ -6,8 +6,8 @@ function modificaDatiPaziente(){
     var password=document.getElementById("Password").value;
     var codePA=document.getElementById("CodPA").value;
 
-    fetch('../api/v1/editPaziente', {
-        method: 'POST',
+    fetch('../api/v1/Paziente', {
+        method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify( { email: email, residenza: residenza, password: password,  codePA: codePA } ),
     })
@@ -23,7 +23,7 @@ function modificaDatiPaziente(){
             if(data.error=='1'){
                 console.log('campo vuoto -wrong format')
             }else if(data.error=="3"){
-                
+
               console.log('email gia registrata');
               document.getElementById("Email").style.background = "#ff7a89";
               document.getElementById("Error_email").innerHTML = "l'email inserita è già associata ad un altro account";
@@ -31,12 +31,12 @@ function modificaDatiPaziente(){
             }
         }
     })
-    .catch( error => console.error(error) );  
+    .catch( error => console.error(error) );
 };
-  
+
 
   function loadData()
-{    
+{
     event.preventDefault();
     fetch('../api/v1/PA', {
         method: 'GET',
@@ -54,7 +54,7 @@ function modificaDatiPaziente(){
     })
 
     console.log('prendo i dati')
-    fetch('../api/v1/editPaziente', {
+    fetch('../api/v1/Paziente', {
         method: 'GET', //con il get mi arriva come risposta non solo lo statos ma anche i dati che chiedo
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(),
@@ -69,7 +69,7 @@ function modificaDatiPaziente(){
         elementemail.value = data['email'];
         var elementPA =  document.getElementById("CodPA");
         elementPA.value = data['codePA'];
-       
+
     })
 };
 
