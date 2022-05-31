@@ -15,6 +15,7 @@ const reset = require ('./routes/resetPassword.js')
 
 const editPaziente = require('./routes/editPaziente.js');
 const modifMedico = require('./routes/modificaMedico.js');
+const profileM = require('./routes/profiloM.js');
 
 const agendaMedico = require('./routes/agendaMedico.js');
 
@@ -31,6 +32,10 @@ app.use('/api/v2/signup', signup);
 app.use('/api/v1/verifyEmail', verify_email);
 app.use('/api/v1/PA', PA);
 app.use('/api/v1/resetPassword', reset)
+
+//__________________________________________________________
+app.use('/api/v1/profileM', profileM);
+app.use('/api/v1/editPaziente', editPaziente);
 
 app.use((req, res, next) => {
     result = check(req.cookies.access_token);
