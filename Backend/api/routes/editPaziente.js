@@ -18,11 +18,8 @@ router.get('', async function(req, res){ //do la risposta al fronted che mi ha c
 
     var _user = getUser(req);
     Patient.findOne({id_user:_user}).then(utente =>{
-        var _id = String(utente._id).split('"')[0];
-        console.log('get dati di '+_id);
-        Patient.findById({_id}).then(data =>{
-            res.status(200).json(data);
-        });
+        console.log(utente);
+        res.status(200).json(utente);
     });
 })
 
