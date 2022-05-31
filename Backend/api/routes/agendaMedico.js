@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Slot = require('../../models/slot');
+const Doc = require('../../models/doc');
 
 function getUser(req)
 {
@@ -110,7 +111,7 @@ router.delete('/:id', async function(req, res){
         res.status(404).json({success: 'false', reason: 'Not found', error: '1'});
         return;
     }
-    if(slot.occupied_id_pat!="")
+    if(slot.occupied_id_pat!=null)
     {
         res.status(400).json({success: 'false', reason: 'Slot occupied', error: '3'});
         return;
