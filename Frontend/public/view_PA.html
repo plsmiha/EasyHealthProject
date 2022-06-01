@@ -214,21 +214,21 @@
 
 </head>
 <body onload="loadData();">
-  <script src="scripts/modificaPA.js"></script>
     <div id="title">Modifica PA</div>
     <img src="img/Logo.png" id="logo"/>
     <div  id="box">
         <span id="l_Residenza">Nome</span>
         <span id="l_Email">Sconto</span>
 
-        <form onsubmit="modificaPA();">
+        <form>
             <input type="text" id="Nome" value="" required/>
-            <input type="text" id="Sconto" value="" required/>
+            <input type="number" id="Sconto" value="" required/>
 
-            <input type="submit" value="salva modifiche" id="btn_salva"/>
+            <input type="submit" value="salva modifiche" id="btn_salva" onclick="modificaPA()"/>
             <input type="button" value="esci" id="btn_esci" onclick="abort();"/>
         </form>
     </div>
+    <script src="scripts/modificaPA.js"></script>
     <div style="position: absolute;top:1000px">&nbsp</div>
 </body>
 </html>

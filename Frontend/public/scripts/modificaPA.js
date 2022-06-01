@@ -1,29 +1,74 @@
+var piani = {};
 function modificaPA(){
 
     var nome=document.getElementById("Nome").value;
     var sconto=document.getElementById("Sconto").value;
     var params = new URLSearchParams(location.search);
-    console.log(params.get('id'));
+    var id= params.get('id');
+    var butta = false;
 
+
+    for(var key in piani) {
+      var value = piani[key];
+
+      if(value == nome && key != id){
+        console.log('ESISTEGIA');
+        butta = true;
+        return;
+      }
+
+  }
+
+  if(butta != true)
+  {
+    console.log('AGGIORNO ');
+    fetch('../api/v1/PA', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify( { id:id,nome: nome, sconto: sconto } ),
+
+    })
+    .then((resp) => resp.json() )
+    .then(function(data) {
+
+
+          if(data.success != "true"){
+
+                window.alert('Errore:\n'+data.reason+'\nRiprovare.');
+                return;
+
+          }
+          else{
+            console.log('bonk');
+            window.location.href = "HP_AO.html";
+            return;
+          }
+
+    })
+    .catch( error => console.log(error) );
+
+  }
+
+return;
 };
 
 
 function loadData()
 {
+  event.preventDefault();
+
   var params = new URLSearchParams(location.search);
   var id=params.get('id');
   var edita= params.get('edit');
   if(edita == "false"){
     var btn_modifica = document.getElementById("btn_salva");
     btn_modifica.style.display = "None";
-
-
-    document.getElementById('Nome').readOnly = true
-    document.getElementById('Sconto').readOnly = true
+    document.getElementById('title').innerHTML = "Visualizza PA";
+    document.getElementById('Nome').readOnly = true;
+    document.getElementById('Sconto').readOnly = true;
 
   }
-  console.log(id);
-    event.preventDefault();
+
     fetch('../api/v1/PA', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -32,7 +77,8 @@ function loadData()
     .then((resp) => resp.json())
     .then(function(data) {
         data.forEach(el => {
-          console.log(el._id.toString());
+          piani[el._id] = el.name;
+
           if(el._id.toString() === id.toString()){
 
             var sconto_html = document.getElementById("Sconto");
@@ -44,7 +90,7 @@ function loadData()
         })
     })
 
-    console.log('prendo i dati')
+
 
 };
 
@@ -53,33 +99,3 @@ function abort(){ //se schiaccio exit non succederà niente, non verrà mandato 
       //window.location.href is not a method, it's a property that will tell you the current URL
       //location of the browser. Changing the value of the property will redirect the page.
 }
-
-function checkPassword()
-{
-    var password = document.getElementById("Password").value;
-    var err = document.getElementById("Error_password");
-    var pass = document.getElementById("Password");
-    if(password.length == 0){
-      err.innerHTML="";
-      pass.style.background = "#C4C4C4";
-      return true;
-    }
-    if(password.length<8)
-    {
-        err.innerHTML="La password deve contenere almeno 8 caratteri";
-        pass.style.background = "#ff7a89";
-        return false;
-    }
-    else if(!password.match(new RegExp("(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])")))
-    {
-        err.innerHTML="La password deve contenere almeno una lettera maiuscola, una lettera minuscola, un numero e un carattere speciale";
-        pass.style.background = "#ff7a89";
-        return false;
-    }
-    else
-    {
-        err.innerHTML="";
-        pass.style.background = "#a2ff96";
-        return true;
-    }
-};

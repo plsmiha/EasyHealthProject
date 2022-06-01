@@ -20,7 +20,7 @@ function loadData()//se la password non viene inserita resta uguale, se viene in
           .then((resp) => resp.json())
           .then(function(data) {
               data.forEach(e => {
-                console.log(e);
+                
                     vettore_pazienti.push([e.name.toString(),e.sconto.toString(),'']);
                     vettore_id.push(e._id.toString())
               })
