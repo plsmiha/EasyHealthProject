@@ -5,19 +5,29 @@ const user = require('../../models/user'); //uguale con user
 const crypto = require('crypto');
 router.get('', async function(req, res) //quando ricevo una richiesta get su /api/v1/modmed entro qui
 {
-  var _user = getUser(req);
+    var _user = getUser(req);
+    var data = await docs.findOne({id_user:_user});
+    res.status(200).json(data);
+});
 
-  docs.findOne({id_user:_user}).then(utente =>{
+router.get('/:id', async function(req, res){
+    var doc=req.params.id;
+    
+    if (!(doc.match(/^[0-9a-fA-F]{24}$/))) {
+        console.log(" ERRATO ID ");
+        res.status(403).json({success: 'false', reason: 'id not acceptable', error: '2'});
+        return;
+    }; 
 
-    var _id = String(utente._id).split('"')[0];
-
-      docs.findById({_id}).then(data =>{
-          res.status(200).json(data);
-      }); //recupera tutte le info dalla tabella docs cercando l'id e le ritorna
-
-      });
-})
-
+    var data = await docs.findById(doc).populate('title', 'name') ;
+    console.log(data);
+    if( data!=null){
+        res.status(200).json(data);
+        return;
+    }
+    res.status(404).json({success: 'false',comment:'medico non trovato', error: '1'});
+    
+});
 
 
 function getUser(req) //qui dentro ricevaero dal jwt l'id user, attesa token ascari

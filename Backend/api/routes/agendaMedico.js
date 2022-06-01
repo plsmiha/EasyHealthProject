@@ -4,13 +4,13 @@ const Slot = require('../../models/slot');
 
 function getUser(req) //qui dentro ricevaero dal jwt l'id user, attesa token ascari
 {
-    //return req.jwtData.id;
-    return '6283a725e782702e1e1e21fe';
+    return req.jwtData.id;
+    //return '6283a725e782702e1e1e21fe';
 }
 function getRole(req) //qui dentro ricevaero dal jwt l'id user, attesa token ascari
 {
-   // return req.jwtData.role;
-   return 'M';
+    return req.jwtData.role;
+   //return 'M';
 }
 
 router.post('', async function(req, res){
