@@ -56,7 +56,7 @@ function viewReferto(value)
         document.getElementById("comment_view").innerText = data.comment;
         pdf_file=data.pdf_file;
         pdf_file_name=data.title;
-        if(pdf_file[0].length!=0) 
+        if(pdf_file.length!=0) 
         {
             document.getElementById("pdf_view").style.visibility="visible";
             document.getElementById("l_pdf_view").style.visibility="visible";
@@ -88,7 +88,7 @@ async function addReferto()
 function downloadPDF()
 {
     console.log(pdf_file);
-    const url = pdf_file[0];
+    const url = pdf_file;
     const link = document.createElement('a');
     link.href = url;
     link.setAttribute('download', pdf_file_name+'.pdf');

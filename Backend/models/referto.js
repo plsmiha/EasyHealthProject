@@ -7,6 +7,6 @@ module.exports = mongoose.model('Referto', new Schema({
     doc_id:{ type: Schema.Types.ObjectId, ref: 'docs' },
     title: String,
     date: String,
-    pdf_file: Array,
+    pdf_file: String,
     comment: String
 }));

@@ -11,7 +11,8 @@ function getUser(req)
 
 router.get('', async function(req, res)
 {
-    var _doc = Doc.findOne({id_user: getUser(req)}, "_id")._id;
+    var _doc = await Doc.findOne({id_user: getUser(req)}, "_id");
+    _doc = _doc._id.valueOf();
     var _pat = req.query.patient;
 
     Referto.find({doc_id: _doc, patient_id: _pat}).then(ref =>{
@@ -36,7 +37,8 @@ router.post('', async function(req, res)
     {
         res.status(400).json({success: 'false', reason: 'Wrong format', error: '1'});
     }
-    var _doc = Doc.findOne({id_user: getUser(req)}, "_id")._id;
+    var _doc = await Doc.findOne({id_user: getUser(req)}, "_id");
+    _doc = _doc._id.valueOf();
     var date = (new Date()).getFullYear()+"-"+((new Date()).getMonth()+1)+"-"+(new Date()).getDate();
     var comment = typeof req.body.comment == 'undefined' ? '' : req.body.comment;
     var pdf = typeof req.body.pdf == 'undefined' ? '' : req.body.pdf;
