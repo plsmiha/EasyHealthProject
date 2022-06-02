@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const Doctor = require('../../models/doc');
-const Patient = require('../../models/doc'); 
+
 const Slot = require('../../models/slot');
 
 const d = new Date();
@@ -41,15 +40,18 @@ router.get('', async function(req, res){ //do la risposta al fronted che mi ha c
 
     var paziente = getPatient(req);
 
-    console.log('dentro a get');
-
     //prendo tutti gli appuntamenti di questo paziente
     var appuntamento = await Slot.find({occupied_id_pat: paziente}, "_id day from to id_doc ").populate('id_doc', ['name', 'surname']) ;
-    //console.log(appuntamento);
-    appuntamento.sort(custom_sort);
-    console.log(appuntamento);
+    
+    if(appuntamento.length!=0){
+        appuntamento.sort(custom_sort);
+        console.log(appuntamento);
 
-    res.status(200).json(appuntamento);   
+        res.status(200).json(appuntamento);   
+    }else{
+        res.status(404).json({success: 'false',comment:'nessun appuntamento trovato', error: '3'});
+    }
+    
 });
 
 
@@ -72,7 +74,7 @@ router.delete('/:slot', async function(req, res){
     }
 
     if(sl.occupied_id_pat==""){
-        res.status(400).json({success: 'false', reason: 'modifica non avvenuta', error: '3'});
+        res.status(304).json({success: 'false', reason: 'modifica non avvenuta', error: '3'});
         return;
     }
     

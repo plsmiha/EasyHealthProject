@@ -3,12 +3,10 @@ const anno = d.getFullYear();
 const mese= d.getMonth()+1;
 const giorno =d.getDate();
 const oggi =anno+"-"+mese+"-"+giorno;
+var body = document.getElementsByTagName('body')[0];
 
 
 function loadData(){    
-
-    console.log('prendo i dati')
-
 
     fetch('../api/v1/agendaPaziente', {
         method: 'GET', 
@@ -17,12 +15,24 @@ function loadData(){
     })
     .then((resp) => resp.json())
     .then(function(data) {
-        if(data!=null){
-            console.log(data);
+        //prendo gli id di tutti gli elementi delle info doctor
+        const dx =  document.getElementById("containerDx");
+        const sx = document.getElementById("containerSx");
+
+        if(data.success!=null){
+            if(data.error == 1){
+                console.log("unauthorized");
+                body.innerHTML="";
+                body.style.backgroundImage = 'url(../img/error.jpg)';
+
+            }else if(data.error==3){
+                console.log("nessun appuntamento trovato");
+                dx.innerHTML="*NON HAI ANCORA PRENOTATO NESSUN APPUNTAMENTO";
+              }  
+
+        }else{
         
-            //prendo gli id di tutti gli elementi delle info doctor
-            const dx =  document.getElementById("containerDx");
-            const sx = document.getElementById("containerSx");
+            //li setto a niente per ripulire la pagina senza doverla ricaricare
             dx.innerHTML="";
             sx.innerHTML="";
             
@@ -40,7 +50,7 @@ function loadData(){
 
                     const visita = document.createElement('div');
                     visita.classList.add('appuntamentoDx');
-                    visita.innerHTML ="<pre>"+noAnno(data[i])+"  alle  "+data[i].from+"-"+data[i].to+"<br>"+ "Dr  "+data[i].id_doc[0].name+" "+data[i].id_doc[0].surname+"</pre>";
+                    visita.innerHTML ="<pre>"+noAnno(data[i])+"  alle  "+data[i].from+"-"+data[i].to+"<br>"+ "Dr  "+data[i].id_doc['name']+" "+data[i].id_doc['surname']+"</pre>";
                     
                     const bottone = document.createElement('button');
                     bottone.classList.add('bottone');
@@ -54,10 +64,9 @@ function loadData(){
 
                 } else if(oggi==data[i].day){
 
-                    console.log(oggi+"  "+data.appuntamento[i].day);
                     const visita= document.createElement('div');
                     visita.classList.add('appuntamentoSx');
-                    visita.innerHTML ="<pre>"+noAnno(data[i])+"  alle  "+data[i].from+"-"+data[i].to+"<br>"+ "Dr  "+data[i].id_doc[0].name+" "+data[i].id_doc[0].surname+"</pre>";
+                    visita.innerHTML ="<pre>"+noAnno(data[i])+"  alle  "+data[i].from+"-"+data[i].to+"<br>"+ "Dr  "+data[i].id_doc['name']+" "+data[i].id_doc['surname']+"</pre>";
                     sx.appendChild(visita);
                 }
             }
@@ -85,11 +94,15 @@ function cancella(slot){
             loadData();
             //window.location.href = "calendar_P.html";
         }else{
-            if(data.error==""){
-                console.log("anauthorized")
+            if(data.error=="1"){
+                console.log("unauthorized");
+                body.innerHTML="";
+                body.style.backgroundImage = 'url(../img/error.jpg)';
             }else if(data.error=="2"){
                 console.log("gia eliminato/slot non tuo/slot di oggi");
-            }else if(data.error=="2"){
+                body.innerHTML="";
+                body.style.backgroundImage = 'url(../img/error.jpg)';
+            }else if(data.error=="3"){
                 console.log("prenotazione non cancellata");
             }
         }
