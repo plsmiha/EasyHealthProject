@@ -22,7 +22,7 @@ router.get('', async function(req, res){ //do la risposta al fronted che mi ha c
   console.log('dentro GET');
 
 //solo P puo vedere il calendario con gli slot liberi
-  if(getRole(req)!='P'){
+  if(getRole(req)!='P'||getRole(req)!='AO'){
     res.status(403).json({success: 'false', reason: 'Unauthorized', error: '1'});
     return;
   
@@ -76,7 +76,6 @@ router.get('', async function(req, res){ //do la risposta al fronted che mi ha c
                                      { $group: { "_id": "$day",  "giorni":{"$addToSet":{"_id":"$_id", "from":"$from", "to":"$to"}}}}]);
   
  //controllo se esistono slot
-  if(slots.length!=0 || slots!=null){
 
     //sorto i giorni
     (slots).sort(function(a, b){
@@ -96,9 +95,6 @@ router.get('', async function(req, res){ //do la risposta al fronted che mi ha c
 
     console.log(slots);
     res.status(200).json(slots);
-  }else{
-    res.status(404).json({success: 'false',comment:'slot non trovato', error: '3'});
-  }
     
 });
 
