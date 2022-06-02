@@ -24,50 +24,51 @@ function loadData(){
                 console.log("unauthorized");
                 body.innerHTML="";
                 body.style.backgroundImage = 'url(../img/error.jpg)';
-
-            }else if(data.error==3){
-                console.log("nessun appuntamento trovato");
-                dx.innerHTML="*NON HAI ANCORA PRENOTATO NESSUN APPUNTAMENTO";
-              }  
+            }
 
         }else{
         
             //li setto a niente per ripulire la pagina senza doverla ricaricare
             dx.innerHTML="";
             sx.innerHTML="";
+
+            if(data.length==0){
+                console.log("nessun appuntamento trovato");
+                dx.innerHTML="*NON HAI ANCORA PRENOTATO NESSUN APPUNTAMENTO";
+            }else{
             
-           
-            for (var i = 0; i < (data).length; i++) {
+                for (var i = 0; i < (data).length; i++) {
 
-                 const giorgio = new Date(data[i].day);
+                    const giorgio = new Date(data[i].day);
 
 
-                 if((giorgio-d)>0){ //faccio vedere solo da domani
-                    
-                    //creo un rettangolo rosso con dentro la data
-                    const el = document.createElement('div')
-                    el.classList.add('item');
+                    if((giorgio-d)>0){ //faccio vedere solo da domani
+                        
+                        //creo un rettangolo rosso con dentro la data
+                        const el = document.createElement('div')
+                        el.classList.add('item');
 
-                    const visita = document.createElement('div');
-                    visita.classList.add('appuntamentoDx');
-                    visita.innerHTML ="<pre>"+noAnno(data[i])+"  alle  "+data[i].from+"-"+data[i].to+"<br>"+ "Dr  "+data[i].id_doc['name']+" "+data[i].id_doc['surname']+"</pre>";
-                    
-                    const bottone = document.createElement('button');
-                    bottone.classList.add('bottone');
-                    bottone.innerHTML="elimina";
-                    bottone.value=data[i]._id;
-                    bottone.ondblclick= function() {  cancella(bottone.value); };
-        
-                    el.appendChild(visita);
-                    el.appendChild(bottone);
-                    dx.appendChild(el);
+                        const visita = document.createElement('div');
+                        visita.classList.add('appuntamentoDx');
+                        visita.innerHTML ="<pre>"+noAnno(data[i])+"  alle  "+data[i].from+"-"+data[i].to+"<br>"+ "Dr  "+data[i].id_doc['name']+" "+data[i].id_doc['surname']+"</pre>";
+                        
+                        const bottone = document.createElement('button');
+                        bottone.classList.add('bottone');
+                        bottone.innerHTML="elimina";
+                        bottone.value=data[i]._id;
+                        bottone.ondblclick= function() {  cancella(bottone.value); };
+            
+                        el.appendChild(visita);
+                        el.appendChild(bottone);
+                        dx.appendChild(el);
 
-                } else if(oggi==data[i].day){
+                    } else if(oggi==data[i].day){
 
-                    const visita= document.createElement('div');
-                    visita.classList.add('appuntamentoSx');
-                    visita.innerHTML ="<pre>"+noAnno(data[i])+"  alle  "+data[i].from+"-"+data[i].to+"<br>"+ "Dr  "+data[i].id_doc['name']+" "+data[i].id_doc['surname']+"</pre>";
-                    sx.appendChild(visita);
+                        const visita= document.createElement('div');
+                        visita.classList.add('appuntamentoSx');
+                        visita.innerHTML ="<pre>"+noAnno(data[i])+"  alle  "+data[i].from+"-"+data[i].to+"<br>"+ "Dr  "+data[i].id_doc['name']+" "+data[i].id_doc['surname']+"</pre>";
+                        sx.appendChild(visita);
+                    }
                 }
             }
         }
@@ -102,8 +103,6 @@ function cancella(slot){
                 console.log("gia eliminato/slot non tuo/slot di oggi");
                 body.innerHTML="";
                 body.style.backgroundImage = 'url(../img/error.jpg)';
-            }else if(data.error=="3"){
-                console.log("prenotazione non cancellata");
             }
         }
     })
