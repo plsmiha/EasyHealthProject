@@ -17,6 +17,28 @@
                 right: 100px;
                 top: 30px;
             }
+            #addbutton{
+
+                position: absolute;
+                width: 45px;
+
+                color: #d4001c;
+
+                right: 0px;
+                top: 293px;
+
+            }
+            #goback{
+
+                position: absolute;
+                width: 45px;
+
+                color: #d4001c;
+
+                left: 20px;
+                top: 20px;
+
+            }
             .btn{
               background-color: #D4001c;
 border: none;
@@ -360,10 +382,12 @@ cursor: pointer;
         </style>
     </head>
     <body onload="loadData();">
-        <div id="title">Visualizzazione  medici</div>
+        <div id="title">Visualizzazione medici</div>
         <a href="/"><img src="img/Logo.png" id="logo"/></a>
         <div  id="box">
             <div id="l_cercamedico">Cerca medici</div>
+            <i id='addbutton' class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
+            <i id='goback' onclick="window.location.href='HP_AO.html'" class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>
 
 
             <div id="l_dashboard">Dashboard</div>

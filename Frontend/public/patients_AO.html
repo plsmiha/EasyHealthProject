@@ -293,6 +293,29 @@ cursor: pointer;
   overflow:auto;
             }
 
+            #addbutton{
+
+                position: absolute;
+                width: 45px;
+
+                color: #d4001c;
+
+                right: 0px;
+                top: 293px;
+
+            }
+            #goback{
+
+                position: absolute;
+                width: 45px;
+
+                color: #d4001c;
+
+                left: 20px;
+                top: 20px;
+
+            }
+
             #listone tr:nth-child(even){font-size: 25px;}
             #listone tr:nth-child(odd){background-color: #ffdbdc; font-size: 25px;}
 
@@ -357,6 +380,7 @@ cursor: pointer;
 
 
 
+
         </style>
     </head>
     <body onload="loadData();">
@@ -364,6 +388,8 @@ cursor: pointer;
         <a href="/"><img src="img/Logo.png" id="logo"/></a>
         <div  id="box">
             <div id="l_cercamedico">Cerca pazienti</div>
+            <i id='addbutton' class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
+            <i id='goback' onclick="window.location.href='HP_AO.html'" class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>
 
 
             <div id="l_dashboard">Dashboard</div>
