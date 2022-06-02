@@ -152,3 +152,25 @@ function createTable(vettore_pazienti) {
     dvTable.innerHTML = "";
     dvTable.appendChild(table);
 }
+
+
+function eliminaPADaAO() {
+    event.preventDefault();
+    var params = new URLSearchParams(location.search);
+    var id= params.get('id');
+  if (confirm("Eliminare il paziente selezionato?")) {
+    fetch('../api/v1/PA', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify( { id:id} ),
+    })
+    .then((resp) => resp.json())
+    .then(function(data) {
+      console.log("PA eliminato")
+      console.log(data)
+      window.location.href = "pas_AO.html";
+    }).catch( error => console.error(error) );
+  } else {
+    window.alert("Eliminazione annullata");
+  }
+}

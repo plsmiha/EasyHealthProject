@@ -94,6 +94,8 @@ function loadData()
 
 };
 
+
+
 function abort(){ //se schiaccio exit non succederà niente, non verrà mandato nessun post, niente backend solo reindirizzamento
     window.location.href = "pas_AO.html";
       //window.location.href is not a method, it's a property that will tell you the current URL
