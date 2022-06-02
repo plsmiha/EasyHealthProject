@@ -1,0 +1,646 @@
+FORMAT: 1A
+HOST: https://easyhealth22.herokuapp.com/
+
+# EasyHealth+
+
+API per usare la piattaforma EasyHealth+, progetto di Ingegneria del Software UniTN 2022
+
+## Registrazione [/api/v1/signup]
+
+### Registrazione di un nuovo paziente [POST]
+
+Crea un nuovo utente che può accedere alla piattaforma. Poi potrà eseguire tutte le operazioni che gli sono concesse in qualità di paziente.
+
++ Request (application/json)
+
+    + Attributes
+        - email (string, required) - Email del paziente
+        - password (string, required) - Password scelta dal paziente
+        - nome (string, required) - Nome del paziente
+        - cognome (string, required) - Cognome del paziente
+        - residenza (string, required) - Indirizzo del paziente
+        - CF (string, required) - Codice Fiscale del paziente
+        - CodPA (string, required) - Codice del Piano Assicurativo del paziente
+
++ Response 200
+
+    Utente creato
+    
+    + Body
+
+            {
+                "success": "true"
+            }
+
++ Response 400
+    
+    Ritornato se la richiesta è in un formato errato: mancano uno o più parametri.
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "Wrong format",
+                "error": "1"
+            }
+
++ Response 406
+    
+    Ritornato se l'utente esiste già: errore 2 per CF già esistente, errore 3 per email esistente.
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "",
+                "error": ""
+            }
+
+## Verifica email [/api/v1/verify_email{?id}]
+
+### Verifica l'email di un utente appena creato [GET]
+
+Verifica l'email di un utente appena creato conoscendo il suo id.
+
++ Parameters
+
+    + id - Id utente
+        
++ Response 200
+    
+    + Headers            
+        
+                Location: /
+                
++ Response 400
+    Id mancante
+    
+    + Body            
+        
+                {
+                    "error": "Bad Request"
+                }
+                
+ 
+             
+## Login [/api/v1/login]
+
+### Effettua il login [POST]
+
+Fornendo le credenziali utente (email e passwork), si ottiene il token JWT necessario ad usufruire dei servizi autenticati della piattaforma.
++ Cookies
+    + access_token
+
++ Request (application/json)
+
+    + Attributes
+        - email (string, required) - Email del medico
+        - password (string, required) - Nuova password del medico
+
+
++ Response 200
+
+    Login effettuato correttamente
+    
+    + Body
+
+            {
+                "redirectTo": "P"
+            }
+
++ Response 403
+    
+    Credenziali invalide
+    
+    + Body
+
+            {
+                "error": "Unauthorized"
+            }
+
++ Response 400
+    
+    Bad request, email o password mancanti
+    
+    + Body
+
+            {
+                "error": "Bad request"
+            }
+                
+                
+## Logout [/api/v1/logout]
+
+### Effettua il logout [POST]
+
+Effettuando il logout si eliminano i cookies dal browser rendendo necessario ri autenticarsi
++ Cookies
+    + access_token
+
++ Request (application/json)
+
+    + Attributes
+
+
++ Response 200
+
+    Logout effettuato correttamente e cookies eliminati.
+    
+    + Body
+
+            {
+                "success": "true"
+            }
+
+
+                                
+                
+## UpdateDoc [/api/v1/editMedico]
+
+### Ottiene le DoctorInfo [GET]
+
+Richiede al database l'indirizzo, l'email e l'area di competenza del dottore attualmente loggato
++ Cookies
+    + access_token
+
++ Response 200
+
+    Query a buon fine
+    
+    + Body
+
+            {
+                "address" : @address,
+                "email": @email,
+                "title": @areaDiCompetenza
+            }
+
+
+            
+
+### Aggiorna le DoctorInfo [POST]
+
+Aggiorna il database con le nuove info relative al medico.
+
++ Request (application/json)
+
+    + Attributes
+        - email (string, required) - Email del medico
+        - password (string, optional) - Nuova password del medico
+        - address (string, required) - Indirizzo del medico
+        - title (string, required) - Area di competenza del medico
+
+
++ Response 200
+
+    Dati aggiornati
+    
+    + Body
+
+            {
+                "success": "true"
+                "comment": ""
+            }
+
++ Response 506
+    
+    Email gia utilizzata da altro utente.
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "Email gia usata",
+                "error": "1"
+            }
+            
++ Response 500
+    
+    Errore correlato alla connessione con il database. 
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "DB connection",
+                "error": "3"
+            }
+            
+            
+            
+
+
+## UpdatePaziente [/api/v1/editPaziente]
+
+### Ottiene le PatientInfo [GET]
+
+Richiede al database l'indirizzo, l'email e codicePianoAssicurativo del paziente attualmente loggato.
++ Cookies
+    + jwtData.id
+
++ Response 200
+
+    Query a buon fine
+    
+    + Body
+
+            {
+                "residenza" : @address,
+                "email": @email,
+                "codePA": @codePA
+            }
+
+
+            
+
+### Aggiorna le PatientInfo [POST]
+
+Aggiorna il database con le nuove info relative al paziente.
+
++ Request (application/json)
+
+    + Attributes
+        - email (string, required) - Email del paziente
+        - password (string, optional) - Nuova password del paziente
+        - residenza (string, required) - Indirizzo del paziente
+        - codePA (string, required) - codice piano assicurativo
+
+
++ Response 200
+
+    Dati aggiornati
+    
+    + Body
+
+            {
+                "success": "true"
+                "comment": "paziente modificato"
+            }
+
++ Response 400
+    
+    Errore nella formattazione dei campi.
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "Wrong format",
+                "error": "1"
+            }
+            
+            
+
++ Response 403
+    
+    Email gia utilizzata da un altro utente.
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "email gia registrata",
+                "error": "3"
+            }
+            
+
+
+## Reset Password [/api/v1/resetPassword]   
+
+### Reset Password [POST]
+
+Genera una password casuale, la invia all'utente tramite mail e parallelamente la salva come nuova password 
+collegata all'email dell'utente permettendogli di accedere di nuovo.
+
++ Request (application/json)
+
+    + Attributes
+        - email (string, required) - Email dell'utente
+
+
++ Response 200
+
+    Password inserita e inviata
+    
+    + Body
+
+            {
+                "success": "true"
+                "comment": "password temporanea modificata"
+            }
+
++ Response 400
+    
+    Errore nella formattazione campo email.
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "Wrong format",
+                "error": "1"
+            }
+            
++ Response 404
+    
+    Email non presente nel database.
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "email non registrata",
+                "error": "2"
+            }
+            
+            
++ Response 406
+    
+    Errore correlato alla connesione con il database.
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "db",
+                "error": "3"
+            }
+            
+            
+## Agenda Medico [/api/v1/agendaMedico]   
+
+### Ottieni Slot Mese [GET /api/v1/agendaMedico{?year}{?month}]
+
+Restituisce gli slot di un medico di un determinato mese.
+
++ Cookies
+    + access_token
+    
++ Parameters
+
+    + year - anno slot
+    + month - mese slot
+
+
++ Response 200
+
+    Successo: restituisce gli id e i giorni degli slot
+    
+    + Body
+
+            [
+                {
+                    "_id": @id, 
+                    "day": @day
+                },
+                ...
+            ]
+
+
++ Response 403
+
+    L'utente non ha il ruolo del medico, quindi non può usare questa API
+    
+    + Body
+            
+            {
+                "error": "Unauthorized"
+            }
+
++ Response 400
+
+    Parametri month o year non settati
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "Wrong format",
+                "error": "1"
+            }
+
+### Ottieni Slot Giorno [GET /api/v1/agendaMedico{?year}{?month}{?day}]
+
+Restituisce gli slot di un medico di un determinato mese.
+
++ Cookies
+    + access_token
+    
++ Parameters
+
+    + year - anno slot
+    + month - mese slot
+    + day - giorno slot
+
+
++ Response 200
+
+    Successo: restituisce gli id degli slot
+    
+    + Body
+
+            [
+                {
+                    "_id": @id
+                },
+                ...
+            ]
+
+
++ Response 403
+
+    L'utente non ha il ruolo del medico, quindi non può usare questa API
+    
+    + Body
+            
+            {
+                "success": "false", 
+                "reason": "Unauthorized",
+                "error": "2"
+            }
+
++ Response 400
+
+    Parametri month o year non settati
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "Wrong format",
+                "error": "1"
+            }
+
+### Ottieni Info Slot [GET /api/v1/agendaMedico/{id}]
+
+Restituisce le info di un determinato slot.
+
++ Cookies
+    + access_token
+    
++ Parameters
+
+    + id - id dello slot
+
+
++ Response 200
+
+    Successo: restituisce le info dello slot
+    
+    + Body
+
+            {
+                _id: @id
+                id_doc: @id_doc,
+                day: @day,
+                from: @from_time,
+                to: @to_time,
+                occupied_id_pat: @id_patient_prenotato
+            }
+
++ Response 403
+
+    L'utente non ha il ruolo del medico, quindi non può usare questa API
+    
+    + Body
+            
+            {
+                "success": "false", 
+                "reason": "Unauthorized",
+                "error": "2"
+            }
+
+
++ Response 404
+
+    Slot non esistente
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "Not found",
+                "error": "1"
+            }
+            
+            
+### Aggiungi Slot [POST]
+
+Aggiunge uno slot alla data e orario indicato
+
++ Cookies
+    + access_token
+    
++ Request
+
+    + Attributes
+        - day (string, required) - Data dello slot formattata in yyyy-m-d
+        - from (string, required) - Orario di inizio formattato in h:m
+        - to (string, required) - Orario di fine formattato in h:m
+
+
++ Response 200
+
+    Slot creato con successo
+    
+    + Body
+
+            {
+                "success": "true"
+            }
+
++ Response 403
+
+    L'utente non ha il ruolo del medico, quindi non può usare questa API
+    
+    + Body
+            
+            {
+                "success": "false", 
+                "reason": "Unauthorized",
+                "error": "2"
+            }
+
+
++ Response 400
+
+    Uno o più attributi non definiti
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "Wrong format",
+                "error": "1"
+            }
+            
++ Response 400
+
+    Data o ore non corrette (non rispettano sequenzialità o sono passate)
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "Incorrect date or time",
+                "error": "3"
+            }
+
+### Rimuovi Slot [DELETE /api/v1/agendaMedico/{id}]
+
+Rimuove uno slot
+
++ Cookies
+    + access_token
+    
++ Parameters
+
+    + id - id dello slot
+
+
++ Response 200
+
+    Successo: slot rimosso
+    
+    + Body
+
+            {
+                "success": "true"
+            }
+
++ Response 403
+
+    L'utente non ha il ruolo del medico, quindi non può usare questa API
+    
+    + Body
+            
+            {
+                "success": "false", 
+                "reason": "Unauthorized",
+                "error": "2"
+            }
+
+
++ Response 404
+
+    Slot non esistente
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "Not found",
+                "error": "1"
+            }
+
++ Response 400
+
+    Slot occupato: impossibile rimuoverlo
+    
+    + Body
+            
+            {
+                "success": "false",
+                "reason": "Slot occupied",
+                "error": "3"
+            }
