@@ -119,25 +119,25 @@
             }
             #nextmonth{
                 position: absolute;
-                width: 0; 
-                height: 0; 
+                width: 0;
+                height: 0;
                 right: 60px;
                 top: 20px;
                 border-top: 17px solid transparent;
                 border-bottom: 17px solid transparent;
-                
+
                 border-left: 40px solid #D4001C;
                 cursor: pointer;
             }
             #prevmonth{
                 position: absolute;
-                width: 0; 
-                height: 0; 
+                width: 0;
+                height: 0;
                 right: 120px;
                 top: 20px;
                 border-top: 17px solid transparent;
                 border-bottom: 17px solid transparent;
-                
+
                 border-right: 40px solid #CCCCCC;
                 cursor: pointer;
             }
@@ -369,9 +369,7 @@
                 border: 2px solid #000000;
                 border-radius: 39px;
                 box-shadow: 0px 0px 25px 3px rgba(0,0,0,0.5);
-                visibility: hidden;
-                transition: visibility 0.3s, opacity 0.3s;
-                opacity: 0;
+                display:none;
             }
             #l_from{
                 position: absolute;
@@ -488,9 +486,7 @@
                 border: 2px solid #000000;
                 border-radius: 39px;
                 box-shadow: 0px 0px 25px 3px rgba(0,0,0,0.5);
-                visibility: hidden;
-                transition: visibility 0.3s, opacity 0.3s;
-                opacity: 0;
+                display:none;
             }
             #exit_removeslotbox{
                 position: absolute;
@@ -617,10 +613,10 @@
             <input type="time" id="from_time" min="07:00" max="23:00" value="07:00"/>
             <input type="time" id="to_time" min="07:00" max="23:00" value="08:00"/>
             <input type="button" id="addslot" value="Aggiungi slot" onclick="addSlot();"/>
-            <input type="button" id="exit_addslotbox" value="Annulla" onclick="document.getElementById('add_slot_box').style.opacity=0; document.getElementById('add_slot_box').style.visibility='hidden';"/>
+            <input type="button" id="exit_addslotbox" value="Annulla" onclick="document.getElementById('add_slot_box').style.display='none';"/>
         </div>
         <div id="remove_slot_box">
-            <input type="button" id="exit_removeslotbox" value="Esci" onclick="document.getElementById('remove_slot_box').style.opacity=0; document.getElementById('remove_slot_box').style.visibility='hidden';"/>
+            <input type="button" id="exit_removeslotbox" value="Esci" onclick="document.getElementById('remove_slot_box').style.display='none';"/>
             <table id="slots">
             </table>
         </div>

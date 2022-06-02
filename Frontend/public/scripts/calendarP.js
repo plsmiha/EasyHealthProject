@@ -3,115 +3,113 @@ const anno = d.getFullYear();
 const mese= d.getMonth()+1;
 const giorno =d.getDate();
 const oggi =anno+"-"+mese+"-"+giorno;
-var body = document.getElementsByTagName('body')[0];
 
 
-function loadData(){    
+function loadData(){
 
-    fetch('../api/v1/agendaPaziente', {
-        method: 'GET', 
+    console.log('prendo i dati')
+
+
+    fetch('../api/v1/calendarP', {
+        method: 'GET',
         headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
+       // credentials: 'include',
     })
     .then((resp) => resp.json())
     .then(function(data) {
-        //prendo gli id di tutti gli elementi delle info doctor
-        const dx =  document.getElementById("containerDx");
-        const sx = document.getElementById("containerSx");
+        if(data!=null){
 
-        if(data.success!=null){
-            if(data.error == 1){
-                console.log("unauthorized");
-                body.innerHTML="";
-                body.style.backgroundImage = 'url(../img/error.jpg)';
+                //prendo gli id di tutti gli elementi delle info doctor
+            const dx =  document.getElementById("containerDx");
+            const sx = document.getElementById("containerSx");
 
-            }else if(data.error==3){
-                console.log("nessun appuntamento trovato");
-                dx.innerHTML="*NON HAI ANCORA PRENOTATO NESSUN APPUNTAMENTO";
-              }  
 
-        }else{
-        
-            //li setto a niente per ripulire la pagina senza doverla ricaricare
-            dx.innerHTML="";
-            sx.innerHTML="";
-            
-           
-            for (var i = 0; i < (data).length; i++) {
+            for (var i = 0; i < (data.appuntamento).length; i++) {
 
-                 const giorgio = new Date(data[i].day);
+                 const giorgio = new Date(data.appuntamento[i].day);
 
 
                  if((giorgio-d)>0){ //faccio vedere solo da domani
-                    
+
                     //creo un rettangolo rosso con dentro la data
                     const el = document.createElement('div')
                     el.classList.add('item');
 
                     const visita = document.createElement('div');
                     visita.classList.add('appuntamentoDx');
-                    visita.innerHTML ="<pre>"+noAnno(data[i])+"  alle  "+data[i].from+"-"+data[i].to+"<br>"+ "Dr  "+data[i].id_doc['name']+" "+data[i].id_doc['surname']+"</pre>";
-                    
+                    visita.innerHTML ="<pre>"+noAnno(data.appuntamento[i])+"  alle  "+data.appuntamento[i].from+"-"+data.appuntamento[i].to+"<br>"+ "Dr  "+nominativo(data.jsonArr[i])+"</pre>";
+
                     const bottone = document.createElement('button');
                     bottone.classList.add('bottone');
                     bottone.innerHTML="elimina";
-                    bottone.value=data[i]._id;
+                    bottone.value=data.appuntamento[i]._id;
                     bottone.ondblclick= function() {  cancella(bottone.value); };
-        
+
                     el.appendChild(visita);
                     el.appendChild(bottone);
                     dx.appendChild(el);
 
-                } else if(oggi==data[i].day){
+                } else if(oggi==data.appuntamento[i].day){
 
+                    console.log(oggi+"  "+data.appuntamento[i].day);
                     const visita= document.createElement('div');
                     visita.classList.add('appuntamentoSx');
-                    visita.innerHTML ="<pre>"+noAnno(data[i])+"  alle  "+data[i].from+"-"+data[i].to+"<br>"+ "Dr  "+data[i].id_doc['name']+" "+data[i].id_doc['surname']+"</pre>";
+                    visita.innerHTML ="<pre>"+noAnno(data.appuntamento[i])+"  alle  "+data.appuntamento[i].from+"-"+data.appuntamento[i].to+"<br>"+ "Dr  "+nominativo(data.jsonArr[i])+"</pre>";
                     sx.appendChild(visita);
                 }
             }
+        }else{
+            //DA IMPLEMENTARE
+            console.log('intanto boh');
         }
     })
      .catch( error => console.error(error) );
-    
+
 };
 
+function stampa(n){
+    var disperazione=0;
+    disperazione++;
+    console.log("ma chi ti ha detto niente"+n);
+}
 
 
 function cancella(slot){
 
     console.log("elimino appuntamento "+slot);
 
-    fetch('../api/v1/agendaPaziente/'+slot, {
+    fetch('../api/v1/calendarP/'+slot, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
-        credentials: 'include'
+        //credentials: 'include'
     })
     .then((resp) => resp.json())
     .then(function(data) {
-        if(data.success=="true"){
+        if(data.success=="true")
+        {
             console.log("eliminato");
             loadData();
-            //window.location.href = "calendar_P.html";
-        }else{
-            if(data.error=="1"){
-                console.log("unauthorized");
-                body.innerHTML="";
-                body.style.backgroundImage = 'url(../img/error.jpg)';
-            }else if(data.error=="2"){
-                console.log("gia eliminato/slot non tuo/slot di oggi");
-                body.innerHTML="";
-                body.style.backgroundImage = 'url(../img/error.jpg)';
-            }else if(data.error=="3"){
-                console.log("prenotazione non cancellata");
-            }
+            window.location.href = "calendar_P.html";
+        }
+        else
+        {
+            //DA IMPLEMENTARE
+            console.log('intanto boh');
         }
     })
      .catch( error => console.error(error) );
   
 }
 
-
+function nominativo(nomi){
+    //ricavo nome di quel medico
+    var n=nomi[0].name+ " "+nomi[0].surname;
+    const arr = n.split(" ");
+    for (var i = 0; i < arr.length; i++) {
+        arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+    }
+    return arr.join("  ");
+}
 function noAnno(appuntamento){
     scritta=appuntamento.day.toString();
     let a = scritta.split("-");

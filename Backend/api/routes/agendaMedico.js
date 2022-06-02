@@ -112,7 +112,7 @@ router.delete('/:id', async function(req, res){
         res.status(400).json({success: 'false', reason: 'Slot occupied', error: '3'});
         return;
     }
-    
+
     await Slot.deleteOne(slot);
     res.status(200).json({success: "true"});
 });

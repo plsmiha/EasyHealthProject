@@ -22,7 +22,7 @@ const profileM = require('./routes/profiloM.js');
 const agendaMedico = require('./routes/agendaMedico.js');
 
 const editPazienteDaAO = require('./routes/editPazienteDaAO.js');
-
+const visita = require('./routes/prenotazione.js');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors())
@@ -45,6 +45,10 @@ app.use('/api/v1/resetPassword', reset);
 app.use('/api/v1/patient', patient);
 app.use('/api/v1/medic', doc);
 
+//__________________________________________________________
+
+
+
 app.use((req, res, next) => {
     result = check(req.cookies.access_token);
     if (result != undefined) {
@@ -55,6 +59,14 @@ app.use((req, res, next) => {
     }
 });
 
+
+
+app.use('/api/v1/Medico', modifMedico);
+
+
+app.use('/api/v1/editPaziente', editPaziente);
+app.use('/api/v1/agendaMedico', agendaMedico);
+app.use('/api/v1/prenotazione', visita);
 app.use('/api/v1/Paziente', editPaziente);
 app.use('/api/v1/Medico', modifMedico);
 

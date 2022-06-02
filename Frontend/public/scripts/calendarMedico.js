@@ -47,7 +47,7 @@ async function loadCalendar()
             }
             else
             {
-                
+
                 s+=("0" + index_day).slice(-2)+" ";
                 let number = data.filter(function(value) { return value.day === d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate() }).length;
                 document.getElementById(boxes[(caselle/5)|0][caselle%5]).innerHTML = ((number==0)?'':('<div id="slots_number">'+number+' slot</div>'))+'<div id="number">'+d.getDate()+'</div><div id="lens" onclick="viewSlot('+d.getDate()+','+d.getMonth()+','+d.getFullYear()+');"></div><div id="plus" onclick="openSlot('+d.getDate()+','+d.getMonth()+','+d.getFullYear()+');"></div>';
@@ -69,7 +69,7 @@ async function loadCalendar()
 
     console.log(s);
 }
-function getDay(date) 
+function getDay(date)
 {
     let day = date.getDay();
     if (day == 6) day = 0;
@@ -94,7 +94,7 @@ function nextMonth()
     }
     else
         month++;
-    
+
     document.getElementById("prevmonth").style.borderRightColor = "#D4001C";
     loadCalendar();
 }
@@ -122,8 +122,7 @@ function openSlot(day, month, year)
     daySelected=day;
     monthSelected=month;
     yearSelected=year;
-    document.getElementById("add_slot_box").style.visibility="visible";
-    document.getElementById("add_slot_box").style.opacity=1;
+    document.getElementById("add_slot_box").style.display="block";
 }
 
 async function addSlot()
@@ -176,7 +175,7 @@ async function viewSlot(day, month, year)
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include'
         }).then(response => response.json());
-        
+
         var tr = document.createElement("tr");
 
         var td1 = document.createElement("td");
@@ -190,7 +189,7 @@ async function viewSlot(day, month, year)
         var td3 = document.createElement("td");
         td3.innerText = (data.occupied_id_pat==""?"NO":"SI");
         tr.appendChild(td3);
-        
+
         var rem = document.createElement("td");
         if(data.occupied_id_pat=="")
         {
@@ -203,8 +202,7 @@ async function viewSlot(day, month, year)
     });
 
 
-    document.getElementById("remove_slot_box").style.visibility="visible";
-    document.getElementById("remove_slot_box").style.opacity=1;
+    document.getElementById("remove_slot_box").style.display="block";
 }
 
 async function removeSlot(id)
