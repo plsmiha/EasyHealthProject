@@ -19,43 +19,56 @@ function loadData(){
     .then(function(data) {
         if(data!=null){
 
-                //prendo gli id di tutti gli elementi delle info doctor
-            const dx =  document.getElementById("containerDx");
-            const sx = document.getElementById("containerSx");
+        if(data.success!=null){
+            if(data.error == 1){
+                console.log("unauthorized");
+                body.innerHTML="";
+                body.style.backgroundImage = 'url(../img/error.jpg)';
+            }
+
+        }else{
+
+            //li setto a niente per ripulire la pagina senza doverla ricaricare
+            dx.innerHTML="";
+            sx.innerHTML="";
+
+            if(data.length==0){
+                console.log("nessun appuntamento trovato");
+                dx.innerHTML="*NON HAI ANCORA PRENOTATO NESSUN APPUNTAMENTO";
+            }else{
+
+                for (var i = 0; i < (data).length; i++) {
+
+                    const giorgio = new Date(data[i].day);
 
 
-            for (var i = 0; i < (data.appuntamento).length; i++) {
+                    if((giorgio-d)>0){ //faccio vedere solo da domani
 
-                 const giorgio = new Date(data.appuntamento[i].day);
+                        //creo un rettangolo rosso con dentro la data
+                        const el = document.createElement('div')
+                        el.classList.add('item');
 
+                        const visita = document.createElement('div');
+                        visita.classList.add('appuntamentoDx');
+                        visita.innerHTML ="<pre>"+noAnno(data[i])+"  alle  "+data[i].from+"-"+data[i].to+"<br>"+ "Dr  "+data[i].id_doc['name']+" "+data[i].id_doc['surname']+"</pre>";
 
-                 if((giorgio-d)>0){ //faccio vedere solo da domani
+                        const bottone = document.createElement('button');
+                        bottone.classList.add('bottone');
+                        bottone.innerHTML="elimina";
+                        bottone.value=data[i]._id;
+                        bottone.ondblclick= function() {  cancella(bottone.value); };
 
-                    //creo un rettangolo rosso con dentro la data
-                    const el = document.createElement('div')
-                    el.classList.add('item');
+                        el.appendChild(visita);
+                        el.appendChild(bottone);
+                        dx.appendChild(el);
 
-                    const visita = document.createElement('div');
-                    visita.classList.add('appuntamentoDx');
-                    visita.innerHTML ="<pre>"+noAnno(data.appuntamento[i])+"  alle  "+data.appuntamento[i].from+"-"+data.appuntamento[i].to+"<br>"+ "Dr  "+nominativo(data.jsonArr[i])+"</pre>";
+                    } else if(oggi==data[i].day){
 
-                    const bottone = document.createElement('button');
-                    bottone.classList.add('bottone');
-                    bottone.innerHTML="elimina";
-                    bottone.value=data.appuntamento[i]._id;
-                    bottone.ondblclick= function() {  cancella(bottone.value); };
-
-                    el.appendChild(visita);
-                    el.appendChild(bottone);
-                    dx.appendChild(el);
-
-                } else if(oggi==data.appuntamento[i].day){
-
-                    console.log(oggi+"  "+data.appuntamento[i].day);
-                    const visita= document.createElement('div');
-                    visita.classList.add('appuntamentoSx');
-                    visita.innerHTML ="<pre>"+noAnno(data.appuntamento[i])+"  alle  "+data.appuntamento[i].from+"-"+data.appuntamento[i].to+"<br>"+ "Dr  "+nominativo(data.jsonArr[i])+"</pre>";
-                    sx.appendChild(visita);
+                        const visita= document.createElement('div');
+                        visita.classList.add('appuntamentoSx');
+                        visita.innerHTML ="<pre>"+noAnno(data[i])+"  alle  "+data[i].from+"-"+data[i].to+"<br>"+ "Dr  "+data[i].id_doc['name']+" "+data[i].id_doc['surname']+"</pre>";
+                        sx.appendChild(visita);
+                    }
                 }
             }
         }else{
@@ -89,16 +102,21 @@ function cancella(slot){
         {
             console.log("eliminato");
             loadData();
-            window.location.href = "calendar_P.html";
-        }
-        else
-        {
-            //DA IMPLEMENTARE
-            console.log('intanto boh');
+            //window.location.href = "calendar_P.html";
+        }else{
+            if(data.error=="1"){
+                console.log("unauthorized");
+                body.innerHTML="";
+                body.style.backgroundImage = 'url(../img/error.jpg)';
+            }else if(data.error=="2"){
+                console.log("gia eliminato/slot non tuo/slot di oggi");
+                body.innerHTML="";
+                body.style.backgroundImage = 'url(../img/error.jpg)';
+            }
         }
     })
      .catch( error => console.error(error) );
-  
+
 }
 
 function nominativo(nomi){

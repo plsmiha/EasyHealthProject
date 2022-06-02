@@ -43,14 +43,11 @@ router.get('', async function(req, res){ //do la risposta al fronted che mi ha c
     //prendo tutti gli appuntamenti di questo paziente
     var appuntamento = await Slot.find({occupied_id_pat: paziente}, "_id day from to id_doc ").populate('id_doc', ['name', 'surname']) ;
     
-    if(appuntamento.length!=0){
+   
         appuntamento.sort(custom_sort);
         console.log(appuntamento);
 
         res.status(200).json(appuntamento);   
-    }else{
-        res.status(404).json({success: 'false',comment:'nessun appuntamento trovato', error: '3'});
-    }
     
 });
 
@@ -69,12 +66,7 @@ router.delete('/:slot', async function(req, res){
     //.where("day").ne(oggi).where("occupied_id_pat", getPatient());
     
     if(!sl){
-        res.status(404).json({success: 'false', reason: 'gia eliminato/slot non tuo/slot di oggi', error: '2'});
-        return;
-    }
-
-    if(sl.occupied_id_pat==""){
-        res.status(304).json({success: 'false', reason: 'modifica non avvenuta', error: '3'});
+        res.status(403).json({success: 'false', reason: 'gia eliminato/slot non tuo/slot di oggi', error: '2'});
         return;
     }
     
