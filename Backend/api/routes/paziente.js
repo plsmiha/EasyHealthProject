@@ -24,6 +24,14 @@ router.get('', async function(req, res) //quando ricevo una richiesta get su /ap
     
 });
 
+router.get('/:id', async function(req, res){ //do la risposta al fronted che mi ha chiesto e faccio la richiesta al db
+    
+    var _user = req.params.id;
+    Patient.findById(_user).then(paziente =>{
+        res.status(200).json(paziente);
+    });
+})
+
 //aggiorno tutte le info del paziente con un post
 
 router.put('', async function(req, res){
