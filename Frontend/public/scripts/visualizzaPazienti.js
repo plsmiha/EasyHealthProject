@@ -203,7 +203,10 @@ function loadViewPatientData() {
                 var child = children[i];
                 child.disabled = getParam("edit") != "true";
               }
-
+              if (getParam("edit") == "false") {
+                document.getElementById('submitButton').hidden = true;
+                document.getElementById('exitButton').disabled = false;
+              }
             }
           })
       })
@@ -264,4 +267,8 @@ function modificaDatiPazienteDaAO(){
   })
   .catch( error => console.error(error) );  
 };
+
+function abort(){
+  window.location.href = "patients_AO.html";
+}
 
