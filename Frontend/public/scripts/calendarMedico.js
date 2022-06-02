@@ -119,10 +119,12 @@ function prevMonth()
 var daySelected, monthSelected, yearSelected;
 function openSlot(day, month, year)
 {
+    console.log("open");
     daySelected=day;
     monthSelected=month;
     yearSelected=year;
-    document.getElementById("add_slot_box").style.display="block";
+    document.getElementById("add_slot_box").style.visibility="visible";
+    document.getElementById("add_slot_box").style.opacity=1;
 }
 
 async function addSlot()
@@ -150,7 +152,8 @@ async function addSlot()
         .then(function(data) {
             console.log(data);
         })
-        document.getElementById('add_slot_box').style.display='none';
+        document.getElementById("add_slot_box").style.visibility="hidden";
+    document.getElementById("add_slot_box").style.opacity=0;
         loadCalendar();
     }
 }
@@ -187,11 +190,11 @@ async function viewSlot(day, month, year)
         tr.appendChild(td2);
 
         var td3 = document.createElement("td");
-        td3.innerText = (data.occupied_id_pat==""?"NO":"SI");
+        td3.innerText = (data.occupied_id_pat==null?"NO":"SI");
         tr.appendChild(td3);
 
         var rem = document.createElement("td");
-        if(data.occupied_id_pat=="")
+        if(data.occupied_id_pat==null)
         {
             rem.innerHTML="<u>X</u>";
             rem.style="text-align:center; cursor: pointer;";
@@ -202,7 +205,8 @@ async function viewSlot(day, month, year)
     });
 
 
-    document.getElementById("remove_slot_box").style.display="block";
+    document.getElementById("remove_slot_box").style.visibility="visible";
+    document.getElementById("remove_slot_box").style.opacity=1;
 }
 
 async function removeSlot(id)

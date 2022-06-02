@@ -49,7 +49,6 @@ app.use('/api/v1/medic', doc);
 //__________________________________________________________
 
 
-
 app.use((req, res, next) => {
     result = check(req.cookies.access_token);
     if (result != undefined) {
@@ -70,6 +69,10 @@ app.use('/api/v1/agendaMedico', agendaMedico);
 app.use('/api/v1/prenotazione', visita);
 app.use('/api/v1/Paziente', editPaziente);
 app.use('/api/v1/Medico', modifMedico);
+app.use('/api/v1/Paziente', editPaziente);
+app.use('/api/v1/Medico', modifMedico);
+app.use('/api/v1/agendaMedico', agendaMedico);
+app.use('/api/v1/profileM', profileM);
 
 app.use('/api/v1/editPazienteDaAO', editPazienteDaAO);
 
