@@ -12,22 +12,23 @@ router.get('', async function(req, res) {
 router.delete('', async function(req, res) {
     console.log('dentro delete backend');
 
-    PA.deleteOne({_id: req.body.id}, function(err, result)
+    Patient.updateMany({codePA:req.body.id},{$set: {"codePA": "6298f524110402d55566676f"}}, function(err, result)
     {
       if(err){
-        res.status(504).json({success: 'false',reason:'db error PA', error: '1'});
+        res.status(504).json({success: 'false',reason:'db error patient', error: '1'});
         return;
       }
       else {
-       var nuovo=  mongoose.Types.ObjectId('6298f524110402d55566676f');
-        Patient.findByIdAndUpdate({codePA: req.body.id},{"codePA": nuovo}, function(err, result)
+        console.log(result);
+        PA.deleteOne({_id: req.body.id}, function(err, result)
         {
           if (err){
             console.log(err);
-            res.status(504).json({success: 'false',reason:'db error patients ma va a buon fine quindi bo', error: '1'});
+            res.status(504).json({success: 'false',reason:'db error PA ', error: '1'});
             return;
           }
           else{
+
             res.status(200).json({success: 'true',comment:'PA eliminato'});
             return;
 
