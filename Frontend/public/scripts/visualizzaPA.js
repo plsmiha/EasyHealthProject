@@ -1,4 +1,5 @@
 var vettore_pazienti = new Array();
+var vettore_id = new Array();
 function loadData()//se la password non viene inserita resta uguale, se viene inserita invece va a modificare la precedente
 {
   event.preventDefault();
@@ -7,7 +8,7 @@ function loadData()//se la password non viene inserita resta uguale, se viene in
 
      vettore_pazienti.push(["NOME", "SCONTO", "OPZIONI"]);
 
-var array_PA = {};
+     var array_PA = {};
 
 
 
@@ -19,8 +20,9 @@ var array_PA = {};
           .then((resp) => resp.json())
           .then(function(data) {
               data.forEach(e => {
-                console.log(e);
+                
                     vettore_pazienti.push([e.name.toString(),e.sconto.toString(),'']);
+                    vettore_id.push(e._id.toString())
               })
               createTable(vettore_pazienti);
           })
@@ -100,11 +102,11 @@ function createTable(vettore_pazienti) {
           cell.style='text-align: center;';
           if(j+1 == columnCount){
                 var btn_visualizza = document.createElement('a');
-                btn_visualizza.innerHTML = '<button class="btn"><i class="fa fa-bars"></i></button>';
+                btn_visualizza.innerHTML = '<button class="btn" onclick="window.location.href=\'view_PA.html?id=' + vettore_id[i-1] +'&edit=' + false + '\';" ><i class="fa fa-bars"></i></button>';
                 var btn_elimina = document.createElement('a');
                 btn_elimina.innerHTML = '<button class="btn"><i class="fa fa-trash"></i></button>';
                 var btn_modifica = document.createElement('a');
-                btn_modifica.innerHTML =  '<button class="btn"><i class="fa fa-pencil"></i></button>';
+                btn_modifica.innerHTML = '<button class="btn" onclick="window.location.href=\'view_PA.html?id=' + vettore_id[i-1] +'&edit=' + true + '\';" ><i class="fa fa-pencil"></i></button>';
 
                 cell.appendChild(btn_visualizza);
                 cell.appendChild(btn_modifica);
@@ -121,6 +123,11 @@ function createTable(vettore_pazienti) {
 
 
     var dvTable = document.getElementById("listone");
+
     dvTable.innerHTML = "";
     dvTable.appendChild(table);
+}
+
+function vuota(){
+  return true;
 }
