@@ -34,67 +34,72 @@ function loadData(){
                 console.log("id not accetable")
                 body.innerHTML="";
                 body.style.backgroundImage = 'url(../img/error.jpg)';
-              }else if(data.error==3){
-                box.innerHTML="*NON CI SONO SLOT DISPONIBILI PER QUESTO MEDICO NEI PROSSIMI 4 MESI";
-              }  
+              }
 
         }else{
-            
-            box.innerHTML=""; //per rimuovere quello che c'era prima nella box degli slot
 
-            //creo gli elementi necessari per ogni giorno in cui c'è almeno uno slot
-            //data.slotsDate e un array di date [ 2022-07-13, 2022-4-6 ...]
-            for (var i = 0; i < (data).length; i++) {
+            if(slots.length!=0 ){
+                console.log("non ci sono slot");
+                box.innerHTML="*NON CI SONO SLOT DISPONIBILI PER QUESTO MEDICO NEI PROSSIMI 4 MESI";
+
+            }else{
+            
+                box.innerHTML=""; //per rimuovere quello che c'era prima nella box degli slot
+
+                //creo gli elementi necessari per ogni giorno in cui c'è almeno uno slot
+                //data.slotsDate e un array di date [ 2022-07-13, 2022-4-6 ...]
+                for (var i = 0; i < (data).length; i++) {
+                    
+                    const giorgio = new Date(data[i]._id);
                 
-                const giorgio = new Date(data[i]._id);
-            
-                if((giorgio-d)>0){ //faccio vedere solo da domani
-                    
-                    //creo un rettangolo rosso con dentro la data
-                    const el = document.createElement('div')
-                    el.classList.add('item');
+                    if((giorgio-d)>0){ //faccio vedere solo da domani
+                        
+                        //creo un rettangolo rosso con dentro la data
+                        const el = document.createElement('div')
+                        el.classList.add('item');
 
-                    //spezzo la data che mi arriva per formattarla come voglio
-                    scritta=data[i]._id.toString();
-                    let a = scritta.split("-");
-                    el.innerHTML ="<pre>"+a[2]+"/"+a[1]+"</pre>";
+                        //spezzo la data che mi arriva per formattarla come voglio
+                        scritta=data[i]._id.toString();
+                        let a = scritta.split("-");
+                        el.innerHTML ="<pre>"+a[2]+"/"+a[1]+"</pre>";
 
-                    //creo un elemento di tipo select
-                    const s = document.createElement('select');
-                    el.appendChild(s);
+                        //creo un elemento di tipo select
+                        const s = document.createElement('select');
+                        el.appendChild(s);
 
-                    //metto la prima opzione di defaul cosi posso usare l'ochange quando il paziente scegliera un orario
-                    //altrimenti l'onchange non funzionerebbe se il paziente scegliesse il primo orario che compare nel select 
-                    const primo = document.createElement('option');
-                    primo.classList.add('ora');
-                    primo.innerHTML = "scegli orario";
-                    s.appendChild(primo);
-                    
-                    //quando seleziono un orario resetto quello che ho selezionato in un altro giorno se no
-                    //se il paziente cambiasse idea e volesse selzionare il giorno selezionato prima di fatto si sbaglierrebbe
-                    //perche non ci sarebbe nessun change e l'id memorizzato sarebbe quello dell'ultima cosa CAMBIATA non selezionata
-                    //devo ridargli la possibilità di cambiarla di nuovo
-                    s.onchange= function(){
-                        visita=s.value;
-                        prevSelect.selectedIndex = 0;
-                        prevSelect=s;
+                        //metto la prima opzione di defaul cosi posso usare l'ochange quando il paziente scegliera un orario
+                        //altrimenti l'onchange non funzionerebbe se il paziente scegliesse il primo orario che compare nel select 
+                        const primo = document.createElement('option');
+                        primo.classList.add('ora');
+                        primo.innerHTML = "scegli orario";
+                        s.appendChild(primo);
+                        
+                        //quando seleziono un orario resetto quello che ho selezionato in un altro giorno se no
+                        //se il paziente cambiasse idea e volesse selzionare il giorno selezionato prima di fatto si sbaglierrebbe
+                        //perche non ci sarebbe nessun change e l'id memorizzato sarebbe quello dell'ultima cosa CAMBIATA non selezionata
+                        //devo ridargli la possibilità di cambiarla di nuovo
+                        s.onchange= function(){
+                            visita=s.value;
+                            prevSelect.selectedIndex = 0;
+                            prevSelect=s;
+                        }
+                        //     giorno 1    g2     g3 ... gn
+                        //[ [ {},{},{}],  [{}], [{},{}], ...]
+                        //ho un array di arrayc con dentro n json  per ogni casella dell'array // una casella=una data in cui c'è almeno uno slot
+                        //per ogni giorno mi creo un'opzione nel select per ogni slot orario e lo appendo al select di quel giorno
+                        for(var j=0; j<data[i].giorni.length; j++){
+                                var opt = document.createElement('option');
+                                opt.classList.add('ora');
+                                opt.innerHTML = data[i].giorni[j].from+" - "+data[i].giorni[j].to;
+                                opt.value = data[i].giorni[j]._id;
+                                s.appendChild(opt);
+                        }
+
+                        //metto queso nuovo elemento "giorno+select+opzioni" nel box che contiene tutto
+                        box.appendChild(el);
                     }
-                    //     giorno 1    g2     g3 ... gn
-                    //[ [ {},{},{}],  [{}], [{},{}], ...]
-                    //ho un array di arrayc con dentro n json  per ogni casella dell'array // una casella=una data in cui c'è almeno uno slot
-                    //per ogni giorno mi creo un'opzione nel select per ogni slot orario e lo appendo al select di quel giorno
-                    for(var j=0; j<data[i].giorni.length; j++){
-                            var opt = document.createElement('option');
-                            opt.classList.add('ora');
-                            opt.innerHTML = data[i].giorni[j].from+" - "+data[i].giorni[j].to;
-                            opt.value = data[i].giorni[j]._id;
-                            s.appendChild(opt);
-                    }
-
-                    //metto queso nuovo elemento "giorno+select+opzioni" nel box che contiene tutto
-                    box.appendChild(el);
-                }
-            }
+                }   
+           }
         }
     }).catch( error => console.error(error) );
 
