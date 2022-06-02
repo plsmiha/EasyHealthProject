@@ -136,7 +136,7 @@ function eliminaPADaAO(id) {
     event.preventDefault();
     var params = new URLSearchParams(location.search);
 
-    if (confirm("Eliminare il paziente selezionato?")) {
+    if (confirm("Eliminare il PA selezionato?")) {
     fetch('../api/v1/PA', {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },

@@ -4,6 +4,36 @@ function modificaPA(){
     var nome=document.getElementById("Nome").value;
     var sconto=document.getElementById("Sconto").value;
     var params = new URLSearchParams(location.search);
+    var add = params.get('add');
+    if(add == 'true'){
+      fetch('../api/v1/PA', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify( { name: nome, sconto: sconto } ),
+
+      })
+      .then((resp) => resp.json() )
+      .then(function(data) {
+
+
+            if(data.success != "true"){
+
+                  window.alert('Errore:\n'+data.reason+'\nRiprovare.');
+                  return;
+
+            }
+            else{
+              console.log('we cool.');
+              window.location.href = "pas_AO.html";
+              return;
+            }
+
+      })
+      .catch( error => console.log(error) );
+
+
+      return;
+    }
     var id= params.get('id');
     var butta = false;
 
@@ -58,6 +88,14 @@ function loadData()
   event.preventDefault();
 
   var params = new URLSearchParams(location.search);
+  var add = params.get('add');
+  if(add == 'true'){
+    console.log('ok');
+    var btn_modifica = document.getElementById("btn_salva");
+    btn_modifica.value = "Aggiungi";
+    document.getElementById('title').innerHTML = "Aggiungi PA";
+    return;
+  }
   var id=params.get('id');
   var edita= params.get('edit');
   if(edita == "false"){
