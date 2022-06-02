@@ -220,11 +220,11 @@
         <span id="l_Residenza">Nome</span>
         <span id="l_Email">Sconto</span>
 
-        <form>
+        <form onsubmit="modificaPA();">
             <input type="text" id="Nome" value="" required/>
             <input type="number" id="Sconto" value="" required/>
 
-            <input type="submit" value="salva modifiche" id="btn_salva" onclick="modificaPA()"/>
+            <input type="submit" value="salva modifiche" id="btn_salva" />
             <input type="button" value="esci" id="btn_esci" onclick="abort();"/>
         </form>
     </div>

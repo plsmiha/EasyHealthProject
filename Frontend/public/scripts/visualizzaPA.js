@@ -20,7 +20,7 @@ function loadData()//se la password non viene inserita resta uguale, se viene in
           .then((resp) => resp.json())
           .then(function(data) {
               data.forEach(e => {
-                
+
                     vettore_pazienti.push([e.name.toString(),e.sconto.toString(),'']);
                     vettore_id.push(e._id.toString())
               })
@@ -104,7 +104,7 @@ function createTable(vettore_pazienti) {
                 var btn_visualizza = document.createElement('a');
                 btn_visualizza.innerHTML = '<button class="btn" onclick="window.location.href=\'view_PA.html?id=' + vettore_id[i-1] +'&edit=' + false + '\';" ><i class="fa fa-bars"></i></button>';
                 var btn_elimina = document.createElement('a');
-                btn_elimina.innerHTML = '<button class="btn"><i class="fa fa-trash"></i></button>';
+                btn_elimina.innerHTML = '<button class="btn" onclick="eliminaPADaAO(\''+ vettore_id[i-1]+'\');"><i class="fa fa-trash"></i></button>';
                 var btn_modifica = document.createElement('a');
                 btn_modifica.innerHTML = '<button class="btn" onclick="window.location.href=\'view_PA.html?id=' + vettore_id[i-1] +'&edit=' + true + '\';" ><i class="fa fa-pencil"></i></button>';
 
@@ -130,4 +130,25 @@ function createTable(vettore_pazienti) {
 
 function vuota(){
   return true;
+}
+
+function eliminaPADaAO(id) {
+    event.preventDefault();
+    var params = new URLSearchParams(location.search);
+
+    if (confirm("Eliminare il PA selezionato?")) {
+    fetch('../api/v1/PA', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify( { id:id} ),
+    })
+    .then((resp) => resp.json())
+    .then(function(data) {
+      console.log("PA eliminato")
+      console.log(data)
+      window.location.href = "pas_AO.html";
+    }).catch( error => console.error(error) );
+  } else {
+    window.alert("Eliminazione annullata");
+  }
 }
