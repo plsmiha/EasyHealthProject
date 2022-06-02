@@ -6,8 +6,8 @@ function modificaDatiPaziente(){
     var password=document.getElementById("Password").value;
     var codePA=document.getElementById("CodPA").value;
 
-    fetch('../api/v1/editPaziente', {
-        method: 'POST',
+    fetch('../api/v1/Paziente', {
+        method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify( { email: email, residenza: residenza, password: password,  codePA: codePA } ),
     })
@@ -20,24 +20,29 @@ function modificaDatiPaziente(){
         }
         else
         {
-            if(data.error=='1'){
+            if(data.error=='2'){
                 console.log('campo vuoto -wrong format')
             }else if(data.error=="3"){
-                
+
               console.log('email gia registrata');
               document.getElementById("Email").style.background = "#ff7a89";
               document.getElementById("Error_email").innerHTML = "l'email inserita è già associata ad un altro account";
 
-            }
+            }else if(data.error=="1"){
+
+                console.log('patient not found/not updated');
+                dbody.innerHTML="";
+                body.style.backgroundImage = 'url(../img/error.jpg)';
+  
+              }
         }
     })
-    .catch( error => console.error(error) );  
+    .catch( error => console.error(error) );
 };
-  
+
 
   function loadData()
-{    
-    event.preventDefault();
+{
     fetch('../api/v1/PA', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -54,22 +59,30 @@ function modificaDatiPaziente(){
     })
 
     console.log('prendo i dati')
-    fetch('../api/v1/editPaziente', {
+    fetch('../api/v1/Paziente', {
         method: 'GET', //con il get mi arriva come risposta non solo lo statos ma anche i dati che chiedo
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(),
+        credentials: 'include',
     })
     .then((resp) => resp.json())
     .then(function(data) {
 
-        var elementresid =  document.getElementById("Residenza");
-        elementresid.value = data['address']; //assegno a quell'id questo valore che ho appena recuperato dal db
+        if(data.success!=null){
+            if(data.error == 1){
+                console.log("patient not found");
+                body.innerHTML="";
+                body.style.backgroundImage = 'url(../img/error.jpg)';
+              }
+              
+        }else{
+            var elementresid =  document.getElementById("Residenza");
+            elementresid.value = data['address']; //assegno a quell'id questo valore che ho appena recuperato dal db
 
-        var elementemail =  document.getElementById("Email");
-        elementemail.value = data['email'];
-        var elementPA =  document.getElementById("CodPA");
-        elementPA.value = data['codePA'];
-       
+            var elementemail =  document.getElementById("Email");
+            elementemail.value = data['email'];
+            var elementPA =  document.getElementById("CodPA");
+            elementPA.value = data['codePA'];
+        }
     })
 };
 
