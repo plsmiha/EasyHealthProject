@@ -130,8 +130,10 @@ function createTable(vettore_pazienti) {
           if(j+1 == columnCount){
                 var btn_visualizza = document.createElement('a');
                 btn_visualizza.innerHTML = '<button class="btn" onclick="window.location.href=\'view_profile_P.html?id=' + vettore_id[i-1] + '&edit=false\';" ><i class="fa fa-bars"></i></button>';
+                
                 var btn_elimina = document.createElement('a');
-                btn_elimina.innerHTML = '<button class="btn" onclick="eliminaPazienteDaAO();"><i class="fa fa-trash"></i></button>';
+                btn_elimina.innerHTML = '<button class="btn" onclick="eliminaPazienteDaAO(\''+ vettore_id[i-1]+'\');"><i class="fa fa-trash"></i></button>';
+
                 var btn_modifica = document.createElement('a');
                 btn_modifica.innerHTML =  '<button class="btn" onclick="window.location.href=\'view_profile_P.html?id=' + vettore_id[i-1] + '&edit=true\';"><i class="fa fa-pencil"></i></button>';
 
@@ -211,10 +213,10 @@ function loadViewPatientData() {
 
 }
 
-function eliminaPazienteDaAO() {
+function eliminaPazienteDaAO(id) {
 
   if (confirm("Eliminare il paziente selezionato?")) {
-    fetch('../api/v1/editPazienteDaAO?id=' + getParam("id"), {
+    fetch('../api/v1/editPazienteDaAO?id=' + id, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
     })
