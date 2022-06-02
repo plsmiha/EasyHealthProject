@@ -129,11 +129,11 @@ function createTable(vettore_pazienti) {
           cell.style='text-align: center;';
           if(j+1 == columnCount){
                 var btn_visualizza = document.createElement('a');
-                btn_visualizza.innerHTML = '<button class="btn" onclick="window.location.href=\'view_profile_P.html?id=' + vettore_id[i-1] + '\';" ><i class="fa fa-bars"></i></button>';
+                btn_visualizza.innerHTML = '<button class="btn" onclick="window.location.href=\'view_profile_P.html?id=' + vettore_id[i-1] + '&edit=false\';" ><i class="fa fa-bars"></i></button>';
                 var btn_elimina = document.createElement('a');
                 btn_elimina.innerHTML = '<button class="btn"><i class="fa fa-trash"></i></button>';
                 var btn_modifica = document.createElement('a');
-                btn_modifica.innerHTML =  '<button class="btn"><i class="fa fa-pencil"></i></button>';
+                btn_modifica.innerHTML =  '<button class="btn" onclick="window.location.href=\'view_profile_P.html?id=' + vettore_id[i-1] + '&edit=true\';"><i class="fa fa-pencil"></i></button>';
 
                 cell.appendChild(btn_visualizza);
                 cell.appendChild(btn_modifica);
@@ -159,7 +159,6 @@ function getParam(param) {
   var url = new URL(url_string);
   return url.searchParams.get(param);
 }
-
 
 function loadViewPatientData() {
   event.preventDefault();
@@ -197,10 +196,54 @@ function loadViewPatientData() {
               document.getElementById("Cognome").value = e.surname;
               document.getElementById("Residenza").value = e.address;
               document.getElementById("CodPA").value = e.codePA;
+
+              var element = document.getElementById('editForm');
+              var children = element.children;
+              for(var i=0; i<children.length; i++){
+                var child = children[i];
+                child.disabled = getParam("edit") != "true";
+              }
+
             }
           })
       })
   })
 
 }
+
+function modificaDatiPazienteDaAO(){
+
+  var email=document.getElementById("Email").value;
+  var nome = document.getElementById("Nome").value;
+  var cognome = document.getElementById("Cognome").value;
+  var residenza=document.getElementById("Residenza").value;
+  var codePA=document.getElementById("CodPA").value;
+
+  fetch('../api/v1/editPazienteDaAO?id=' + getParam("id"), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify( { email: email, residenza: residenza, nome: nome, cognome: cognome, codePA: codePA } ),
+  })
+  .then((resp) => resp.json())
+  .then(function(data) {
+      if(data.success=="true")
+      {
+          console.log('buon fine')
+          window.location.href = "patients_AO.html";
+      }
+      else
+      {
+          if(data.error=='1'){
+              console.log('campo vuoto -wrong format')
+          }else if(data.error=="3"){
+              
+            console.log('email gia registrata');
+            document.getElementById("Email").style.background = "#ff7a89";
+            document.getElementById("Error_email").innerHTML = "l'email inserita è già associata ad un altro account";
+
+          }
+      }
+  })
+  .catch( error => console.error(error) );  
+};
 

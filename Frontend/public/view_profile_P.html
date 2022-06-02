@@ -213,14 +213,14 @@
     <script src="scripts/visualizzaPazienti.js"></script>
     <div id="title">Modifica Profilo Paziente</div>
     <img src="img/Logo.png" id="logo"/>
-    <div  id="box">
+    <div id="box">
         <span id="l_Residenza">Residenza</span>
         <span id="l_Email">Email</span>
         <span id="Error_email"></span>
         <span id="l_CodPA">Codice Piano Assicutativo</span>
         <span id="l_Nome">Nome</span>
         <span id="l_Cognome">Cognome</span>
-        <form onsubmit="modificaDatiPaziente(); return false;">
+        <form onsubmit="modificaDatiPazienteDaAO(); return false;" id="editForm">
             <input type="text" id="Residenza" value="" required/>
             <input type="email" id="Email" value="" required/>
             <select name="CodPA" id="CodPA">
