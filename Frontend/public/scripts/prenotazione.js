@@ -38,7 +38,7 @@ function loadData(){
 
         }else{
 
-            if(slots.length!=0 ){
+            if(data.length==0 ){
                 console.log("non ci sono slot");
                 box.innerHTML="*NON CI SONO SLOT DISPONIBILI PER QUESTO MEDICO NEI PROSSIMI 4 MESI";
 
