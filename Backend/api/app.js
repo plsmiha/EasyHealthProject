@@ -4,6 +4,8 @@ const cors = require('cors');
 const cookieParser = require("cookie-parser");
 
 const login = require('./routes/login.js');
+const patient = require('./routes/pazienti.js');
+const doc = require('./routes/medici.js');
 const aree = require('./routes/aree.js');
 const signup = require('./routes/signup.js');
 const check = require('./routes/tokenCheck.js');
@@ -29,6 +31,11 @@ app.use('/api/v2/signup', signup);
 app.use('/api/v1/verifyEmail', verify_email);
 app.use('/api/v1/PA', PA);
 app.use('/api/v1/resetPassword', reset)
+
+
+
+app.use('/api/v1/patient', patient);
+app.use('/api/v1/medic', doc);
 
 app.use((req, res, next) => {
     result = check(req.cookies.access_token);
