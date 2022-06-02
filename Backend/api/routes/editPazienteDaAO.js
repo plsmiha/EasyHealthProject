@@ -6,18 +6,12 @@ const router = express.Router();
 const User = require('../../models/user');
 const Patient = require('../../models/patient');
 
-
-function getUser(req){ //qui dentro ricevaero dal jwt l'id user
-    return req.query.id;
-    //return '6283b2e8cd01c7be9d02d148';
-}
-
 router.delete('', async function(req, res) {
     console.log('dentro delete backend');
     
     var id_user= await Patient.findOne({_id: req.query.id}).id_user
-    //await User.deleteOne({_id: id_user})
-    //await Patient.deleteOne({_id: req.query.id})
+    await User.deleteOne({_id: id_user})
+    await Patient.deleteOne({_id: req.query.id})
     res.status(200).json({success: 'true',comment:'paziente eliminato'});
 })
 
