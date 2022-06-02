@@ -1,6 +1,6 @@
 var piani = {};
 function modificaPA(){
-
+  event.preventDefault();
     var nome=document.getElementById("Nome").value;
     var sconto=document.getElementById("Sconto").value;
     var params = new URLSearchParams(location.search);
@@ -13,6 +13,7 @@ function modificaPA(){
 
       if(value == nome && key != id){
         console.log('ESISTEGIA');
+        window.alert('Nome gia presente.')
         butta = true;
         return;
       }
@@ -40,7 +41,7 @@ function modificaPA(){
           }
           else{
             console.log('bonk');
-            window.location.href = "HP_AO.html";
+            window.location.href = "pas_AO.html";
             return;
           }
 
@@ -49,7 +50,6 @@ function modificaPA(){
 
   }
 
-return;
 };
 
 

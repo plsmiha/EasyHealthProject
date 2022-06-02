@@ -38,7 +38,7 @@ router.put('', async function(req, res)
 
     }
 });
-return;
+
 })
 
 
