@@ -16,7 +16,7 @@ const reset = require ('./routes/resetPassword.js')
 const editPaziente = require('./routes/editPaziente.js');
 const modifMedico = require('./routes/modificaMedico.js');
 const visita = require('./routes/prenotazione.js');
-const agendaMedico = require('./routes/agendaMedico.js');
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -51,7 +51,7 @@ app.use('/api/v1/Medico', modifMedico);
 
 
 app.use('/api/v1/editPaziente', editPaziente);
-app.use('/api/v1/agendaMedico', agendaMedico);
+
 app.use('/api/v1/prenotazione', visita);
 app.use('/api/v1/logout', logout);
 
