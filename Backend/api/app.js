@@ -13,7 +13,7 @@ const PA = require('./routes/assurancePlans.js');
 
 const reset = require ('./routes/resetPassword.js')
 
-const editPaziente = require('./routes/editPaziente.js');
+const editPaziente = require('./routes/paziente.js');
 const modifMedico = require('./routes/modificaMedico.js');
 
 app.use(express.json());
