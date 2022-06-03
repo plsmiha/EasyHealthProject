@@ -66,13 +66,11 @@ app.use((req, res, next) => {
 app.use('/api/v1/Medico', modifMedico);
 
 
-app.use('/api/v1/editPaziente', editPaziente);
+
 
 app.use('/api/v1/prenotazione', visita);
 app.use('/api/v1/Paziente', editPaziente);
-app.use('/api/v1/Medico', modifMedico);
-app.use('/api/v1/Paziente', editPaziente);
-app.use('/api/v1/Medico', modifMedico);
+
 app.use('/api/v1/agendaMedico', agendaMedico);
 app.use('/api/v1/profileM', profileM);
 
