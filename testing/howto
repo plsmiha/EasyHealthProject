@@ -1,0 +1,15 @@
+npm npm install -g jest
+
+
+creare un file con estensione .test.js
+lanciare "npm test"
+
+Come esempio ho creato un file che testa delle funzioni a buffo, disattivatelo pure modificando l'estensione o mettendolo con risultato
+corretto, fate voi
+
+Per testare le request ovviamente dovete startare il server e poi fare gli npm test
+
+Se vi servono delle funzioni per calcolare roba buttatele in funzioniUtili.js seguendo la blueprint e poi importatele:
+
+const funzioni = require("./funzioniUtili");
+funzioni.nomefunzione(parametri)
