@@ -50,7 +50,7 @@ router.put('', async function(req, res){
     var codePA=req.body.codePA;
     var _user=getUser(req);
     var p= await Patient.findOne({id_user:_user})
-    var _id = String(ids._id).split('"')[0];
+
     console.log(p._id);
 
 //cerca nel database se c'è un user diverso da me che ha questa mail che voglio settare io
