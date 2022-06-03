@@ -20,7 +20,7 @@ const reset = require ('./routes/resetPassword.js')
 const editPaziente = require('./routes/paziente.js');
 const modifMedico = require('./routes/modificaMedico.js');
 const profileM = require('./routes/profiloM.js');
-const agendaMedico = require('./routes/agendaMedico.js');
+
 
 const editPazienteDaAO = require('./routes/editPazienteDaAO.js');
 const visita = require('./routes/prenotazione.js');
