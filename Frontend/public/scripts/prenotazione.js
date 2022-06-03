@@ -150,7 +150,7 @@ function loadData(){
             titolo.innerHTML = "Dottor  "+nominativo; //assegno a quell'id questo valore che ho appena recuperato dal db
             //.value è solo per gli elementi che accettano un inpu/ innerHtml è per tutto
             nome.innerHTML = nominativo; 
-            competenza.innerHTML = data.title[0].name;
+            competenza.innerHTML = data.title['name'];
             tel.innerHTML = data.numero; 
             email.innerHTML = data.email;
             bio.innerHTML = data.bio;

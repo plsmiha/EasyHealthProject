@@ -22,11 +22,13 @@ router.get('', async function(req, res){ //do la risposta al fronted che mi ha c
   console.log('dentro GET');
 
 //solo P puo vedere il calendario con gli slot liberi
-  if(getRole(req)!='P'||getRole(req)!='AO'){
-    res.status(403).json({success: 'false', reason: 'Unauthorized', error: '1'});
-    return;
-  
-  }
+  if(getRole(req)!='P'){
+    if(getRole(req)!='AO'){
+      res.status(403).json({success: 'false', reason: 'Unauthorized', error: '1'});
+      return;
+    }
+   }
+
   var year= d.getFullYear();
   var month= d.getMonth()+1;
   //var month=10;
