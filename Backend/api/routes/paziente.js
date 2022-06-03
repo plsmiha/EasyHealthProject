@@ -21,11 +21,11 @@ router.get('', async function(req, res) //quando ricevo una richiesta get su /ap
         return;
     }
     res.status(404).json({success: 'false', reason: 'patient not found', error: '1'});
-    
+
 });
 
 router.get('/:id', async function(req, res){ //do la risposta al fronted che mi ha chiesto e faccio la richiesta al db
-    
+
     var _user = req.params.id;
     Patient.findById(_user).then(paziente =>{
         res.status(200).json(paziente);
@@ -38,7 +38,7 @@ router.put('', async function(req, res){
     console.log('dentro put');
 
     //controllo che ogni campo sia completato in maniera opportuna
-    if(typeof req.body.email == 'undefined' ||  typeof req.body.residenza== 'undefined' || typeof req.body.codePA == 'undefined' ){   
+    if(typeof req.body.email == 'undefined' ||  typeof req.body.residenza== 'undefined' || typeof req.body.codePA == 'undefined' ){
         res.status(400).json({success: 'false', reason: 'Wrong format', error: '2'});
         console.log('wrong format');
         return;
@@ -58,7 +58,7 @@ router.put('', async function(req, res){
     console.log(Object.keys(user_check).length);
 
     if(Object.keys(user_check).length>0){
-        res.status(403).json({success: 'false', reason: 'forbidden', error: '3'});
+        res.status(406).json({success: 'false', reason: 'email gia registrata', error: '3'});
         console.log('email gia registrata');
         return;
     };
@@ -86,7 +86,7 @@ router.put('', async function(req, res){
         if(uedit==null){
             res.status(404).json({success: 'false', reason: 'patient not found/not updated', error: '1'});
             return
-        } 
+        }
 
     }else{ //password=0 -> non voglio modificata
         var uedit=await User.findByIdAndUpdate( {_id: _user},{"email": email});
