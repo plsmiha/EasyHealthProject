@@ -15,6 +15,7 @@ const calendarioP = require('./routes/calendarioP.js');
 const PA = require('./routes/assurancePlans.js');
 const referto = require('./routes/referto.js')
 
+const AO = require('./routes/modificaAO.js');
 const reset = require ('./routes/resetPassword.js')
 
 const editPaziente = require('./routes/paziente.js');
@@ -81,6 +82,9 @@ app.use('/api/v1/editPazienteDaAO', editPazienteDaAO);
 app.use('/api/v1/agendaPaziente', calendarioP);
 app.use('/api/v1/Referto', referto);
 
+app.use('/api/v1/editPaziente', editPaziente);
+app.use('/api/v1/editMedico', modifMedico);
+app.use('/api/v1/AO', AO);
 app.use('/api/v1/logout', logout);
 
 app.use((req, res) => {
