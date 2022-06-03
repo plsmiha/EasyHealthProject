@@ -32,7 +32,7 @@
 
             position: absolute;
             width: auto;
-            height: 697px;
+            height: 950px;
             left: 100px;
             right: 100px;
             top: 230px;
@@ -41,11 +41,11 @@
             border: 2px solid #D4001C;
             border-radius: 39px;
         }
-        #l_Residenza{
-            position: absolute;
-            height: 49px;
-            left: 74px;
-            top: 41px;
+        #l_Bio{
+          position: absolute;
+          height: 49px;
+          left: 74px;
+          top: 555px;
         }
         #l_Email{
             position: absolute;
@@ -68,7 +68,24 @@
             top: 425px;
         }
 
-        #Residenza{
+        #l_Numero{
+          position: absolute;
+          height: 49px;
+          left: 74px;
+          top: 41px;
+
+        }
+
+        #Bio{
+          position: absolute;
+          height:200px;
+          left: 74px;
+          top: 600px;
+          width: auto;
+          right: 74px;
+        }
+        #Numero{
+
             position: absolute;
             height: 49px;
             left: 74px;
@@ -161,7 +178,7 @@
             width: 248px;
             height: 67px;
             left: 74px;
-            top: 588px;
+            top: 840px;
 
             background: #D4001C;
             border-radius: 15px;
@@ -179,10 +196,22 @@
             width: 248px;
             height: 67px;
             left: 400px;
-            top: 588px;
+            top: 840px;
 
             background: #D4001C;
             border-radius: 15px;
+        }
+        textarea{
+          font-family: 'Questrial', sans-serif;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 28px;
+          line-height: 49px;
+
+          background: #C4C4C4;
+          border-radius: 15px;
+           resize: none;
+           overflow:hidden;
         }
         #aree{
             position: absolute;
@@ -217,14 +246,16 @@
     <div id="title">Modifica Profilo Doc</div>
     <img src="img/Logo.png" id="logo"/>
     <div  id="box">
-        <span id="l_Residenza">Residenza</span>
+        <span id="l_Bio">Bio</span>
         <span id="l_Email">Email</span>
+        <span id="l_Numero">Numero di telefono</span>
         <span id="l_Password">Password  (vuota per non modificare)</span>
         <span id="l_titoloMedico">Area di competenza</span>
         <span id="Error_email"></span>
         <span id="Error_password"></span>
         <form onsubmit="modificaDatiMedico();">
-            <input type="text" id="Residenza" value="" required/>
+            <textarea cols="40" rows="5" id="Bio" value="" required></textarea>
+            <input type="text" id="Numero" value="" required/>
             <input type="email" id="Email" value="" required/>
 
              <input type="password" id="Password" value="" onfocusout="checkPassword();"/>

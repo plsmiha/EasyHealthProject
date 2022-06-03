@@ -1,0 +1,629 @@
+<html>
+    <head>
+        <title>Calendario</title>
+        <link rel="icon" type="image/x-icon" href="/img/icona.png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+        <style>
+            #logo{
+                position: absolute;
+                width: 200px;
+                height: auto;
+                right: 100px;
+                top: 30px;
+            }
+            #title{
+                position: absolute;
+                width: auto;
+                height: 49px;
+                left: 100px;
+                top: 73px;
+
+                font-family: 'Questrial', sans-serif;
+                font-variant: small-caps;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 48px;
+                line-height: 49px;
+
+                color: #D4001C;
+            }
+            #box{
+                box-sizing: border-box;
+
+                position: absolute;
+                width: auto;
+                height: 700px;
+                left: 100px;
+                right: 100px;
+                top: 200px;
+
+                background: #FFFFFF;
+                border: 2px solid #D4001C;
+                border-radius: 39px;
+            }
+            #box_calendar{
+                box-sizing: border-box;
+
+                position: absolute;
+                width: calc(65% - 70px);
+                left: 60px;
+                top: 60px;
+                bottom: 60px;
+
+                background: #FFEAED;
+                border: 0px;
+                border-radius: 10px;
+            }
+            #box_routine{
+                box-sizing: border-box;
+
+                position: absolute;
+                width: calc(35% - 70px);
+                right: 60px;
+                top: 60px;
+                bottom: 60px;
+
+                background: #FFEAED;
+                border: 0px;
+                border-radius: 10px;
+            }
+            #month{
+                position: absolute;
+                left: 60px;
+                top: 20px;
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 36px;
+                line-height: 37px;
+                color: #D4001C;
+                font-variant: small-caps;
+            }
+            #routine{
+                position: absolute;
+                width: 200px;
+                left: calc(50% - 100px);
+                top: 20px;
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 36px;
+                line-height: 37px;
+                color: #D4001C;
+                font-variant: small-caps;
+                text-align: center;
+            }
+            #today{
+                position: absolute;
+                width: 131px;
+                height: 34px;
+                right: 180px;
+                top: 20px;
+
+                background: #D4001C;
+                border-radius: 10px;
+
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 24px;
+                line-height: 25px;
+                align-items: center;
+                text-align: center;
+                border: 0px;
+                cursor: pointer;
+
+                color: #FFFFFF;
+            }
+            #nextmonth{
+                position: absolute;
+                width: 0; 
+                height: 0; 
+                right: 60px;
+                top: 20px;
+                border-top: 17px solid transparent;
+                border-bottom: 17px solid transparent;
+                
+                border-left: 40px solid #D4001C;
+                cursor: pointer;
+            }
+            #prevmonth{
+                position: absolute;
+                width: 0; 
+                height: 0; 
+                right: 120px;
+                top: 20px;
+                border-top: 17px solid transparent;
+                border-bottom: 17px solid transparent;
+                
+                border-right: 40px solid #CCCCCC;
+                cursor: pointer;
+            }
+            #boxday00{
+                top: 90px;
+                left: 60px;
+            }
+            #boxday01{
+                top: 90px;
+                left: calc(60px + 17% + 10px);
+            }
+            #boxday02{
+                top: 90px;
+                left: calc(60px + 34% + 20px);
+            }
+            #boxday03{
+                top: 90px;
+                left: calc(60px + 51% + 30px);
+            }
+            #boxday04{
+                top: 90px;
+                left: calc(60px + 68% + 40px);
+            }
+            #boxday10{
+                top: calc(90px + 15% + 10px);
+                left: 60px;
+            }
+            #boxday11{
+                top: calc(90px + 15% + 10px);
+                left: calc(60px + 17% + 10px);
+            }
+            #boxday12{
+                top: calc(90px + 15% + 10px);
+                left: calc(60px + 34% + 20px);
+            }
+            #boxday13{
+                top: calc(90px + 15% + 10px);
+                left: calc(60px + 51% + 30px);
+            }
+            #boxday14{
+                top: calc(90px + 15% + 10px);
+                left: calc(60px + 68% + 40px);
+            }
+            #boxday20{
+                top: calc(90px + 30% + 20px);
+                left: 60px;
+            }
+            #boxday21{
+                top: calc(90px + 30% + 20px);
+                left: calc(60px + 17% + 10px);
+            }
+            #boxday22{
+                top: calc(90px + 30% + 20px);
+                left: calc(60px + 34% + 20px);
+            }
+            #boxday23{
+                top: calc(90px + 30% + 20px);
+                left: calc(60px + 51% + 30px);
+            }
+            #boxday24{
+                top: calc(90px + 30% + 20px);
+                left: calc(60px + 68% + 40px);
+            }
+            #boxday30{
+                top: calc(90px + 45% + 30px);
+                left: 60px;
+            }
+            #boxday31{
+                top: calc(90px + 45% + 30px);
+                left: calc(60px + 17% + 10px);
+            }
+            #boxday32{
+                top: calc(90px + 45% + 30px);
+                left: calc(60px + 34% + 20px);
+            }
+            #boxday33{
+                top: calc(90px + 45% + 30px);
+                left: calc(60px + 51% + 30px);
+            }
+            #boxday34{
+                top: calc(90px + 45% + 30px);
+                left: calc(60px + 68% + 40px);
+            }
+            #boxday40{
+                top: calc(90px + 60% + 40px);
+                left: 60px;
+            }
+            #boxday41{
+                top: calc(90px + 60% + 40px);
+                left: calc(60px + 17% + 10px);
+            }
+            #boxday42{
+                top: calc(90px + 60% + 40px);
+                left: calc(60px + 34% + 20px);
+            }
+            #boxday43{
+                top: calc(90px + 60% + 40px);
+                left: calc(60px + 51% + 30px);
+            }
+            #boxday44{
+                top: calc(90px + 60% + 40px);
+                left: calc(60px + 68% + 40px);
+            }
+            #lens{
+                background-image: url('img/lente.png');
+                background-size: 100% 100%;
+                position: absolute;
+                width: 30px;
+                height: 30px;
+                right: 30px;
+                top: 0px;
+                cursor: pointer;
+            }
+            #plus{
+                background-image: url('img/+.png');
+                background-size: 100% 100%;
+                position: absolute;
+                width: 30px;
+                height: 30px;
+                right: 0px;
+                top: 0px;
+                cursor: pointer;
+            }
+            #number{
+                position: absolute;
+                width: auto;
+                left: 8px;
+                top: 5px;
+
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 20px;
+                line-height: 25px;
+                display: flex;
+                align-items: center;
+
+                color: #000000;
+            }
+            #slots_number{
+                position: absolute;
+                width: 100%;
+                top: 36px;
+
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: bold;
+                font-size: 20px;
+                line-height: 25px;
+                text-align: center;
+
+                color: #000000;
+            }
+            #Lun{
+                position: absolute;
+                width: 50px;
+                left: calc(60px + 9% - 25px);
+                top: 55px;
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 24px;
+                line-height: 37px;
+                color: #000000;
+                text-align: center;
+            }
+            #Mar{
+                position: absolute;
+                width: 50px;
+                left: calc(70px + 26% - 25px);
+                top: 55px;
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 24px;
+                line-height: 37px;
+                color: #000000;
+                text-align: center;
+            }
+            #Mer{
+                position: absolute;
+                width: 50px;
+                left: calc(80px + 43% - 25px);
+                top: 55px;
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 24px;
+                line-height: 37px;
+                color: #000000;
+                text-align: center;
+            }
+            #Gio{
+                position: absolute;
+                width: 50px;
+                left: calc(90px + 60% - 25px);
+                top: 55px;
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 24px;
+                line-height: 37px;
+                color: #000000;
+                text-align: center;
+            }
+            #Ven{
+                position: absolute;
+                width: 50px;
+                left: calc(100px + 77% - 25px);
+                top: 55px;
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 24px;
+                line-height: 37px;
+                color: #000000;
+                text-align: center;
+            }
+            #add_slot_box{
+                box-sizing: border-box;
+
+                position: absolute;
+                width: 1000px;
+                height: 340px;
+                left: calc(50% - 500px);
+                top: calc(50% - 170px);
+
+                background: #FFFFFF;
+                border: 2px solid #000000;
+                border-radius: 39px;
+                box-shadow: 0px 0px 25px 3px rgba(0,0,0,0.5);
+                visibility: hidden;
+                transition: visibility 0.3s, opacity 0.3s;
+                opacity: 0;
+            }
+            #l_from{
+                position: absolute;
+                left: 10%;
+                top: 80px;
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 30px;
+                line-height: 37px;
+                color: #000000;
+            }
+            #l_to{
+                position: absolute;
+                left: 10%;
+                top: 150px;
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 30px;
+                line-height: 37px;
+                color: #000000;
+            }
+            #from_time{
+                position: absolute;
+                height: 39px;
+                left: calc(10% + 150px);
+                right: 10%;
+                top: 80px;
+
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 26px;
+                line-height: 37px;
+
+                color: #000000;
+                background: #DDDDDD;
+                border-radius: 10px;
+                border: 0px;
+            }
+            #to_time{
+                position: absolute;
+                height: 39px;
+                left: calc(10% + 150px);
+                right: 10%;
+                top: 150px;
+
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 26px;
+                line-height: 37px;
+
+                color: #000000;
+                background: #DDDDDD;
+                border-radius: 10px;
+                border: 0px;
+            }
+            #addslot{
+                position: absolute;
+                width: 200px;
+                height: 39px;
+                right: 10%;
+                top: 220px;
+
+                background: #D4001C;
+                border-radius: 10px;
+
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 24px;
+                line-height: 25px;
+                align-items: center;
+                text-align: center;
+                border: 0px;
+                cursor: pointer;
+
+                color: #FFFFFF;
+            }
+            #exit_addslotbox{
+                position: absolute;
+                width: 200px;
+                height: 39px;
+                right: calc(10% + 230px);
+                top: 220px;
+
+                background: #DDDDDD;
+                border-radius: 10px;
+
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 24px;
+                line-height: 25px;
+                align-items: center;
+                text-align: center;
+                border: 0px;
+                cursor: pointer;
+
+                color: #505050;
+            }
+            #remove_slot_box{
+                box-sizing: border-box;
+
+                position: absolute;
+                width: 1000px;
+                height: 800px;
+                left: calc(50% - 500px);
+                top: calc(50% - 400px);
+
+                background: #FFFFFF;
+                border: 2px solid #000000;
+                border-radius: 39px;
+                box-shadow: 0px 0px 25px 3px rgba(0,0,0,0.5);
+                visibility: hidden;
+                transition: visibility 0.3s, opacity 0.3s;
+                opacity: 0;
+            }
+            #exit_removeslotbox{
+                position: absolute;
+                width: 200px;
+                height: 39px;
+                right: 10%;
+                bottom: 80px;
+
+                background: #DDDDDD;
+                border-radius: 10px;
+
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 24px;
+                line-height: 25px;
+                align-items: center;
+                text-align: center;
+                border: 0px;
+                cursor: pointer;
+
+                color: #505050;
+            }
+            .day{
+                position: absolute;
+                width: 17%;
+                height: 15%;
+                background: #FFFFFF;
+                border: 1px solid #000000;
+                border-radius: 10px;
+            }
+            body{
+                background-image: url('img/background.png');
+            }
+            /* Table */
+            #slots {
+                font-family: 'Questrial', sans-serif;
+                border-collapse: collapse;
+                position: absolute;
+                left: 10%;
+                right: 10%;
+                width: 80%;
+                top: 80px;
+            }
+
+            #slots td, #slots th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+
+            #slots tr:nth-child(even){background-color: #f2f2f2;}
+
+            #slots tr:hover {background-color: #ddd;}
+
+            #slots th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: center;
+                background-color: #D4001C;
+                color: white;
+            }
+            /* Scrollbar styles */
+            ::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+            }
+
+            ::-webkit-scrollbar-thumb {
+            background: #d4001c;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+            background: #960011;
+            }
+        </style>
+    </head>
+    <body onload="loadCalendar();">
+        <div id="title">Il tuo calendario</div>
+        <a href="/"><img src="img/Logo.png" id="logo"/></a>
+        <div id="box">
+            <div id="box_calendar">
+                <span id="month">[Month]</span>
+                <input type="button" id="today" value="Today" onclick="today();"/>
+                <div id="nextmonth" onclick="nextMonth();"></div>
+                <div id="prevmonth" onclick="prevMonth();"></div>
+                <div id="Lun">Lun</div>
+                <div id="Mar">Mar</div>
+                <div id="Mer">Mer</div>
+                <div id="Gio">Gio</div>
+                <div id="Ven">Ven</div>
+                <div id="boxday00" class="day"></div>
+                <div id="boxday01" class="day"></div>
+                <div id="boxday02" class="day"></div>
+                <div id="boxday03" class="day"></div>
+                <div id="boxday04" class="day"></div>
+                <div id="boxday10" class="day"></div>
+                <div id="boxday11" class="day"></div>
+                <div id="boxday12" class="day"></div>
+                <div id="boxday13" class="day"></div>
+                <div id="boxday14" class="day"></div>
+                <div id="boxday20" class="day"></div>
+                <div id="boxday21" class="day"></div>
+                <div id="boxday22" class="day"></div>
+                <div id="boxday23" class="day"></div>
+                <div id="boxday24" class="day"></div>
+                <div id="boxday30" class="day"></div>
+                <div id="boxday31" class="day"></div>
+                <div id="boxday32" class="day"></div>
+                <div id="boxday33" class="day"></div>
+                <div id="boxday34" class="day"></div>
+                <div id="boxday40" class="day"></div>
+                <div id="boxday41" class="day"></div>
+                <div id="boxday42" class="day"></div>
+                <div id="boxday43" class="day"></div>
+                <div id="boxday44" class="day"></div>
+            </div>
+            <div id="box_routine">
+                <span id="routine">Routine</span>
+            </div>
+        </div>
+        <div id="add_slot_box">
+            <span id="l_from">Da ore:</span>
+            <span id="l_to">A ore:</span>
+            <input type="time" id="from_time" min="07:00" max="23:00" value="07:00"/>
+            <input type="time" id="to_time" min="07:00" max="23:00" value="08:00"/>
+            <input type="button" id="addslot" value="Aggiungi slot" onclick="addSlot();"/>
+            <input type="button" id="exit_addslotbox" value="Annulla" onclick="document.getElementById('add_slot_box').style.opacity=0; document.getElementById('add_slot_box').style.visibility='hidden';"/>
+        </div>
+        <div id="remove_slot_box">
+            <input type="button" id="exit_removeslotbox" value="Esci" onclick="document.getElementById('remove_slot_box').style.opacity=0; document.getElementById('remove_slot_box').style.visibility='hidden';"/>
+            <table id="slots">
+            </table>
+        </div>
+        <script src="scripts/calendarMedico.js"></script>
+    </body>
+</html>

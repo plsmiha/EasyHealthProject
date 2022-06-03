@@ -324,3 +324,7 @@ function modificaDatiPazienteDaAO() {
 function navigateToAdd() {
     window.location.href = 'view_profile_P.html?add=true';
 }
+function abort(){
+  window.location.href = "patients_AO.html";
+}
+

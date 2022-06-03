@@ -11,12 +11,16 @@ const signup = require('./routes/signup.js');
 const check = require('./routes/tokenCheck.js');
 const logout = require('./routes/logout.js');
 const verify_email = require('./routes/verify_email.js');
+const calendarioP = require('./routes/calendarioP.js');
 const PA = require('./routes/assurancePlans.js');
+const referto = require('./routes/referto.js')
 
 const reset = require ('./routes/resetPassword.js')
 
-const editPaziente = require('./routes/editPaziente.js');
+const editPaziente = require('./routes/paziente.js');
 const modifMedico = require('./routes/modificaMedico.js');
+const profileM = require('./routes/profiloM.js');
+const agendaMedico = require('./routes/agendaMedico.js');
 
 const editPazienteDaAO = require('./routes/editPazienteDaAO.js');
 
@@ -29,10 +33,13 @@ app.use('/', express.static('./Frontend/public'));
 
 app.use('/api/v1/login', login);
 app.use('/api/v1/aree', aree);
-app.use('/api/v1/signup', signup);
+app.use('/api/v2/signup', signup);
 app.use('/api/v1/verifyEmail', verify_email);
 app.use('/api/v1/PA', PA);
-app.use('/api/v1/resetPassword', reset)
+app.use('/api/v1/resetPassword', reset);
+
+
+//_______________________________________________________________________-
 
 
 
@@ -49,10 +56,13 @@ app.use((req, res, next) => {
     }
 });
 
-app.use('/api/v1/editPaziente', editPaziente);
-app.use('/api/v1/editMedico', modifMedico);
+app.use('/api/v1/Paziente', editPaziente);
+app.use('/api/v1/Medico', modifMedico);
 
 app.use('/api/v1/editPazienteDaAO', editPazienteDaAO);
+
+app.use('/api/v1/agendaPaziente', calendarioP);
+app.use('/api/v1/Referto', referto);
 
 app.use('/api/v1/logout', logout);
 
