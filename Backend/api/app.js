@@ -13,24 +13,24 @@ const logout = require('./routes/logout.js');
 const verify_email = require('./routes/verify_email.js');
 const calendarioP = require('./routes/calendarioP.js');
 const PA = require('./routes/assurancePlans.js');
-const referto = require('./routes/referto.js')
+const referto = require('./routes/referto.js');
 
 const AO = require('./routes/modificaAO.js');
-const reset = require ('./routes/resetPassword.js')
+const reset = require ('./routes/resetPassword.js');
 
 const editPaziente = require('./routes/paziente.js');
 const modifMedico = require('./routes/modificaMedico.js');
 const profileM = require('./routes/profiloM.js');
 const visita = require('./routes/prenotazione.js');
 const admin = require('./routes/admin.js');
-
+const agendaMedico = require('./routes/agendaMedico.js');
 
 
 const editPazienteDaAO = require('./routes/editPazienteDaAO.js');
-const visita = require('./routes/prenotazione.js');
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors())
+app.use(cors());
 app.use(cookieParser());
 
 app.use('/', express.static('./Frontend/public'));

@@ -28,12 +28,12 @@ router.get('/:id', async function(req, res){ //do la risposta al fronted che mi 
 
     var _user = req.params.id;
     Patient.findById(_user).then(paziente =>{
-        res.status(200).json(paziente);
+        res.status(200).json(paziente)});
     Patient.findOne({id_user:_user}).then(utente =>{
         console.log(utente);
         res.status(200).json(utente);
     });
-})
+});
 
 //aggiorno tutte le info del paziente con un post
 
@@ -52,7 +52,7 @@ router.put('', async function(req, res){
     var password=req.body.password;
     var codePA=req.body.codePA;
     var _user=getUser(req);
-    var p= await Patient.findOne({id_user:_user})
+    var p= await Patient.findOne({id_user:_user});
 
     console.log(p._id);
 
@@ -73,7 +73,7 @@ router.put('', async function(req, res){
 
     if(patmodificato==null){
         res.status(404).json({success: 'false', reason: 'patient not found/not updated', error: '1'});
-        return
+        return;
     }
 
     if(password.length > 0){
@@ -84,11 +84,11 @@ router.put('', async function(req, res){
         data = hash.update(password, 'utf-8');
         gen_hash= data.digest('hex');
 
-        var uedit=await User.findByIdAndUpdate( {_id: _user},{"email": email,  "password": gen_hash})
+        var uedit=await User.findByIdAndUpdate( {_id: _user},{"email": email,  "password": gen_hash});
         console.log('update user psw');
         if(uedit==null){
             res.status(404).json({success: 'false', reason: 'patient not found/not updated', error: '1'});
-            return
+            return;
         }
 
     }else{ //password=0 -> non voglio modificata
@@ -96,7 +96,7 @@ router.put('', async function(req, res){
         console.log('update no psw user');
         if(uedit==null){
             res.status(404).json({success: 'false', reason: 'patient not found/not updated', error: '1'});
-            return
+            return;
         }
     }
 
