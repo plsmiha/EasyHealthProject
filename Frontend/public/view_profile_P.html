@@ -113,7 +113,7 @@
         #Error_email{
             position: absolute;
             left: 74px;
-            top: 475px;
+            top: 515px; 
             font-size: 18px;      
         }
 
@@ -216,16 +216,14 @@
     <div id="box">
         <span id="l_Residenza">Residenza</span>
         <span id="l_Email">Email</span>
-        <span id="Error_email"></span>
         <span id="l_CodPA">Codice Piano Assicutativo</span>
         <span id="l_Nome">Nome</span>
         <span id="l_Cognome">Cognome</span>
+        <span id="Error_email" hidden>*Email già registrata!</span>
         <form onsubmit="modificaDatiPazienteDaAO(); return false;" id="editForm">
             <input type="text" id="Residenza" value="" required/>
             <input type="email" id="Email" value="" required/>
-            <select name="CodPA" id="CodPA">
-                <option value="">Nessuno</option>
-            </select>
+            <select name="CodPA" id="CodPA"></select>
             <input type="text" id="Nome" value="" required/>
             <input type="text" id="Cognome" value="" required/>
             <input type="submit" value="salva modifiche"/>
