@@ -302,7 +302,34 @@ function modificaDatiMedicoDaAO() {
 
   } else {
 
-    // aggiunta medico roba a parte
+    var email = document.getElementById("Email").value;
+    var nome = document.getElementById("Nome").value;
+    var cognome = document.getElementById("Cognome").value;
+    var numero = document.getElementById("Numero").value;
+    var area = document.getElementById("Area").value;
+    var bio = document.getElementById("Bio").value;
+
+    fetch('../api/v1/editMedicoDaAO', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, numero: numero, nome: nome, cognome: cognome, title: area, bio: bio }),
+  })
+      .then((resp) => resp.json())
+      .then(function (data) {
+          if (data.success == "true") {
+              console.log('buon fine')
+              window.location.href = "doctors_AO.html";
+          }
+          else {
+              if (data.error == "1") {
+
+                  console.log('email gia registrata');
+                  document.getElementById("Email").style.background = "#ff7a89";
+                  document.getElementById("Error_email").hidden = false;
+
+              }
+          }
+      }).catch(error => console.error(error));
   }
 };
 
@@ -314,3 +341,14 @@ function abort(){
 window.location.href = "doctors_AO.html";
 }
 
+function changeTitle() {
+  if (getParam("add") == "true") {
+    document.getElementById("title").innerHTML = "Aggiungi medico"
+  } else {
+    if(getParam("edit") != "true") {
+      document.getElementById("title").innerHTML = "Visualizza profilo medico"
+    } else {
+      document.getElementById("title").innerHTML = "Modifica profilo medico"
+    }
+  }
+}

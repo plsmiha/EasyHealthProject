@@ -3,11 +3,22 @@ const router = express.Router();
 const docs = require('../../models/doc'); //importo il tipo doc, definito il suo schema in models/doc
 const user = require('../../models/user'); //uguale con user
 const crypto = require('crypto');
+const nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 587,
+    auth: {
+      user: 'easy.health.app.info@gmail.com',
+      pass: process.env.PASSWORD_MAIL
+    },
+});
+transporter.verify().then().catch(console.error);
 
 router.delete('', async function(req, res) {
     console.log('dentro delete backend');
     
-    var id_user= await docs.findOne({_id: v}).id_user
+    var id_user= await docs.findOne({_id: req.query.id}).id_user
     await user.deleteOne({_id: id_user})
     await docs.deleteOne({_id: req.query.id})
     res.status(200).json({success: 'true',comment:'medico eliminato'});
@@ -111,39 +122,39 @@ router.post('', async function(req, res) //qui quando ricevo una post
     var nome = req.body.nome;
     var cognome = req.body.cognome;
 
-    if(typeof _email == 'undefined' || typeof bio == 'undefined' || typeof title == 'undefined' || typeof numero == 'undefined' || typeof nome == 'undefined' || typeofcognome == 'undefined')
+    if(typeof _email == 'undefined' || typeof bio == 'undefined' || typeof title == 'undefined' || typeof numero == 'undefined' || typeof nome == 'undefined' || typeof cognome == 'undefined')
     {
         res.status(400).json({success: 'false', reason: 'Wrong format', error: '1'});
         return;
     }
 
-    user_check = await User.find().where('email',req.body.email);
+    user_check = await user.find().where('email',req.body.email);
     if(Object.keys(user_check).length>=1)
     {
         res.status(406).json({success: 'false', reason: 'Email already exists', error: '3'});
         return;
     }
 
-    let user = new User({
-        email: req.body.email,
+    let _user = new user({
+        email: _email,
         password: "",
         type: 'M',
         verified: false
     });
-    user = await user.save();
+    _user = await _user.save();
 
     let doc = new docs({
-        id_user: user._id.valueOf(),
+        id_user: _user._id.valueOf(),
         email:_email,
         name: nome,
         surname: cognome,
-        address: req.body.address,
-        CF: req.body.CF,
-        codePA: req.body.codePA==''?null:req.body.codePA
+        bio: bio,
+        numero: numero,
+        title: title==''?null:title
     })
-    patient = await patient.save();
+    doc = await doc.save();
 
-    let link = process.env.DOMAIN + "/api/v1/verifyEmail?id=" + user._id.valueOf();
+    let link = process.env.DOMAIN + "/api/v1/verifyEmail?id=" + _user._id.valueOf();
     transporter.sendMail({
         from: '"EasyHealth+" <easy.health.app.info@gmail.com>',
         to: req.body.email,
@@ -154,9 +165,6 @@ router.post('', async function(req, res) //qui quando ricevo una post
 
     res.status(200).json({success: 'true'});
     console.log("User saved");
-
-});
-
 
 });
 

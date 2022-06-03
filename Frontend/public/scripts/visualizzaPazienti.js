@@ -328,3 +328,15 @@ function abort(){
   window.location.href = "patients_AO.html";
 }
 
+function changeTitle() {
+    if (getParam("add") == "true") {
+      document.getElementById("title").innerHTML = "Aggiungi paziente"
+    } else {
+      if(getParam("edit") != "true") {
+        document.getElementById("title").innerHTML = "Visualizza profilo paziente"
+      } else {
+        document.getElementById("title").innerHTML = "Modifica profilo paziente"
+      }
+    }
+  }
+  
