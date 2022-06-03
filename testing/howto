@@ -1,4 +1,7 @@
-npm npm install -g jest
+per installare tutto basta fare
+> npm install
+oppure
+> npm i
 
 
 creare un file con estensione .test.js
