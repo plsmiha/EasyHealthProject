@@ -210,7 +210,7 @@
             .dropdown:hover {background-color: #3e8e41;}
         </style>
     </head>
-    <body>
+    <body onload="loadHP('M');">
         <div id="title">Benvenuto, Doc [Nome] [Cognome]</div>
         <a href="/"><img src="img/Logo.png" id="logo"/></a>
         <div  id="box">
@@ -226,12 +226,13 @@
                 <img src="img/profile.png" id="img_profile" class="dropbtn"/>
                 <div id="settings" class="dropdown-content">
                     <span id="nome" style="padding-top: 10px;">[Nome]</span>
-                    <span id="cognome" style="padding-bottom: 10px;">[Cognome]</span>
+                    <span id="cognome" style="padding-bottom: 10px;">Dr. [Cognome]</span>
                     <span id="modifica_profilo" onclick="window.location.href='edit_profile_M.html';" class="drop">Modifica profilo</span>
                     <span id="logout" onclick="logout();" class="drop">Logout</span>
                 </div>
             </div>
         </div>
         <script src="scripts/logout.js"></script>
+        <script src="scripts/hps.js"></script>
     </body>
 </html>
