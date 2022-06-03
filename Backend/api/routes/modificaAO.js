@@ -80,6 +80,11 @@ function metodoMagico(_email,password,_user,res,req)//essendo asincrone le richi
 router.put('', async function(req, res) //qui quando ricevo una post
     {
         //i dati della richiesta sono dentro a req.body, e` un dictionary a cui si accede ai campi con .nomeCampo
+        if(typeof req.body.email == 'undefined' ||  typeof req.body.password == 'undefined')
+        {
+            res.status(400).json({success: 'false', reason: 'Wrong format', error: '1'});
+            console.log('wrong format');
+        }
         var _email = req.body.email;
 
         var password = req.body.password;
