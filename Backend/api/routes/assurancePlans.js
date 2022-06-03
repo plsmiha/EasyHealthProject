@@ -11,6 +11,12 @@ router.get('', async function(req, res) {
 
 router.delete('', async function(req, res) {
     console.log('dentro delete backend');
+    if(typeof req.body.id == 'undefined' )
+    {
+        res.status(400).json({success: 'false', reason: 'Wrong format', error: '1'});
+        console.log('wrong format');
+      }
+
 
     Patient.updateMany({codePA:req.body.id},{$set: {"codePA": "6298f524110402d55566676f"}}, function(err, result)
     {
@@ -44,6 +50,12 @@ router.delete('', async function(req, res) {
 router.put('', async function(req, res)
 {
 
+  if(typeof req.body.nome == 'undefined' || typeof req.body.sconto == 'undefined' )
+  {
+      res.status(400).json({success: 'false', reason: 'Wrong format', error: '1'});
+      console.log('wrong format');
+    }
+
   if (Number.isInteger(parseInt(req.body.sconto)) == false) {
     res.status(504).json({success: 'false',reason:'sconto non e` un intero', error: '2'});
     return;
@@ -76,6 +88,12 @@ router.put('', async function(req, res)
 
 
 router.post('',async function(req,res){
+
+  if(typeof req.body.nome == 'undefined' || typeof req.body.sconto == 'undefined' )
+  {
+      res.status(400).json({success: 'false', reason: 'Wrong format', error: '1'});
+      console.log('wrong format');
+  }
 
   console.log('we good');
   if (Number.isInteger(parseInt(req.body.sconto)) == false) {
