@@ -16,3 +16,6 @@ Se vi servono delle funzioni per calcolare roba buttatele in funzioniUtili.js se
 
 const funzioni = require("./funzioniUtili");
 funzioni.nomefunzione(parametri)
+
+login.test.js e` un esempio di post
+modificaProfiloMedico.test.js e` un esempio di get CON COOKIE
