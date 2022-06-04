@@ -1,13 +1,7 @@
-npm install --save-dev jest
-npm install
-npm npm install -g jest
-
-aggiungere a package.json(dentro le {} principali)
-
-,
-  "scripts": {
-    "test": "jest"
-  }
+per installare tutto basta fare
+> npm install
+oppure
+> npm i
 
 
 creare un file con estensione .test.js
