@@ -233,6 +233,57 @@ describe('[JEST] /api/v1/login',()=>{
 
 });
 
+describe('[JEST] /api/v1/logout',()=>{
+
+  it('[LOGGATO] <200> POST logout con account P', async () => {
+    await new Promise(r => setTimeout(r, 100));//evita che il server esploda
+    ck  = 'access_token='+process.env.P_TOKEN;
+    expect.assertions(1);
+    var response = await fetch(url+'/api/v1/logout', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json', cookie:ck}
+    })
+    expect( response.status ).toEqual(200);
+
+  })
+
+  it('[LOGGATO] <200> POST logout con account M', async () => {
+    await new Promise(r => setTimeout(r, 100));//evita che il server esploda
+    ck  = 'access_token='+process.env.M_TOKEN;
+    expect.assertions(1);
+    var response = await fetch(url+'/api/v1/logout', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json', cookie:ck}
+    })
+    expect( response.status ).toEqual(200);
+  })
+
+  it('[LOGGATO] <200> POST logout con account AO', async () => {
+    await new Promise(r => setTimeout(r, 100));//evita che il server esploda
+    ck  = 'access_token='+process.env.AO_TOKEN;
+    expect.assertions(1);
+    var response = await fetch(url+'/api/v1/logout', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json', cookie:ck}
+    })
+    expect( response.status ).toEqual(200);
+  })
+
+  it('[NON LOGGATO] <403> POST logout senza token', async () => {
+    expect.assertions(1);
+    var response = await fetch(url+'/api/v1/logout', {
+        method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+    })
+    expect( response.status ).toEqual(403);
+  })
+
+
+
+});
+
+
+
 describe('[JEST] /api/v1/resetPassword',()=>{
   const email="utenteresetpassword@test.cases"
 

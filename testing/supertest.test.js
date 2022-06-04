@@ -2,7 +2,7 @@
 const request = require('supertest');
 const app = require('../Backend/api/app.js');
 const jwt = require('jsonwebtoken');
- const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 require("dotenv").config();
 
 beforeAll( async () => { jest.setTimeout(8000);
@@ -90,18 +90,15 @@ describe('[SUPERTEST] /api/v1/login', () => {
      .send({email: 'paziente@test.cases', password:"password"})
      .expect(200)});
 
-
      test('[NON LOGGATO] <200> POST login con account M', () => {
      return request(app).post('/api/v1/login')
      .send({email: 'medico@test.cases', password:"password"})
      .expect(200)});
 
-       test('[NON LOGGATO] <200> POST login con account AO', () => {
+     test('[NON LOGGATO] <200> POST login con account AO', () => {
        return request(app).post('/api/v1/login')
        .send({email: 'ao@test.cases', password:"password"})
        .expect(200)});
-
-
 
      test('[NON LOGGATO] <403> POST login con account P password errata', () => {
      return request(app).post('/api/v1/login')
@@ -118,12 +115,40 @@ describe('[SUPERTEST] /api/v1/login', () => {
      .send({email: 'ao@test.cases', password:"passwordErrata"})
      .expect(403)});
 
-     test('[NON LOGGATO] <400> POST login login dati incompleti', () => {
+     test('[NON LOGGATO] <400> POST login con dati incompleti', () => {
      return request(app).post('/api/v1/login')
      .send({email: 'ao@test.cases'})
      .expect(400)});
 
  });
+
+describe('[SUPERTEST] /api/v1/logout', () => {
+      var ck;
+
+      ck  = 'access_token='+process.env.P_TOKEN;
+      test('[LOGGATO] <200> POST logout con account P', () => {
+      return request(app).post('/api/v1/logout')
+      .set({'Content-Type': 'application/json', cookie:ck})
+      .expect(200)});
+
+      ck  = 'access_token='+process.env.M_TOKEN;
+      test('[LOGGATO] <200> POST logout con account M', () => {
+      return request(app).post('/api/v1/logout')
+      .set({'Content-Type': 'application/json', cookie:ck})
+      .expect(200)});
+
+      ck  = 'access_token='+process.env.AO_TOKEN;
+      test('[LOGGATO] <200> POST logout con account AO', () => {
+      return request(app).post('/api/v1/logout')
+      .set({'Content-Type': 'application/json', cookie:ck})
+      .expect(200)});
+
+      test('[NON LOGGATO] <403> POST logout senza token', () => {
+      return request(app).post('/api/v1/logout')
+      .expect(403)});
+
+
+  });
 
 describe('[SUPERTEST] /api/v1/resetPassword', () => {
 
