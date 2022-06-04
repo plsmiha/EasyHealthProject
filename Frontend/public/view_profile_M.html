@@ -32,7 +32,7 @@
 
             position: absolute;
             width: auto;
-            height: 900px;
+            height: 1050px;
             left: 100px;
             right: 100px;
             top: 230px;
@@ -56,7 +56,7 @@
             top: 175px;
         }
 
-        #l_Residenza{
+        #l_Numero{
             position: absolute;
             height: 49px;
             left: 74px;
@@ -69,11 +69,18 @@
             top: 425px;
         }
 
-        #l_CodPA{
+        #l_Area{
             position: absolute;
             height: 49px;
             left: 74px;
             top: 550px;
+        }
+
+        #l_Bio{
+            position: absolute;
+            height: 49px;
+            left: 74px;
+            top: 675px;
         }
 
         #Nome {
@@ -93,7 +100,7 @@
             right: 74px;
         }
   
-        #Residenza{
+        #Numero{
             position: absolute;
             height: 49px;
             left: 74px;                
@@ -117,13 +124,22 @@
             font-size: 18px;      
         }
 
-        #CodPA{
+        #Area{
             position: absolute;
             height: 49px;
             left: 74px;
             top: 600px;
             width: auto;
             right: 74px;
+        }
+
+        #Bio{
+          position: absolute;
+          height:200px;
+          left: 74px;
+          top: 725px;
+          width: auto;
+          right: 74px;
         }
 
         body{
@@ -167,7 +183,7 @@
             width: 248px;
             height: 67px;
             left: 400px;
-            top: 788px;
+            top: 938px;
 
             background: #D4001C;
             border-radius: 15px;
@@ -185,10 +201,22 @@
             width: 248px;
             height: 67px;
             left: 74px;
-            top: 788px;
+            top: 938px;
 
             background: #D4001C;
             border-radius: 15px;
+        }
+        textarea{
+          font-family: 'Questrial', sans-serif;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 28px;
+          line-height: 49px;
+
+          background: #C4C4C4;
+          border-radius: 15px;
+           resize: none;
+           overflow:hidden;
         }
 
         /* Scrollbar styles */
@@ -209,23 +237,35 @@
 
 
 </head>
-<body onload="changeTitle(); loadViewPatientData();">
-    <script src="scripts/visualizzaPazienti.js"></script>
+<body onload="changeTitle(); loadViewMedicData();">
+    <script src="scripts/visualizzaMedici.js"></script>
     <div id="title"></div>
     <img src="img/Logo.png" id="logo"/>
     <div id="box">
-        <span id="l_Residenza">Residenza</span>
-        <span id="l_Email">Email</span>
-        <span id="l_CodPA">Codice Piano Assicurativo</span>
+        <!--
+            nome
+            cognome
+            numero
+            email
+            area di competenza
+            bio
+        -->
+        
         <span id="l_Nome">Nome</span>
         <span id="l_Cognome">Cognome</span>
+        <span id="l_Numero">Numero</span>
+        <span id="l_Email">Email</span>
+        <span id="l_Area">Area di competenza</span>
+        <span id="l_Bio">Biografia</span>
         <span id="Error_email" hidden>*Email già registrata!</span>
-        <form onsubmit="modificaDatiPazienteDaAO(); return false;" id="editForm">
-            <input type="text" id="Residenza" value="" required/>
-            <input type="email" id="Email" value="" required/>
-            <select name="CodPA" id="CodPA"></select>
+
+        <form onsubmit="modificaDatiMedicoDaAO(); return false;" id="editForm">
             <input type="text" id="Nome" value="" required/>
             <input type="text" id="Cognome" value="" required/>
+            <input type="text" id="Numero" value="" required/>
+            <input type="email" id="Email" value="" required/>
+            <select name="Area" id="Area"></select>
+            <textarea cols="40" rows="5" id="Bio" value="" required></textarea>
             <input id="submitButton" type="submit" value="salva modifiche"/>
             <input id="exitButton" type="button" value="esci" onclick="abort();"/>
         </form>

@@ -27,6 +27,7 @@ const agendaMedico = require('./routes/agendaMedico.js');
 
 
 const editPazienteDaAO = require('./routes/editPazienteDaAO.js');
+const editMedicoDaAO = require('./routes/editMedicoDaAO.js');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -78,6 +79,7 @@ app.use('/api/v1/agendaMedico', agendaMedico);
 app.use('/api/v1/profileM', profileM);
 
 app.use('/api/v1/editPazienteDaAO', editPazienteDaAO);
+app.use('/api/v1/editMedicoDaAO', editMedicoDaAO);
 
 app.use('/api/v1/agendaPaziente', calendarioP);
 app.use('/api/v1/Referto', referto);
