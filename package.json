@@ -3,13 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-<<<<<<< HEAD
-=======
   "scripts": {
     "start": "node index.js",
-    "test": "jest"
+    "test": "jest --verbose"
   },
->>>>>>> main
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -27,12 +24,5 @@
   },
   "devDependencies": {
     "jest": "^28.1.0"
-<<<<<<< HEAD
-  },
-  "scripts": {
-    "test": "jest",
-    "start": "node index.js"
-=======
->>>>>>> main
   }
 }

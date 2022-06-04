@@ -195,7 +195,7 @@ function loadViewPatientData() {
                             if (e._id == getParam("id")) {
                                 console.log(e.codePA)
                                 console.log(array_PA[e.codePA.toString()])
-                                document.getElementById("Email").value = e.email;                                                                                                                                                                                           
+                                document.getElementById("Email").value = e.email;
                                 document.getElementById("Nome").value = e.name;
                                 document.getElementById("Cognome").value = e.surname;
                                 document.getElementById("Residenza").value = e.address;
@@ -267,11 +267,11 @@ function modificaDatiPazienteDaAO() {
                     if (data.error == '1') {
                         console.log('campo vuoto -wrong format')
                     } else if (data.error == "3") {
-    
+
                         console.log('email gia registrata');
                         document.getElementById("Email").style.background = "#ff7a89";
                         document.getElementById("Error_email").innerHTML = "l'email inserita è già associata ad un altro account";
-    
+
                     }
                 }
             }).catch(error => console.error(error));
@@ -285,7 +285,7 @@ function modificaDatiPazienteDaAO() {
         var codPA=document.getElementById("CodPA").value;
         if (!codPA) codPA = "6298f524110402d55566676f"
 
-        fetch('../api/v1/signup', {
+        fetch('../api/v2/signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify( { nome: nome, cognome: cognome, residenza: residenza, CF: genRand(16), email: email, password: "TemporaryPasswordToBeR3S3TTED", codPA: codPA } ),
@@ -339,4 +339,3 @@ function changeTitle() {
       }
     }
   }
-  
