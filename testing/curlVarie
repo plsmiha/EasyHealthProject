@@ -1,2 +1,0 @@
-#api/v1/Medico GET
-curl --cookie "access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOWIyMWI5Yzc1Y2U3MGZlMjEwMjg0NCIsInJvbGUiOiJNIiwiaWF0IjoxNjU0MzM0NjUyfQ.4TQDXqMarF0wIKICuVsEdNEI6lfew1EZZdQWIbEUckk" http://localhost/api/v1/Medico
