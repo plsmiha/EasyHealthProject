@@ -14,13 +14,13 @@ router.get('/:id', async function(req, res){
     var doc=req.params.id;
 
     if (!(doc.match(/^[0-9a-fA-F]{24}$/))) {
-        console.log(" ERRATO ID ");
+        //console.log(" ERRATO ID ");
         res.status(403).json({success: 'false', reason: 'id not acceptable', error: '2'});
         return;
     };
 
     var data = await docs.findById(doc).populate('title', 'name') ;
-    console.log(data);
+    //console.log(data);
     if( data!=null){
         res.status(200).json(data);
         return;
@@ -95,10 +95,11 @@ router.put('', async function(req, res) //qui quando ricevo una post
         if(typeof req.body.email == 'undefined' || typeof req.body.bio == 'undefined' || typeof req.body.password == 'undefined' || typeof req.body.title == 'undefined' || typeof req.body.numero == 'undefined')
         {
             res.status(400).json({success: 'false', reason: 'Wrong format', error: '1'});
-            console.log('wrong format');
+            //console.log('wrong format');
+            return;
         }
 
-        
+
         var _email = req.body.email;
         var bio = req.body.bio;
         var password = req.body.password;
@@ -132,7 +133,8 @@ router.put('', async function(req, res) //qui quando ricevo una post
 
           }).catch(err => {
             res.status(500).json({success: 'false',reason: 'bonk',error: 3});
-              console.log(err);
+              //console.log(err);
+              return;
           });
 
       });

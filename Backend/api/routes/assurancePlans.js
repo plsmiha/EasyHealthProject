@@ -10,11 +10,12 @@ router.get('', async function(req, res) {
 
 
 router.delete('', async function(req, res) {
-    console.log('dentro delete backend');
+    //console.log('dentro delete backend');
     if(typeof req.body.id == 'undefined' )
     {
         res.status(400).json({success: 'false', reason: 'Wrong format', error: '1'});
-        console.log('wrong format');
+        //console.log('wrong format');
+        return;
       }
 
 
@@ -25,11 +26,11 @@ router.delete('', async function(req, res) {
         return;
       }
       else {
-        console.log(result);
+        //console.log(result);
         PA.deleteOne({_id: req.body.id}, function(err, result)
         {
           if (err){
-            console.log(err);
+            //console.log(err);
             res.status(504).json({success: 'false',reason:'db error PA ', error: '1'});
             return;
           }
@@ -50,10 +51,11 @@ router.delete('', async function(req, res) {
 router.put('', async function(req, res)
 {
 
-  if(typeof req.body.nome == 'undefined' || typeof req.body.sconto == 'undefined' )
+  if(typeof req.body.name == 'undefined' || typeof req.body.sconto == 'undefined'|| typeof req.body.id == 'undefined' )
   {
       res.status(400).json({success: 'false', reason: 'Wrong format', error: '1'});
-      console.log('wrong format');
+      //console.log('wrong format');
+      return;
     }
 
   if (Number.isInteger(parseInt(req.body.sconto)) == false) {
@@ -65,18 +67,23 @@ router.put('', async function(req, res)
     return;
   }
 
+  let pa_check = await PA.find().where('name',req.body.name);
+  if(Object.keys(pa_check).length>=1)
+  {
+      res.status(506).json({success: 'false', reason: 'Name already exists', error: '2'});
+      return;
+  }
 
-
-  PA.findByIdAndUpdate(req.body.id, { name: req.body.nome,sconto: req.body.sconto },
+  PA.findByIdAndUpdate(req.body.id, { name: req.body.name,sconto: req.body.sconto },
                             function (err, docs) {
     if (err){
-      console.log('bbb');
+      //console.log('bbb');
 
       res.status(504).json({success: 'false',reason:'db error', error: '1'});
       return;
     }
     else{
-      console.log('ccc');
+      //console.log('ccc');
 
       res.status(200).json({success: 'true',reason:"si"});
       return;
@@ -89,13 +96,14 @@ router.put('', async function(req, res)
 
 router.post('',async function(req,res){
 
-  if(typeof req.body.nome == 'undefined' || typeof req.body.sconto == 'undefined' )
+  if(typeof req.body.name == 'undefined' || typeof req.body.sconto == 'undefined' )
   {
       res.status(400).json({success: 'false', reason: 'Wrong format', error: '1'});
-      console.log('wrong format');
+      //console.log('wrong format');
+      return;
   }
 
-  console.log('we good');
+  //console.log('we good');
   if (Number.isInteger(parseInt(req.body.sconto)) == false) {
     res.status(504).json({success: 'false',reason:'sconto non e` un intero', error: '2'});
     return;
@@ -105,6 +113,13 @@ router.post('',async function(req,res){
     return;
   }
 
+
+  let pa_check = await PA.find().where('name',req.body.name);
+  if(Object.keys(pa_check).length>=1)
+  {
+      res.status(506).json({success: 'false', reason: 'Name already exists', error: '2'});
+      return;
+  }
 
   let pa = new PA({
       name: req.body.name,

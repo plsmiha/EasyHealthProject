@@ -1,3 +1,11 @@
+const http = require('http')
+const os = require('os')
+const cluster = require("cluster")
+const mongoose = require('mongoose');
+
+require("dotenv").config();
+
+
 const express = require('express');
 const app = express();
 const cors = require('cors');

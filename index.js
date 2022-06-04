@@ -29,19 +29,20 @@ if (cluster.isMaster) {
 
     app.locals.db = mongoose.connect(process.env.DB_URL, {useNewUrlParser: true, useUnifiedTopology: true})
     .then ( () => {
-        
+
         console.log(`WORKER ${process.pid} connected to DB`)
 
         router.use(app)
 
         let server = http.createServer(router)
         server.listen(process.env.PORT || 80)
-    
+
         process.on('uncaughtException', (code, signal) => {
             console.log(`WORKER error...\n\tcode:(${code})\n\tsignal:(${signal})`)
             process.exit()
         })
-        
-    });  
+
+
+    });
 
 }
