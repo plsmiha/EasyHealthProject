@@ -1,10 +1,10 @@
 <html>
     <head>
-        <title>Home page</title>
+        <title>Visualizza Pazienti</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="icon" type="image/x-icon" href="/img/icona.png">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
@@ -17,6 +17,18 @@
                 right: 100px;
                 top: 30px;
             }
+            .btn{
+              background-color: #D4001c;
+        border: none;
+        color: white;
+        padding: 12px 16px;
+        font-size: 16px;
+        cursor: pointer;
+
+            }
+            .btn:hover {
+  background-color: #7a1724;
+}
             #title{
                 position: absolute;
                 width: auto;
@@ -33,9 +45,6 @@
 
                 color: #D4001C;
             }
-            #listone tr:nth-child(even){font-size: 25px;}
-            #listone tr:nth-child(odd){background-color: #ffdbdc; font-size: 25px;}
-
             #box{
                 box-sizing: border-box;
 
@@ -68,7 +77,7 @@
 
                 color: #000000;
             }
-            #txt_medico_nome{
+            #txt_paziente_nome{
                 position: absolute;
                 width: 40%;
                 height: 39px;
@@ -86,7 +95,7 @@
                 border-radius: 10px;
                 border: 0px;
             }
-            #aree{
+            #piani{
                 position: absolute;
                 width: 40%;
                 height: 39px;
@@ -104,12 +113,33 @@
                 border-radius: 10px;
                 border: 0px;
             }
-            #btn_medico_nome{
+            #btn_paziente_nome{
                 position: absolute;
                 width: 20%;
                 height: 39px;
                 left: calc(46% + 20px);
                 top: 110px;
+
+                background: #D4001C;
+                border-radius: 10px;
+                border: 0px;
+
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 20px;
+                line-height: 25px;
+                align-items: center;
+                text-align: center;
+
+                color: #FFFFFF;
+            }
+            #btn_restore_all{
+                position: absolute;
+                width: 20%;
+                height: 39px;
+                left: calc(70% + 20px);
+                top: 140px;
 
                 background: #D4001C;
                 border-radius: 10px;
@@ -223,7 +253,7 @@
                 width: 239px;
                 height: 37px;
                 left: 6%;
-                top: 380px;
+                top: 240px;
 
                 font-family: 'Questrial';
                 font-style: normal;
@@ -235,10 +265,10 @@
             }
             #dashboard{
                 position: absolute;
-                width: 85%;
+                width: 90%;
                 height: auto;
                 left: 6%;
-                top: 430px;
+                top: 290px;
 
                 background: #FFEAED;
                 border-radius: 10px;
@@ -257,6 +287,42 @@
                 width: 100px;
                 height: 100px;
             }
+            #listone{
+              height: 380px;
+
+  overflow:auto;
+            }
+
+            #addbutton{
+
+                position: absolute;
+                width: 45px;
+
+                color: #d4001c;
+
+                right: 0px;
+                top: 293px;
+
+            }
+            #goback{
+
+                position: absolute;
+                width: 45px;
+
+                color: #d4001c;
+
+                left: 20px;
+                top: 20px;
+
+            }
+
+            #listone tr:nth-child(even){font-size: 25px;}
+            #listone tr:nth-child(odd){background-color: #ffdbdc; font-size: 25px;}
+
+
+
+
+
             /* Scrollbar styles */
             ::-webkit-scrollbar {
             width: 12px;
@@ -307,53 +373,38 @@
             }
             .dropdown-content .drop:hover {background-color: #f1f1f1;}
             .dropdown:hover .dropdown-content {display: block;}
-
-            .btn{
-              background-color: #D4001c;
-border: none;
-color: white;
-padding: 12px 16px;
-font-size: 16px;
-cursor: pointer;
-
-            }
-            .btn:hover {
-  background-color: #7a1724;
-}
             .dropdown:hover {background-color: #3e8e41;}
+
+
+
+
+
+
+
         </style>
     </head>
-    <body onload="loadAree(); loadHP('P');loadData();">
-        <div id="title">Benvenuto, [Nome] [Cognome]</div>
+    <body onload="loadData();">
+        <div id="title">Visualizzazione Paziente</div>
         <a href="/"><img src="img/Logo.png" id="logo"/></a>
         <div  id="box">
-            <div id="l_cercamedico">Cerca medico</div>
-            <div id="l_calendario">Il tuo calendario</div>
-            <div id="l_storia">La tua storia medica</div>
+            <div id="l_cercamedico">Cerca pazienti</div>
+            <i id='goback' onclick="window.location.href='HP_AO.html'" class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>
+
+
             <div id="l_dashboard">Dashboard</div>
-            <input type="text" id="txt_medico_nome" value=""/>
-            <select id="aree"></select>
-            <input type="button" id="btn_medico_nome" value="Cerca per nome" onclick="check_and_redirect_nome();"/>
-            <input type="button" id="btn_medico_competenza" value="Cerca per competenza" onclick="check_and_redirect_competenza();"/>
-            <input type="button" id="btn_appuntamenti" value="Visualizza appuntamenti" onclick="window.location.href='calendar_P.html';"/>
-            <input type="button" id="btn_referti" value="Visualizza referti"/>
+            <input type="text" id="txt_paziente_nome" value="zeno"/>
+            <select id="piani"></select>
+            <input type="button" id="btn_paziente_nome" value="Cerca per nome" onclick="cercapernome();"/>
+              <input type="button" id="btn_restore_all" value="Restore All" onclick="restore_all();"/>
+            <input type="button" id="btn_medico_competenza" value="Cerca per PA" onclick="cercaperpa();"/>
+
             <div id="dashboard">
               <div id='listone'>
                 </div>
             </div>
-            <div id="profile" class="dropdown">
-                <img src="img/profile.png" id="img_profile" class="dropbtn"/>
-                <div id="settings" class="dropdown-content">
-                    <span id="nome" style="padding-top: 10px;">[Nome]</span>
-                    <span id="cognome" style="padding-bottom: 10px;">[Cognome]</span>
-                    <span id="modifica_profilo" onclick="window.location.href='edit_profile_P.html';" class="drop">Modifica profilo</span>
-                    <span id="logout" onclick="logout();" class="drop">Logout</span>
-                </div>
-            </div>
+
         </div>
-        <script src="scripts/logout.js"></script>
-        <script src="scripts/hp_p_load.js"></script>
-        <script src="scripts/hps.js"></script>
-        <script src="scripts/visualizzaMediciDaPaziente.js"></script>
+        <script src="scripts/visualizzaPazientiDaM.js"></script>
+
     </body>
 </html>

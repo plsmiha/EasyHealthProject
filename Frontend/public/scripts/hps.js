@@ -14,6 +14,7 @@ function loadHP(type)
             nome.innerText = nome.innerText.replace("[Nome]", capitalizeFirstLetter(data.name));
             let cognome=document.getElementById("cognome");
             cognome.innerText = cognome.innerText.replace("[Cognome]", capitalizeFirstLetter(data.surname));
+            document.getElementById("btn_referti").onclick = function() { window.location.href='reports_P.html?id=' + data._id; };
         });
 }
 
