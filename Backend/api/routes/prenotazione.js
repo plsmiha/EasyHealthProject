@@ -9,7 +9,7 @@ function getPatient(req)
 {
     return req.jwtData.id;
  // return '628a32899a3fa04062284232';
-    
+
 }
 function getRole(req) //qui dentro ricevaero dal jwt l'id user, attesa token ascari
 {
@@ -39,7 +39,7 @@ router.get('', async function(req, res){ //do la risposta al fronted che mi ha c
     console.log(" ERRATO ID ");
     res.status(406).json({success: 'false', reason: 'not accetable id', error: '2'});
     return
-  } 
+  }
 
 
 //____________CREO VARIABILI PER PRENDERE I PRIMI 4 MESI___________________________________________________________________
@@ -63,20 +63,20 @@ router.get('', async function(req, res){ //do la risposta al fronted che mi ha c
     month3++;
    // console.log(month2+"  3  "+month3+"   "+year3)
   };
-  
-  
+
+
   /*1)cerco tutti gli slot vuoti(null) di quel medico nei prossimi 4 mesi
   /2) per ogni data distinta disponibile creo un subdocument con tutti gli slot(orari) disponibili della giornata
         data1 -> {id ..from..to..}
         data2 -> {id ..from..to..}
                 {id ..from..to..}
-        data3 -> {id ..from..to..}    
+        data3 -> {id ..from..to..}
   */
-   var slots=await Slot.aggregate([ { $match: 
+   var slots=await Slot.aggregate([ { $match:
                                             {"$and" : [{ "occupied_id_pat" : null },{ $expr : { $eq: [ '$id_doc' , { $toObjectId: doc } ] } },
-                                                      {$or: [{day: new RegExp(year+"-"+month+"-")},{day: new RegExp(year1+"-"+month1+"-")},{day: new RegExp(year2+"-"+month2+"-")},{day: new RegExp(year3+"-"+month3+"-")}]}]}} , 
+                                                      {$or: [{day: new RegExp(year+"-"+month+"-")},{day: new RegExp(year1+"-"+month1+"-")},{day: new RegExp(year2+"-"+month2+"-")},{day: new RegExp(year3+"-"+month3+"-")}]}]}} ,
                                      { $group: { "_id": "$day",  "giorni":{"$addToSet":{"_id":"$_id", "from":"$from", "to":"$to"}}}}]);
-  
+
  //controllo se esistono slot
 
     //sorto i giorni
@@ -97,7 +97,7 @@ router.get('', async function(req, res){ //do la risposta al fronted che mi ha c
 
     console.log(slots);
     res.status(200).json(slots);
-    
+
 });
 
 
@@ -133,5 +133,4 @@ e qua posso avere PIU GET DIVERSE  ma devo diversificarle con il primo parametro
                   |
       let idMedico = req.params.id;
                      //piuttosto che req.body.id
-
-*/ 
+*/

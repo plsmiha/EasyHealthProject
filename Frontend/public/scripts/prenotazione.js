@@ -4,17 +4,17 @@ var prevSelect=""; //variabile globale in modo che quando seleziono l'opzione di
 var body = document.getElementsByTagName('body')[0];
 
 
-function loadData(){    
+function loadData(){
 
     const queryString = window.location.search; //grab the query string
     const urlParams = new URLSearchParams(queryString); //parsing the query string
-   
-    
+
+
     //https//localhost/profile_M?id=asdfghfdsaWWSDF
     id_medico = urlParams.get('id') //prendo dall'insieme di parametri il valore di quello chiamato "id"
-  
-    
-    
+
+
+
 //___________________GET SLOTS DISPONIBIILI____________________________________________________________________________________________
     fetch('../api/v1/prenotazione?id='+id_medico, {//passo al middleware il mio parametro attraverso la uri
         method: 'GET', //con il get mi arriva come risposta non solo lo statos ma anche i dati che chiedo
@@ -43,17 +43,17 @@ function loadData(){
                 box.innerHTML="*NON CI SONO SLOT DISPONIBILI PER QUESTO MEDICO NEI PROSSIMI 4 MESI";
 
             }else{
-            
+
                 box.innerHTML=""; //per rimuovere quello che c'era prima nella box degli slot
 
                 //creo gli elementi necessari per ogni giorno in cui c'è almeno uno slot
                 //data.slotsDate e un array di date [ 2022-07-13, 2022-4-6 ...]
                 for (var i = 0; i < (data).length; i++) {
-                    
+
                     const giorgio = new Date(data[i]._id);
-                
+
                     if((giorgio-d)>0){ //faccio vedere solo da domani
-                        
+
                         //creo un rettangolo rosso con dentro la data
                         const el = document.createElement('div')
                         el.classList.add('item');
@@ -68,12 +68,12 @@ function loadData(){
                         el.appendChild(s);
 
                         //metto la prima opzione di defaul cosi posso usare l'ochange quando il paziente scegliera un orario
-                        //altrimenti l'onchange non funzionerebbe se il paziente scegliesse il primo orario che compare nel select 
+                        //altrimenti l'onchange non funzionerebbe se il paziente scegliesse il primo orario che compare nel select
                         const primo = document.createElement('option');
                         primo.classList.add('ora');
                         primo.innerHTML = "scegli orario";
                         s.appendChild(primo);
-                        
+
                         //quando seleziono un orario resetto quello che ho selezionato in un altro giorno se no
                         //se il paziente cambiasse idea e volesse selzionare il giorno selezionato prima di fatto si sbaglierrebbe
                         //perche non ci sarebbe nessun change e l'id memorizzato sarebbe quello dell'ultima cosa CAMBIATA non selezionata
@@ -98,15 +98,15 @@ function loadData(){
                         //metto queso nuovo elemento "giorno+select+opzioni" nel box che contiene tutto
                         box.appendChild(el);
                     }
-                }   
+                }
            }
         }
     }).catch( error => console.error(error) );
 
 
     //_________________GET INFO MEDICO___________________________________
-  
-    
+
+
     fetch('../api/v1/Medico/'+id_medico, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -125,7 +125,7 @@ function loadData(){
                 console.log("id not accetable")
                 body.innerHTML="";
                 body.style.backgroundImage = 'url(../img/error.jpg)';
-              }    
+              }
 
         }else{
 
@@ -137,10 +137,10 @@ function loadData(){
             var email = document.getElementById("Email");
             var bio = document.getElementById("dashboard");
 
-            //metto le maiuscole al nome 
+            //metto le maiuscole al nome
             var n=data.name+ " "+data.surname;
             const arr = n.split(" ");
-        
+
             for (var i = 0; i < arr.length; i++) {
                 arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
             }
@@ -149,9 +149,9 @@ function loadData(){
             //assegno il giusto contenuto preso dalla get a tutti gli elementi
             titolo.innerHTML = "Dottor  "+nominativo; //assegno a quell'id questo valore che ho appena recuperato dal db
             //.value è solo per gli elementi che accettano un inpu/ innerHtml è per tutto
-            nome.innerHTML = nominativo; 
+            nome.innerHTML = nominativo;
             competenza.innerHTML = data.title['name'];
-            tel.innerHTML = data.numero; 
+            tel.innerHTML = data.numero;
             email.innerHTML = data.email;
             bio.innerHTML = data.bio;
 
@@ -176,7 +176,7 @@ function prenota(){
         var box = document.getElementById('container');
         if(data.success=="true")
         {
-            loadData();    
+            loadData();
             //se la prenotazione va a buon fine ricarico la pagina in modo che sparisca lo slot appena selezionato
             console.log('slot prenotato')
             //window.location.href = "profile_M.html?id="+id_medico; //cosi ritorno su quel medico li
@@ -193,9 +193,9 @@ function prenota(){
                 console.log("prenotazione non avvenuta")
                 box.innerHTML="<pre>"+"Prenotazione non avvenuta correttamente."+"<br>"+"Ricaricare la pagine e riprovare il processo di prenotazione."+"</pre>";
 
-              }    
+              }
         }
     })
      .catch( error => console.error(error) );
-  
+
 }
