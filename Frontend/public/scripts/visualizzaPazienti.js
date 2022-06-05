@@ -40,7 +40,7 @@ function loadData()//se la password non viene inserita resta uguale, se viene in
                 array_PA[e._id] = e.name;
             })
 
-            fetch('../api/v1/patient', {
+            fetch('../api/v1/Paziente/all', {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(),
