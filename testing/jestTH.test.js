@@ -1,6 +1,5 @@
 const fetch = require("node-fetch");
-require("dotenv").config();
-
+require("dotenv").config()
 const url =  "http://localhost"
 
 
@@ -19,6 +18,7 @@ it('[LOGGATO] <200> GET dati medico medico', async () => {
   'Content-Type': 'application/json',
   cookie:ck
   };
+  console.log(ck);
   var code;
   var data;
 
