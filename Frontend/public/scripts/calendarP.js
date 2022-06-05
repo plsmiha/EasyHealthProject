@@ -56,7 +56,11 @@ function loadData(){
                         bottone.classList.add('bottone');
                         bottone.innerHTML="elimina";
                         bottone.value=data[i]._id;
-                        bottone.ondblclick= function() {  cancella(bottone.value); };
+                        bottone.onclick= function() {
+
+                          if (confirm("Eliminare l'appuntamento?")) {
+                          cancella(bottone.value);}
+                         };
 
                         el.appendChild(visita);
                         el.appendChild(bottone);

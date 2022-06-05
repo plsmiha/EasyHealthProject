@@ -1,6 +1,6 @@
 <head>
     <title>Pagina di registrazione</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
     <style>
@@ -86,7 +86,7 @@
         #Nome {
             position: absolute;
             height: 49px;
-            left: 74px;                
+            left: 74px;
             top: 100px;
             width: auto;
             right: 74px;
@@ -94,16 +94,16 @@
         #Cognome {
             position: absolute;
             height: 49px;
-            left: 74px;                
+            left: 74px;
             top: 225px;
             width: auto;
             right: 74px;
         }
-  
+
         #Numero{
             position: absolute;
             height: 49px;
-            left: 74px;                
+            left: 74px;
             top: 350px;
             width: auto;
             right: 74px;
@@ -120,8 +120,8 @@
         #Error_email{
             position: absolute;
             left: 74px;
-            top: 515px; 
-            font-size: 18px;      
+            top: 515px;
+            font-size: 18px;
         }
 
         #Area{
@@ -226,11 +226,11 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #d4001c;  
+            background: #d4001c;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: #960011;  
+            background: #960011;
         }
 
     </style>
@@ -250,7 +250,7 @@
             area di competenza
             bio
         -->
-        
+
         <span id="l_Nome">Nome</span>
         <span id="l_Cognome">Cognome</span>
         <span id="l_Numero">Numero</span>
@@ -264,7 +264,7 @@
             <input type="text" id="Cognome" value="" required/>
             <input type="text" id="Numero" value="" required/>
             <input type="email" id="Email" value="" required/>
-            <select name="Area" id="Area"></select>
+            <select name="Area" id="Area" selected disabled hidden></select>
             <textarea cols="40" rows="5" id="Bio" value="" required></textarea>
             <input id="submitButton" type="submit" value="salva modifiche"/>
             <input id="exitButton" type="button" value="esci" onclick="abort();"/>

@@ -1,6 +1,6 @@
 <head>
     <title>Pagina di registrazione</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
     <style>
@@ -53,7 +53,7 @@
             left: 74px;
             top: 169px;
         }
-   
+
         #l_Password{
             position: absolute;
             height: 49px;
@@ -67,11 +67,11 @@
             left: 74px;
             top: 425px;
         }
-  
+
         #Residenza{
             position: absolute;
             height: 49px;
-            left: 74px;                
+            left: 74px;
             top: 91px;
             width: auto;
             right: 74px;
@@ -89,7 +89,7 @@
             position: absolute;
             left: 74px;
             top: 256px;
-            font-size: 18px;      
+            font-size: 18px;
         }
         #Password{
             position: absolute;
@@ -104,7 +104,7 @@
             position: absolute;
             left: 74px;
             top: 389px;
-            font-size: 18px;      
+            font-size: 18px;
         }
 
         #CodPA{
@@ -188,11 +188,11 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #d4001c;  
+            background: #d4001c;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: #960011;  
+            background: #960011;
         }
 
     </style>
@@ -215,7 +215,7 @@
             <input type="email" id="Email" value="" required/>
             <input type="password" id="Password" value="" onfocusout="checkPassword();"/>
             <select name="CodPA" id="CodPA">
-                <option value="">Nessuno</option>
+                <option value="" selected disabled hidden></option>
             </select>
             <input type="submit" value="salva modifiche"/>
             <input type="button" value="esci" onclick="abort();"/>

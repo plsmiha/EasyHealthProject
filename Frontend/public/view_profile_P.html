@@ -1,6 +1,6 @@
 <head>
     <title>Pagina di registrazione</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
     <style>
@@ -79,7 +79,7 @@
         #Nome {
             position: absolute;
             height: 49px;
-            left: 74px;                
+            left: 74px;
             top: 100px;
             width: auto;
             right: 74px;
@@ -87,16 +87,16 @@
         #Cognome {
             position: absolute;
             height: 49px;
-            left: 74px;                
+            left: 74px;
             top: 225px;
             width: auto;
             right: 74px;
         }
-  
+
         #Residenza{
             position: absolute;
             height: 49px;
-            left: 74px;                
+            left: 74px;
             top: 350px;
             width: auto;
             right: 74px;
@@ -113,8 +113,8 @@
         #Error_email{
             position: absolute;
             left: 74px;
-            top: 515px; 
-            font-size: 18px;      
+            top: 515px;
+            font-size: 18px;
         }
 
         #CodPA{
@@ -198,11 +198,11 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #d4001c;  
+            background: #d4001c;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: #960011;  
+            background: #960011;
         }
 
     </style>
@@ -223,7 +223,7 @@
         <form onsubmit="modificaDatiPazienteDaAO(); return false;" id="editForm">
             <input type="text" id="Residenza" value="" required/>
             <input type="email" id="Email" value="" required/>
-            <select name="CodPA" id="CodPA"></select>
+            <select name="CodPA" id="CodPA" selected disabled hidden></select>
             <input type="text" id="Nome" value="" required/>
             <input type="text" id="Cognome" value="" required/>
             <input id="submitButton" type="submit" value="salva modifiche"/>
