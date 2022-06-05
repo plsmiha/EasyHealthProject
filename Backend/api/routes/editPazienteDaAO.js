@@ -8,16 +8,17 @@ const Patient = require('../../models/patient');
 
 router.delete('', async function(req, res) {
     console.log('dentro delete backend');
-    
+
     var id_user= await Patient.findOne({_id: req.query.id}).id_user
     await User.deleteOne({_id: id_user})
     await Patient.deleteOne({_id: req.query.id})
     res.status(200).json({success: 'true',comment:'paziente eliminato'});
+    return;
 })
 
 router.post('', async function(req, res){
     console.log('dentro post backend');
-    
+
     //controllo che ogni campo sia completato in maniera opportuna
     if(typeof req.body.email == 'undefined' ||  typeof req.body.residenza== 'undefined' || typeof req.body.codePA == 'undefined' || typeof req.body.nome == 'undefined' || typeof req.body.cognome == 'undefined' )
     {   console.log('anuovi dati:');
@@ -45,8 +46,8 @@ router.post('', async function(req, res){
         console.log('email gia registrata');
         return;
     }
-  
-  
+
+
 
     //primo parametro e quello secondo il quale sto cercando=id, poi passo nuovi campi, poi callback
     //The query executes if callback is passed.
@@ -59,7 +60,3 @@ router.post('', async function(req, res){
 });
 
 module.exports = router;
-
-
-
-
