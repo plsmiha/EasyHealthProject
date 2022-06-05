@@ -3,10 +3,10 @@ require("dotenv").config();
 const url =  "http://localhost";
 const jwt = require('jsonwebtoken');
 
-const tokenM= 'access_token='+jwt.sign({id: "629b21b9c75ce70fe2102844", role: "M"}, process.env.JWT_KEY);
-const tokenP='access_token='+jwt.sign({id: "629b232ec9018223bad5708c", role: "P"}, process.env.JWT_KEY);
+const tokenM= 'access_token='+jwt.sign({id: "629d1dff46a2046f0591d629", role: "M"}, process.env.JWT_KEY);
+const tokenP='access_token='+jwt.sign({id: "629d1eb14c6160436acda633", role: "P"}, process.env.JWT_KEY);
 
-const tokenAO='access_token='+jwt.sign({id: "629b2394c9018223bad57092", role: "AO"}, process.env.JWT_KEY);
+const tokenAO='access_token='+jwt.sign({id: "629d1b4f9cb6ddb084043776", role: "AO"}, process.env.JWT_KEY);
 
 
 describe('[JEST] /api/v1/Medico', () => {
