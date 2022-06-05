@@ -183,7 +183,7 @@ function loadViewPatientData() {
             document.getElementById("CodPA").value = "6298f524110402d55566676f";
 
             if (getParam("add") != "true") {
-                fetch('../api/v1/patient', {
+                fetch('../api/v1/Paziente/all', {
                     method: 'GET',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(),
@@ -253,7 +253,7 @@ function modificaDatiPazienteDaAO() {
         var codePA = document.getElementById("CodPA").value;
 
         fetch('../api/v1/editPazienteDaAO?id=' + getParam("id"), {
-            method: 'POST',
+            method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: email, residenza: residenza, nome: nome, cognome: cognome, codePA: codePA }),
         })

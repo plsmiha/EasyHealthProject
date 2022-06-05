@@ -16,8 +16,8 @@ router.delete('', async function(req, res) {
     return;
 })
 
-router.post('', async function(req, res){
-    console.log('dentro post backend');
+router.put('', async function(req, res){
+    console.log('dentro put backend');
 
     //controllo che ogni campo sia completato in maniera opportuna
     if(typeof req.body.email == 'undefined' ||  typeof req.body.residenza== 'undefined' || typeof req.body.codePA == 'undefined' || typeof req.body.nome == 'undefined' || typeof req.body.cognome == 'undefined' )
