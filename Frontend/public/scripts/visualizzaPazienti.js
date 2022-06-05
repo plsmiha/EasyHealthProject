@@ -288,7 +288,7 @@ function modificaDatiPazienteDaAO() {
         fetch('../api/v2/signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify( { nome: nome, cognome: cognome, residenza: residenza, CF: genRand(16), email: email, password: "TemporaryPasswordToBeR3S3TTED", codPA: codPA } ),
+            body: JSON.stringify( { name: nome, surname: cognome, address: residenza, CF: genRand(16), email: email, password: "TemporaryPasswordToBeR3S3TTED", codePA: codPA } ),
         })
         .then((resp) => resp.json())
         .then(function(data) {
