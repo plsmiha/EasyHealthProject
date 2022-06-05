@@ -1,6 +1,12 @@
 const fetch = require("node-fetch");
-require("dotenv").config()
-const url =  "http://localhost"
+require("dotenv").config();
+const url =  "http://localhost";
+const jwt = require('jsonwebtoken');
+
+const tokenM= 'access_token='+jwt.sign({id: "629b21b9c75ce70fe2102844", role: "M"}, process.env.JWT_KEY);
+const tokenP='access_token='+jwt.sign({id: "629b232ec9018223bad5708c", role: "P"}, process.env.JWT_KEY);
+
+const tokenAO='access_token='+jwt.sign({id: "629b2394c9018223bad57092", role: "AO"}, process.env.JWT_KEY);
 
 
 describe('[JEST] /api/v1/Medico', () => {
@@ -10,15 +16,17 @@ const defaultMedico ={
     password:"password",
     numero:"3333333333",
     title:"628fbe011e0b7989431e2254"
-  }
+  };
+
+
 it('[LOGGATO] <200> GET dati medico medico', async () => {
 
-  var ck  = 'access_token='+process.env.M_TOKEN;//il jwt token
+
   const meta = {//creo l'headers
   'Content-Type': 'application/json',
-  cookie:ck
+  cookie:tokenM
   };
-  console.log(ck);
+
   var code;
   var data;
 
@@ -39,10 +47,10 @@ it('[LOGGATO] <200> GET dati medico medico', async () => {
 
 it('[LOGGATO] <200> PUT Modifica dati medico medico', async () => {
 
-  var ck  = 'access_token='+process.env.M_TOKEN;//il jwt token
+
   const meta = {//creo l'headers
   'Content-Type': 'application/json',
-  cookie:ck
+  cookie:tokenM
   };
   const body ={
     email: "medico@test.cases",
@@ -65,10 +73,10 @@ it('[LOGGATO] <200> PUT Modifica dati medico medico', async () => {
 
 it('[LOGGATO] <200> GET nuovi dati medico medico', async () => {
 
-  var ck  = 'access_token='+process.env.M_TOKEN;//il jwt token
+
   const meta = {//creo l'headers
   'Content-Type': 'application/json',
-  cookie:ck
+  cookie:tokenM
   };
   var code;
   var data;
@@ -90,10 +98,10 @@ it('[LOGGATO] <200> GET nuovi dati medico medico', async () => {
 
 it('[LOGGATO] <200> Restore dati medico medico', async () => {
 
-  var ck  = 'access_token='+process.env.M_TOKEN;//il jwt token
+
   const meta = {//creo l'headers
   'Content-Type': 'application/json',
-  cookie:ck
+  cookie:tokenM
   };
 
   var code;
@@ -110,10 +118,10 @@ it('[LOGGATO] <200> Restore dati medico medico', async () => {
 
 it('[LOGGATO] <400> Modifica dati medico medico incompleto', async () => {
 
-  var ck  = 'access_token='+process.env.M_TOKEN;//il jwt token
+
   const meta = {//creo l'headers
   'Content-Type': 'application/json',
-  cookie:ck
+  cookie:tokenM
   };
   const body ={
     email: "medico@test.cases",
@@ -135,10 +143,10 @@ it('[LOGGATO] <400> Modifica dati medico medico incompleto', async () => {
 
 it('[LOGGATO] <506> Modifica dati medico medico email gia` usata', async () => {
 
-  var ck  = 'access_token='+process.env.M_TOKEN;//il jwt token
+
   const meta = {//creo l'headers
   'Content-Type': 'application/json',
-  cookie:ck
+  cookie:tokenM
   };
   const body ={
     email: "paziente@test.cases",
@@ -235,13 +243,14 @@ describe('[JEST] /api/v1/login',()=>{
 
 describe('[JEST] /api/v1/logout',()=>{
 
+
   it('[LOGGATO] <200> POST logout con account P', async () => {
     await new Promise(r => setTimeout(r, 100));//evita che il server esploda
-    ck  = 'access_token='+process.env.P_TOKEN;
+
     expect.assertions(1);
     var response = await fetch(url+'/api/v1/logout', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json', cookie:ck}
+        headers: {'Content-Type': 'application/json', cookie:tokenP}
     })
     expect( response.status ).toEqual(200);
 
@@ -249,22 +258,22 @@ describe('[JEST] /api/v1/logout',()=>{
 
   it('[LOGGATO] <200> POST logout con account M', async () => {
     await new Promise(r => setTimeout(r, 100));//evita che il server esploda
-    ck  = 'access_token='+process.env.M_TOKEN;
+
     expect.assertions(1);
     var response = await fetch(url+'/api/v1/logout', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json', cookie:ck}
+        headers: {'Content-Type': 'application/json', cookie:tokenM}
     })
     expect( response.status ).toEqual(200);
   })
 
   it('[LOGGATO] <200> POST logout con account AO', async () => {
     await new Promise(r => setTimeout(r, 100));//evita che il server esploda
-    ck  = 'access_token='+process.env.AO_TOKEN;
+
     expect.assertions(1);
     var response = await fetch(url+'/api/v1/logout', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json', cookie:ck}
+        headers: {'Content-Type': 'application/json', cookie:tokenAO}
     })
     expect( response.status ).toEqual(200);
   })
@@ -281,8 +290,6 @@ describe('[JEST] /api/v1/logout',()=>{
 
 
 });
-
-
 
 describe('[JEST] /api/v1/resetPassword',()=>{
   const email="utenteresetpassword@test.cases"
@@ -354,6 +361,7 @@ describe('[JEST] /api/v1/resetPassword',()=>{
 
 describe('[JEST] /api/v1/PA',()=>{
 var id_delete;
+
 const paName="PATaroccoTestCases";
 const datiPA =JSON.stringify({
 name: paName,
@@ -362,7 +370,7 @@ sconto:30
 
 //uncommentare tutti i console.log per vedere le modifiche al db in corso d'opera
 //rename //console.log => console.log
-const meta = {'Content-Type': 'application/json',cookie:'access_token='+process.env.AO_TOKEN};
+const meta = {'Content-Type': 'application/json',cookie:tokenAO};
 
 it('[LOGGATO] <200> GET dati PA', async () => {
 

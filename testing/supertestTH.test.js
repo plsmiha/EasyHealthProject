@@ -15,10 +15,18 @@ beforeEach( async () => {//altrimenti il server taglia le connessioni se arrivan
     await new Promise(resolve => setTimeout(resolve, 50));
  });
 
+
+const tokenM='access_token='+jwt.sign({id: "629b21b9c75ce70fe2102844", role: "M"}, process.env.JWT_KEY);
+
+const tokenP='access_token='+jwt.sign({id: "629b232ec9018223bad5708c", role: "P"}, process.env.JWT_KEY);
+const tokenAO='access_token='+jwt.sign({id: "629b2394c9018223bad57092", role: "AO"}, process.env.JWT_KEY);
+
+
+
 describe('[SUPERTEST] /api/v1/Medico', () => {
 
-      var ck  = 'access_token='+process.env.M_TOKEN;
-      header={'Content-Type': 'application/json', cookie:ck};
+
+      header={'Content-Type': 'application/json', cookie:tokenM};
 
       test('[LOGGATO] <200> GET dati medico medico', () => {
       return request(app).get('/api/v1/Medico')
@@ -123,24 +131,21 @@ describe('[SUPERTEST] /api/v1/login', () => {
  });
 
 describe('[SUPERTEST] /api/v1/logout', () => {
-      var ck;
 
-      ck  = 'access_token='+process.env.P_TOKEN;
       test('[LOGGATO] <200> POST logout con account P', () => {
       return request(app).post('/api/v1/logout')
-      .set({'Content-Type': 'application/json', cookie:ck})
+      .set({'Content-Type': 'application/json', cookie:tokenP})
       .expect(200)});
 
-      ck  = 'access_token='+process.env.M_TOKEN;
       test('[LOGGATO] <200> POST logout con account M', () => {
       return request(app).post('/api/v1/logout')
-      .set({'Content-Type': 'application/json', cookie:ck})
+      .set({'Content-Type': 'application/json', cookie:tokenM})
       .expect(200)});
 
       ck  = 'access_token='+process.env.AO_TOKEN;
       test('[LOGGATO] <200> POST logout con account AO', () => {
       return request(app).post('/api/v1/logout')
-      .set({'Content-Type': 'application/json', cookie:ck})
+      .set({'Content-Type': 'application/json', cookie:tokenAO})
       .expect(200)});
 
       test('[NON LOGGATO] <403> POST logout senza token', () => {
@@ -178,7 +183,7 @@ describe('[SUPERTEST] /api/v1/PA', () => {
       name: paName,
       sconto:30
       })
-      const header = {'Content-Type': 'application/json',cookie:'access_token='+process.env.AO_TOKEN};
+      const header = {'Content-Type': 'application/json',cookie:tokenAO};
 
       test('[LOGGATO] <200> GET dati PA', () => {
       return request(app).get('/api/v1/PA')
@@ -202,6 +207,7 @@ describe('[SUPERTEST] /api/v1/PA', () => {
                           id_delete=data[property]['_id'];//setto l'id da eliminare poi
                       }};
                 })
+
       });
 
       test('[LOGGATO] <506> POST PA con nome esistente', () => {
@@ -273,6 +279,10 @@ describe('[SUPERTEST] /api/v1/PA', () => {
         id: id_delete
       }))
       .expect(200)});
+
+      test('[LOGGATO] <403> ALL PA senza token AO', () => {
+      return request(app).get('/api/v1/PA')
+      .expect(403)});
 
 
 });

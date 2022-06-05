@@ -48,7 +48,6 @@ app.use('/api/v1/login', login);
 app.use('/api/v1/aree', aree);
 app.use('/api/v2/signup', signup);
 app.use('/api/v1/verifyEmail', verify_email);
-app.use('/api/v1/PA', PA);
 app.use('/api/v1/resetPassword', reset);
 
 
@@ -76,6 +75,7 @@ app.use((req, res, next) => {
 
 app.use('/api/v1/Medico', modifMedico);
 app.use('/api/v1/Admin', admin);
+app.use('/api/v1/PA', PA);
 
 
 
