@@ -28,7 +28,7 @@ const reset = require ('./routes/resetPassword.js');
 
 const editPaziente = require('./routes/paziente.js');
 const modifMedico = require('./routes/modificaMedico.js');
-const profileM = require('./routes/profiloM.js');
+
 const visita = require('./routes/prenotazione.js');
 const admin = require('./routes/admin.js');
 const agendaMedico = require('./routes/agendaMedico.js');
@@ -84,7 +84,7 @@ app.use('/api/v1/prenotazione', visita);
 app.use('/api/v1/Paziente', editPaziente);
 
 app.use('/api/v1/agendaMedico', agendaMedico);
-app.use('/api/v1/profileM', profileM);
+
 
 app.use('/api/v1/editPazienteDaAO', editPazienteDaAO);
 app.use('/api/v1/editMedicoDaAO', editMedicoDaAO);

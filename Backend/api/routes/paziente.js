@@ -11,6 +11,21 @@ function getUser(req){ //qui dentro ricevaero dal jwt l'id user
 }
 
 
+function getRole(req)
+{
+    return req.jwtData.role;
+}
+
+router.get('/all', async function(req, res) {
+  if(getRole(req)!='M' || getRole(req)!='AO')
+  {
+    let pas = await Patient.find({});
+    res.status(200).json(pas);
+    return;
+  }
+
+})
+
 //recupero le informazioni dell'utente con un GET per metterle nel form di modifica
 router.get('', async function(req, res) //quando ricevo una richiesta get su /api/v1/modmed entro qui
 {
