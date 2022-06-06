@@ -266,7 +266,25 @@
                 border-radius: 50px;
             }
 
+            #goback{
+
+                position: absolute;
+                width: 45px;
+                height: 45px;
+
+                color: #d4001c;
+
+                left: 20px;
+                top: 20px;
+                  cursor: pointer;
+
+            }
+
         </style>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body onload="loadData();">
         <script src="scripts/calendarP.js"></script>
@@ -275,6 +293,7 @@
         <div  id="box">
             <div id="oggi">Gli Appuntamenti Di Oggi: </div>
             <div id="prossimi">Prossimi Appuntamenti: </div>
+            <i id='goback' onclick="window.location.href='HP_P.html'" class="fa fa-arrow-circle-left fa-2x" ></i>
             <div id="dashboard">
                 <img src="img/calendario.png" id="img"/>
                 <span>Non è possibile disdire un appuntamento il giorno stesso.<br>In caso di assenza ad un

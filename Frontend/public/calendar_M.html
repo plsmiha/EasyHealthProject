@@ -565,12 +565,31 @@
             ::-webkit-scrollbar-thumb:hover {
             background: #960011;
             }
+            #goback{
+
+                position: absolute;
+                width: 45px;
+                height: 45px;
+
+                color: #d4001c;
+
+                left: 20px;
+                top: 20px;
+                  cursor: pointer;
+
+            }
+
         </style>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body onload="loadCalendar();">
         <div id="title">Il tuo calendario</div>
         <a href="/"><img src="img/Logo.png" id="logo"/></a>
         <div id="box">
+          <i id='goback' onclick="window.location.href='HP_M.html'" class="fa fa-arrow-circle-left fa-2x" ></i>
             <div id="box_calendar">
                 <span id="month">[Month]</span>
                 <input type="button" id="today" value="Today" onclick="today();"/>
