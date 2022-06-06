@@ -26,3 +26,13 @@ jobs:
         cache: 'npm'
     - run: npm install
     - run: npm test
+      env:
+        DB_URL_API: mongodb+srv://NodeApp:Y1XPLdwnXWNRSKIN@nodeapp.ggfa7kc.mongodb.net/test
+        DB_URL: mongodb+srv://NodeApp:Y1XPLdwnXWNRSKIN@nodeapp.ggfa7kc.mongodb.net/API
+        PASSWORD_MAIL: idsids22
+        JWT_KEY: SONOLACHIAVEDITUTTO
+        DOMAIN: http://localhost
+        P_TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOWIyMzJlYzkwMTgyMjNiYWQ1NzA4YyIsInJvbGUiOiJQIiwiaWF0IjoxNjU0MzM0NjI0fQ.A6ayppxRY-W9nFisHmWJJ5MsjywXIVTsJRAK6sVj6-Y
+        AO_TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOWIyMzk0YzkwMTgyMjNiYWQ1NzA5MiIsInJvbGUiOiJBTyIsImlhdCI6MTY1NDMzNDY3M30.PtARCfJ69C0PosEQf1T874wzU6EJx2OmvRp6Qr0cZJY
+        M_TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOWIyMWI5Yzc1Y2U3MGZlMjEwMjg0NCIsInJvbGUiOiJNIiwiaWF0IjoxNjU0MzM0NjUyfQ.4TQDXqMarF0wIKICuVsEdNEI6lfew1EZZdQWIbEUckk
+      
