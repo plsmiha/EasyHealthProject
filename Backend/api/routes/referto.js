@@ -39,9 +39,11 @@ router.get('/paziente', async function(req, res)
 
 router.get('/:id', async function(req, res)
 {
-    Referto.findById(req.params.id).then(ref =>{
+    let referto = await Referto.findById(req.params.id);
+    if(!referto)
+        res.status(404).json({success: 'false', reason: 'Not found', error: '1'});
+    else
         res.status(200).json(ref);
-    });
 })
 
 router.post('', async function(req, res)
