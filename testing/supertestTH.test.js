@@ -279,9 +279,7 @@ describe('[SUPERTEST] /api/v1/PA', () => {
       }))
       .expect(200)});
 
-      test('[LOGGATO] <403> ALL PA senza token AO', () => {
-      return request(app).get('/api/v1/PA')
-      .expect(403)});
+    
 
 
 });
