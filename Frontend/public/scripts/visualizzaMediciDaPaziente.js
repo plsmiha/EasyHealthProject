@@ -17,13 +17,13 @@ function loadData()//se la password non viene inserita resta uguale, se viene in
              var opt = document.createElement('option');
              opt.innerHTML = el.name;
              opt.value = el._id;
-             document.getElementById("piani").appendChild(opt);
+             document.getElementById("aree").appendChild(opt);
          })
      });
 
 
 
-     vettore_pazienti.push(["NOME", "COGNOME", "EMAIL","NUMERO","AREA COMPETENZA", "OPZIONI"]);
+     vettore_pazienti.push(["NOME", "COGNOME", "EMAIL","NUMERO","AREA COMPETENZA", "VISUALIZZA"]);
 
 var array_PA = {};
 
@@ -60,7 +60,7 @@ fetch('../api/v1/aree', {
 
 
 function cercaperpa(){
-    var elemento=document.getElementById("piani");
+    var elemento=document.getElementById("aree");
     var area=elemento.options[elemento.selectedIndex].text;
     var smistati = vettore_pazienti.filter(item =>item[4].indexOf(area) !== -1 || item[4].indexOf('AREA COMPETENZA') !== -1);
 
@@ -69,7 +69,7 @@ function cercaperpa(){
     }
     else{
       var tmp = new Array();
-      tmp.push(["NOME", "COGNOME", "EMAIL","NUMERO","AREA COMPETENZA", "OPZIONI"]);
+      tmp.push(["NOME", "COGNOME", "EMAIL","NUMERO","AREA COMPETENZA", "VISUALIZZA"]);
       createTable(tmp);
     }
 

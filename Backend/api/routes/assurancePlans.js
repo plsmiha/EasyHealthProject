@@ -50,7 +50,6 @@ router.delete('', async function(req, res) {
 
 router.put('', async function(req, res)
 {
-
   if(typeof req.body.name == 'undefined' || typeof req.body.sconto == 'undefined'|| typeof req.body.id == 'undefined' )
   {
       res.status(400).json({success: 'false', reason: 'Wrong format', error: '1'});

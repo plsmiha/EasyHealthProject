@@ -133,6 +133,7 @@
                 text-align: center;
 
                 color: #FFFFFF;
+                cursor:pointer;
             }
             #btn_restore_all{
                 position: absolute;
@@ -154,8 +155,9 @@
                 text-align: center;
 
                 color: #FFFFFF;
+                cursor:pointer;
             }
-            #btn_medico_competenza{
+            #btn_paziente_pa{
                 position: absolute;
                 width: 20%;
                 height: 39px;
@@ -175,6 +177,7 @@
                 text-align: center;
 
                 color: #FFFFFF;
+                cursor:pointer;
             }
             #l_calendario{
                 position: absolute;
@@ -313,6 +316,7 @@
 
                 left: 20px;
                 top: 20px;
+                cursor: pointer;
 
             }
 
@@ -391,12 +395,11 @@
             <i id='goback' onclick="window.location.href='HP_M.html'" class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>
 
 
-            <div id="l_dashboard">Dashboard</div>
             <input type="text" id="txt_paziente_nome" value="zeno"/>
             <select id="piani"></select>
             <input type="button" id="btn_paziente_nome" value="Cerca per nome" onclick="cercapernome();"/>
               <input type="button" id="btn_restore_all" value="Restore All" onclick="restore_all();"/>
-            <input type="button" id="btn_medico_competenza" value="Cerca per PA" onclick="cercaperpa();"/>
+            <input type="button" id="btn_paziente_pa" value="Cerca per PA" onclick="cercaperpa();"/>
 
             <div id="dashboard">
               <div id='listone'>

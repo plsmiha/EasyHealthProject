@@ -29,9 +29,9 @@ router.post('', async function(req, res){
         res.status(400).json({success: 'false', reason: 'Wrong format', error: '1'});
         return;
     }
-    let d = new Date();
-    let today = d.getFullYear()  + "-" + (d.getMonth()+1) + "-" + d.getDate();
-    if(from>=to || day<=today)
+    let today = new Date();
+    let dayindate = new Date(day.split("-")[0], day.split("-")[1], day.split("-")[2]);
+    if(from>=to || dayindate<=today)
     {
         res.status(400).json({success: 'false', reason: 'Incorrect date or time', error: '3'});
         return;
