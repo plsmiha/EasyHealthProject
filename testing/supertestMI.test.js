@@ -151,7 +151,7 @@ describe('[SUPERTEST] /api/v1/Prenotazione', () => {
         .expect(200);
       });
 
-      test('[LOGGATO] <200> GET slot liberi da M', () => {
+      test('[LOGGATO] <403> GET slot liberi da M', () => {
         return request(app).get('/api/v1/Prenotazione?id='+id_medico)
         .set(headerM)
         .expect(403);
@@ -163,7 +163,7 @@ describe('[SUPERTEST] /api/v1/Prenotazione', () => {
         .expect(200);
       });
 
-      test('[LOGGATO] <200> GET slot passando id medico formato sbagliato', () => {
+      test('[LOGGATO] <406> GET slot passando id medico formato sbagliato', () => {
         return request(app).get('/api/v1/Prenotazione?id='+not_id)
         .set(headerP)
         .expect(406);
@@ -301,12 +301,12 @@ describe('[SUPERTEST] /api/v1/agendaPaziente', () => {
         .expect(200);
     });
 
-    test('[LOGGATO] <200> DELETE uno slot di P da AO', () => {
+    test('[LOGGATO] <403> DELETE uno slot di P da AO', () => {
         return request(app).delete('/api/v1/agendaPaziente/'+id_slot)
         .set(headerAO)
         .expect(403);
     });
-    test('[LOGGATO] <200> DELETE uno slot di P da M', () => {
+    test('[LOGGATO] <403> DELETE uno slot di P da M', () => {
         return request(app).delete('/api/v1/agendaPaziente/'+id_slot)
         .set(headerM)
         .expect(403);
