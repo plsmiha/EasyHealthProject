@@ -31,7 +31,6 @@ const editPaziente = require('./routes/paziente.js');
 const modifMedico = require('./routes/modificaMedico.js');
 
 const visita = require('./routes/prenotazione.js');
-const admin = require('./routes/admin.js');
 const agendaMedico = require('./routes/agendaMedico.js');
 
 
@@ -76,7 +75,6 @@ app.use((req, res, next) => {
 
 
 app.use('/api/v1/Medico', modifMedico);
-app.use('/api/v1/Admin', admin);
 app.use('/api/v1/PA', PA);
 
 
