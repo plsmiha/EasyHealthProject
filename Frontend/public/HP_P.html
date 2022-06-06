@@ -330,6 +330,27 @@ cursor: pointer;
   background-color: #7a1724;
 }
             .dropdown:hover {background-color: #3e8e41;}
+            #btn_restore_all{
+                position: absolute;
+                width: 20%;
+                height: 39px;
+                left: calc(70% + 20px);
+                top: 140px;
+
+                background: #D4001C;
+                border-radius: 10px;
+                border: 0px;
+
+                font-family: 'Questrial';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 20px;
+                line-height: 25px;
+                align-items: center;
+                text-align: center;
+
+                color: #FFFFFF;
+            }
         </style>
     </head>
     <body onload="loadAree(); loadHP('P');loadData();">
@@ -345,6 +366,7 @@ cursor: pointer;
             <input type="button" id="btn_medico_competenza" value="Cerca per competenza" onclick="cercaperpa();"/>
             <input type="button" id="btn_appuntamenti" value="Visualizza appuntamenti" onclick="window.location.href='calendar_P.html';"/>
             <input type="button" id="btn_referti" value="Visualizza referti"/>
+              <input type="button" id="btn_restore_all" value="Restore All" onclick="restore_all();"/>
             <div id="dashboard">
               <div id='listone'>
                 </div>
