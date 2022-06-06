@@ -12,7 +12,7 @@ afterAll( () => {
    mongoose.connection.close(true);
  });
 beforeEach( async () => {//altrimenti il server taglia le connessioni se arrivano tutte in blocco
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise(resolve => setTimeout(resolve, 100));
  });
 
 
@@ -22,7 +22,7 @@ beforeEach( async () => {//altrimenti il server taglia le connessioni se arrivan
  const tokenAO='access_token='+jwt.sign({id: "629d1b4f9cb6ddb084043776", role: "AO"}, process.env.JWT_KEY);
 
 
- describe('[SUPERTEST] /api/v1/Medico', () => {
+describe('[SUPERTEST] /api/v1/Medico', () => {
 
 
        header={'Content-Type': 'application/json', cookie:tokenM};
@@ -59,6 +59,20 @@ beforeEach( async () => {//altrimenti il server taglia le connessioni se arrivan
            }
        ))
        .expect(200)});
+
+       test('[LOGGATO] <506> PUT Modifica dati medico email registrata', () => {
+       return request(app).put('/api/v1/Medico')
+       .set(header)
+       .send(JSON.stringify(
+         {
+             email: "ao@test.cases",
+             bio:"sono la bio di default",
+             password:"password",
+             numero:"3333333333",
+             title:"628fbe011e0b7989431e2254"
+           }
+       ))
+       .expect(506)});
 
        test('[LOGGATO] <400> PUT Modifica dati medico medico incompleto', () => {
        return request(app).put('/api/v1/Medico')
