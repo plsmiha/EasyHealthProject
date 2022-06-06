@@ -17,7 +17,7 @@ const transporter = nodemailer.createTransport({
 transporter.verify().then().catch(console.error);
 
 router.delete('', async function(req, res) {
-    var doc = await docs.findOne(req.query.id)
+    var doc = await docs.findById(req.query.id)
     await Slot.deleteMany({id_doc: req.query.id})
     await user.deleteOne({_id: doc.id_user})
     await docs.deleteOne({_id: req.query.id})
