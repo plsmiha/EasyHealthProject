@@ -17,11 +17,9 @@ const transporter = nodemailer.createTransport({
 transporter.verify().then().catch(console.error);
 
 router.delete('', async function(req, res) {
-    console.log('dentro delete backend');
-    
-    var id_user= await docs.findOne({_id: req.query.id}).id_user
+    var doc = await docs.findOne(req.query.id)
     await Slot.deleteMany({id_doc: req.query.id})
-    await user.deleteOne({_id: id_user})
+    await user.deleteOne({_id: doc.id_user})
     await docs.deleteOne({_id: req.query.id})
     res.status(200).json({success: 'true',comment:'medico eliminato'});
 })
