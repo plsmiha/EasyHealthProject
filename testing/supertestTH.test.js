@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 
 
 beforeAll( async () => { jest.setTimeout(8000);
-    app.locals.db = await mongoose.connect(process.env.DB_URL);
+    app.locals.db = await mongoose.connect(process.env.DB_URL_API);
 });
 afterAll( () => {
    mongoose.connection.close(true);
