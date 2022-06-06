@@ -10,7 +10,7 @@ router.get('', async function(req, res) {
         res.json({ error: 'Bad Request' });
         return;
     }
-    let user = await User.findByIdAndUpdate(req.query.id, { verified: true });
+    await User.findByIdAndUpdate(req.query.id, { verified: true }).catch(error => {});
     res.redirect('../../index.html');
 });
 
