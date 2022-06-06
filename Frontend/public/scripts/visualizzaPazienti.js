@@ -222,7 +222,7 @@ function loadViewPatientData() {
 function eliminaPazienteDaAO(id) {
 
     if (confirm("Eliminare il paziente selezionato?")) {
-        fetch('../api/v1/editPazienteDaAO?id=' + id, {
+        fetch('../api/v1/PazienteDaAO?id=' + id, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
         })
@@ -252,7 +252,7 @@ function modificaDatiPazienteDaAO() {
         var residenza = document.getElementById("Residenza").value;
         var codePA = document.getElementById("CodPA").value;
 
-        fetch('../api/v1/editPazienteDaAO?id=' + getParam("id"), {
+        fetch('../api/v1/PazienteDaAO?id=' + getParam("id"), {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: email, residenza: residenza, nome: nome, cognome: cognome, codePA: codePA }),

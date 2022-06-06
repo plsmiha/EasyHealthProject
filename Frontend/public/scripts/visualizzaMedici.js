@@ -247,7 +247,7 @@ function loadViewMedicData() {
 function eliminaMedicoDaAO(id) {
 
   if (confirm("Eliminare il medico selezionato?")) {
-      fetch('../api/v1/editMedicoDaAO?id=' + id, {
+      fetch('../api/v1/MedicoDaAO?id=' + id, {
           method: 'DELETE',
           headers: { 'Content-Type': 'application/json' },
       })
@@ -278,7 +278,7 @@ function modificaDatiMedicoDaAO() {
       var area = document.getElementById("Area").value;
       var bio = document.getElementById("Bio").value;
 
-      fetch('../api/v1/editMedicoDaAO?id=' + getParam("id"), {
+      fetch('../api/v1/MedicoDaAO?id=' + getParam("id"), {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: email, numero: numero, nome: nome, cognome: cognome, title: area, bio: bio }),
@@ -309,7 +309,7 @@ function modificaDatiMedicoDaAO() {
     var area = document.getElementById("Area").value;
     var bio = document.getElementById("Bio").value;
 
-    fetch('../api/v1/editMedicoDaAO', {
+    fetch('../api/v1/MedicoDaAO', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: email, numero: numero, nome: nome, cognome: cognome, title: area, bio: bio }),

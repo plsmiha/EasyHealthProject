@@ -21,6 +21,7 @@ const logout = require('./routes/logout.js');
 const verify_email = require('./routes/verify_email.js');
 const calendarioP = require('./routes/calendarioP.js');
 const PA = require('./routes/assurancePlans.js');
+const PAPublic = require('./routes/assurancePlansPublic.js');
 const referto = require('./routes/referto.js');
 
 const AO = require('./routes/modificaAO.js');
@@ -57,6 +58,7 @@ app.use('/api/v1/resetPassword', reset);
 
 
 app.use('/api/v1/medic', doc);
+app.use('/api/v1/PA', PAPublic);
 
 //__________________________________________________________
 
@@ -86,14 +88,13 @@ app.use('/api/v1/Paziente', editPaziente);
 app.use('/api/v1/agendaMedico', agendaMedico);
 
 
-app.use('/api/v1/editPazienteDaAO', editPazienteDaAO);
-app.use('/api/v1/editMedicoDaAO', editMedicoDaAO);
+app.use('/api/v1/PazienteDaAO', editPazienteDaAO);
+app.use('/api/v1/MedicoDaAO', editMedicoDaAO);
 
 app.use('/api/v1/agendaPaziente', calendarioP);
 app.use('/api/v1/Referto', referto);
 
-app.use('/api/v1/editPaziente', editPaziente);
-app.use('/api/v1/editMedico', modifMedico);
+
 app.use('/api/v1/AO', AO);
 app.use('/api/v1/logout', logout);
 
