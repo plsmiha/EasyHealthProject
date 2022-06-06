@@ -6,7 +6,7 @@ function modificaDatiPaziente(){
     var password=document.getElementById("Password").value;
     var codePA=document.getElementById("CodPA").value;
 
-    fetch('../api/v1/Paziente', {
+    fetch('../api/v2/Paziente', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify( { email: email, residenza: residenza, password: password,  codePA: codePA } ),
@@ -65,7 +65,7 @@ function modificaDatiPaziente(){
     })
 
     //console.log('prendo i dati')
-    fetch('../api/v1/Paziente', {
+    fetch('../api/v2/Paziente', {
         method: 'GET', //con il get mi arriva come risposta non solo lo statos ma anche i dati che chiedo
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

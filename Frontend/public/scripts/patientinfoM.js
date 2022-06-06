@@ -6,7 +6,7 @@ function loadData(){
     });
     user_id = params.id;
 
-    fetch('../api/v1/Paziente/'+user_id, {
+    fetch('../api/v2/Paziente/'+user_id, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(),

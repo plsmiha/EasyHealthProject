@@ -1,6 +1,6 @@
 function loadHP(type)
 {
-        fetch(type=='P'?'../api/v1/Paziente':type=='M'?'../api/v1/Medico':'', {
+        fetch(type=='P'?'../api/v2/Paziente':type=='M'?'../api/v2/Medico':'', {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include'

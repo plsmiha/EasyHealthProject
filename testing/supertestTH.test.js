@@ -22,18 +22,18 @@ beforeEach( async () => {//altrimenti il server taglia le connessioni se arrivan
  const tokenAO='access_token='+jwt.sign({id: "629d1b4f9cb6ddb084043776", role: "AO"}, process.env.JWT_KEY);
 
 
-describe('[SUPERTEST] /api/v1/Medico', () => {
+describe('[SUPERTEST] /api/v2/Medico', () => {
 
 
        header={'Content-Type': 'application/json', cookie:tokenM};
 
        test('[LOGGATO] <200> GET dati medico medico', () => {
-       return request(app).get('/api/v1/Medico')
+       return request(app).get('/api/v2/Medico')
        .set(header)
        .expect(200)});
 
        test('[LOGGATO] <200> PUT Modifica dati medico medico', () => {
-       return request(app).put('/api/v1/Medico')
+       return request(app).put('/api/v2/Medico')
        .set(header)
        .send(JSON.stringify(
          {
@@ -47,7 +47,7 @@ describe('[SUPERTEST] /api/v1/Medico', () => {
        .expect(200)});
 
        test('[LOGGATO] <200> PUT Restore dati medico medico', () => {
-       return request(app).put('/api/v1/Medico')
+       return request(app).put('/api/v2/Medico')
        .set(header)
        .send(JSON.stringify(
          {
@@ -61,7 +61,7 @@ describe('[SUPERTEST] /api/v1/Medico', () => {
        .expect(200)});
 
        test('[LOGGATO] <506> PUT Modifica dati medico email registrata', () => {
-       return request(app).put('/api/v1/Medico')
+       return request(app).put('/api/v2/Medico')
        .set(header)
        .send(JSON.stringify(
          {
@@ -75,7 +75,7 @@ describe('[SUPERTEST] /api/v1/Medico', () => {
        .expect(506)});
 
        test('[LOGGATO] <400> PUT Modifica dati medico medico incompleto', () => {
-       return request(app).put('/api/v1/Medico')
+       return request(app).put('/api/v2/Medico')
        .set(header)
        .send(JSON.stringify(
          {
@@ -88,7 +88,7 @@ describe('[SUPERTEST] /api/v1/Medico', () => {
        .expect(400)});
 
        test('[LOGGATO] Modifica dati medico medico email gia` usata <506>', () => {
-       return request(app).put('/api/v1/Medico')
+       return request(app).put('/api/v2/Medico')
        .set(header)
        .send(JSON.stringify(
          {

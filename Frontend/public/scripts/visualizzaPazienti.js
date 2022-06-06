@@ -40,7 +40,7 @@ function loadData()//se la password non viene inserita resta uguale, se viene in
                 array_PA[e._id] = e.name;
             })
 
-            fetch('../api/v1/Paziente/all', {
+            fetch('../api/v2/Paziente/all', {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(),
@@ -183,7 +183,7 @@ function loadViewPatientData() {
             document.getElementById("CodPA").value = "6298f524110402d55566676f";
 
             if (getParam("add") != "true") {
-                fetch('../api/v1/Paziente/all', {
+                fetch('../api/v2/Paziente/all', {
                     method: 'GET',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(),
@@ -226,7 +226,7 @@ function loadViewPatientData() {
 function eliminaPazienteDaAO(id) {
 
     if (confirm("Eliminare il paziente selezionato?")) {
-        fetch('../api/v1/PazienteDaAO?id=' + id, {
+        fetch('../api/v2/PazienteDaAO?id=' + id, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
         })
@@ -256,7 +256,7 @@ function modificaDatiPazienteDaAO() {
         var residenza = document.getElementById("Residenza").value;
         var codePA = document.getElementById("CodPA").value;
 
-        fetch('../api/v1/PazienteDaAO?id=' + getParam("id"), {
+        fetch('../api/v2/PazienteDaAO?id=' + getParam("id"), {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: email, residenza: residenza, nome: nome, cognome: cognome, codePA: codePA }),
