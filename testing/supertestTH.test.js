@@ -279,7 +279,85 @@ describe('[SUPERTEST] /api/v1/PA', () => {
       }))
       .expect(200)});
 
-    
+
 
 
 });
+
+describe('[SUPERTEST] /api/v1/signup (include Interazioni AO con P)', () => {
+
+       header={'Content-Type': 'application/json', cookie:tokenAO};
+       var id_delete;
+       test('[NON LOGGATO] <200> POST Aggiunta P', () => {
+       return request(app).post('/api/v2/signup')
+       .set(header)
+       .send(JSON.stringify({
+           name:"Jhonny",
+           surname:"Bravo",
+           CF:"asd234asd3",
+           address:"casa testcases",
+           email:"jhonnyGood@test.cases",
+           password:"password123$",
+           codePA:"6298f524110402d55566676f"
+       }))
+       .expect(200)});
+       test('[NON LOGGATO] <406> POST Aggiunta P con email presente', () => {
+       return request(app).post('/api/v2/signup')
+       .set(header)
+       .send(JSON.stringify({
+           name:"Jhonny",
+           surname:"Bravo",
+           CF:"asd234543sdfg",
+           address:"casa testcases",
+           email:"paziente@test.cases",
+           password:"password123$",
+           codePA:"6298f524110402d55566676f"
+       }))
+       .expect(406)});
+       test('[NON LOGGATO] <406> POST Aggiunta P con CF presente', () => {
+       return request(app).post('/api/v2/signup')
+       .set(header)
+       .send(JSON.stringify({
+           name:"Jhonny",
+           surname:"Bravo",
+           CF:"asd234asd3",
+           address:"casa testcases",
+           email:"mailNuovissima@test.cases",
+           password:"password123$",
+           codePA:"6298f524110402d55566676f"
+       }))
+       .expect(406)});
+       test('[NON LOGGATO] <400> POST Aggiunta P con dati incompleti', () => {
+       return request(app).post('/api/v2/signup')
+       .set(header)
+       .send(JSON.stringify({
+           name:"Jhonny",
+           surname:"Bravo",
+           CF:"asd234asd3",
+           email:"mailNuovissima@test.cases",
+           password:"password123$",
+           codePA:"6298f524110402d55566676f"
+       }))
+       .expect(400)});
+
+       test('[LOGGATO] <dataGathering> GET id new P', () => {
+       request(app).get('/api/v1/Paziente/all')
+       .set(header)
+       .set('Accept', 'application/json')
+       .end((err,res) => {
+                     data= JSON.parse(res.text);
+                     for (var property in data) {
+
+                         if(data[property]["CF"] == "asd234asd3"){
+
+                           id_delete=data[property]['_id'];//setto l'id da eliminare poi
+                       }};
+                 })
+
+       });
+       test('[LOGGATO] <databaseRestore> DELETE P', () => {
+       return request(app).delete('/api/v1/PazienteDaAO?id='+id_delete)
+       .set(header)
+       .expect(200)});
+
+ });
