@@ -12,7 +12,7 @@ afterAll( () => {
    mongoose.connection.close(true);
  });
 beforeEach( async () => {//altrimenti il server taglia le connessioni se arrivano tutte in blocco
-    await new Promise(resolve => setTimeout(resolve, 100));
+    await new Promise(resolve => setTimeout(resolve, 150));
  });
 
 
@@ -92,7 +92,7 @@ describe('[SUPERTEST] /api/v1/Medico', () => {
        .set(header)
        .send(JSON.stringify(
          {
-           email: "paziente@test.cases",
+           email: "ao@test.cases",
            bio:"SONO UNA BIO MODIFICATA SIKE",
            password:"",
            title:"628fbe011e0b7989431e2254",

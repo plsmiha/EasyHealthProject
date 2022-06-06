@@ -12,7 +12,7 @@ afterAll( () => {
    mongoose.connection.close(true);
  });
 beforeEach( async () => {//altrimenti il server taglia le connessioni se arrivano tutte in blocco
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise(resolve => setTimeout(resolve, 150));
  });
 
 
@@ -23,7 +23,7 @@ beforeEach( async () => {//altrimenti il server taglia le connessioni se arrivan
 describe('[SUPERTEST] /api/v1/Paziente', () => {
 
     header={'Content-Type': 'application/json', cookie: tokenP};
-    headerM={'Content-Type': 'application/json', cookie: tokenM}; 
+    headerM={'Content-Type': 'application/json', cookie: tokenM};
 
       test('[LOGGATO] <200> PUT Modifica dei dati paziente da P', () => {
       return request(app).put('/api/v1/Paziente')
@@ -47,7 +47,7 @@ describe('[SUPERTEST] /api/v1/Paziente', () => {
             expect(res.body.address).toEqual('casa modificata');
             expect(res.body.codePA).toEqual('6298f524110402d55566676f')
         })
-      
+
       });
       test('[LOGGATO] <404> GET di un paziente non esistente', () => {
         return request(app).get('/api/v1/Paziente')
@@ -131,7 +131,7 @@ describe('[SUPERTEST] /api/v1/Paziente/all', () => {
         .set(headerP)
         .expect(403);
       });
-  
+
 });
 
 describe('[SUPERTEST] /api/v1/Prenotazione', () => {
@@ -139,7 +139,7 @@ describe('[SUPERTEST] /api/v1/Prenotazione', () => {
     headerP={'Content-Type': 'application/json', cookie: tokenP};
     headerM={'Content-Type': 'application/json', cookie: tokenM};
     headerAO={'Content-Type': 'application/json', cookie: tokenAO};
-    
+
     const id_medico= "629d1dff46a2046f0591d62b";
     const not_id= "629b21b9c75ce70fe210284";
 
@@ -173,7 +173,7 @@ describe('[SUPERTEST] /api/v1/Prenotazione', () => {
 
     var id_slot= "629d2ad11f6e21af9186091f";
     var not_slot="629d2ad11f6e21af9146091f";
-      
+
     test('[LOGGATO] <200> PUT prenotato da P', () => {
         return request(app).put('/api/v1/Prenotazione')
         .set(headerP)
@@ -182,7 +182,7 @@ describe('[SUPERTEST] /api/v1/Prenotazione', () => {
         }))
         .expect(200);
     });
-    
+
 
     test('[LOGGATO] <404> PUT prenotato da P SLOT GIA PRENOTATO', () => {
         return request(app).put('/api/v1/Prenotazione')
@@ -222,7 +222,7 @@ describe('[SUPERTEST] /api/v1/Prenotazione', () => {
         }))
         .expect(404);
     });
-  
+
 });
 
 describe('[SUPERTEST] /api/v1/Medico/id', () => {
@@ -250,7 +250,7 @@ describe('[SUPERTEST] /api/v1/Medico/id', () => {
         .set(headerP)
         .expect(404);
       });
-  
+
 });
 
 describe('[SUPERTEST] /api/v1/agendaPaziente', () => {
@@ -323,7 +323,7 @@ describe('[SUPERTEST] /api/v1/agendaPaziente', () => {
         .set(headerP)
         .expect(404);
     });
-    
+
 
    /* test('[LOGGATO] <404> DELETE uno slot di P di oggi', () => {
         return request(app).delete('/api/v1/agendaPaziente/'+oggi_slot)
@@ -336,8 +336,5 @@ describe('[SUPERTEST] /api/v1/agendaPaziente', () => {
         .set(headerP)
         .expect(406);
     });
-    
+
 });
-
-
-

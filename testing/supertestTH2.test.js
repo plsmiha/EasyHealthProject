@@ -12,7 +12,7 @@ afterAll( () => {
    mongoose.connection.close(true);
  });
 beforeEach( async () => {//altrimenti il server taglia le connessioni se arrivano tutte in blocco
-    await new Promise(resolve => setTimeout(resolve,100));
+    await new Promise(resolve => setTimeout(resolve,150));
  });
 
 
@@ -48,7 +48,7 @@ describe('[SUPERTEST] /api/v1/signup (include Interazioni AO con P)', () => {
            surname:"Bravo",
            CF:"asd234543sdfg",
            address:"casa testcases",
-           email:"paziente@test.cases",
+           email:"ao@test.cases",
            password:"password123$",
            codePA:"6298f524110402d55566676f"
        }))
