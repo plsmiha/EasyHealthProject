@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const docs = require('../../models/doc'); //importo il tipo doc, definito il suo schema in models/doc
 const user = require('../../models/user'); //uguale con user
+const Slot = require('../../models/slot');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 
@@ -19,6 +20,7 @@ router.delete('', async function(req, res) {
     console.log('dentro delete backend');
     
     var id_user= await docs.findOne({_id: req.query.id}).id_user
+    await Slot.deleteMany({id_doc: req.query.id})
     await user.deleteOne({_id: id_user})
     await docs.deleteOne({_id: req.query.id})
     res.status(200).json({success: 'true',comment:'medico eliminato'});
