@@ -5,7 +5,7 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main", "testCasesAndreatta", "testCasesMiha" ]
+    branches: [ "main", "testcasesAndreatta", "testcasesMiha" ]
 
 jobs:
   build:

@@ -56,7 +56,7 @@ function modificaPA(){
     fetch('../api/v1/PA', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify( { id:id,name: nome, sconto: sconto } ),
+        body: JSON.stringify( { id:id, name: nome, sconto: sconto } ),
 
     })
     .then((resp) => resp.json() )

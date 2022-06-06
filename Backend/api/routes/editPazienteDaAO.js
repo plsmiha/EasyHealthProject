@@ -5,12 +5,12 @@ const router = express.Router();
 
 const User = require('../../models/user');
 const Patient = require('../../models/patient');
+const Slot = require('../../models/slot');
 
 router.delete('', async function(req, res) {
-    console.log('dentro delete backend');
-
-    var id_user= await Patient.findOne({_id: req.query.id}).id_user
-    await User.deleteOne({_id: id_user})
+    var pat = await Patient.findById(req.query.id)
+    await Slot.updateMany({occupied_id_pat: req.query.id }, {occupied_id_pat: undefined})
+    await User.deleteOne({_id: pat.id_user})
     await Patient.deleteOne({_id: req.query.id})
     res.status(200).json({success: 'true',comment:'paziente eliminato'});
     return;

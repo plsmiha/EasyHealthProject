@@ -205,9 +205,13 @@ function loadViewPatientData() {
                                 var children = element.children;
                                 for (var i = 0; i < children.length; i++) {
                                     var child = children[i];
-                                    child.disabled = getParam("edit") != "true";
+                                    if (child.type != "button" && child.type != "submit") {
+                                        child.disabled = getParam("edit") != "true";
+                                    }
                                 }
-
+                                if(getParam("edit") != "true") {
+                                    document.getElementById("submitButton").hidden = true
+                                }
                             }
                         })
                     })
@@ -325,6 +329,7 @@ function navigateToAdd() {
     window.location.href = 'view_profile_P.html?add=true';
 }
 function abort(){
+    console.log("invoked")
   window.location.href = "patients_AO.html";
 }
 
