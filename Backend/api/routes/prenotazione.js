@@ -111,7 +111,7 @@ router.put('', async function(req, res){
   var idSlot=req.body._idSlot;
   var idPatient= getPatient(req);
   console.log('idVisita='+idSlot);
-  var prenotato=await Slot.findByIdAndUpdate( {_id: idSlot}, {"occupied_id_pat": idPatient })
+  var prenotato=await Slot.findOneAndUpdate( {_id: idSlot, occupied_id_pat:  null } , {"occupied_id_pat": idPatient })
 
   if(prenotato==null){
     res.status(404).json({success: 'false',comment:'slot non trovato', error: '2'});
