@@ -20,7 +20,7 @@ function loadData(){
         document.getElementById("Email").innerText = data['email'];       
     })
 
-    fetch('../api/v1/Referto?patient='+user_id, {
+    fetch('../api/v1/Referto/paziente', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(),

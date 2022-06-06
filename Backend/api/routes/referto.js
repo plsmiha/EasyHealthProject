@@ -24,6 +24,19 @@ router.get('', async function(req, res)
     });
 })
 
+router.get('/paziente', async function(req, res)
+{
+    var _patient = await Patient.findOne({id_user: getUser(req)});
+
+    await Referto.find({patient_id: _patient._id}).then(ref =>{
+        if(ref!=null)
+        {
+            ref=ref.map(({_id, title, date}) => ({_id, title, date}))
+        }
+        res.status(200).json(ref);
+    });
+})
+
 router.get('/:id', async function(req, res)
 {
     Referto.findById(req.params.id).then(ref =>{
