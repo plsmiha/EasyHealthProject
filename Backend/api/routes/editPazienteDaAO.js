@@ -9,7 +9,7 @@ const Slot = require('../../models/slot');
 
 router.delete('', async function(req, res) {
     var pat = await Patient.findById(req.query.id)
-    //await Slot.updateMany({occupied_id_pat: req.query.id }, {occupied_id_pat: undefined})
+    await Slot.updateMany({occupied_id_pat: req.query.id }, {$unset: {category: 1 }})
     await User.deleteOne({_id: pat.id_user})
     await Patient.deleteOne({_id: req.query.id})
     res.status(200).json({success: 'true',comment:'paziente eliminato'});
