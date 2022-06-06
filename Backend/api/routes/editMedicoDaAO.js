@@ -33,7 +33,7 @@ router.get('', async function(req, res) //quando ricevo una richiesta get su /ap
     var _id = String(utente._id).split('"')[0];
 
       docs.findById({_id}).then(data =>{
-      
+
           res.status(200).json(data);
       }); //recupera tutte le info dalla tabella docs cercando l'id e le ritorna
 
@@ -79,6 +79,12 @@ router.put('', async function(req, res) //qui quando ricevo una put
         var numero = req.body.numero;
         var nome = req.body.nome;
         var cognome = req.body.cognome;
+
+        if(typeof _email == 'undefined' || typeof bio == 'undefined' || typeof title == 'undefined' || typeof numero == 'undefined' || typeof nome == 'undefined' || typeof cognome == 'undefined')
+        {
+            res.status(400).json({success: 'false', reason: 'Wrong format', error: '1'});
+            return;
+        }
 
         docs.findOne({_id:req.query.id}).then(utente =>{
 
