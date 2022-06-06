@@ -34,6 +34,12 @@ function modificaDatiPaziente(){
                 dbody.innerHTML="";
                 body.style.backgroundImage = 'url(../img/error.jpg)';
   
+            }else if(data.error=="4"){
+
+                console.log('forbidden');
+                dbody.innerHTML="";
+                body.style.backgroundImage = 'url(../img/error.jpg)';
+  
               }
         }
     })

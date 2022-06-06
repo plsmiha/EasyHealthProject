@@ -1,4 +1,5 @@
 const express = require('express');
+const crypto = require('crypto');
 const router = express.Router();
 
 const User = require('../../models/user');
@@ -17,12 +18,13 @@ function getRole(req)
 }
 
 router.get('/all', async function(req, res) {
-  if(getRole(req)!='M' || getRole(req)!='AO')
+  if(getRole(req)=='M' || getRole(req)=='AO')
   {
     let pas = await Patient.find({});
     res.status(200).json(pas);
     return;
   }
+  res.status(403).json({success: 'false', reason: 'forbidden', error: '1'});
 
 })
 
@@ -33,6 +35,7 @@ router.get('', async function(req, res) //quando ricevo una richiesta get su /ap
     var data = await Patient.findOne({id_user:_user});
     if(data!=null){
         res.status(200).json(data);
+        console.log(data);
         return;
     }
     res.status(404).json({success: 'false', reason: 'patient not found', error: '1'});
@@ -54,6 +57,11 @@ router.get('/:id', async function(req, res){ //do la risposta al fronted che mi 
 
 router.put('', async function(req, res){
     console.log('dentro put');
+
+    if(getRole(req)!='P'){
+          res.status(403).json({success: 'false', reason: 'Unauthorized', error: '4'});
+          return;
+    }
 
     //controllo che ogni campo sia completato in maniera opportuna
     if(typeof req.body.email == 'undefined' ||  typeof req.body.residenza== 'undefined' || typeof req.body.codePA == 'undefined' ){

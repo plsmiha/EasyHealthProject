@@ -30,7 +30,6 @@ function custom_sort(a, b) {
 
 
 router.get('', async function(req, res){ //do la risposta al fronted che mi ha chiesto e faccio la richiesta al db
-    console.log('dentro a get');
 
     if(getRole(req)!='P')
     {
@@ -53,20 +52,26 @@ router.get('', async function(req, res){ //do la risposta al fronted che mi ha c
 
 
 router.delete('/:slot', async function(req, res){
-    console.log('dentro a delete');
+  
     if(getRole(req)!='P')
     {
         res.status(403).json({success: 'false', reason: 'Unauthorized', error: '1'});
         return;
     }
-    console.log('dentro a delete');
 
     const s=req.params.slot;
+
+    if (!(s.match(/^[0-9a-fA-F]{24}$/))) {
+        console.log(" ERRATO ID SLOT");
+        res.status(406).json({success: 'false', reason: 'not accetable id', error: '2'});
+        return
+      }
+   
     let sl= await Slot.findOneAndUpdate( {_id:s,  day: { $ne: oggi }, occupied_id_pat:  getPatient(req) },{"occupied_id_pat":null});
     //.where("day").ne(oggi).where("occupied_id_pat", getPatient());
 
     if(!sl){
-        res.status(403).json({success: 'false', reason: 'gia eliminato/slot non tuo/slot di oggi', error: '2'});
+        res.status(404).json({success: 'false', reason: 'gia eliminato/slot non tuo/slot di oggi', error: '2'});
         return;
     }
 
