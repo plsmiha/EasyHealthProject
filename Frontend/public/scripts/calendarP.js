@@ -21,7 +21,7 @@ function loadData(){
 
         if(data.success!=null){
             if(data.error == 1){
-                console.log("unauthorized");
+                //console.log("unauthorized");
                 body.innerHTML="";
                 body.style.backgroundImage = 'url(../img/error.jpg)';
             }
@@ -33,7 +33,7 @@ function loadData(){
             sx.innerHTML="";
 
             if(data.length==0){
-                console.log("nessun appuntamento trovato");
+                //console.log("nessun appuntamento trovato");
                 dx.innerHTML="*NON HAI ANCORA PRENOTATO NESSUN APPUNTAMENTO";
             }else{
 
@@ -85,7 +85,7 @@ function loadData(){
 
 function cancella(slot){
 
-    console.log("elimino appuntamento "+slot);
+    //console.log("elimino appuntamento "+slot);
 
     fetch('../api/v1/agendaPaziente/'+slot, {
         method: 'DELETE',
@@ -95,16 +95,16 @@ function cancella(slot){
     .then((resp) => resp.json())
     .then(function(data) {
         if(data.success=="true"){
-            console.log("eliminato");
+            //console.log("eliminato");
             loadData();
             //window.location.href = "calendar_P.html";
         }else{
             if(data.error=="1"){
-                console.log("unauthorized");
+                //console.log("unauthorized");
                 body.innerHTML="";
                 body.style.backgroundImage = 'url(../img/error.jpg)';
             }else if(data.error=="2"){
-                console.log("gia eliminato/slot non tuo/slot di oggi");
+                //console.log("gia eliminato/slot non tuo/slot di oggi");
                 body.innerHTML="";
                 body.style.backgroundImage = 'url(../img/error.jpg)';
             }

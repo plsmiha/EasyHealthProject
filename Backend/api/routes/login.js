@@ -23,27 +23,27 @@ router.post('', async function(req, res) {
             gen_hash= data.digest('hex');
 
             if (user.verified && gen_hash == user.password) {
-                //console.log("utente loggato " + process.env.JWT_KEY)
+                ////console.log("utente loggato " + process.env.JWT_KEY)
                 const token = jwt.sign({ id: user._id.valueOf(), role: user.type },  process.env.JWT_KEY);
-                //console.log(token);
+                ////console.log(token);
                 res.cookie("access_token", token, { httpOnly: true, secure: true}).status(200).json( { redirectTo: user.type });
                 return;
 
             }
             else if(gen_hash != user.password){
-                //console.log("tentativo di log errato");
+                ////console.log("tentativo di log errato");
                 res.status(403).json({ error: 'Unauthorized' });
                 return;
             }
             else{
-                //console.log("utente non verificato");
+                ////console.log("utente non verificato");
                 res.status(403).json({ error: 'Not verified' });
                 return;
             }
         }
         else
         {
-            //console.log("tentativo di log errato");
+            ////console.log("tentativo di log errato");
             res.status(403).json({ error: 'Unauthorized' });
             return;
         }

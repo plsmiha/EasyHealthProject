@@ -35,7 +35,7 @@ router.get('', async function(req, res) //quando ricevo una richiesta get su /ap
     var data = await Patient.findOne({id_user:_user});
     if(data!=null){
         res.status(200).json(data);
-        console.log(data);
+        //console.log(data);
         return;
     }
     res.status(404).json({success: 'false', reason: 'patient not found', error: '1'});
@@ -49,7 +49,7 @@ router.get('/:id', async function(req, res){ //do la risposta al fronted che mi 
             res.status(200).json(paziente)
         } else {
             Patient.findOne({id_user:_user}).then(utente =>{
-                console.log(utente);
+                //console.log(utente);
                 res.status(200).json(utente);
             });
         }
@@ -59,7 +59,7 @@ router.get('/:id', async function(req, res){ //do la risposta al fronted che mi 
 //aggiorno tutte le info del paziente con un post
 
 router.put('', async function(req, res){
-    console.log('dentro put');
+    //console.log('dentro put');
 
     if(getRole(req)!='P'){
           res.status(403).json({success: 'false', reason: 'Unauthorized', error: '4'});
@@ -69,7 +69,7 @@ router.put('', async function(req, res){
     //controllo che ogni campo sia completato in maniera opportuna
     if(typeof req.body.email == 'undefined' ||  typeof req.body.residenza== 'undefined' || typeof req.body.codePA == 'undefined' ){
         res.status(400).json({success: 'false', reason: 'Wrong format', error: '2'});
-        console.log('wrong format');
+        //console.log('wrong format');
         return;
     }
 
@@ -80,15 +80,15 @@ router.put('', async function(req, res){
     var _user=getUser(req);
     var p= await Patient.findOne({id_user:_user});
 
-    console.log(p._id);
+    //console.log(p._id);
 
 //cerca nel database se c'è un user diverso da me che ha questa mail che voglio settare io
     var user_check = await User.find({"email" : { $regex : new RegExp(email, "i") }}).where('_id').ne(_user);
-    console.log(Object.keys(user_check).length);
+    //console.log(Object.keys(user_check).length);
 
     if(Object.keys(user_check).length>0){
         res.status(406).json({success: 'false', reason: 'email gia registrata', error: '3'});
-        console.log('email gia registrata');
+        //console.log('email gia registrata');
         return;
     };
 
@@ -111,7 +111,7 @@ router.put('', async function(req, res){
         gen_hash= data.digest('hex');
 
         var uedit=await User.findByIdAndUpdate( {_id: _user},{"email": email,  "password": gen_hash});
-        console.log('update user psw');
+        //console.log('update user psw');
         if(uedit==null){
             res.status(404).json({success: 'false', reason: 'patient not found/not updated', error: '1'});
             return;
@@ -119,7 +119,7 @@ router.put('', async function(req, res){
 
     }else{ //password=0 -> non voglio modificata
         var uedit=await User.findByIdAndUpdate( {_id: _user},{"email": email});
-        console.log('update no psw user');
+        //console.log('update no psw user');
         if(uedit==null){
             res.status(404).json({success: 'false', reason: 'patient not found/not updated', error: '1'});
             return;

@@ -67,7 +67,7 @@ async function loadCalendar()
         caselle++;
     }
 
-    console.log(s);
+    //console.log(s);
 }
 function getDay(date)
 {
@@ -119,7 +119,7 @@ function prevMonth()
 var daySelected, monthSelected, yearSelected;
 function openSlot(day, month, year)
 {
-    console.log("open");
+    //console.log("open");
     daySelected=day;
     monthSelected=month;
     yearSelected=year;
@@ -150,7 +150,7 @@ async function addSlot()
         })
         .then((resp) => resp.json())
         .then(function(data) {
-            console.log(data);
+            //console.log(data);
         })
         document.getElementById("add_slot_box").style.visibility="hidden";
     document.getElementById("add_slot_box").style.opacity=0;
@@ -216,7 +216,7 @@ async function removeSlot(id)
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include'
     }).then(response => response.json());
-    console.log(data);
+    //console.log(data);
     loadCalendar();
     viewSlot(vs_day,vs_month,vs_year);
 }

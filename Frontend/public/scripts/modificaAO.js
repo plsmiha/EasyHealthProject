@@ -5,7 +5,7 @@ function modificaAO(){
     var email=document.getElementById("Email").value;
 
     var password=document.getElementById("Password").value;
-    console.log('passo per le modifiche')
+    //console.log('passo per le modifiche')
     fetch('../api/v1/AO', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -29,14 +29,14 @@ function modificaAO(){
           }
 
     })
-    .catch( error => console.log(error) );
+    .catch( error => //console.log(error) );
 };
 
 function loadData()//se la password non viene inserita resta uguale, se viene inserita invece va a modificare la precedente
 {
   event.preventDefault();
 
-    console.log('caricooo')
+    //console.log('caricooo')
     fetch('../api/v1/AO', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },

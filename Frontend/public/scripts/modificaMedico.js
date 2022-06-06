@@ -7,7 +7,7 @@ function modificaDatiMedico(){
     var numero=document.getElementById("Numero").value;
     var password=document.getElementById("Password").value;
     var titolo=document.getElementById("aree").value;
-    console.log('passo per le modifiche');
+    //console.log('passo per le modifiche');
 
     fetch('../api/v1/Medico', {
         method: 'PUT',
@@ -32,7 +32,7 @@ function modificaDatiMedico(){
           }
 
     })
-    .catch( error => console.log(error) );
+    .catch( error => //console.log(error) );
 };
 
 function loadData()//se la password non viene inserita resta uguale, se viene inserita invece va a modificare la precedente
@@ -57,7 +57,7 @@ function loadData()//se la password non viene inserita resta uguale, se viene in
 
 
 
-    console.log('caricooo')
+    //console.log('caricooo')
     fetch('../api/v1/Medico', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },

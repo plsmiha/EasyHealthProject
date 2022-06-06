@@ -11,14 +11,14 @@ const app = require("./Backend/api/app.js")
 
 if (cluster.isMaster) {
 
-    console.log(`MASTER ${process.pid} running`)
+    //console.log(`MASTER ${process.pid} running`)
 
     cluster.on('fork', function(worker) {
-        console.log(`WORKER ${worker.process.pid} up`)
+        //console.log(`WORKER ${worker.process.pid} up`)
     })
 
     cluster.on('exit', function(worker) {
-        console.log(`WORKER ${worker.process.pid} down`)
+        //console.log(`WORKER ${worker.process.pid} down`)
         cluster.fork()
     })
 
@@ -30,7 +30,7 @@ if (cluster.isMaster) {
     app.locals.db = mongoose.connect(process.env.DB_URL, {useNewUrlParser: true, useUnifiedTopology: true})
     .then ( () => {
 
-        console.log(`WORKER ${process.pid} connected to DB`)
+        //console.log(`WORKER ${process.pid} connected to DB`)
 
         router.use(app)
 
@@ -38,7 +38,7 @@ if (cluster.isMaster) {
         server.listen(process.env.PORT || 80)
 
         process.on('uncaughtException', (code, signal) => {
-            console.log(`WORKER error...\n\tcode:(${code})\n\tsignal:(${signal})`)
+            //console.log(`WORKER error...\n\tcode:(${code})\n\tsignal:(${signal})`)
             process.exit()
         })
 

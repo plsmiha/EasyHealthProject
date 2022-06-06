@@ -10,14 +10,14 @@ function startReset(){
   .then(function(data) {
       if(data.success=="true")
       {
-          console.log('buon fine')
+          //console.log('buon fine')
           window.location.href = "login.html";
       }
       else
       {
           if(data.error=="2")
           {
-            console.log('email non corrisponde a nessun account');
+            //console.log('email non corrisponde a nessun account');
             document.getElementById("email_reset").style.background = "#ff7a89";
             document.getElementById("Error_email").innerHTML = "l'email inserita non corrisponde a nessun account";
           }
@@ -25,11 +25,11 @@ function startReset(){
           {
             window.alert('Errore:\n'+data.reason+'\nRiprovare.')
             document.getElementById("email_reset").style.background = "#ff7a89";
-            console.log('errore update db');
+            //console.log('errore update db');
             
           }else if(data.error=="1")
           {
-            console.log('wrong format');
+            //console.log('wrong format');
 
           }
       }

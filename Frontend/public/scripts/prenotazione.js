@@ -26,12 +26,12 @@ function loadData(){
         var box = document.getElementById('container');
         if(data.success!=null){
             if(data.error == 1){
-                console.log("not authorized");
+                //console.log("not authorized");
                 body.innerHTML="";
                 body.style.backgroundImage = 'url(../img/error.jpg)';
               }
               else if(data.error==2){
-                console.log("id not accetable")
+                //console.log("id not accetable")
                 body.innerHTML="";
                 body.style.backgroundImage = 'url(../img/error.jpg)';
               }
@@ -39,7 +39,7 @@ function loadData(){
         }else{
 
             if(data.length==0 ){
-                console.log("non ci sono slot");
+                //console.log("non ci sono slot");
                 box.innerHTML="*NON CI SONO SLOT DISPONIBILI PER QUESTO MEDICO NEI PROSSIMI 4 MESI";
 
             }else{
@@ -117,12 +117,12 @@ function loadData(){
 
         if(data.success!=null){
             if(data.error == 1){
-                console.log("medico non trovato");
+                //console.log("medico non trovato");
                 body.innerHTML="";
                 body.style.backgroundImage = 'url(../img/error.jpg)';
               }
               else if(data.error==2){
-                console.log("id not accetable")
+                //console.log("id not accetable")
                 body.innerHTML="";
                 body.style.backgroundImage = 'url(../img/error.jpg)';
               }
@@ -163,7 +163,7 @@ function loadData(){
 
 function prenota(){
 
-    console.log("prenotero lo slot "+visita);
+    //console.log("prenotero lo slot "+visita);
 
     fetch('../api/v1/prenotazione', {
         method: 'PUT',
@@ -178,19 +178,19 @@ function prenota(){
         {
             loadData();
             //se la prenotazione va a buon fine ricarico la pagina in modo che sparisca lo slot appena selezionato
-            console.log('slot prenotato')
+            //console.log('slot prenotato')
             //window.location.href = "profile_M.html?id="+id_medico; //cosi ritorno su quel medico li
             //non so perche non fuziona se rimetto l'opzione a index 0 e richiamo loadData() con il redirect si invece
         }
         else
         {
             if(data.error == 1){
-                console.log("no authorized");
+                //console.log("no authorized");
                 body.innerHTML="";
                 body.style.backgroundImage = 'url(../img/error.jpg)';
               }
               else if(data.error==2){
-                console.log("prenotazione non avvenuta")
+                //console.log("prenotazione non avvenuta")
                 box.innerHTML="<pre>"+"Prenotazione non avvenuta correttamente."+"<br>"+"Ricaricare la pagine e riprovare il processo di prenotazione."+"</pre>";
 
               }

@@ -19,7 +19,7 @@ function getRole(req) //qui dentro ricevaero dal jwt l'id user, attesa token asc
 
 router.get('', async function(req, res){ //do la risposta al fronted che mi ha chiesto e faccio la richiesta al db
 
-  console.log('dentro GET');
+  //console.log('dentro GET');
 
 //solo P puo vedere il calendario con gli slot liberi
   if(getRole(req)!='P'){
@@ -36,7 +36,7 @@ router.get('', async function(req, res){ //do la risposta al fronted che mi ha c
 
   //parametro passato non è un id
   if (!(doc.match(/^[0-9a-fA-F]{24}$/))) {
-    console.log(" ERRATO ID ");
+    //console.log(" ERRATO ID ");
     res.status(406).json({success: 'false', reason: 'not accetable id', error: '2'});
     return
   }
@@ -53,15 +53,15 @@ router.get('', async function(req, res){ //do la risposta al fronted che mi ha c
    if(month>month1){
      year1++;
      month1++;
-     //console.log(month+"   1 "+month1+"   "+year1)
+     ////console.log(month+"   1 "+month1+"   "+year1)
    }else if(month1>month2){
      year2++;
      month2++;
-     //console.log(month1+" 2   "+month2+"   "+year2)
+     ////console.log(month1+" 2   "+month2+"   "+year2)
    }else if(month2>month3){
     year3++;
     month3++;
-   // console.log(month2+"  3  "+month3+"   "+year3)
+   // //console.log(month2+"  3  "+month3+"   "+year3)
   };
 
 
@@ -95,7 +95,7 @@ router.get('', async function(req, res){ //do la risposta al fronted che mi ha c
       })
     };
 
-    console.log(slots);
+    //console.log(slots);
     res.status(200).json(slots);
 
 });
@@ -110,7 +110,7 @@ router.put('', async function(req, res){
 
   var idSlot=req.body._idSlot;
   var idPatient= getPatient(req);
-  console.log('idVisita='+idSlot);
+  //console.log('idVisita='+idSlot);
   var prenotato=await Slot.findOneAndUpdate( {_id: idSlot, occupied_id_pat:  null } , {"occupied_id_pat": idPatient })
 
   if(prenotato==null){

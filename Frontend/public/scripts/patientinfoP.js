@@ -66,7 +66,7 @@ function viewReferto(value)
 
 function downloadPDF()
 {
-    console.log(pdf_file);
+    //console.log(pdf_file);
     const url = pdf_file;
     const link = document.createElement('a');
     link.href = url;

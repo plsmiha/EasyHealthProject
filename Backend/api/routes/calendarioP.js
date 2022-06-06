@@ -44,7 +44,7 @@ router.get('', async function(req, res){ //do la risposta al fronted che mi ha c
 
 
         appuntamento.sort(custom_sort);
-        console.log(appuntamento);
+        //console.log(appuntamento);
 
         res.status(200).json(appuntamento);
 
@@ -62,7 +62,7 @@ router.delete('/:slot', async function(req, res){
     const s=req.params.slot;
 
     if (!(s.match(/^[0-9a-fA-F]{24}$/))) {
-        console.log(" ERRATO ID SLOT");
+        //console.log(" ERRATO ID SLOT");
         res.status(406).json({success: 'false', reason: 'not accetable id', error: '2'});
         return
       }

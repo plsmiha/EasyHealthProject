@@ -48,7 +48,7 @@ fetch('../api/v1/aree', {
           .then((resp) => resp.json())
           .then(function(data) {
               data.forEach(e => {
-                console.log(e);
+                //console.log(e);
                     vettore_pazienti.push([e.name.toString(),e.surname.toString(),e.email.toString(),e.numero.toString(),array_PA[e.title.toString()],'']);
                     vettore_id.push(e._id.toString())
                   })
@@ -172,8 +172,8 @@ function eliminaPADaAO() {
     })
     .then((resp) => resp.json())
     .then(function(data) {
-      console.log("PA eliminato")
-      console.log(data)
+      //console.log("PA eliminato")
+      //console.log(data)
       window.location.href = "pas_AO.html";
     }).catch( error => console.error(error) );
   } else {
@@ -217,7 +217,7 @@ function loadViewMedicData() {
 
                       data.forEach(e => {
                           if (e._id == getParam("id")) {
-                              console.log(e)
+                              //console.log(e)
                                                                                                                                           
                               document.getElementById("Nome").value = e.name;
                               document.getElementById("Cognome").value = e.surname;
@@ -258,8 +258,8 @@ function eliminaMedicoDaAO(id) {
       })
           .then((resp) => resp.json())
           .then(function (data) {
-              console.log("medico eliminato")
-              console.log(data)
+              //console.log("medico eliminato")
+              //console.log(data)
               window.location.href = "doctors_AO.html";
           }).catch(error => console.error(error));
   } else {
@@ -291,13 +291,13 @@ function modificaDatiMedicoDaAO() {
           .then((resp) => resp.json())
           .then(function (data) {
               if (data.success == "true") {
-                  console.log('buon fine')
+                  //console.log('buon fine')
                   window.location.href = "doctors_AO.html";
               }
               else {
                   if (data.error == "1") {
   
-                      console.log('email gia registrata');
+                      //console.log('email gia registrata');
                       document.getElementById("Email").style.background = "#ff7a89";
                       document.getElementById("Error_email").hidden = false;
   
@@ -322,13 +322,13 @@ function modificaDatiMedicoDaAO() {
       .then((resp) => resp.json())
       .then(function (data) {
           if (data.success == "true") {
-              console.log('buon fine')
+              //console.log('buon fine')
               window.location.href = "doctors_AO.html";
           }
           else {
               if (data.error == "1") {
 
-                  console.log('email gia registrata');
+                  //console.log('email gia registrata');
                   document.getElementById("Email").style.background = "#ff7a89";
                   document.getElementById("Error_email").hidden = false;
 

@@ -83,14 +83,14 @@ router.put('', async function(req, res) //qui quando ricevo una post
         if(typeof req.body.email == 'undefined' ||  typeof req.body.password == 'undefined')
         {
             res.status(400).json({success: 'false', reason: 'Wrong format', error: '1'});
-            console.log('wrong format');
+            //console.log('wrong format');
         }
         var _email = req.body.email;
 
         var password = req.body.password;
 
         var _user = getUser(req);
-        console.log(_user);
+        //console.log(_user);
 
         user.findOne({ _id:_user }).then(data => {
               if (data != null) {
@@ -112,7 +112,7 @@ router.put('', async function(req, res) //qui quando ricevo una post
 
           }).catch(err => {
             res.status(500).json({success: 'false',reason: err,error: 3});
-              console.log(err);
+              //console.log(err);
           });
 
 

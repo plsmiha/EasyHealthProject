@@ -48,7 +48,7 @@ fetch('../api/v1/aree', {
           .then((resp) => resp.json())
           .then(function(data) {
               data.forEach(e => {
-                console.log(e);
+                //console.log(e);
                     vettore_pazienti.push([e.name.toString(),e.surname.toString(),e.email.toString(),e.numero.toString(),array_PA[e.title.toString()],'']);
                     vettore_id.push(e._id.toString())
                   })
@@ -188,7 +188,7 @@ function loadViewMedicData() {
 
                       data.forEach(e => {
                           if (e._id == getParam("id")) {
-                              console.log(e)
+                              //console.log(e)
 
                               document.getElementById("Nome").value = e.name;
                               document.getElementById("Cognome").value = e.surname;

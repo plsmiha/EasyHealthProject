@@ -193,8 +193,8 @@ function loadViewPatientData() {
 
                         data.forEach(e => {
                             if (e._id == getParam("id")) {
-                                console.log(e.codePA)
-                                console.log(array_PA[e.codePA.toString()])
+                                //console.log(e.codePA)
+                                //console.log(array_PA[e.codePA.toString()])
                                 document.getElementById("Email").value = e.email;
                                 document.getElementById("Nome").value = e.name;
                                 document.getElementById("Cognome").value = e.surname;
@@ -232,8 +232,8 @@ function eliminaPazienteDaAO(id) {
         })
             .then((resp) => resp.json())
             .then(function (data) {
-                console.log("paziente eliminato")
-                console.log(data)
+                //console.log("paziente eliminato")
+                //console.log(data)
                 window.location.href = "patients_AO.html";
             }).catch(error => console.error(error));
     } else {
@@ -264,15 +264,15 @@ function modificaDatiPazienteDaAO() {
             .then((resp) => resp.json())
             .then(function (data) {
                 if (data.success == "true") {
-                    console.log('buon fine')
+                    //console.log('buon fine')
                     window.location.href = "patients_AO.html";
                 }
                 else {
                     if (data.error == '1') {
-                        console.log('campo vuoto -wrong format')
+                        //console.log('campo vuoto -wrong format')
                     } else if (data.error == "3") {
 
-                        console.log('email gia registrata');
+                        //console.log('email gia registrata');
                         document.getElementById("Email").style.background = "#ff7a89";
                         document.getElementById("Error_email").innerHTML = "l'email inserita è già associata ad un altro account";
 
@@ -329,7 +329,7 @@ function navigateToAdd() {
     window.location.href = 'view_profile_P.html?add=true';
 }
 function abort(){
-    console.log("invoked")
+    //console.log("invoked")
   window.location.href = "patients_AO.html";
 }
 

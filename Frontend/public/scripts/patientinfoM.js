@@ -77,7 +77,7 @@ async function addReferto()
         })
         .then((resp) => resp.json())
         .then(function(data) {
-            console.log(data);
+            //console.log(data);
         })
     }
     document.getElementById('add_referto_box').style.opacity=0; 
@@ -87,7 +87,7 @@ async function addReferto()
 
 function downloadPDF()
 {
-    console.log(pdf_file);
+    //console.log(pdf_file);
     const url = pdf_file;
     const link = document.createElement('a');
     link.href = url;

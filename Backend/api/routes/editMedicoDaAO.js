@@ -110,7 +110,7 @@ router.put('', async function(req, res) //qui quando ricevo una put
 
           }).catch(err => {
             res.status(500).json({success: 'false',reason: 'bonk',error: 3});
-              console.log(err);
+              //console.log(err);
           });
 
       });
@@ -170,7 +170,7 @@ router.post('', async function(req, res) //qui quando ricevo una post
     }).then().catch(console.error);
 
     res.status(200).json({success: 'true'});
-    console.log("User saved");
+    //console.log("User saved");
 
 });
 

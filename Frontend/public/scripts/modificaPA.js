@@ -23,13 +23,13 @@ function modificaPA(){
 
             }
             else{
-              console.log('we cool.');
+              //console.log('we cool.');
               window.location.href = "pas_AO.html";
               return;
             }
 
       })
-      .catch( error => console.log(error) );
+      .catch( error => //console.log(error) );
 
 
       return;
@@ -42,7 +42,7 @@ function modificaPA(){
       var value = piani[key];
 
       if(value == nome && key != id){
-        console.log('ESISTEGIA');
+        //console.log('ESISTEGIA');
         window.alert('Nome gia presente.')
         butta = true;
         return;
@@ -52,7 +52,7 @@ function modificaPA(){
 
   if(butta != true)
   {
-    console.log('AGGIORNO ');
+    //console.log('AGGIORNO ');
     fetch('../api/v1/PA', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -70,13 +70,13 @@ function modificaPA(){
 
           }
           else{
-            console.log('bonk');
+            //console.log('bonk');
             window.location.href = "pas_AO.html";
             return;
           }
 
     })
-    .catch( error => console.log(error) );
+    .catch( error => //console.log(error) );
 
   }
 
@@ -90,7 +90,7 @@ function loadData()
   var params = new URLSearchParams(location.search);
   var add = params.get('add');
   if(add == 'true'){
-    console.log('ok');
+    //console.log('ok');
     var btn_modifica = document.getElementById("btn_salva");
     btn_modifica.value = "Aggiungi";
     document.getElementById('title').innerHTML = "Aggiungi PA";

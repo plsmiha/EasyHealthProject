@@ -144,8 +144,8 @@ function eliminaPADaAO(id) {
     })
     .then((resp) => resp.json())
     .then(function(data) {
-      console.log("PA eliminato")
-      console.log(data)
+      //console.log("PA eliminato")
+      //console.log(data)
       window.location.href = "pas_AO.html";
     }).catch( error => console.error(error) );
   } else {

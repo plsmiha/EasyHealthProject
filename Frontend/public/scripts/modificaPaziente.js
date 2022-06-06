@@ -15,28 +15,28 @@ function modificaDatiPaziente(){
     .then(function(data) {
         if(data.success=="true")
         {
-            console.log('buon fine')
+            //console.log('buon fine')
             window.location.href = "HP_P.html";
         }
         else
         {
             if(data.error=='2'){
-                console.log('campo vuoto -wrong format')
+                //console.log('campo vuoto -wrong format')
             }else if(data.error=="3"){
 
-              console.log('email gia registrata');
+              //console.log('email gia registrata');
               document.getElementById("Email").style.background = "#ff7a89";
               document.getElementById("Error_email").innerHTML = "l'email inserita è già associata ad un altro account";
 
             }else if(data.error=="1"){
 
-                console.log('patient not found/not updated');
+                //console.log('patient not found/not updated');
                 dbody.innerHTML="";
                 body.style.backgroundImage = 'url(../img/error.jpg)';
   
             }else if(data.error=="4"){
 
-                console.log('forbidden');
+                //console.log('forbidden');
                 dbody.innerHTML="";
                 body.style.backgroundImage = 'url(../img/error.jpg)';
   
@@ -64,7 +64,7 @@ function modificaDatiPaziente(){
         })
     })
 
-    console.log('prendo i dati')
+    //console.log('prendo i dati')
     fetch('../api/v1/Paziente', {
         method: 'GET', //con il get mi arriva come risposta non solo lo statos ma anche i dati che chiedo
         headers: { 'Content-Type': 'application/json' },
@@ -75,7 +75,7 @@ function modificaDatiPaziente(){
 
         if(data.success!=null){
             if(data.error == 1){
-                console.log("patient not found");
+                //console.log("patient not found");
                 body.innerHTML="";
                 body.style.backgroundImage = 'url(../img/error.jpg)';
               }

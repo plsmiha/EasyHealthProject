@@ -70,7 +70,7 @@ router.post('', async function(req, res) {
     }).then().catch(console.error);
 
     res.status(200).json({success: 'true'});
-    console.log("User saved");
+    //console.log("User saved");
     
 
 });
