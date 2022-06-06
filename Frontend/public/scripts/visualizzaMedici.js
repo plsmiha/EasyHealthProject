@@ -230,8 +230,13 @@ function loadViewMedicData() {
                               var children = element.children;
                               for (var i = 0; i < children.length; i++) {
                                   var child = children[i];
-                                  child.disabled = getParam("edit") != "true";
+                                  if (child.type != "button" && child.type != "submit") {
+                                    child.disabled = getParam("edit") != "true";
+                                  }
                               }
+                              if(getParam("edit") != "true") {
+                                document.getElementById("submitButton").hidden = true
+                            }
 
                           }
                       })
