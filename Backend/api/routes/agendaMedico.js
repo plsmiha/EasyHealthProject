@@ -89,7 +89,7 @@ router.get('/:id', async function(req, res){
         res.status(403).json({success: 'false', reason: 'Unauthorized', error: '2'});
         return;
     }
-    let slot = await Slot.findById(req.params.id);
+    let slot = await Slot.findById(req.params.id).catch(err => {});
     if(!slot)
     {
         res.status(404).json({success: 'false', reason: 'Not found', error: '1'});
@@ -105,7 +105,7 @@ router.delete('/:id', async function(req, res){
         res.status(403).json({success: 'false', reason: 'Unauthorized', error: '2'});
         return;
     }
-    let slot = await Slot.findById(req.params.id);
+    let slot = await Slot.findById(req.params.id).catch(err => {});
     if(!slot)
     {
         res.status(404).json({success: 'false', reason: 'Not found', error: '1'});
