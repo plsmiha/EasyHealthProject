@@ -2,8 +2,10 @@
 const request = require('supertest');
 const app = require('../Backend/api/app.js');
 const Slot = require('../Backend/models/slot');
+const Referto = require('../Backend/models/referto');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
+const referto = require('../Backend/models/referto.js');
 require("dotenv").config();
 
 beforeAll( async () => { jest.setTimeout(8000);
@@ -349,5 +351,170 @@ describe('[SUPERTEST] /api/v1/agendaMedico', () => {
       Slot.findByIdAndDelete(slot._id);
     })
   });
+
+});
+
+
+describe('[SUPERTEST] /api/v1/Referto', () => {
+
+  header={'Content-Type': 'application/json', cookie: tokenM};
+  headerP={'Content-Type': 'application/json', cookie: tokenP};
+  headerWJWT={'Content-Type': 'application/json'};
+  
+  today=new Date();
+  today.setDate(today.getDate() + 1);
+  let day = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate();
+
+  test('[LOGGATO] <200> GET lista di referti del paziente', () => {
+    return request(app).get('/api/v1/Referto?patient=629d1eb14c6160436acda633')
+    .set(header)
+    .expect(200)
+    .expect((res) => {
+    })
+  });
+
+  test('[LOGGATO] <200> GET info referto da id', async () => {
+    let referto = new Referto({
+      patient_id: "629d1eb14c6160436acda633",
+      doc_id: "629d1dff46a2046f0591d629",
+      title: "Titolo",
+      date: day,
+      pdf_file: null,
+      comment: "Commento"
+    })
+    referto = await referto.save();
+    return request(app).get('/api/v1/Referto/'+referto._id)
+    .set(header)
+    .expect(200)
+    .expect((res) => {
+      expect(res.body._id).toEqual(expect.any(String));
+      expect(res.body.patient_id).toEqual(expect.any(String));
+      expect(res.body.doc_id).toEqual(expect.any(String));
+      expect(res.body.title).toEqual(expect.any(String));
+      expect(res.body.date).toEqual(expect.any(String));
+      expect(res.body.pdf_file).toEqual(expect.any(Object));
+      expect(res.body.comment).toEqual(expect.any(String));
+    })
+    .then(() => {
+      Referto.findByIdAndDelete(referto._id);
+    })
+  });
+
+  test('[LOGGATO] <404> GET info referto da id non esistente', async () => {
+    return request(app).get('/api/v1/Referto/593205')
+    .set(header)
+    .expect(404)
+    .expect((res) => {
+      expect(res.body.success).toBe("false");
+      expect(res.body.error).toBe("1");
+    })
+  });
+
+  test('[LOGGATO] <403> GET info referto senza token', async () => {
+    return request(app).get('/api/v1/Referto')
+    .set(headerWJWT)
+    .expect(403)
+    .expect((res) => {
+      expect(res.body.error).toBe("Unauthorized");
+    })
+  });
+
+  test('[LOGGATO] <200> POST crea referto', async () => {
+    return request(app).post('/api/v1/Referto')
+    .set(header)
+    .send(
+      JSON.stringify({
+        id_patient: "629d1eb14c6160436acda633",
+        title: "titolo",
+        comment: "commento"
+      })
+    )
+    .expect(200)
+    .expect((res) => {
+      expect(res.body.success).toBe("true");
+    })
+  });
+
+  test('[LOGGATO] <400> POST crea referto con pdf e commento mancanti', async () => {
+    return request(app).post('/api/v1/Referto')
+    .set(header)
+    .send(
+      JSON.stringify({
+        id_patient: "629d1eb14c6160436acda633",
+        title: "titolo",
+      })
+    )
+    .expect(400)
+    .expect((res) => {
+      expect(res.body.success).toBe("false");
+      expect(res.body.error).toBe("1");
+    })
+  });
+
+  test('[LOGGATO] <400> POST crea referto con id paziente mancante', async () => {
+    return request(app).post('/api/v1/Referto')
+    .set(header)
+    .send(
+      JSON.stringify({
+        title: "titolo",
+        comment: "commento"
+      })
+    )
+    .expect(400)
+    .expect((res) => {
+      expect(res.body.success).toBe("false");
+      expect(res.body.error).toBe("1");
+    })
+  });
+
+  test('[LOGGATO] <400> POST crea referto con titolo mancante', async () => {
+    return request(app).post('/api/v1/Referto')
+    .set(header)
+    .send(
+      JSON.stringify({
+        id_patient: "629d1eb14c6160436acda633",
+        comment: "commento"
+      })
+    )
+    .expect(400)
+    .expect((res) => {
+      expect(res.body.success).toBe("false");
+      expect(res.body.error).toBe("1");
+    })
+  });
+
+  test('[LOGGATO] <403> POST crea referto con token paziente', async () => {
+    return request(app).post('/api/v1/Referto')
+    .set(headerP)
+    .send(
+      JSON.stringify({
+        id_patient: "629d1eb14c6160436acda633",
+        title: "titolo",
+        comment: "commento"
+      })
+    )
+    .expect(403)
+    .expect((res) => {
+      expect(res.body.success).toBe("false");
+      expect(res.body.error).toBe("2");
+    })
+  });
+
+  test('[LOGGATO] <403> POST crea referto senza token', async () => {
+    return request(app).post('/api/v1/Referto')
+    .set(headerWJWT)
+    .send(
+      JSON.stringify({
+        id_patient: "629d1eb14c6160436acda633",
+        title: "titolo",
+        comment: "commento"
+      })
+    )
+    .expect(403)
+    .expect((res) => {
+      expect(res.body.error).toBe("Unauthorized");
+    })
+  });
+
 
 });

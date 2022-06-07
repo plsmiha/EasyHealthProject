@@ -43,11 +43,11 @@ router.get('/paziente', async function(req, res)
 
 router.get('/:id', async function(req, res)
 {
-    let referto = await Referto.findById(req.params.id);
+    let referto = await Referto.findById(req.params.id).catch((err) => {});
     if(!referto)
         res.status(404).json({success: 'false', reason: 'Not found', error: '1'});
     else
-        res.status(200).json(ref);
+        res.status(200).json(referto);
 })
 
 router.post('', async function(req, res)
@@ -60,6 +60,7 @@ router.post('', async function(req, res)
     if(typeof req.body.id_patient == 'undefined' || typeof req.body.title == 'undefined' || (typeof req.body.pdf == 'undefined' && typeof req.body.comment == 'undefined'))
     {
         res.status(400).json({success: 'false', reason: 'Wrong format', error: '1'});
+        return;
     }
     var _doc = await Doc.findOne({id_user: getUser(req)}, "_id");
     _doc = _doc._id.valueOf();
