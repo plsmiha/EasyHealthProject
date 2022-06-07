@@ -26,3 +26,13 @@ jobs:
         cache: 'npm'
     - run: npm install
     - run: npm test
+    env:
+        DB_URL_API: mongodb+srv://NodeApp:Y1XPLdwnXWNRSKIN@nodeapp.ggfa7kc.mongodb.net/test
+        DB_URL: mongodb+srv://NodeApp:Y1XPLdwnXWNRSKIN@nodeapp.ggfa7kc.mongodb.net/API
+        PASSWORD_MAIL: idsids22
+        JWT_KEY: SONOLACHIAVEDITUTTO
+        DOMAIN: http://localhost
+        EMAIL: easy.health.app.info@gmail.com
+        GMAIL_CLIENT_ID: 865542775048-njds813dg7iu0ml213scugeb5si1a7au.apps.googleusercontent.com
+        GMAIL_CLIENT_SECRET: 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
+        GMAIL_REFRESH_TOKEN: 1//04MK5yaKwZ5KNCgYIARAAGAQSNwF-L9IrQWng74bp58ysMYvJ1VETZR8V1nFBs_TucCO8c0uY8WU59L7Di8AsVtPc5Kyc_VaYQ0I
