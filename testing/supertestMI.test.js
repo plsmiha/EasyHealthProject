@@ -20,13 +20,13 @@ beforeEach( async () => {//altrimenti il server taglia le connessioni se arrivan
  const tokenP='access_token='+jwt.sign({id: "629d1eb14c6160436acda633", role: "P"}, process.env.JWT_KEY);
  const tokenAO='access_token='+jwt.sign({id: "629d1b4f9cb6ddb084043776", role: "AO"}, process.env.JWT_KEY);
 
-describe('[SUPERTEST] /api/v1/Paziente', () => {
+describe('[SUPERTEST] /api/v2/Paziente', () => {
 
     header={'Content-Type': 'application/json', cookie: tokenP};
     headerM={'Content-Type': 'application/json', cookie: tokenM};
 
       test('[LOGGATO] <200> PUT Modifica dei dati paziente da P', () => {
-      return request(app).put('/api/v1/Paziente')
+      return request(app).put('/api/v2/Paziente')
       .set(header)
       .send(JSON.stringify(
         {
@@ -39,7 +39,7 @@ describe('[SUPERTEST] /api/v1/Paziente', () => {
       .expect(200)});
 
       test('[LOGGATO] <200> GET dati paziente aggiornati', () => {
-        return request(app).get('/api/v1/Paziente')
+        return request(app).get('/api/v2/Paziente')
         .set(header)
         .expect(200)
         .then((res)=>{
@@ -50,13 +50,13 @@ describe('[SUPERTEST] /api/v1/Paziente', () => {
 
       });
       test('[LOGGATO] <404> GET di un paziente non esistente', () => {
-        return request(app).get('/api/v1/Paziente')
+        return request(app).get('/api/v2/Paziente')
         .set(headerM)
         .expect(404)
       });
 
       test('[LOGGATO] <200> PUT Restore dati paziente paziente', () => {
-      return request(app).put('/api/v1/Paziente')
+      return request(app).put('/api/v2/Paziente')
       .set(header)
       .send(JSON.stringify(
         {
@@ -69,7 +69,7 @@ describe('[SUPERTEST] /api/v1/Paziente', () => {
       .expect(200)});
 
       test('[LOGGATO] <403> PUT Modifica dei dati paziente da M', () => {
-        return request(app).put('/api/v1/Paziente')
+        return request(app).put('/api/v2/Paziente')
         .set(headerM)
         .send(JSON.stringify(
           {
@@ -82,7 +82,7 @@ describe('[SUPERTEST] /api/v1/Paziente', () => {
         .expect(403)});
 
       test('[LOGGATO] <400> PUT Modifica dati paziente da P incompleto', () => {
-      return request(app).put('/api/v1/Paziente')
+      return request(app).put('/api/v2/Paziente')
       .set(header)
       .send(JSON.stringify(
         {
@@ -94,7 +94,7 @@ describe('[SUPERTEST] /api/v1/Paziente', () => {
       .expect(400)});
 
       test('[LOGGATO] <406> Modifica dati paziente da P email gia` usata ', () => {
-      return request(app).put('/api/v1/Paziente')
+      return request(app).put('/api/v2/Paziente')
       .set(header)
       .send(JSON.stringify(
         {
@@ -108,26 +108,26 @@ describe('[SUPERTEST] /api/v1/Paziente', () => {
 
 });
 
-describe('[SUPERTEST] /api/v1/Paziente/all', () => {
+describe('[SUPERTEST] /api/v2/Paziente/all', () => {
 
     headerP={'Content-Type': 'application/json', cookie: tokenP};
     headerM={'Content-Type': 'application/json', cookie: tokenM};
     headerAO={'Content-Type': 'application/json', cookie: tokenAO};
 
       test('[LOGGATO] <200> GET Ps da AO', () => {
-        return request(app).get('/api/v1/Paziente/all')
+        return request(app).get('/api/v2/Paziente/all')
         .set(headerAO)
         .expect(200);
       });
 
       test('[LOGGATO] <200> GET all Ps da M', () => {
-        return request(app).get('/api/v1/Paziente/all')
+        return request(app).get('/api/v2/Paziente/all')
         .set(headerM)
         .expect(200);
       });
 
       test('[LOGGATO] <403> GET all Ps da P', () => {
-        return request(app).get('/api/v1/Paziente/all')
+        return request(app).get('/api/v2/Paziente/all')
         .set(headerP)
         .expect(403);
       });
@@ -225,7 +225,7 @@ describe('[SUPERTEST] /api/v1/Prenotazione', () => {
 
 });
 
-describe('[SUPERTEST] /api/v1/Medico/id', () => {
+describe('[SUPERTEST] /api/v2/Medico/id', () => {
 
     headerP={'Content-Type': 'application/json', cookie: tokenP};
 
@@ -234,19 +234,19 @@ describe('[SUPERTEST] /api/v1/Medico/id', () => {
     const wrong_id = "629d1dff46a2046f1591d72b";
 
       test('[LOGGATO] <200> GET doc by id ', () => {
-        return request(app).get('/api/v1/Medico/'+id_doc)
+        return request(app).get('/api/v2/Medico/'+id_doc)
         .set(headerP)
         .expect(200);
       });
 
       test('[LOGGATO] <403> GET formato id non valido', () => {
-        return request(app).get('/api/v1/Medico/'+not_id)
+        return request(app).get('/api/v2/Medico/'+not_id)
         .set(headerP)
         .expect(403);
       });
 
       test('[LOGGATO] <404> GET id inesistente', () => {
-        return request(app).get('/api/v1/Medico/'+wrong_id)
+        return request(app).get('/api/v2/Medico/'+wrong_id)
         .set(headerP)
         .expect(404);
       });

@@ -107,7 +107,7 @@ function loadData(){
     //_________________GET INFO MEDICO___________________________________
 
 
-    fetch('../api/v1/Medico/'+id_medico, {
+    fetch('../api/v2/Medico/'+id_medico, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

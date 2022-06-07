@@ -74,20 +74,20 @@ app.use((req, res, next) => {
 
 
 
-app.use('/api/v1/Medico', modifMedico);
+app.use('/api/v2/Medico', modifMedico);
 app.use('/api/v1/PA', PA);
 
 
 
 
 app.use('/api/v1/prenotazione', visita);
-app.use('/api/v1/Paziente', editPaziente);
+app.use('/api/v2/Paziente', editPaziente);
 
 app.use('/api/v1/agendaMedico', agendaMedico);
 
 
-app.use('/api/v1/PazienteDaAO', editPazienteDaAO);
-app.use('/api/v1/MedicoDaAO', editMedicoDaAO);
+app.use('/api/v2/PazienteDaAO', editPazienteDaAO);
+app.use('/api/v2/MedicoDaAO', editMedicoDaAO);
 
 app.use('/api/v1/agendaPaziente', calendarioP);
 app.use('/api/v1/Referto', referto);

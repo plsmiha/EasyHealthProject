@@ -9,7 +9,7 @@ function modificaDatiMedico(){
     var titolo=document.getElementById("aree").value;
     //console.log('passo per le modifiche');
 
-    fetch('../api/v1/Medico', {
+    fetch('../api/v2/Medico', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify( { email: email, bio: bio, password: password, title:titolo,numero:numero } ),
@@ -58,7 +58,7 @@ function loadData()//se la password non viene inserita resta uguale, se viene in
 
 
     //console.log('caricooo')
-    fetch('../api/v1/Medico', {
+    fetch('../api/v2/Medico', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(),

@@ -80,7 +80,7 @@ describe('[SUPERTEST] /api/v1/signup (include Interazioni AO con P)', () => {
        .expect(400)});
 
        test('[LOGGATO] <dataGathering> GET id new P', () => {
-       request(app).get('/api/v1/Paziente/all')
+       request(app).get('/api/v2/Paziente/all')
        .set(header)
        .set('Accept', 'application/json')
        .end((err,res) => {
@@ -95,7 +95,7 @@ describe('[SUPERTEST] /api/v1/signup (include Interazioni AO con P)', () => {
 
        });
        test('[LOGGATO] <databaseRestore> DELETE P', () => {
-       return request(app).delete('/api/v1/PazienteDaAO?id='+id_delete)
+       return request(app).delete('/api/v2/PazienteDaAO?id='+id_delete)
        .set(header)
        .expect(200)});
 
@@ -103,13 +103,13 @@ describe('[SUPERTEST] /api/v1/signup (include Interazioni AO con P)', () => {
 
 
 
-describe('[SUPERTEST] /api/v1/MedicoDaAO', () => {
+describe('[SUPERTEST] /api/v2/MedicoDaAO', () => {
 
        header={'Content-Type': 'application/json', cookie:tokenAO};
        var id_delete;
 
        test('[LOGGATO] <200> POST Aggiunta M', () => {
-       return request(app).post('/api/v1/MedicoDaAO')
+       return request(app).post('/api/v2/MedicoDaAO')
        .set(header)
        .send(JSON.stringify({
          email:"mailmedicoTMP@test.cases",
@@ -122,7 +122,7 @@ describe('[SUPERTEST] /api/v1/MedicoDaAO', () => {
        }))
        .expect(200)});
        test('[LOGGATO] <400> POST Aggiunta M dati incompleti', () => {
-       return request(app).post('/api/v1/MedicoDaAO')
+       return request(app).post('/api/v2/MedicoDaAO')
        .set(header)
        .send(JSON.stringify({
          bio:"BioMedico temporanea",
@@ -134,7 +134,7 @@ describe('[SUPERTEST] /api/v1/MedicoDaAO', () => {
        }))
        .expect(400)});
        test('[LOGGATO] <406> POST Aggiunta M mail utilizzata', () => {
-       return request(app).post('/api/v1/MedicoDaAO')
+       return request(app).post('/api/v2/MedicoDaAO')
        .set(header)
        .send(JSON.stringify({
          email:"ao@test.cases",
@@ -164,7 +164,7 @@ describe('[SUPERTEST] /api/v1/MedicoDaAO', () => {
        });
 
        test('[LOGGATO] <200> PUT Modifica medico Da AO', () => {
-       return request(app).put('/api/v1/MedicoDaAO?id='+id_delete)//id utente@resetPassword
+       return request(app).put('/api/v2/MedicoDaAO?id='+id_delete)//id utente@resetPassword
        .set(header)
        .send(JSON.stringify(
          {
@@ -178,7 +178,7 @@ describe('[SUPERTEST] /api/v1/MedicoDaAO', () => {
        ))
        .expect(200)});
        test('[LOGGATO] <400> PUT Modifica medico dati incompleti', () => {
-       return request(app).put('/api/v1/MedicoDaAO?id='+id_delete)//id utente@resetPassword
+       return request(app).put('/api/v2/MedicoDaAO?id='+id_delete)//id utente@resetPassword
        .set(header)
        .send(JSON.stringify(
          {
@@ -191,7 +191,7 @@ describe('[SUPERTEST] /api/v1/MedicoDaAO', () => {
        ))
        .expect(400)});
        test('[LOGGATO] <506> PUT Modifica medico mail utilizzata', () => {
-       return request(app).put('/api/v1/MedicoDaAO?id='+id_delete)//id utente@resetPassword
+       return request(app).put('/api/v2/MedicoDaAO?id='+id_delete)//id utente@resetPassword
        .set(header)
        .send(JSON.stringify(
          {
@@ -206,14 +206,14 @@ describe('[SUPERTEST] /api/v1/MedicoDaAO', () => {
        .expect(506)});
 
        test('[LOGGATO] <200> DELETE M da AO', () => {
-       return request(app).delete('/api/v1/MedicoDaAO?id='+id_delete)
+       return request(app).delete('/api/v2/MedicoDaAO?id='+id_delete)
        .set(header)
        .expect(200)});
 
 
  });
 
-describe('[SUPERTEST] /api/v1/PazienteDaAO', () => {
+describe('[SUPERTEST] /api/v2/PazienteDaAO', () => {
 
        header={'Content-Type': 'application/json', cookie:tokenAO};
        var id_delete;
@@ -232,7 +232,7 @@ describe('[SUPERTEST] /api/v1/PazienteDaAO', () => {
        }))
        .expect(200)});
        test('[LOGGATO] <dataGathering> GET id new P', () => {
-       request(app).get('/api/v1/Paziente/all')
+       request(app).get('/api/v2/Paziente/all')
        .set(header)
        .set('Accept', 'application/json')
        .end((err,res) => {
@@ -247,7 +247,7 @@ describe('[SUPERTEST] /api/v1/PazienteDaAO', () => {
 
        });
        test('[LOGGATO] <200> PUT Modifica paziente Da AO', () => {
-       return request(app).put('/api/v1/PazienteDaAO?id='+id_delete)//id utente@resetPassword
+       return request(app).put('/api/v2/PazienteDaAO?id='+id_delete)//id utente@resetPassword
        .set(header)
        .send(JSON.stringify(
          {
@@ -260,7 +260,7 @@ describe('[SUPERTEST] /api/v1/PazienteDaAO', () => {
        ))
        .expect(200)});
        test('[LOGGATO] <400> PUT Modifica paziente Da AO dati incompleti', () => {
-       return request(app).put('/api/v1/PazienteDaAO?id='+id_delete)//id utente@resetPassword
+       return request(app).put('/api/v2/PazienteDaAO?id='+id_delete)//id utente@resetPassword
        .set(header)
        .send(JSON.stringify(
          {
@@ -272,7 +272,7 @@ describe('[SUPERTEST] /api/v1/PazienteDaAO', () => {
        ))
        .expect(400)});
        test('[LOGGATO] <403> PUT Modifica paziente Da AO email in uso', () => {
-       return request(app).put('/api/v1/PazienteDaAO?id='+id_delete)//id utente@resetPassword
+       return request(app).put('/api/v2/PazienteDaAO?id='+id_delete)//id utente@resetPassword
        .set(header)
        .send(JSON.stringify(
          {
@@ -287,7 +287,7 @@ describe('[SUPERTEST] /api/v1/PazienteDaAO', () => {
 
 
        test('[LOGGATO] <200> DELETE P da AO', () => {
-       return request(app).delete('/api/v1/PazienteDaAO?id='+id_delete)
+       return request(app).delete('/api/v2/PazienteDaAO?id='+id_delete)
        .set(header)
        .expect(200)});
 
