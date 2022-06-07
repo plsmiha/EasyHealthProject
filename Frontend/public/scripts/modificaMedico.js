@@ -32,7 +32,7 @@ function modificaDatiMedico(){
           }
 
     })
-    .catch( error => //console.log(error) );
+    .catch( error => {});
 };
 
 function loadData()//se la password non viene inserita resta uguale, se viene inserita invece va a modificare la precedente
