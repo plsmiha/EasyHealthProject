@@ -4,17 +4,8 @@ const docs = require('../../models/doc'); //importo il tipo doc, definito il suo
 const user = require('../../models/user'); //uguale con user
 const Slot = require('../../models/slot');
 const crypto = require('crypto');
-const nodemailer = require('nodemailer');
 
-const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    auth: {
-      user: 'easy.health.app.info@gmail.com',
-      pass: process.env.PASSWORD_MAIL
-    },
-});
-transporter.verify().then().catch(console.error);
+let mailer = require('./mailer.js')
 
 router.delete('', async function(req, res) {
     var doc = await docs.findById(req.query.id)
@@ -161,13 +152,16 @@ router.post('', async function(req, res) //qui quando ricevo una post
     doc = await doc.save();
 
     let link = process.env.DOMAIN + "/api/v1/verifyEmail?id=" + _user._id.valueOf();
+    
+    let transporter = await mailer();
+    
     transporter.sendMail({
         from: '"EasyHealth+" <easy.health.app.info@gmail.com>',
         to: req.body.email,
         subject: "Conferma il tuo account su EasyHealth+ ✔",
         text: "",
         html: "<a href='"+link+"'>Clicca qui per confermare la tua identità!</a> O copia incolla il link qui sotto:<br/>"+link,
-    }).then().catch(console.error);
+    }).then().catch(console.log("aaa"));
 
     res.status(200).json({success: 'true'});
     //console.log("User saved");

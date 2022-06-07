@@ -1,18 +1,9 @@
 const express = require('express');
 const crypto = require('crypto');
-const nodemailer = require('nodemailer');
+let mailer = require('./mailer.js')
 const router = express.Router();
 
 const User = require('../../models/user');
-
-const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    auth: {
-      user: 'easy.health.app.info@gmail.com',
-      pass: process.env.PASSWORD_MAIL
-    },
-});
 
 //FUNZIONI
 
@@ -70,6 +61,8 @@ router.post('', async function(req, res) {
 
         //mando nuova passw in chiaro al paziente per mail
         ////console.log('mail presente nel db');
+
+        let transporter = await mailer();
 
         transporter.sendMail({
           from: '"EasyHealth+" <easy.health.app.info@gmail.com>',

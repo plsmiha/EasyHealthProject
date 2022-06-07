@@ -1,21 +1,12 @@
 const express = require('express');
 const crypto = require('crypto');
-const nodemailer = require('nodemailer');
 const mongoose = require('mongoose');
 const router = express.Router();
 
 const User = require('../../models/user');
 const Patient = require('../../models/patient');
 
-const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    auth: {
-      user: 'easy.health.app.info@gmail.com',
-      pass: process.env.PASSWORD_MAIL
-    },
-});
-transporter.verify().then().catch(console.error);
+let mailer = require('./mailer.js')
 
 router.post('', async function(req, res) {
 
@@ -59,6 +50,8 @@ router.post('', async function(req, res) {
         codePA: req.body.codePA==''?null:req.body.codePA
     })
     patient = await patient.save();
+
+    let transporter = await mailer();
 
     let link = process.env.DOMAIN + "/api/v1/verifyEmail?id=" + user._id.valueOf();
     transporter.sendMail({
