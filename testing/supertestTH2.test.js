@@ -23,7 +23,7 @@ beforeEach( async () => {//altrimenti il server taglia le connessioni se arrivan
 
 
 
-describe('[SUPERTEST] /api/v1/signup (include Interazioni AO con P)', () => {
+describe('[SUPERTEST] /api/v2/signup (include Interazioni AO con P)', () => {
 
        header={'Content-Type': 'application/json', cookie:tokenAO};
        var id_delete;
